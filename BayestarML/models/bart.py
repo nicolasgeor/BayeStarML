@@ -47,9 +47,10 @@ def BART_M(X, X_er, Y, Y_er, m=250):
         
         mu = pmb.BART('mu', X_normal, Y.values, m=m)
              
-        sig = pm.HalfCauchy('sig', beta=0.05)  #test line
+        sig = pm.HalfCauchy('sig', beta=0.05)  # Difference with BART_R: here we infer the noise parameter instead of fixing it.
+        # What we do here is defining a weakly informative prior to learn the standard deviation (noise) of the output from the data.
         
-        y = pm.Normal("y", mu=mu, sigma=sig, shape=X_in.shape[0], observed=Y)
+        y = pm.Normal("y", mu=mu, sigma=sig, shape=X_in.shape[0], observed=Y) # Defining the likelihood function.
         
     return model_BART
 
