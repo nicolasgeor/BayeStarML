@@ -47,7 +47,7 @@ def BART_M(X, X_er, Y, Y_er, m=250):
         
         mu = pmb.BART('mu', X_normal, Y.values, m=m)
              
-        sig = pm.HalfCauchy('sig', beta=0.05)
+        sig = pm.HalfCauchy('sig', beta=0.05)  #test line
         
         y = pm.Normal("y", mu=mu, sigma=sig, shape=X_in.shape[0], observed=Y)
         
