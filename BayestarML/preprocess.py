@@ -36,10 +36,13 @@ def return_norm(df):
     """
     Compute normalization statistics for stellar parameters and their errors.
 
-    Extracts stellar feature columns and their associated asymmetric measurement
+    Extracts stellar feature (feature=input variable) columns and their associated asymmetric measurement
     uncertainties, computes symmetric mean errors, splits the dataset into
     training and test sets, and calculates the mean and standard deviation
     of each input and target variable for normalization.
+    
+    We normalize because if we just feed a neural network a Temperature of 5500 and a Metallicity of -0.5, 
+    the massive difference in scale will cause the math to completely break down.
 
     Parameters
     ----------
