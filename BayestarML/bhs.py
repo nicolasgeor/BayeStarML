@@ -24,6 +24,9 @@ def median_clip(X_train, X_test):
     features and allows the model to capture asymmetric behavior above and below 
     the median.
 
+    Results in two columns: one for values above the median (clipped at 0) and 
+    one for values below the median (clipped at 0).
+
     Parameters
     ----------
     X_train : array-like
