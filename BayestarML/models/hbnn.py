@@ -96,7 +96,7 @@ def HBNN_M3(X_train, Y, X_error, Y_error, n_hidden):
         
         bias_out = pm.Normal("bias_out", 0, sigma=1)
 
-
+        # Building the neural network here. With LeakyReLU activations, bc PyMC doesn't have built-in LeakyReLU
         act_1 = pm.Deterministic('act_1', 
             pm.math.switch(pm.math.dot(ann_input, weights_in_1.T) + bias_1 > 0, 
                            pm.math.dot(ann_input, weights_in_1.T) + bias_1, 
