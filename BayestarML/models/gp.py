@@ -36,6 +36,8 @@ class SparseLatent:
         defines latent variables in the rotated space, and computes the GP prior 
         mean for the observed inputs.
 
+        Andy: "Creates marix of initial values"
+
         Parameters
         ----------
         name : str
@@ -51,10 +53,10 @@ class SparseLatent:
             GP prior mean evaluated at X.
         """
         Kuu = self.cov(Xu)
-        self.L = tt.slinalg.cholesky(pm.gp.util.stabilize(Kuu))
+        self.L = tt.slinalg.cholesky(pm.gp.util.stabilize(Kuu)) # Obtaing the Cholesky factor of the covariance matrix
 
-        self.v = pm.Normal(f"u_rotated_{name}", mu=0.0, sigma=1.0, shape=len(Xu))
-        self.u = pm.Deterministic(f"u_{name}", tt.dot(self.L, self.v))
+        self.v = pm.Normal(f"u_rotated_{name}", mu=0.0, sigma=1.0, shape=len(Xu)) # Prior of the model solutions in the rotated space defined by the Cholesky factor.
+        self.u = pm.Deterministic(f"u_{name}", tt.dot(self.L, self.v)) # Prior of the model solutions in the rotated space defined by the Cholesky factor.
 
         Kfu = self.cov(X, Xu)
         self.Kuiu = tt.slinalg.solve_triangular(
@@ -81,6 +83,9 @@ class SparseLatent:
         -------
         pm.MvNormal
             Multivariate normal random variable representing GP predictions.
+
+            Andy: "The output is a lot of distributions, correlated with each other,
+            which drive us to the predicition"
         """
         Ksu = self.cov(Xnew, Xu)
         mus = tt.dot(Ksu, self.Kuiu)
@@ -128,7 +133,7 @@ class SparseLatent:
         return pm.Normal(name, mu=mu_pred, sigma=sigma_pred,
                          shape=Xnew.shape[0])
     
-def get_ℓ_prior(points):
+def get_ℓ_prior(points): # Indicates convergence, according to Andy
     """
     Estimate mean and standard deviation for an InverseGamma prior on the GP length scale.
 
@@ -145,7 +150,7 @@ def get_ℓ_prior(points):
     tuple of float
         Mean and standard deviation for the InverseGamma prior on the length scale.
     """
-    distances = pdist(points[:, None])
+    distances = pdist(points[:, None]) # Compute pairwise distances between points to know how to limit \ell
     distinct = distances != 0
     ℓ_l = distances[distinct].min() if sum(distinct) > 0 else 0.1
     ℓ_u = distances[distinct].max() if sum(distinct) > 0 else 1
@@ -153,7 +158,7 @@ def get_ℓ_prior(points):
     ℓ_μ = ℓ_l + 3 * ℓ_σ
     return ℓ_μ, ℓ_σ
 
-def _farthest_point_sampling(X, M, seed=0):
+def _farthest_point_sampling(X, M, seed=0): # Select a small, highly representative sample of points from X to use as inducing points, using the farthest point sampling algorithm.
     rng = np.random.default_rng(seed)
     X = np.asarray(X, dtype=float)
     n = len(X)
@@ -170,6 +175,7 @@ def make_inducing_points(
 ):
     """
     Assumes X is already standardised (per-feature).
+    Runs K-Means on the dataset and uses the cluster centers as the inducing points.
     """
     X = np.asarray(X, dtype=float)
     N, D = X.shape
@@ -198,6 +204,9 @@ def make_inducing_points(
     return Xu.astype(float)
 
 def make_Xu_er(X_er, M=60, method="kmeans", add_bounds=True, standardise=True, seed=0):
+    """
+    Same as previous function, but generating inducing points for the measurement errors, not values.
+    """
     Xe = np.asarray(X_er, float)
     if standardise:
         mu, sd = Xe.mean(0, keepdims=True), Xe.std(0, keepdims=True) + 1e-12
@@ -269,6 +278,7 @@ def sparse_fully_heteroscedastic_gp(
         ls = pm.InverseGamma("ls", mu=ls_mu_vec, sigma=ls_sd_vec, shape=D)
         eta = pm.Gamma("eta", alpha=2, beta=1)
 
+        # Covariance matrix
         cov_mean = eta**2 * pm.gp.cov.ExpQuad(input_dim=D, ls=ls) \
                    + pm.gp.cov.WhiteNoise(sigma=1e-5)
 
@@ -302,6 +312,6 @@ def sparse_fully_heteroscedastic_gp(
         σ_f     = pm.Deterministic("σ_f", pm.math.exp(0.5 * log_var))
 
         # -------- likelihood --------
-        y_obs = pm.Normal("y", mu=μ_f, sigma=σ_f, observed=y)
+        y_obs = pm.Normal("y", mu=μ_f, sigma=σ_f, observed=y) # A series of normals for each observed value, with different means and variances given by the two GPs.
 
     return model, μ_gp, log_var_gp, Xu, Xu_var
