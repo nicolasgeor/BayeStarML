@@ -43,7 +43,8 @@ def predict4(X, X_er, target, test=False):
 
 
         gp4_model, μ_gp4, lg_σ_gp4, Xu4, Xu_er4 = gp.sparse_fully_heteroscedastic_gp(x_train, x_train_er, mass_train, 80, 40)
-            
+
+        # Loads the trace from the trained GP model (the learned weights and hyperparamenters)    
         gp4_trace = az.from_netcdf('models/model_artifacts/gp_mass_80_40.nc')
         gp4_pred, lpd_GP4 = posterior_predictive_GP(gp4_model, μ_gp4, lg_σ_gp4, 
                                             gp4_trace, X,
@@ -51,7 +52,7 @@ def predict4(X, X_er, target, test=False):
                                             Xu4, Xu_er4, 4, 'mass')
 
         
-        
+        # Loads the trace from the trained HBNN model (the learned weights and hyperparamenters)    
         hbnn4_trace = az.from_netcdf('models/model_artifacts/HBNN_mass.nc')
         hbnn4_pred, lpd_HBNN4 = sample_post_pred_HBNN_para(hbnn4_trace,  
                                                       X,
@@ -93,7 +94,7 @@ def predict4(X, X_er, target, test=False):
     
     if target == 'radius':
         
-        unorm_rad = denormalise_val(rad_train, 'radius')
+        unorm_rad = denormalise_val(rad_train, 'radius') # Check if this should be rad_test instead of rad_train
         
         
         bart4_model = bart.BART_R(x_train, x_train_er, rad_train, erad_train)
