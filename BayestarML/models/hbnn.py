@@ -39,6 +39,11 @@ def HBNN_M3(X_train, Y, X_error, Y_error, n_hidden):
     """
     
     with pm.Model() as neural_network:
+
+        X_train = np.asarray(X_train, dtype=float)
+        X_error = np.asarray(X_error, dtype=float)
+        Y = np.asarray(Y, dtype=float)
+        n_features = X_train.shape[1]
         
         # Data containers
         # X_data = pm.MutableData('X_data', X_train.values) 
@@ -47,7 +52,7 @@ def HBNN_M3(X_train, Y, X_error, Y_error, n_hidden):
         # Fixed LKJCholeskyCov specification
         chol, corr, sigmas = pm.LKJCholeskyCov(
             'Omega', 
-            n=3, 
+            n=n_features, 
             eta=2,  
             sd_dist=pm.HalfNormal.dist(1), 
             compute_corr=True,
@@ -56,9 +61,9 @@ def HBNN_M3(X_train, Y, X_error, Y_error, n_hidden):
         # Latent variables
         X_latent = pm.MvNormal(
             'X_latent', 
-            mu=np.zeros(3),
+            mu=np.zeros(n_features),
             chol=chol,
-            shape=(X_train.shape[0], 3)
+            shape=(X_train.shape[0], n_features)
         )
         
         # Observation model
@@ -368,11 +373,16 @@ def HBNN_R3(X_train, Y, X_error, Y_error, n_hidden):
         PyMC model defining the reduced 3-input Bayesian neural network.
     """
     with pm.Model() as neural_network:
+
+        X_train = np.asarray(X_train, dtype=float)
+        X_error = np.asarray(X_error, dtype=float)
+        Y = np.asarray(Y, dtype=float)
+        n_features = X_train.shape[1]
         
         # Fixed LKJCholeskyCov specification
         chol, corr, sigmas = pm.LKJCholeskyCov(
             'Omega', 
-            n=3, 
+            n=n_features, 
             eta=2,  
             sd_dist=pm.HalfNormal.dist(1), 
             compute_corr=True,
@@ -382,9 +392,9 @@ def HBNN_R3(X_train, Y, X_error, Y_error, n_hidden):
         # Latent variables
         X_latent = pm.MvNormal(
             'X_latent', 
-            mu=np.zeros(3),
+            mu=np.zeros(n_features),
             chol=chol,
-            shape=(X_train.shape[0], 3)
+            shape=(X_train.shape[0], n_features)
         )
         
         # Observation model

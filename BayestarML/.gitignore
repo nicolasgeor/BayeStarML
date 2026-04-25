@@ -1,2 +1,10 @@
 __pycache__/
 *.pyc
+Train_outputs/
+models/model_artifacts/
+Radius_output/
+*.nc
+*.npz
+*.pkl
+*.joblib
+justtoreadtext.xlsx

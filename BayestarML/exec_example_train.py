@@ -17,31 +17,40 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error
 
-df_train = get_dataset('Datasets/data_sample_mass_radius.txt', 'MS')
+df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
 (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
-  mass_test, emass_test, rad_train, erad_train, rad_test, erad_test
+  mass_test, emass_test
 ) = return_train_test(df_train)
 
 unorm_mass = denormalise_val(mass_test, 'mass')
 
-x_train = x_train[['Teff', 'logg', 'Meta', 'L']]
-x_train_er = x_train_er[['eTeff', 'elogg', 'eMeta', 'eL']]
+x_train = x_train[['Teff', 'Meta', 'rho']]
+x_train_er = x_train_er[['eTeff', 'eMeta', 'erho']]
 
-x_test = x_test[['Teff', 'logg', 'Meta', 'L']]
-x_test_er = x_test_err[['eTeff', 'elogg', 'eMeta', 'eL']]
+x_test = x_test[['Teff', 'Meta', 'rho']]
+x_test_er = x_test_err[['eTeff', 'eMeta', 'erho']]
 
 # print(x_test3_er)
 
 def main():
  
-    # model = hbnn.HBNN_R3(x_train3, rad_train, x_train3_er, erad_train, 15)
-    model, μ_gp, lg_σ_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
+    # model = hbnn.HBNN_M4(x_train, rad_train, x_train_er, erad_train, 15)
+    # model = hbnn.HBNN_M3(x_train, mass_train, x_train_er, emass_train, 15)
+
+    model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
                                                                         x_train_er,
-                                                                        mass_train, 60, 40)
+                                                                        mass_train, 80, 40)
     # Train is imported from another file, and runs MCMC sampling using PyMC.
-    trace = train(model, "Radius_output/GP_mass_full_w_int_lognorm_60_40.nc", draw=1000, chains=2)
-    # trace = az.from_netcdf("Radius_output/GP_hetero_new_2026_mass_4param_gamma_etav_80_40.nc")
+
+    # trace = az.from_netcdf("Radius_output/HBNN_sig_015_15_nodes_mass_4_param.nc")
     
+    # trace = train(model, "Radius_output/HBNN_sig_015_15_nodes_mass_4_param.nc", draw=1000, chains=2)
+
+    # trace = az.from_netcdf("Radius_output/GP_hetero_new_2026_mass_4param_gamma_etav_80_40.nc")
+
+    trace = train(model, "Train_outputs/GP_mass_3param_1000_draws_80_40.nc", draw=1000, chains=2)
+    
+    # trace = train(model, "Train_outputs/HBNN_mass_3param_1000_draws_15_nodes_sig_015.nc", draw=1000, chains=2)
         
     # trace.extend(pm.compute_log_likelihood(trace, model=model, var_names='y'))
     
@@ -55,8 +64,17 @@ def main():
     
     print(az.loo(trace))
     
-    pred, lpd = posterior_predictive_GP(model, μ_gp, lg_σ_gp, trace,
-                                         x_test, x_test_err, Xu, Xu_er, 4, 'mass')
+    pred, lpd = posterior_predictive_GP(
+        model, μ_gp, log_var_gp, trace,
+        x_test, x_test_er, Xu, Xu_er, 3, 'mass'
+    )
+
+    # pred, lpd = sample_post_pred_HBNN_para(
+    #     trace, x_test, x_test_er, 15, 3, 'mass'
+    # )
+
+    # pred, lpd = sample_post_pred_HBNN_para(trace, x_test, x_test_er, 15, 4, 'mass')
+
     print(pred.std(0))
     print(pred.mean(0))
     print(unorm_mass)
@@ -72,7 +90,7 @@ def main():
     plt.plot([unorm_mass.min(), unorm_mass.max()], [unorm_mass.min(), unorm_mass.max()], 'r--')
     plt.xlabel('True Mass')
     plt.ylabel('Predicted Mass')
-    plt.title('GP Predictions with Uncertainty')
+    plt.title('HBNN Predictions with Uncertainty')
     plt.legend()
     plt.show()
 
@@ -81,7 +99,7 @@ def main():
     plt.hlines(0, unorm_mass.min(), unorm_mass.max(), 'r', linestyle='--')
     plt.xlabel('True Mass')
     plt.ylabel('Residual Mass')
-    # plt.title('GP Predictions with Uncertainty')
+    # plt.title('HBNN Predictions with Uncertainty')
     plt.legend()
     plt.show()
 

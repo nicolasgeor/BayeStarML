@@ -196,7 +196,8 @@ def sample_post_pred_HBNN_para(trace, X, X_er, n_hidden, n_param, target,
             Pointwise LOO log predictive densities for the model.
     """
     lpd_HBNN = find_pointwise_loo(trace)
-    n_chol   = 10 if n_param == 4 else 6
+    # Changed number of Cholesky parameters to make it valid for n parameters
+    n_chol = n_param * (n_param + 1) // 2
 
     posterior  = trace.posterior
     n_chains   = posterior.sizes["chain"]
@@ -276,12 +277,14 @@ def forward_pass(x_latent, w_in_1, b1, w_1_2, b2, w_2_out, b_out):
         Network output for the given input.
     """
     # Layer 1 with ReLU
+    alpha = 0.01
+
     layer1 = x_latent @ w_in_1.T + b1
-    layer1 = np.maximum(layer1, 0)  
+    layer1 = np.where(layer1 > 0, layer1, alpha * layer1)
     
     # Layer 2 with ReLU 
     layer2 = layer1 @ w_1_2 + b2
-    layer2 = np.maximum(layer2, 0) 
+    layer2 = np.where(layer2 > 0, layer2, alpha * layer2)
     
     # Final output (linear)
     return layer2 @ w_2_out + b_out
@@ -537,7 +540,10 @@ def posterior_predictive_GP(
     # Posterior predictive draws for y
     y_draws = ppc.predictions["y_pred"].stack(sample=("chain", "draw")).values
 
-    return denormalise_val(y_draws, target).T, lpd_GP
+    if y_draws.shape[0] == N_new and y_draws.shape[1] != N_new:
+        y_draws = y_draws.T
+
+    return denormalise_val(y_draws, target), lpd_GP
 
 # def posterior_predictive_GP(
 #     gp_model, μ_gp, lg_σ_gp, trace,
@@ -682,6 +688,10 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2):
 
     lpd_BART = find_pointwise_loo(trace)
     # print(az.rhat(trace))
+
+    X = np.asarray(X)
+    X_er = np.asarray(X_er)
+    N_test = X.shape[0]
         
     with model:
         pm.set_data({'X': X,
@@ -690,8 +700,11 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2):
         pred = pm.sample_posterior_predictive(trace, predictions=True)
 
         y_draws = pred.predictions["y"].stack(sample=("chain", "draw")).values
+
+    if y_draws.shape[0] == N_test and y_draws.shape[1] != N_test:
+        y_draws = y_draws.T
     
-    return denormalise_val(y_draws, target).T, lpd_BART
+    return denormalise_val(y_draws, target), lpd_BART
 
 
 

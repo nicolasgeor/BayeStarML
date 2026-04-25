@@ -18,12 +18,12 @@ import pandas as pd
 # from sklearn.metrics import mean_absolute_error
 # from utils import find_pointwise_loo
 
-
+# This prediction for 4 variables is very probably broken now
 def predict4(X, X_er, target, test=False):
     
-    df_train = get_dataset('Datasets/data_sample_mass_radius.txt', 'MS')
+    df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
     (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
-      mass_test, emass_test, rad_train, erad_train, rad_test, erad_test
+    mass_test, emass_test
     ) = return_train_test(df_train)
     
     if test == True:
@@ -151,9 +151,9 @@ def predict4(X, X_er, target, test=False):
 
 def predictNAN(X, X_er, target, test=False):
     
-    df_train = get_dataset('Datasets/data_sample_mass_radius.txt', 'MS')
+    df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
     (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
-      mass_test, emass_test, rad_train, erad_train, rad_test, erad_test
+    mass_test, emass_test
     ) = return_train_test(df_train)
     
     if test == True:
@@ -197,18 +197,18 @@ def predictNAN(X, X_er, target, test=False):
 
 def predict3(X, X_er, target, test=False):
     
-    df_train = get_dataset('Datasets/data_sample_mass_radius.txt', 'MS')
+    df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
     (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
-      mass_test, emass_test, rad_train, erad_train, rad_test, erad_test
+    mass_test, emass_test
     ) = return_train_test(df_train)
     
     
-    x_train3 = x_train[['Teff', 'logg', 'Meta']]
-    x_train3_er = x_train_er[['eTeff', 'elogg', 'eMeta']]
+    x_train3 = x_train[['Teff', 'Meta', 'rho']]
+    x_train3_er = x_train_er[['eTeff', 'eMeta', 'erho']]
     
     if test == True:
-        X = x_test[['Teff', 'logg', 'Meta']]
-        X_er = x_test_err[['eTeff', 'elogg', 'eMeta']]
+        X = x_test[['Teff', 'Meta', 'rho']]
+        X_er = x_test_err[['eTeff', 'eMeta', 'erho']]
     
     if target == 'mass':
         
@@ -222,22 +222,22 @@ def predict3(X, X_er, target, test=False):
                                       X_er, 'mass',
                                       1000, 4)
 
-        gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train,
-                                                                                      x_train_er, 
+        gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train3,
+                                                                                      x_train3_er, 
                                                                                       mass_train, 
                                                                                       80, 40)
 
-        gp3_trace = az.from_netcdf('models/model_artifacts/gp_mass_3_param.nc')
+        gp3_trace = az.from_netcdf('Train_outputs/GP_mass_3param_1000_draws_80_40.nc')
         gp3_pred, lpd_GP3 = posterior_predictive_GP(gp3_model, μ_gp3, lg_σ_gp3, 
                                             gp3_trace, X,
                                             X_er,
                                             Xu3, Xu_er3, 3, 'mass')
 
-        hbnn3_trace = az.from_netcdf('models/model_artifacts/HBNN_mass_3_param.nc')
+        hbnn3_trace = az.from_netcdf('Train_outputs/HBNN_mass_3param_1000_draws_15_nodes_sig_015.nc')
         hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(hbnn3_trace,  
                                                       X,
                                                       X_er,
-                                                      10, 3, 'mass')
+                                                      15, 3, 'mass')
 
         
         (bhs_trace, bhs_pred, bhs_w) = run_stack(bart3_pred, hbnn3_pred, gp3_pred,
@@ -287,13 +287,13 @@ def predict3(X, X_er, target, test=False):
         gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train3, 
                                                                                      x_train3_er,
                                                                                      rad_train, 80, 40)
-        gp3_trace = az.from_netcdf('models/model_artifacts/gp_radius_3_param.nc')
+        gp3_trace = az.from_netcdf('Train_outputs/GP_radius_3param_1000_draws_80_40.nc')
         gp3_pred, lpd_GP3 = posterior_predictive_GP(gp3_model, μ_gp3, lg_σ_gp3, 
                                             gp3_trace, X,
                                             X_er,
                                             Xu3, Xu_er3, 3, 'radius')
 
-        hbnn3_trace = az.from_netcdf('models/model_artifacts/HBNN_sig_015_15_nodes_radius_3_param.nc')
+        hbnn3_trace = az.from_netcdf('Train_outputs/HBNN_radius_3param_1000_draws_15_nodes_sig_015.nc')
         hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(hbnn3_trace,  
                                                       X,
                                                       X_er,
@@ -346,19 +346,20 @@ def main():
     # pred.to_csv("Results/NASAFLAG_8col_radius_res.csv")
     # w4.to_csv("Results/NASAFLAG_8col_A_radius_w.csv")
     
-    # X3, X3_er = prepare_pred3("Datasets/dataset_B_trimmed_6cols_NASAFLAG.csv")
-    # pred3, w3 = predict3(X3, X3_er, 'radius')
-    # pred3.to_csv("Results/NASAFLAG_6col_radius_res.csv")
-    # w3.to_csv("Results/NASAFLAG_6col_radius_w.csv")
-    
-    X1, X1_er = prepare_pred4("Datasets/dataset_C_trimmed_8cols_NASAFLAG.csv")
+    X3, X3_er = prepare_pred3("Datasets/dataset_density_trimmed_6cols_NASAFLAG.csv")
+    base_preds, bhs_pred, bhs_w = predict3(X3, X3_er, 'mass', test=True)
+
+    pd.DataFrame(bhs_pred.mean(0)).to_csv("Results/3_features_post_pred_bhs_6col_mass_res.csv", index=False)
+    pd.DataFrame(bhs_w.mean(0)).to_csv("Results/3_features_post_pred_bhs_6col_mass_w.csv", index=False)
+
+    # X1, X1_er = prepare_pred4("Datasets/dataset_C_trimmed_8cols_NASAFLAG.csv")
     
     # pred1,_ = predict4(X1, X1_er, 'radius', test=True)
     # pred1.to_csv("Results/post_pred_bhs_rad.csv")
     # #w1.to_csv("Results/NASAFLAG_6col_dataC_radius_w.csv")
     
-    pred2,_ = predict4(X1, X1_er, 'mass', test=True)
-    pred2.to_csv("Results/post_pred_bhs_mass.csv")
+    # pred2,_ = predict4(X1, X1_er, 'mass', test=True)
+    # pred2.to_csv("Results/post_pred_bhs_mass.csv")
     # w2.to_csv("Results/NASAFLAG_6col_dataC_mass_w.csv")
     # X2, X2_er = prepare_pred3("Datasets/ARIEL_level_0.csv")
     # print(X2)
