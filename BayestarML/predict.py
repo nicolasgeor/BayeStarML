@@ -195,7 +195,7 @@ def predictNAN(X, X_er, target, test=False):
             
         return hbnn4_pred
 
-def predict3(X, X_er, target, test=False):
+def predict3(X, X_er, target, test=False): # Default: not test-mode
     
     df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
     (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
@@ -232,7 +232,7 @@ def predict3(X, X_er, target, test=False):
                                             gp3_trace, X,
                                             X_er,
                                             Xu3, Xu_er3, 3, 'mass')
-
+        
         hbnn3_trace = az.from_netcdf('Train_outputs/HBNN_mass_3param_1000_draws_15_nodes_sig_015.nc')
         hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(hbnn3_trace,  
                                                       X,
@@ -292,7 +292,7 @@ def predict3(X, X_er, target, test=False):
                                             gp3_trace, X,
                                             X_er,
                                             Xu3, Xu_er3, 3, 'radius')
-
+        
         hbnn3_trace = az.from_netcdf('Train_outputs/HBNN_radius_3param_1000_draws_15_nodes_sig_015.nc')
         hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(hbnn3_trace,  
                                                       X,

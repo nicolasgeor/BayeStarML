@@ -24,14 +24,25 @@ from predict import predict3, predict4
 
 # For 3 variables
 def main():
-    X3, X3_er = prepare_pred3("Datasets/dataset_density_trimmed_6cols_NASAFLAG.csv")
+    print("Evaluating BHS on 20% holdout test set...")
+    # X3, X3_er = prepare_pred3("Datasets/dataset_density_trimmed_6cols_NASAFLAG.csv")
     # will need to change the traces in predict3 if you re-train
     # trace files aren't included in the github repo due to size
-    # _, bhs_pred, w3 = predict3(X, X_er, 'mass', test=True) # disregards X, X_er for test=True / uses test values
-    _, pred, w3 = predict3(X3, X3_er, 'mass') # make predictions on new data (X, X_er)
 
-    pred_val = pred.mean(0)
-    pred_err = pred.std(0)
+    # Benchmark: Evaluates holdout test set, ignores X3, prints MARD/MRD metrics
+    # _, bhs_pred, w3 = predict3(X3, X3_er, 'mass', test=True) # disregards X, X_er for test=True / uses test values
+
+    # Inference: Evaluates new dataset, outputs predicted values
+    # _, pred, w3 = predict3(X3, X3_er, 'mass') # make predictions on new data (X, X_er)
+
+    # pred_val = pred.mean(0)
+    # pred_err = pred.std(0)
+
+    # ChatGPT:
+    # Pass None for the data inputs, because test=True overrides them anyway.
+    base_preds, bhs_pred_test, bhs_w_test = predict3(None, None, 'mass', test=True)
+
+    print("\n--- Evaluation Complete ---")
 
 
     
