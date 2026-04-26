@@ -220,7 +220,7 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         bart3_pred, lpd_BART3 = sample_pred_BART(bart3_model,
                                       X,
                                       X_er, 'mass',
-                                      1000, 4)
+                                      2000, 4) # Made 2000 draws bc better MARD on test set
 
         gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train3,
                                                                                       x_train3_er, 
@@ -282,7 +282,7 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         bart3_pred, lpd_BART3 = sample_pred_BART(bart3_model,
                                       X,
                                       X_er, 'radius',
-                                      1000, 4)
+                                      2000, 4) # Made 2000 draws bc better MARD on test set
 
         gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train3, 
                                                                                      x_train3_er,
