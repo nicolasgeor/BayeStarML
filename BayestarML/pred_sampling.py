@@ -17,6 +17,10 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from functools import partial
 import os
 from numpy.linalg import solve
+from constants import (
+    FEATURE_ERROR_BY_FEATURE,
+    GP_VARIANCE_FEATURES,
+)
 
 RANDOM_SEED = 5732 
 
@@ -420,8 +424,8 @@ def posterior_predictive_GP(
     gp_model, mu_gp, log_var_gp, trace,
     X_new_raw, X_er_new_raw, Xu, Xu_var,
     n_param, target,
-    var_cols_x=(0,1),        # columns of X used in variance GP
-    var_cols_xerr=(0,1),     # columns of X_err used in variance GP
+    var_cols_x=None,         # columns of X used in variance GP
+    var_cols_xerr=None,      # columns of X_err used in variance GP
     random_seed=42,
 ):
     """
@@ -467,10 +471,28 @@ def posterior_predictive_GP(
     """
     lpd_GP = find_pointwise_loo(trace)
 
+    x_columns = list(X_new_raw.columns) if hasattr(X_new_raw, "columns") else None
+    x_err_columns = list(X_er_new_raw.columns) if hasattr(X_er_new_raw, "columns") else None
+
     X_new_raw = np.asarray(X_new_raw, float)
     X_er_new_raw = np.asarray(X_er_new_raw, float)
 
     N_new = X_new_raw.shape[0]
+
+    if var_cols_x is None:
+        if x_columns is None:
+            var_cols_x = tuple(range(n_param))
+        else:
+            var_cols_x = tuple(x_columns.index(col) for col in GP_VARIANCE_FEATURES)
+
+    if var_cols_xerr is None:
+        if x_err_columns is None:
+            var_cols_xerr = tuple(range(n_param))
+        else:
+            variance_error_features = [
+                FEATURE_ERROR_BY_FEATURE[col] for col in GP_VARIANCE_FEATURES
+            ]
+            var_cols_xerr = tuple(x_err_columns.index(col) for col in variance_error_features)
 
     # Missingness masks for mean GP inputs
     mask_mu = ~np.isfinite(X_new_raw)

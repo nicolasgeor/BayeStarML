@@ -293,8 +293,8 @@ def HBNN_R4(X_train, Y, X_error, Y_error, n_hidden):
         pm.Normal(
             "X_obs",
             mu=X_latent,
-            sigma=X_error.values,
-            observed=X_train.values
+            sigma=X_error,
+            observed=X_train
         )
         
         
@@ -401,8 +401,8 @@ def HBNN_R3(X_train, Y, X_error, Y_error, n_hidden):
         pm.Normal(
             "X_obs",
             mu=X_latent,
-            sigma=X_error.values,
-            observed=X_train.values
+            sigma=X_error,
+            observed=X_train
         )
         
         

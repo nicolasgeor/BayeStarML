@@ -10,6 +10,12 @@ import pytensor.tensor as tt
 import pymc as pm
 from scipy.spatial.distance import pdist
 from sklearn.cluster import KMeans
+from constants import (
+    FEATURE_ERROR_BY_FEATURE,
+    FEATURE_ERRORS,
+    FEATURES,
+    GP_VARIANCE_FEATURES,
+)
 
 
 class SparseLatent:
@@ -227,11 +233,25 @@ def make_Xu_er(X_er, M=60, method="kmeans", add_bounds=True, standardise=True, s
 
     return Xu_er.astype(float)
 
+
+def _column_indices(column_names, selected_columns, default_columns):
+    if column_names is None:
+        missing = [col for col in selected_columns if col not in default_columns]
+        if missing:
+            raise ValueError(f"Columns {missing} are not available in default order {default_columns}.")
+        return [default_columns.index(col) for col in selected_columns]
+
+    missing = [col for col in selected_columns if col not in column_names]
+    if missing:
+        raise ValueError(f"Columns {missing} are missing from input columns {column_names}.")
+    return [column_names.index(col) for col in selected_columns]
+
 def sparse_fully_heteroscedastic_gp(
     X, X_err, y,
     M_mean=60,
     M_var=60,
     seed=0,
+    variance_features=None,
 ):
     """
     X      : (N, D) inputs
@@ -239,11 +259,16 @@ def sparse_fully_heteroscedastic_gp(
     y      : (N,) targets
     """
 
+    x_columns = list(X.columns) if hasattr(X, "columns") else None
+    x_err_columns = list(X_err.columns) if hasattr(X_err, "columns") else None
+
     X = np.asarray(X, float)
     X_err = np.asarray(X_err, float)
     y = np.asarray(y, float)
     N, D = X.shape
     D_err = X_err.shape[1]
+    variance_features = list(variance_features or GP_VARIANCE_FEATURES)
+    variance_error_features = [FEATURE_ERROR_BY_FEATURE[col] for col in variance_features]
 
     # Inducing points for mean GP
     Xu = make_inducing_points(X, X_er=X_err, M=M_mean,
@@ -252,8 +277,16 @@ def sparse_fully_heteroscedastic_gp(
                               weight_by_error=True,
                               seed=seed)
     
-    X_var = np.hstack([X[:,:2], X_err[:,:2]])  # use only Teff and logg to model log variance
-    # X_var = X_err 
+    x_default_columns = FEATURES[:D]
+    x_err_default_columns = FEATURE_ERRORS[:D_err]
+    variance_x_idx = _column_indices(x_columns, variance_features, x_default_columns)
+    variance_xerr_idx = _column_indices(
+        x_err_columns,
+        variance_error_features,
+        x_err_default_columns,
+    )
+
+    X_var = np.hstack([X[:, variance_x_idx], X_err[:, variance_xerr_idx]])
     Xu_var = make_inducing_points(X_var, M=M_var,
                                   method="kmeans",
                                   add_bounds=True,

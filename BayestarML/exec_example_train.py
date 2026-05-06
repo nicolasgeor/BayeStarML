@@ -6,102 +6,176 @@ Created on Tue Aug 12 10:50:13 2025
 @author: LamirelFamily
 """
 
-from preprocess import return_train_test, prepare_pred4, denormalise_val, prepare_pred3
-from utils import get_dataset, train, mard, mrd
-from models import hbnn, bart, gp
-from pred_sampling import sample_post_pred_HBNN_para, posterior_predictive_GP
 import arviz as az
-import numpy as np
-import pymc as pm
-import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error
 
-df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
-(x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
-  mass_test, emass_test
-) = return_train_test(df_train)
+from constants import (
+    FEATURE_ERRORS,
+    FEATURES,
+    GP_MASS_TRACE_PATH,
+    HBNN_MASS_TRACE_PATH,
+    TARGET,
+)
+from models import gp, hbnn
+from pred_sampling import posterior_predictive_GP, sample_post_pred_HBNN_para
+from preprocess import denormalise_val, return_train_test
+from utils import get_dataset, mard, mrd, train
 
-unorm_mass = denormalise_val(mass_test, 'mass')
 
-x_train = x_train[['Teff', 'Meta', 'rho']]
-x_train_er = x_train_er[['eTeff', 'eMeta', 'erho']]
+# Choose exactly one model to train by commenting/uncommenting these two lines.
+# TRAIN_MODEL = "gp"
+TRAIN_MODEL = "hbnn"
 
-x_test = x_test[['Teff', 'Meta', 'rho']]
-x_test_er = x_test_err[['eTeff', 'eMeta', 'erho']]
+N_HIDDEN = 15
+GP_M_MEAN = 80
+GP_M_VAR = 40
+DRAWS = 1000
+CHAINS = 2
 
-# print(x_test3_er)
 
-def main():
- 
-    # model = hbnn.HBNN_M4(x_train, rad_train, x_train_er, erad_train, 15)
-    # model = hbnn.HBNN_M3(x_train, mass_train, x_train_er, emass_train, 15)
+df_train = get_dataset("Datasets/data_sample_calculated_density.txt", "MS")
+(
+    x_train,
+    x_train_er,
+    x_test,
+    x_test_err,
+    mass_train,
+    emass_train,
+    mass_test,
+    emass_test,
+) = return_train_test(df_train, target=TARGET)
 
-    model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
-                                                                        x_train_er,
-                                                                        mass_train, 80, 40)
-    # Train is imported from another file, and runs MCMC sampling using PyMC.
+unorm_mass = denormalise_val(mass_test, TARGET)
 
-    # trace = az.from_netcdf("Radius_output/HBNN_sig_015_15_nodes_mass_4_param.nc")
-    
-    # trace = train(model, "Radius_output/HBNN_sig_015_15_nodes_mass_4_param.nc", draw=1000, chains=2)
+x_train = x_train[FEATURES]
+x_train_er = x_train_er[FEATURE_ERRORS]
+x_test = x_test[FEATURES]
+x_test_er = x_test_err[FEATURE_ERRORS]
 
-    # trace = az.from_netcdf("Radius_output/GP_hetero_new_2026_mass_4param_gamma_etav_80_40.nc")
 
-    trace = train(model, "Train_outputs/GP_mass_3param_1000_draws_80_40.nc", draw=1000, chains=2)
-    
-    # trace = train(model, "Train_outputs/HBNN_mass_3param_1000_draws_15_nodes_sig_015.nc", draw=1000, chains=2)
-        
-    # trace.extend(pm.compute_log_likelihood(trace, model=model, var_names='y'))
-    
+def build_selected_model():
+    if TRAIN_MODEL == "gp":
+        model, mu_gp, log_var_gp, Xu, Xu_var = gp.sparse_fully_heteroscedastic_gp(
+            x_train,
+            x_train_er,
+            mass_train,
+            GP_M_MEAN,
+            GP_M_VAR,
+        )
+        return model, GP_MASS_TRACE_PATH, {
+            "mu_gp": mu_gp,
+            "log_var_gp": log_var_gp,
+            "Xu": Xu,
+            "Xu_var": Xu_var,
+        }
+
+    if TRAIN_MODEL == "hbnn":
+        model = hbnn.HBNN_M3(
+            x_train,
+            mass_train,
+            x_train_er,
+            emass_train,
+            N_HIDDEN,
+        )
+        return model, HBNN_MASS_TRACE_PATH, {}
+
+    raise ValueError('TRAIN_MODEL must be either "gp" or "hbnn".')
+
+
+def sample_holdout_predictions(model, trace, model_info):
+    if TRAIN_MODEL == "gp":
+        return posterior_predictive_GP(
+            model,
+            model_info["mu_gp"],
+            model_info["log_var_gp"],
+            trace,
+            x_test,
+            x_test_er,
+            model_info["Xu"],
+            model_info["Xu_var"],
+            len(FEATURES),
+            TARGET,
+        )
+
+    return sample_post_pred_HBNN_para(
+        trace,
+        x_test,
+        x_test_er,
+        N_HIDDEN,
+        len(FEATURES),
+        TARGET,
+    )
+
+
+def print_diagnostics(trace):
     r_hat_values = az.rhat(trace)
     all_rhats = []
     for var in r_hat_values.data_vars:
         max_rhat = r_hat_values[var].max().values.item()
         all_rhats.append((var, max_rhat))
 
-    print(all_rhats)
-    
+    print("R-hat values:", all_rhats)
     print(az.loo(trace))
-    
-    pred, lpd = posterior_predictive_GP(
-        model, μ_gp, log_var_gp, trace,
-        x_test, x_test_er, Xu, Xu_er, 3, 'mass'
+
+
+def plot_holdout(pred):
+    plt.figure(figsize=(8, 6))
+    plt.errorbar(
+        unorm_mass,
+        pred.mean(0),
+        yerr=pred.std(0),
+        fmt="o",
+        label="Predictions with Uncertainty",
+        alpha=0.7,
     )
+    plt.plot(
+        [unorm_mass.min(), unorm_mass.max()],
+        [unorm_mass.min(), unorm_mass.max()],
+        "r--",
+    )
+    plt.xlabel("True Mass")
+    plt.ylabel("Predicted Mass")
+    plt.title(f"{TRAIN_MODEL.upper()} Mass Predictions with Uncertainty")
+    plt.legend()
+    plt.show()
 
-    # pred, lpd = sample_post_pred_HBNN_para(
-    #     trace, x_test, x_test_er, 15, 3, 'mass'
-    # )
+    plt.figure(figsize=(8, 6))
+    plt.errorbar(
+        unorm_mass,
+        pred.mean(0) - unorm_mass,
+        yerr=pred.std(0),
+        fmt="o",
+        label="Predictions with Uncertainty",
+        alpha=0.7,
+    )
+    plt.hlines(0, unorm_mass.min(), unorm_mass.max(), "r", linestyle="--")
+    plt.xlabel("True Mass")
+    plt.ylabel("Residual Mass")
+    plt.legend()
+    plt.show()
 
-    # pred, lpd = sample_post_pred_HBNN_para(trace, x_test, x_test_er, 15, 4, 'mass')
+
+def main():
+    model, output_path, model_info = build_selected_model()
+
+    trace = train(model, output_path, draw=DRAWS, chains=CHAINS)
+    print(f"Saved {TRAIN_MODEL.upper()} trace to {output_path}")
+
+    print_diagnostics(trace)
+
+    pred, lpd = sample_holdout_predictions(model, trace, model_info)
 
     print(pred.std(0))
     print(pred.mean(0))
     print(unorm_mass)
-    
-    print('MAE: ', mean_absolute_error(unorm_mass, pred.mean(0)))
-    
-    print('MARD', mard(unorm_mass, pred.mean(0)))
-    
-    print('MRD', mrd(unorm_mass, pred.mean(0)))
 
-    plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_mass, pred.mean(0), yerr=pred.std(0), fmt='o', label='Predictions with Uncertainty', alpha=0.7)
-    plt.plot([unorm_mass.min(), unorm_mass.max()], [unorm_mass.min(), unorm_mass.max()], 'r--')
-    plt.xlabel('True Mass')
-    plt.ylabel('Predicted Mass')
-    plt.title('HBNN Predictions with Uncertainty')
-    plt.legend()
-    plt.show()
+    print("MAE:", mean_absolute_error(unorm_mass, pred.mean(0)))
+    print("MARD:", mard(unorm_mass, pred.mean(0)))
+    print("MRD:", mrd(unorm_mass, pred.mean(0)))
 
-    plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_mass, pred.mean(0) - unorm_mass, yerr=pred.std(0), fmt='o', label='Predictions with Uncertainty', alpha=0.7)
-    plt.hlines(0, unorm_mass.min(), unorm_mass.max(), 'r', linestyle='--')
-    plt.xlabel('True Mass')
-    plt.ylabel('Residual Mass')
-    # plt.title('HBNN Predictions with Uncertainty')
-    plt.legend()
-    plt.show()
+    plot_holdout(pred)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
