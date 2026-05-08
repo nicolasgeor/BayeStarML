@@ -18,8 +18,9 @@ from constants import (
     TARGET,
     TARGET_COLUMNS,
     TARGET_ERROR_COLUMNS,
+    TRAINING_DATA_FILE,
 )
-from utils import get_dataset
+from utils import get_dataset, load_stellar_dataframe
 from sklearn.model_selection import train_test_split
 
 RANDOM_SEED = 5732 
@@ -48,6 +49,21 @@ def _mean_symmetric_errors(df: pd.DataFrame) -> pd.DataFrame:
     for out_col, (lo_col, hi_col) in RAW_ERROR_COLUMNS.items():
         errors[out_col] = (df[lo_col] + df[hi_col]) / 2
     return pd.DataFrame(errors, index=df.index)
+
+
+def _set_normalisation_stats(mteff, mmet, mrho, mtmass, steff, smet, srho, smass, target):
+    MU.update({
+        FEATURES[0]: mteff,
+        FEATURES[1]: mmet,
+        FEATURES[2]: mrho,
+        target: mtmass,
+    })
+    SIGMA.update({
+        FEATURES[0]: steff,
+        FEATURES[1]: smet,
+        FEATURES[2]: srho,
+        target: smass,
+    })
 
 
 def normalise_val(x: float | None, key: str) -> float:
@@ -122,6 +138,7 @@ def return_norm(df, target: str = TARGET):
     smet = np.std(met)
     srho = np.std(rho)
     smass = np.std(target_values)
+    _set_normalisation_stats(mteff, mmet, mrho, mtmass, steff, smet, srho, smass, target)
     
     return mteff, mmet, mrho, mtmass, steff, smet, srho, smass     
 
@@ -178,6 +195,7 @@ def return_train_test(df, normalised=True, target: str = TARGET):
     smet = np.std(met)
     srho = np.std(rho)
     smass = np.std(y_train)
+    _set_normalisation_stats(mteff, mmet, mrho, mtmass, steff, smet, srho, smass, target)
     
     # Standardize inputs 
     teff = (teff - mteff) / steff
@@ -247,8 +265,14 @@ def prepare_pred3(filename, target: str = TARGET):
     """
     
     _check_target(target)
-    X = pd.read_csv(filename)
-    df = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
+    X, _ = load_stellar_dataframe(
+        filename,
+        required_features=FEATURES,
+        target=target,
+        star_class=None,
+        drop_invalid=True,
+    )
+    df = get_dataset(TRAINING_DATA_FILE, 'MS', features=FEATURES, target=target)
     mteff, mmet, mrho, mtmass, steff, smet, srho, smass = return_norm(df, target=target)
 
     # Helper function to normalize and handle missing values

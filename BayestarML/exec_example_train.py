@@ -16,6 +16,7 @@ from constants import (
     GP_MASS_TRACE_PATH,
     HBNN_MASS_TRACE_PATH,
     TARGET,
+    TRAINING_DATA_FILE,
 )
 from models import gp, hbnn
 from pred_sampling import posterior_predictive_GP, sample_post_pred_HBNN_para
@@ -34,7 +35,7 @@ DRAWS = 1000
 CHAINS = 2
 
 
-df_train = get_dataset("Datasets/data_sample_calculated_density.txt", "MS")
+df_train = get_dataset(TRAINING_DATA_FILE, "MS", features=FEATURES, target=TARGET)
 (
     x_train,
     x_train_er,

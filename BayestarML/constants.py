@@ -7,6 +7,7 @@ Created on Mon Jul 14 17:55:32 2025
 """
 
 TARGET = "mass"
+TRAINING_DATA_FILE = "Datasets/database2026_A_.txt"
 
 # Canonical 3-input model feature set:
 # effective temperature, metallicity, and stellar density.
@@ -30,10 +31,9 @@ GP_VARIANCE_FEATURES = FEATURES
 GP_MASS_TRACE_PATH = "Train_outputs/GP_mass_3features_allvar_1000_draws_80_40.nc"
 HBNN_MASS_TRACE_PATH = "Train_outputs/HBNN_mass_3param_1000_draws_15_nodes_sig_015.nc"
 
-# These values match the current training split produced from
-# Datasets/data_sample_calculated_density.txt with RANDOM_SEED = 5732.
-# If the dataset or split changes, regenerate these values before trusting
-# physical-scale predictions or metrics.
+# Fallback normalization values. return_train_test/return_norm update these
+# dictionaries from the selected training file before model training,
+# prediction, or metric denormalization.
 MU = {
     "Teff": 6185.617021276596,
     "Meta": -0.0460354609929078,
