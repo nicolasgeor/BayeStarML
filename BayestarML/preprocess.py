@@ -47,7 +47,9 @@ def _mean_symmetric_errors(df: pd.DataFrame) -> pd.DataFrame:
     """Average the two reported uncertainty columns into one error column."""
     errors = {}
     for out_col, (lo_col, hi_col) in RAW_ERROR_COLUMNS.items():
-        errors[out_col] = (df[lo_col] + df[hi_col]) / 2
+        sides = df[[lo_col, hi_col]].abs()
+        sides = sides.where(sides > 0)
+        errors[out_col] = sides.mean(axis=1, skipna=True)
     return pd.DataFrame(errors, index=df.index)
 
 

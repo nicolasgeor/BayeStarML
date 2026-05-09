@@ -142,6 +142,10 @@ def _mean_abs_error(row, err1_col, err2_col):
     return float(np.mean(values))
 
 
+def _has_positive_error(row, err1_col, err2_col):
+    return np.isfinite(_mean_abs_error(row, err1_col, err2_col))
+
+
 def _percentage_error(row, value_col, err1_col, err2_col):
     if value_col not in row.index or pd.isna(row[value_col]):
         return np.nan
@@ -208,6 +212,17 @@ def _required_columns_for_model(features, target):
     return list(dict.fromkeys(required))
 
 
+def _required_value_columns_for_model(features, target):
+    return ["class", TARGET_COLUMN[target], *features]
+
+
+def _required_error_pairs_for_model(features, target):
+    pairs = [TARGET_ERROR_SIDES[target]]
+    for feature in features:
+        pairs.append(FEATURE_ERROR_SIDES[feature])
+    return pairs
+
+
 def _validate_columns(df, required_columns, data_file):
     missing = [column for column in required_columns if column not in df.columns]
     if missing:
@@ -249,7 +264,21 @@ def load_stellar_dataframe(
     rows_after_class_filter = len(df)
 
     if drop_invalid:
-        df = df.dropna(subset=required_columns).copy()
+        value_columns = _required_value_columns_for_model(required_features, target)
+        valid_mask = df[value_columns].notna().all(axis=1)
+        for value_col in value_columns:
+            if value_col != "class":
+                valid_mask &= np.isfinite(df[value_col])
+
+        for err1_col, err2_col in _required_error_pairs_for_model(required_features, target):
+            valid_mask &= df.apply(
+                _has_positive_error,
+                axis=1,
+                err1_col=err1_col,
+                err2_col=err2_col,
+            )
+
+        df = df[valid_mask].copy()
     rows_usable = len(df)
 
     summary = {
@@ -257,6 +286,7 @@ def load_stellar_dataframe(
         "rows_loaded": rows_loaded,
         "rows_after_class_filter": rows_after_class_filter,
         "rows_usable": rows_usable,
+        "rows_dropped_invalid": rows_after_class_filter - rows_usable,
         "required_columns": required_columns,
         **mapping_summary,
     }
@@ -321,6 +351,7 @@ def train(model, filename, draw=1000, chains=2, target_accept=0.95):
         target_accept=target_accept,
     )
     trace.extend(pm.compute_log_likelihood(trace, model=model, var_names="y"))
+    Path(filename).parent.mkdir(parents=True, exist_ok=True)
     trace.to_netcdf(filename)
 
     return trace

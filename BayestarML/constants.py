@@ -8,6 +8,7 @@ Created on Mon Jul 14 17:55:32 2025
 
 TARGET = "mass"
 TRAINING_DATA_FILE = "Datasets/database2026_A_.txt"
+PREDICTION_OUTPUT_DIR = "Dataset_A_outputs"
 
 # Canonical 3-input model feature set:
 # effective temperature, metallicity, and stellar density.
@@ -28,8 +29,10 @@ TARGET_ERROR_COLUMNS = {
 # Use all three input features for the heteroscedastic GP variance model.
 GP_VARIANCE_FEATURES = FEATURES
 
-GP_MASS_TRACE_PATH = "Train_outputs/GP_mass_3features_allvar_1000_draws_80_40.nc"
-HBNN_MASS_TRACE_PATH = "Train_outputs/HBNN_mass_3param_1000_draws_15_nodes_sig_015.nc"
+GP_MASS_TRACE_PATH = "Dataset_A_training/GP_mass_3features_allvar_1000_draws_80_40.nc"
+HBNN_MASS_TRACE_PATH = "Dataset_A_training/HBNN_mass_3features_1000_draws_15_nodes_sig_015.nc"
+BHS_MASS_PRED_PATH = f"{PREDICTION_OUTPUT_DIR}/BHS_mass_3features_holdout_predictions.csv"
+BHS_MASS_WEIGHTS_PATH = f"{PREDICTION_OUTPUT_DIR}/BHS_mass_3features_holdout_weights.csv"
 
 # Fallback normalization values. return_train_test/return_norm update these
 # dictionaries from the selected training file before model training,

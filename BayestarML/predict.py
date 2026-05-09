@@ -14,6 +14,8 @@ import pandas as pd
 
 from bhs import run_stack
 from constants import (
+    BHS_MASS_PRED_PATH,
+    BHS_MASS_WEIGHTS_PATH,
     FEATURE_ERRORS,
     FEATURES,
     GP_MASS_TRACE_PATH,
@@ -201,15 +203,15 @@ def predict3(X, X_er, target=TARGET, test=False):
 def main():
     _, bhs_pred, bhs_w = predict3(None, None, TARGET, test=True)
 
-    Path("Results").mkdir(exist_ok=True)
-    pd.DataFrame(bhs_pred.mean(0)).to_csv(
-        "Results/3_features_post_pred_bhs_6col_mass_res.csv",
-        index=False,
-    )
-    pd.DataFrame(bhs_w.mean(0)).to_csv(
-        "Results/3_features_post_pred_bhs_6col_mass_w.csv",
-        index=False,
-    )
+    Path(BHS_MASS_PRED_PATH).parent.mkdir(parents=True, exist_ok=True)
+    pd.DataFrame({
+        "bhs_mean": bhs_pred.mean(0),
+        "bhs_std": bhs_pred.std(0),
+    }).to_csv(BHS_MASS_PRED_PATH, index=False)
+    pd.DataFrame(
+        bhs_w.mean(0),
+        columns=["w_bart", "w_hbnn", "w_gp"],
+    ).to_csv(BHS_MASS_WEIGHTS_PATH, index=False)
 
 
 if __name__ == "__main__":

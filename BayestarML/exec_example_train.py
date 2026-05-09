@@ -25,8 +25,8 @@ from utils import get_dataset, mard, mrd, train
 
 
 # Choose exactly one model to train by commenting/uncommenting these two lines.
-# TRAIN_MODEL = "gp"
-TRAIN_MODEL = "hbnn"
+TRAIN_MODEL = "gp"
+# TRAIN_MODEL = "hbnn"
 
 N_HIDDEN = 15
 GP_M_MEAN = 80
