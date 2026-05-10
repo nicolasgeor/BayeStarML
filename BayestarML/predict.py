@@ -14,6 +14,7 @@ import pandas as pd
 
 from bhs import run_stack
 from constants import (
+    DATASET_PATH,
     FEATURE_ERRORS,
     FEATURES,
     GP_MASS_TRACE_PATH,
@@ -110,7 +111,7 @@ def predict3(X, X_er, target=TARGET, test=False):
             "before running stacked predictions."
         )
 
-    df_train = get_dataset("Datasets/data_sample_calculated_density.txt", "MS")
+    df_train = get_dataset(DATASET_PATH, "MS")
     (
         x_train,
         x_train_er,

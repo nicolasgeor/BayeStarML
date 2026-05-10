@@ -11,6 +11,7 @@ Created on Mon Jul 14 18:03:17 2025
 import numpy as np
 import pandas as pd
 from constants import (
+    DATASET_PATH,
     FEATURE_ERRORS,
     FEATURES,
     MU,
@@ -65,6 +66,19 @@ def denormalise_err(y: np.ndarray, key: str) -> np.ndarray:
     return y * SIGMA[key]
 
 
+def _required_raw_error_columns(target: str) -> list[str]:
+    error_columns = []
+    for error_col in [*FEATURE_ERRORS, TARGET_ERROR_COLUMNS[target]]:
+        error_columns.extend(RAW_ERROR_COLUMNS[error_col])
+    return error_columns
+
+
+def _drop_nonpositive_uncertainties(df: pd.DataFrame, target: str) -> pd.DataFrame:
+    required_error_columns = _required_raw_error_columns(target)
+    mask = (df[required_error_columns] > 0).all(axis=1)
+    return df.loc[mask].copy()
+
+
 def return_norm(df, target: str = TARGET):
     """
     Compute normalization statistics for stellar parameters and their errors.
@@ -90,6 +104,7 @@ def return_norm(df, target: str = TARGET):
         effective temperature, metallicity, density, and mass.
     """
     _check_target(target)
+    df = _drop_nonpositive_uncertainties(df, target)
     target_column = TARGET_COLUMNS[target]
     target_error_column = TARGET_ERROR_COLUMNS[target]
 
@@ -148,6 +163,7 @@ def return_train_test(df, normalised=True, target: str = TARGET):
 
     """
     _check_target(target)
+    df = _drop_nonpositive_uncertainties(df, target)
     target_column = TARGET_COLUMNS[target]
     target_error_column = TARGET_ERROR_COLUMNS[target]
 
@@ -189,7 +205,7 @@ def return_train_test(df, normalised=True, target: str = TARGET):
     # Uncertainties for the inputs
     eteff = X_train['eTeff'] / steff
     emet = abs(X_train['eMeta']) / smet
-    erho = X_train['erho'] / srho  
+    erho = X_train['erho'] / srho
     y_train_error = Y_train[target_error_column] / smass
 
     x_train = pd.concat([teff, met, rho], axis=1)
@@ -207,7 +223,7 @@ def return_train_test(df, normalised=True, target: str = TARGET):
 
     eteff_test = X_test['eTeff'] / steff
     emet_test = abs(X_test['eMeta']) / smet
-    erho_test = X_test['erho'] / srho 
+    erho_test = X_test['erho'] / srho
     y_test_error = Y_test[target_error_column] / smass
 
     x_test_error = pd.concat([eteff_test, emet_test, erho_test], axis=1)
@@ -248,7 +264,8 @@ def prepare_pred3(filename, target: str = TARGET):
     
     _check_target(target)
     X = pd.read_csv(filename)
-    df = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
+    X = X[(X[FEATURE_ERRORS] > 0).all(axis=1)].copy()
+    df = get_dataset(DATASET_PATH, 'MS')
     mteff, mmet, mrho, mtmass, steff, smet, srho, smass = return_norm(df, target=target)
 
     # Helper function to normalize and handle missing values

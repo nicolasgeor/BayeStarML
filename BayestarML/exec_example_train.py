@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error
 
 from constants import (
+    DATASET_PATH,
     FEATURE_ERRORS,
     FEATURES,
     GP_MASS_TRACE_PATH,
@@ -34,7 +35,7 @@ DRAWS = 1000
 CHAINS = 2
 
 
-df_train = get_dataset("Datasets/data_sample_calculated_density.txt", "MS")
+df_train = get_dataset(DATASET_PATH, "MS")
 (
     x_train,
     x_train_er,
