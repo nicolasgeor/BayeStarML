@@ -68,6 +68,37 @@ def _load_trace(path, model_name):
     return az.from_netcdf(trace_path)
 
 
+def _trace_training_row_count(trace, model_name):
+    if not hasattr(trace, "log_likelihood") or "y" not in trace.log_likelihood:
+        raise ValueError(
+            f"{model_name} trace does not contain pointwise log-likelihood "
+            "for variable 'y'. Retrain it with the current training script."
+        )
+
+    log_likelihood = trace.log_likelihood["y"]
+    pointwise_dims = [
+        dim for dim in log_likelihood.dims if dim not in {"chain", "draw"}
+    ]
+    if not pointwise_dims:
+        raise ValueError(
+            f"{model_name} trace log-likelihood has no pointwise observation "
+            "dimension. Retrain it with the current training script."
+        )
+
+    return int(np.prod([log_likelihood.sizes[dim] for dim in pointwise_dims]))
+
+
+def _validate_trace_training_rows(trace, trace_path, model_name, expected_rows):
+    trace_rows = _trace_training_row_count(trace, model_name)
+    if trace_rows != expected_rows:
+        raise ValueError(
+            f"{model_name} trace at {trace_path} was trained with {trace_rows} "
+            f"training rows, but the current dataset/split has {expected_rows}. "
+            f"Retrain {model_name} with exec_example_train.py after the latest "
+            "dataset corrections before running exec_example_prediction.py."
+        )
+
+
 def _print_holdout_metrics(unorm_mass, bart_pred, gp_pred, hbnn_pred, bhs_pred):
     print("MARD BART:", mard(unorm_mass, bart_pred.mean(0)))
     print("MRD BART:", mrd(unorm_mass, bart_pred.mean(0)))
@@ -127,6 +158,12 @@ def predict3(X, X_er, target=TARGET, test=False):
 
     x_train3 = x_train.loc[:, FEATURES]
     x_train3_er = x_train_er.loc[:, FEATURE_ERRORS]
+    n_train = len(x_train3)
+
+    gp3_trace = _load_trace(gp_trace_path, "GP Mass")
+    hbnn3_trace = _load_trace(hbnn_trace_path, "HBNN Mass")
+    _validate_trace_training_rows(gp3_trace, gp_trace_path, "GP Mass", n_train)
+    _validate_trace_training_rows(hbnn3_trace, hbnn_trace_path, "HBNN Mass", n_train)
 
     if test:
         X_pred = x_test.loc[:, FEATURES]
@@ -159,7 +196,6 @@ def predict3(X, X_er, target=TARGET, test=False):
         80,
         40,
     )
-    gp3_trace = _load_trace(gp_trace_path, "GP Mass")
     gp3_pred, lpd_GP3 = posterior_predictive_GP(
         gp3_model,
         mu_gp3,
@@ -173,7 +209,6 @@ def predict3(X, X_er, target=TARGET, test=False):
         TARGET,
     )
 
-    hbnn3_trace = _load_trace(hbnn_trace_path, "HBNN Mass")
     hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(
         hbnn3_trace,
         X_pred,

@@ -671,7 +671,7 @@ def posterior_predictive_GP(
 
 #     return stats, lpd_GP
 
-def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2):
+def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2, cores=1):
     """
     Generate posterior predictive samples and LOO scores for a BART model.
 
@@ -694,6 +694,9 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2):
         Number of posterior draws per chain. Default is 1000.
     chains : int, optional
         Number of MCMC chains. Default is 2.
+    cores : int, optional
+        Number of worker processes for sampling. Default is 1 to avoid
+        fragile multiprocessing imports on Windows.
 
     Returns
     -------
@@ -704,15 +707,15 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2):
             Pointwise LOO log predictive densities for the BART model.
     """
     with model:
-        trace = pm.sample(draws=draws, tune=draws, chains=chains)
+        trace = pm.sample(draws=draws, tune=draws, chains=chains, cores=cores)
         trace.extend(pm.compute_log_likelihood(trace))
         # pp = pm.sample_posterior_predictive(trace)
 
     lpd_BART = find_pointwise_loo(trace)
     # print(az.rhat(trace))
 
-    X = np.asarray(X)
-    X_er = np.asarray(X_er)
+    X = np.asarray(X, dtype=float)
+    X_er = np.asarray(X_er, dtype=float)
     N_test = X.shape[0]
         
     with model:

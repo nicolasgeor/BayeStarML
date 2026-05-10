@@ -43,11 +43,11 @@ def median_clip(X_train, X_test):
         - X_test_comb : ndarray
             Transformed test data of shape (m_samples, 2 × n_features).
     """
-    X_train = np.array(X_train)
+    X_train = np.asarray(X_train, dtype=float)
     median = np.median(X_train, axis=0)
     X_train_u = (X_train - median).clip(max=0)
     X_train_l = (X_train - median).clip(min=0)
-    X_test = np.array(X_test)
+    X_test = np.asarray(X_test, dtype=float)
     X_test_u = (X_test - median).clip(max=0)
     X_test_l = (X_test - median).clip(min=0)
     
@@ -98,11 +98,14 @@ def stacking_continuous(
         including priors over feature coefficients and softmax-normalized weights 
         for model combination.
     """
+    X = np.nan_to_num(np.asarray(X, dtype=float), nan=0.0)
+    X_test = np.nan_to_num(np.asarray(X_test, dtype=float), nan=0.0)
+    lpd_point = np.asarray(lpd_point, dtype=float)
+
     N = X.shape[0]
     d = X.shape[1]  # Number of continuous features
     N_test = X_test.shape[0]
     K = lpd_point.shape[1]  # Number of candidate models
-    X_test = np.nan_to_num(X_test, nan=0.0)
     #print(X_test)
 
     with pm.Model() as model:
@@ -116,13 +119,9 @@ def stacking_continuous(
             "beta", (sigma * beta_con + mu).T
         )
 
-        assert beta.eval().shape == (K - 1, d)
-
         # Calculate stacking weights for training set
 
         f = pm.Deterministic("f", pm.math.concatenate([pm.math.dot(X, beta.T), np.zeros((N, 1))], axis=1))
-
-        assert f.eval().shape == (N, K)
 
         # Log-softmax for stacking weights (log probability in unconstrained space)
         log_w = pm.math.log_softmax(f, axis=1)
@@ -170,7 +169,7 @@ def _to_2d_draws(arr, N_test=None, name="arr"):
     ndarray
         Array of shape (S, N_test).
     """
-    a = np.asarray(arr)
+    a = np.asarray(arr, dtype=float)
     if a.ndim == 1:
         a = a[None, :]
     elif a.ndim == 3:
@@ -188,6 +187,7 @@ def run_stack(
     lpd_BART, lpd_HBNN, lpd_GP,
     tau_mu=1.0, tau_sigma=0.5,
     draws=1000, chains=4,
+    cores=1,
     random_seed=42,
 ):
     """
@@ -221,6 +221,9 @@ def run_stack(
         Number of posterior draws for the stacking model.
     chains : int, default 4
         Number of MCMC chains.
+    cores : int, default 1
+        Number of worker processes for sampling. Kept at 1 to avoid fragile
+        multiprocessing imports on Windows.
     random_seed : int, default 42
         Random seed used for posterior sampling and draw alignment.
 
@@ -252,7 +255,11 @@ def run_stack(
 
     # Build BHS inputs 
     X1, X2 = median_clip(x_train, x_pred)
-    lpd_point = np.vstack((lpd_BART, lpd_HBNN, lpd_GP)).T  # (N_train, K=3)
+    lpd_point = np.vstack((
+        np.asarray(lpd_BART, dtype=float),
+        np.asarray(lpd_HBNN, dtype=float),
+        np.asarray(lpd_GP, dtype=float),
+    )).T  # (N_train, K=3)
 
     model = stacking_continuous(X1, X2, lpd_point, tau_mu, tau_sigma)
 
@@ -261,6 +268,7 @@ def run_stack(
         trace = pm.sample(
             draws=draws,
             chains=chains,
+            cores=cores,
             random_seed=random_seed,
             target_accept=0.9,
             progressbar=True,

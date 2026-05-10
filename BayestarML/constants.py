@@ -7,7 +7,7 @@ Created on Mon Jul 14 17:55:32 2025
 """
 
 TARGET = "mass"
-TRAINING_DATA_FILE = "Datasets/database2026_A_.txt"
+TRAINING_DATA_FILE = "Datasets/old_database.txt"
 PREDICTION_OUTPUT_DIR = "Dataset_A_outputs"
 
 # Canonical 3-input model feature set:
