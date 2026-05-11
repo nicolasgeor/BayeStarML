@@ -41,6 +41,9 @@ def get_dataset(data_file, star_class):
 
     # clean NA values (simply remove the corresponding rows)
     df.dropna(inplace=True, axis=0)
+    uncertainty_cols = ['eM1', 'eM2', 'eTeff1', 'eTeff2',
+                        'eMeta1', 'eMeta2', 'erho1', 'erho2']
+    df = df[(df[uncertainty_cols] != 0).all(axis=1)]
     df_complete = data_MS.loc[df.index].copy()
 
     return df_complete

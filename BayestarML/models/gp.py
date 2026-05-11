@@ -261,7 +261,7 @@ def sparse_fully_heteroscedastic_gp(
                                   seed=seed)
     
     with pm.Model() as model:
-        X_mu  = pm.Data("X_mu",  X)
+        X_mu  = tt.constant(X)
         # X_er  = pm.ConstantData("X_er",  X_err)
 
         # -------- mean GP: ARD kernel over X --------
@@ -285,7 +285,7 @@ def sparse_fully_heteroscedastic_gp(
         μ_gp = SparseLatent(cov_mean)
         μ_f  = μ_gp.prior("μ", X_mu, Xu)
 
-        X_var_data = pm.Data("X_var", X_var)
+        X_var_data = tt.constant(X_var)
         D_var = X_var.shape[1]
 
         # Priors for ARD lengthscales over concatenated space

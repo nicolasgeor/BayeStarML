@@ -270,7 +270,7 @@ def prepare_pred3(filename):
     """
     
     X = pd.read_csv(filename)
-    df = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
+    df = get_dataset('Datasets/database_A_old_format.txt', 'MS')
     mteff, mmet, mrho, mtmass, steff, smet, srho, smass = return_norm(df)
 
     # Helper function to normalize and handle missing values

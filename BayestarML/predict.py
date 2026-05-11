@@ -197,7 +197,7 @@ def predictNAN(X, X_er, target, test=False):
 
 def predict3(X, X_er, target, test=False): # Default: not test-mode
     
-    df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
+    df_train = get_dataset('Datasets/database_A_old_format.txt', 'MS')
     (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
     mass_test, emass_test
     ) = return_train_test(df_train)
@@ -226,14 +226,17 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
                                                                                       x_train3_er, 
                                                                                       mass_train, 
                                                                                       80, 40)
+        
+        # CHANGE NAMES HERE
+        # Change gp3_trace and hbnn3_trace according to which training we did
 
-        gp3_trace = az.from_netcdf('Train_outputs/GP_mass_3param_1000_draws_80_40.nc')
+        gp3_trace = az.from_netcdf('Dataset_A_training/GP_mass_3param_3000_draws_4_chains_80_40.nc')
         gp3_pred, lpd_GP3 = posterior_predictive_GP(gp3_model, μ_gp3, lg_σ_gp3, 
                                             gp3_trace, X,
                                             X_er,
                                             Xu3, Xu_er3, 3, 'mass')
         
-        hbnn3_trace = az.from_netcdf('Train_outputs/HBNN_mass_3param_1000_draws_15_nodes_sig_015.nc')
+        hbnn3_trace = az.from_netcdf('Dataset_A_training/HBNN_mass_3param_3000_draws_4_chains_15_nodes_sig_015.nc')
         hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(hbnn3_trace,  
                                                       X,
                                                       X_er,
