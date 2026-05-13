@@ -74,7 +74,7 @@ def return_norm(df):
     
     # do split
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y,
-                                                        test_size=0.2,
+                                                        test_size=154,
                                                         random_state=RANDOM_SEED)
 
     # Extract relevant columns for stellar mass prediction
@@ -136,7 +136,7 @@ def return_train_test(df, normalised=True):
     
     # do split
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y,
-                                                        test_size=0.2,
+                                                        test_size=154,
                                                         random_state=RANDOM_SEED)
 
     # Extract relevant columns for stellar mass prediction

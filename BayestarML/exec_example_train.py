@@ -37,17 +37,17 @@ def main():
 
     # PiCK ONE OF THESE TWO COMBINATiONS (model + trace)
  
-    model = hbnn.HBNN_M3(x_train, mass_train, x_train_er, emass_train, 15)
+    # model = hbnn.HBNN_M3(x_train, mass_train, x_train_er, emass_train, 15)
 
     
-    trace = train(model, "Dataset_A_training/HBNN_mass_3param_3000_draws_4_chains_15_nodes_sig_015.nc", draw=3000, chains=4)
+    # trace = train(model, "Dataset_A_training/HBNN_mass_3param_3000_draws_4_chains_15_nodes_sig_015_bis.nc", draw=3000, chains=4)
 
     
-    # model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
-    #                                                                     x_train_er,
-    #                                                                     mass_train, 80, 40)
+    model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
+                                                                        x_train_er,
+                                                                        mass_train, 100, 50)
     
-    # trace = train(model, "Dataset_A_training/GP_mass_3param_1000_draws_80_40.nc", draw=1000, chains=2)
+    trace = train(model, "Dataset_A_training/GP_mass_3param_3000_draws_4_chains_100_50_bis.nc", draw=3000, chains=4)
 
     
     # model = hbnn.HBNN_M4(x_train, rad_train, x_train_er, erad_train, 15)
@@ -77,14 +77,14 @@ def main():
     
     # PICK ONE OF THESE TWO
 
-    # pred, lpd = posterior_predictive_GP(
-    #     model, μ_gp, log_var_gp, trace,
-    #     x_test, x_test_er, Xu, Xu_er, 3, 'mass'
-    # )
-
-    pred, lpd = sample_post_pred_HBNN_para(
-        trace, x_test, x_test_er, 15, 3, 'mass'
+    pred, lpd = posterior_predictive_GP(
+        model, μ_gp, log_var_gp, trace,
+        x_test, x_test_er, Xu, Xu_er, 3, 'mass'
     )
+
+    # pred, lpd = sample_post_pred_HBNN_para(
+    #     trace, x_test, x_test_er, 15, 3, 'mass'
+    # )
 
     # pred, lpd = sample_post_pred_HBNN_para(trace, x_test, x_test_er, 15, 4, 'mass')
 
@@ -134,8 +134,8 @@ def main():
     unorm_mass_plot = np.asarray(unorm_mass)[plot_mask]
     M_pred_mean_plot = M_pred_mean[plot_mask]
     M_pred_sigma_plot = M_pred_sigma[plot_mask]
-    # plot_output_base = 'Dataset_A_training/GP_mass_3param_1000_draws_80_40'
-    plot_output_base = 'Dataset_A_training/HBNN_mass_3param_3000_draws_4_chains_15_nodes_sig_015'
+    plot_output_base = 'Dataset_A_training/GP_mass_3param_3000_draws_4_chains_100_50_bis'
+    # plot_output_base = 'Dataset_A_training/HBNN_mass_3param_3000_draws_4_chains_15_nodes_sig_015_bis'
 
     # CHANGE NAMES HERE FOR THE PLOTS. 3 TIMES (ABOVE BELOW, AND SUPER BELOW)
 
@@ -144,7 +144,7 @@ def main():
     plt.plot([unorm_mass.min(), unorm_mass.max()], [unorm_mass.min(), unorm_mass.max()], 'r--')
     plt.xlabel('True Mass')
     plt.ylabel('Predicted Mass')
-    plt.title('HBNN Predictions with Uncertainty')
+    plt.title('GP Predictions with Uncertainty')
     plt.legend()
     plt.savefig(plot_output_base + '_full_prediction.png', dpi=300, bbox_inches='tight')
     plt.show()
@@ -154,7 +154,7 @@ def main():
     plt.hlines(0, unorm_mass.min(), unorm_mass.max(), 'r', linestyle='--')
     plt.xlabel('True Mass')
     plt.ylabel('Residual Mass')
-    # plt.title('HBNN Predictions with Uncertainty')
+    # plt.title('GP Predictions with Uncertainty')
     plt.legend()
     plt.savefig(plot_output_base + '_full_residual.png', dpi=300, bbox_inches='tight')
     plt.show()
@@ -164,7 +164,7 @@ def main():
     plt.plot([unorm_mass_plot.min(), unorm_mass_plot.max()], [unorm_mass_plot.min(), unorm_mass_plot.max()], 'r--')
     plt.xlabel('True Mass')
     plt.ylabel('Predicted Mass')
-    plt.title('HBNN Predictions with Uncertainty (M_pred_sigma < 95th percentile)')
+    plt.title('GP Predictions with Uncertainty (M_pred_sigma < 95th percentile)')
     plt.legend()
     plt.savefig(plot_output_base + '_filtered_prediction.png', dpi=300, bbox_inches='tight')
     plt.show()

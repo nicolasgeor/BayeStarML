@@ -187,7 +187,7 @@ def run_stack(
     x_train, x_pred,
     lpd_BART, lpd_HBNN, lpd_GP,
     tau_mu=1.0, tau_sigma=0.5,
-    draws=1000, chains=4,
+    draws=3000, chains=4,
     random_seed=42,
 ):
     """

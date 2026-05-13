@@ -14,9 +14,56 @@ from bhs import run_stack
 import arviz as az
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 # import pymc as pm
 # from sklearn.metrics import mean_absolute_error
 # from utils import find_pointwise_loo
+
+def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95,)):
+    M_pred_sigma = pred.std(0)
+    M_pred_mean = pred.mean(0)
+
+    plt.figure(figsize=(8, 6))
+    plt.errorbar(unorm_mass, M_pred_mean, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.plot([unorm_mass.min(), unorm_mass.max()], [unorm_mass.min(), unorm_mass.max()], 'r--')
+    plt.xlabel('True Mass')
+    plt.ylabel('Predicted Mass')
+    plt.title(model_name + ' Predictions with Uncertainty')
+    plt.legend()
+    plt.show()
+
+    plt.figure(figsize=(8, 6))
+    plt.errorbar(unorm_mass, M_pred_mean - unorm_mass, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.hlines(0, unorm_mass.min(), unorm_mass.max(), 'r', linestyle='--')
+    plt.xlabel('True Mass')
+    plt.ylabel('Residual Mass')
+    plt.legend()
+    plt.show()
+
+    for percentile in filtered_percentiles:
+        sigma_cut = np.percentile(M_pred_sigma, percentile)
+        plot_mask = M_pred_sigma < sigma_cut
+        unorm_mass_plot = np.asarray(unorm_mass)[plot_mask]
+        M_pred_mean_plot = M_pred_mean[plot_mask]
+        M_pred_sigma_plot = M_pred_sigma[plot_mask]
+
+        plt.figure(figsize=(8, 6))
+        plt.errorbar(unorm_mass_plot, M_pred_mean_plot, yerr=M_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+        plt.plot([unorm_mass_plot.min(), unorm_mass_plot.max()], [unorm_mass_plot.min(), unorm_mass_plot.max()], 'r--')
+        plt.xlabel('True Mass')
+        plt.ylabel('Predicted Mass')
+        plt.title(model_name + f' Predictions with Uncertainty (M_pred_sigma < {percentile}th percentile)')
+        plt.legend()
+        plt.show()
+
+        plt.figure(figsize=(8, 6))
+        plt.errorbar(unorm_mass_plot, M_pred_mean_plot - unorm_mass_plot, yerr=M_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+        plt.hlines(0, unorm_mass_plot.min(), unorm_mass_plot.max(), 'r', linestyle='--')
+        plt.xlabel('True Mass')
+        plt.ylabel('Residual Mass')
+        plt.title(model_name + f' Residual Mass (M_pred_sigma < {percentile}th percentile)')
+        plt.legend()
+        plt.show()
 
 # This prediction for 4 variables is very probably broken now
 def predict4(X, X_er, target, test=False):
@@ -220,23 +267,23 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         bart3_pred, lpd_BART3 = sample_pred_BART(bart3_model,
                                       X,
                                       X_er, 'mass',
-                                      2000, 4) # Made 2000 draws bc better MARD on test set
+                                      3000, 4) # Made 2000 draws bc better MARD on test set
 
         gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train3,
                                                                                       x_train3_er, 
                                                                                       mass_train, 
-                                                                                      80, 40)
+                                                                                      100, 50)
         
         # CHANGE NAMES HERE
         # Change gp3_trace and hbnn3_trace according to which training we did
 
-        gp3_trace = az.from_netcdf('Dataset_A_training/GP_mass_3param_3000_draws_4_chains_80_40.nc')
+        gp3_trace = az.from_netcdf('Dataset_A_training/GP_mass_3param_3000_draws_4_chains_100_50_bis.nc')
         gp3_pred, lpd_GP3 = posterior_predictive_GP(gp3_model, μ_gp3, lg_σ_gp3, 
                                             gp3_trace, X,
                                             X_er,
                                             Xu3, Xu_er3, 3, 'mass')
         
-        hbnn3_trace = az.from_netcdf('Dataset_A_training/HBNN_mass_3param_3000_draws_4_chains_15_nodes_sig_015.nc')
+        hbnn3_trace = az.from_netcdf('Dataset_A_training/HBNN_mass_3param_3000_draws_4_chains_15_nodes_sig_015_bis.nc')
         hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(hbnn3_trace,  
                                                       X,
                                                       X_er,
@@ -271,6 +318,9 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
             
             print('MARD BHS:', mard_BHS)
             print('MRD BHS:', mrd_BHS)
+
+            plot_mass_diagnostics(unorm_mass, bart3_pred, 'BART')
+            plot_mass_diagnostics(unorm_mass, bhs_pred, 'BHS', filtered_percentiles=(95, 90))
         
         return [bart3_pred, gp3_pred, hbnn3_pred], bhs_pred, bhs_w
     
