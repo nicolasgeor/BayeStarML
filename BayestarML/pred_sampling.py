@@ -649,7 +649,7 @@ def posterior_predictive_GP(
 
 #     return stats, lpd_GP
 
-def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2):
+def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2, trace_filename=None, predictions_filename=None):
     """
     Generate posterior predictive samples and LOO scores for a BART model.
 
@@ -684,6 +684,9 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2):
     with model:
         trace = pm.sample(draws=draws, tune=draws, chains=chains)
         trace.extend(pm.compute_log_likelihood(trace))
+        if trace_filename is not None:
+            os.makedirs(os.path.dirname(trace_filename), exist_ok=True)
+            trace.to_netcdf(trace_filename)
         # pp = pm.sample_posterior_predictive(trace)
 
     lpd_BART = find_pointwise_loo(trace)
@@ -698,6 +701,9 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2):
                      'X_er': X_er
             })
         pred = pm.sample_posterior_predictive(trace, predictions=True)
+        if predictions_filename is not None:
+            os.makedirs(os.path.dirname(predictions_filename), exist_ok=True)
+            pred.to_netcdf(predictions_filename)
 
         y_draws = pred.predictions["y"].stack(sample=("chain", "draw")).values
 

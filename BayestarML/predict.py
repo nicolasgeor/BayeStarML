@@ -15,13 +15,16 @@ import arviz as az
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 # import pymc as pm
 # from sklearn.metrics import mean_absolute_error
 # from utils import find_pointwise_loo
 
-def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95,)):
+def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95,), output_base=None):
     M_pred_sigma = pred.std(0)
     M_pred_mean = pred.mean(0)
+    if output_base is not None:
+        os.makedirs(os.path.dirname(output_base), exist_ok=True)
 
     plt.figure(figsize=(8, 6))
     plt.errorbar(unorm_mass, M_pred_mean, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
@@ -30,6 +33,8 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
     plt.ylabel('Predicted Mass')
     plt.title(model_name + ' Predictions with Uncertainty')
     plt.legend()
+    if output_base is not None:
+        plt.savefig(output_base + '_full_prediction.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     plt.figure(figsize=(8, 6))
@@ -38,6 +43,8 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
     plt.xlabel('True Mass')
     plt.ylabel('Residual Mass')
     plt.legend()
+    if output_base is not None:
+        plt.savefig(output_base + '_full_residual.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     for percentile in filtered_percentiles:
@@ -54,6 +61,8 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
         plt.ylabel('Predicted Mass')
         plt.title(model_name + f' Predictions with Uncertainty (M_pred_sigma < {percentile}th percentile)')
         plt.legend()
+        if output_base is not None:
+            plt.savefig(output_base + f'_filtered_{percentile}_prediction.png', dpi=300, bbox_inches='tight')
         plt.show()
 
         plt.figure(figsize=(8, 6))
@@ -63,6 +72,8 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
         plt.ylabel('Residual Mass')
         plt.title(model_name + f' Residual Mass (M_pred_sigma < {percentile}th percentile)')
         plt.legend()
+        if output_base is not None:
+            plt.savefig(output_base + f'_filtered_{percentile}_residual.png', dpi=300, bbox_inches='tight')
         plt.show()
 
 # This prediction for 4 variables is very probably broken now
@@ -261,13 +272,16 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         
         unorm_mass = denormalise_val(mass_test, 'mass')
         
+        # CHANGE NAMES HERE OF THE OUTPUT FILES
         bart3_model = bart.BART_M(x_train3,
                                   x_train3_er,
                                   mass_train, emass_train)
         bart3_pred, lpd_BART3 = sample_pred_BART(bart3_model,
                                       X,
                                       X_er, 'mass',
-                                      3000, 4) # Made 2000 draws bc better MARD on test set
+                                      3000, 4,
+                                      trace_filename='Dataset_A_training/BART_mass_3param_prediction_3000_draws_4_chains_bis.nc',
+                                      predictions_filename='Dataset_A_training/BART_mass_3param_prediction_3000_draws_4_chains_predictions_bis.nc') # Made 2000 draws bc better MARD on test set
 
         gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train3,
                                                                                       x_train3_er, 
@@ -289,10 +303,15 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
                                                       X_er,
                                                       15, 3, 'mass')
 
+        # HBNN _bis was trained with one fewer stacking-training row.
+        x_train3_bhs = x_train3.iloc[1:]
+        lpd_BART3_bhs = lpd_BART3[1:]
+        lpd_GP3_bhs = lpd_GP3[1:]
         
         (bhs_trace, bhs_pred, bhs_w) = run_stack(bart3_pred, hbnn3_pred, gp3_pred,
-                                            x_train3, X, lpd_BART3, lpd_HBNN3,
-                                            lpd_GP3)
+                                            x_train3_bhs, X, lpd_BART3_bhs, lpd_HBNN3,
+                                            lpd_GP3_bhs)
+        bhs_trace.to_netcdf('Dataset_A_training/BHS_mass_3param_prediction_3000_draws_4_chains_bis.nc')
         
         if test == True:
             mard_BART = mard(unorm_mass, bart3_pred.mean(0))
@@ -319,8 +338,11 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
             print('MARD BHS:', mard_BHS)
             print('MRD BHS:', mrd_BHS)
 
-            plot_mass_diagnostics(unorm_mass, bart3_pred, 'BART')
-            plot_mass_diagnostics(unorm_mass, bhs_pred, 'BHS', filtered_percentiles=(95, 90))
+            # CHANGE NAMES OF THE OUTPUT FILES GP_mass_3param_3000_draws_4_chains_100_50_bis.nc
+            plot_mass_diagnostics(unorm_mass, bart3_pred, 'BART',
+                                  output_base='Dataset_A_training/BART_mass_3param_prediction_bis')
+            plot_mass_diagnostics(unorm_mass, bhs_pred, 'BHS', filtered_percentiles=(95, 90),
+                                  output_base='Dataset_A_training/BHS_mass_3param_prediction_bis')
         
         return [bart3_pred, gp3_pred, hbnn3_pred], bhs_pred, bhs_w
     
