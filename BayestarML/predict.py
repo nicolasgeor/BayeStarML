@@ -261,12 +261,12 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
     ) = return_train_test(df_train)
     
     
-    x_train3 = x_train[['Teff', 'Meta', 'rho']]
-    x_train3_er = x_train_er[['eTeff', 'eMeta', 'erho']]
+    x_train3 = x_train[['Teff', 'Meta', 'L']]
+    x_train3_er = x_train_er[['eTeff', 'eMeta', 'eL']]
     
     if test == True:
-        X = x_test[['Teff', 'Meta', 'rho']]
-        X_er = x_test_err[['eTeff', 'eMeta', 'erho']]
+        X = x_test[['Teff', 'Meta', 'L']]
+        X_er = x_test_err[['eTeff', 'eMeta', 'eL']]
     
     if target == 'mass':
         
@@ -280,8 +280,8 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
                                       X,
                                       X_er, 'mass',
                                       3000, 4,
-                                      trace_filename='Dataset_A_training/BART_mass_3param_prediction_3000_draws_4_chains_bis.nc',
-                                      predictions_filename='Dataset_A_training/BART_mass_3param_prediction_3000_draws_4_chains_predictions_bis.nc') # Made 2000 draws bc better MARD on test set
+                                      trace_filename='Dataset_A_training/BART_mass_3param_L_prediction_3000_draws_4_chains_bis.nc',
+                                      predictions_filename='Dataset_A_training/BART_mass_3param_L_prediction_3000_draws_4_chains_predictions_bis.nc') # Made 2000 draws bc better MARD on test set
 
         gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train3,
                                                                                       x_train3_er, 
@@ -291,27 +291,22 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         # CHANGE NAMES HERE
         # Change gp3_trace and hbnn3_trace according to which training we did
 
-        gp3_trace = az.from_netcdf('Dataset_A_training/GP_mass_3param_3000_draws_4_chains_100_50_bis.nc')
+        gp3_trace = az.from_netcdf('Dataset_A_training/GP_mass_3param_L_3000_draws_4_chains_100_50_bis.nc')
         gp3_pred, lpd_GP3 = posterior_predictive_GP(gp3_model, μ_gp3, lg_σ_gp3, 
                                             gp3_trace, X,
                                             X_er,
                                             Xu3, Xu_er3, 3, 'mass')
         
-        hbnn3_trace = az.from_netcdf('Dataset_A_training/HBNN_mass_3param_3000_draws_4_chains_15_nodes_sig_015_bis.nc')
+        hbnn3_trace = az.from_netcdf('Dataset_A_training/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015_bis.nc')
         hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(hbnn3_trace,  
                                                       X,
                                                       X_er,
                                                       15, 3, 'mass')
 
-        # HBNN _bis was trained with one fewer stacking-training row.
-        x_train3_bhs = x_train3.iloc[1:]
-        lpd_BART3_bhs = lpd_BART3[1:]
-        lpd_GP3_bhs = lpd_GP3[1:]
-        
         (bhs_trace, bhs_pred, bhs_w) = run_stack(bart3_pred, hbnn3_pred, gp3_pred,
-                                            x_train3_bhs, X, lpd_BART3_bhs, lpd_HBNN3,
-                                            lpd_GP3_bhs)
-        bhs_trace.to_netcdf('Dataset_A_training/BHS_mass_3param_prediction_3000_draws_4_chains_bis.nc')
+                                            x_train3, X, lpd_BART3, lpd_HBNN3,
+                                            lpd_GP3)
+        bhs_trace.to_netcdf('Dataset_A_training/BHS_mass_3param_L_prediction_3000_draws_4_chains_bis.nc')
         
         if test == True:
             mard_BART = mard(unorm_mass, bart3_pred.mean(0))
@@ -338,11 +333,10 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
             print('MARD BHS:', mard_BHS)
             print('MRD BHS:', mrd_BHS)
 
-            # CHANGE NAMES OF THE OUTPUT FILES GP_mass_3param_3000_draws_4_chains_100_50_bis.nc
             plot_mass_diagnostics(unorm_mass, bart3_pred, 'BART',
-                                  output_base='Dataset_A_training/BART_mass_3param_prediction_bis')
+                                  output_base='Dataset_A_training/BART_mass_3param_L_prediction_bis')
             plot_mass_diagnostics(unorm_mass, bhs_pred, 'BHS', filtered_percentiles=(95, 90),
-                                  output_base='Dataset_A_training/BHS_mass_3param_prediction_bis')
+                                  output_base='Dataset_A_training/BHS_mass_3param_L_prediction_bis')
         
         return [bart3_pred, gp3_pred, hbnn3_pred], bhs_pred, bhs_w
     

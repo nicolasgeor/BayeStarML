@@ -1,0 +1,6 @@
+
+
+
+conda activate stellar_ml311
+cd "C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML"
+python exec_example_train.py

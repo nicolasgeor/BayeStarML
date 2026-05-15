@@ -57,17 +57,17 @@ def return_norm(df):
         Mean and standard deviation for each variable, in the order:
         effective temperature, surface gravity, metallicity, luminosity, and mass.
     """
-    df1 = df[['eTeff1', 'eMeta1', 'erho1', 'eM1', 'eR1']].copy()
-    df2 = df[['eTeff2', 'eMeta2', 'erho2', 'eM2', 'eR2']].copy()
-    df2.columns = ['eTeff1', 'eMeta1', 'erho1', 'eM1', 'eR1']
+    df1 = df[['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']].copy()
+    df2 = df[['eTeff2', 'eMeta2', 'eL2', 'eM2', 'eR2']].copy()
+    df2.columns = ['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']
 
     # Mean error if non-symetric
 
     X_error = (df1 + df2) / 2 
-    X_error.columns = ['eTeff', 'eMeta', 'erho', 'eM', 'eR']
+    X_error.columns = ['eTeff', 'eMeta', 'eL', 'eM', 'eR']
 
-    X = pd.concat([df[['Teff', 'Meta', 'rho']],
-                   X_error[['eTeff', 'eMeta', 'erho']]],
+    X = pd.concat([df[['Teff', 'Meta', 'L']],
+                   X_error[['eTeff', 'eMeta', 'eL']]],
                   axis=1)
     
     Y = pd.concat([df['M'], X_error['eM']], axis=1)
@@ -80,22 +80,22 @@ def return_norm(df):
     # Extract relevant columns for stellar mass prediction
     teff = X_train['Teff']
     met = X_train['Meta']
-    rho = X_train['rho']
+    lum = X_train['L']
     mass = Y_train["M"]    
 
 
     # Compute means and standard deviations for standardization
     mteff = np.mean(teff)
     mmet = np.mean(met)
-    mrho = np.mean(rho)
+    mlum = np.mean(lum)
     mtmass = np.mean(mass)
 
     steff = np.std(teff)
     smet = np.std(met)
-    srho = np.std(rho)
+    slum = np.std(lum)
     smass = np.std(mass)
     
-    return mteff, mmet, mrho, mtmass, steff, smet, srho, smass     
+    return mteff, mmet, mlum, mtmass, steff, smet, slum, smass     
 
 def return_train_test(df, normalised=True):
     """
@@ -119,18 +119,18 @@ def return_train_test(df, normalised=True):
     if you want both just call twice
 
     """
-    df1 = df[['eTeff1', 'eMeta1', 'erho1', 'eM1', 'eR1']].copy()
-    df2 = df[['eTeff2', 'eMeta2', 'erho2', 'eM2', 'eR2']].copy()
-    df2.columns = ['eTeff1', 'eMeta1', 'erho1', 'eM1', 'eR1']
+    df1 = df[['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']].copy()
+    df2 = df[['eTeff2', 'eMeta2', 'eL2', 'eM2', 'eR2']].copy()
+    df2.columns = ['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']
 
     # Mean error if non-symmetric
     X_error = (df1 + df2) / 2 
 
 
-    X_error.columns = ['eTeff', 'eMeta', 'erho', 'eM', 'eR']  
+    X_error.columns = ['eTeff', 'eMeta', 'eL', 'eM', 'eR']  
 
-    X = pd.concat([df[['Teff', 'Meta', 'rho']],
-                    X_error[['eTeff', 'eMeta', 'erho']]],
+    X = pd.concat([df[['Teff', 'Meta', 'L']],
+                    X_error[['eTeff', 'eMeta', 'eL']]],
                     axis=1)
     Y = pd.concat([df['M'], X_error['eM'], df['R'], X_error['eR']], axis=1)
     
@@ -142,7 +142,7 @@ def return_train_test(df, normalised=True):
     # Extract relevant columns for stellar mass prediction
     teff = X_train['Teff']
     met = X_train['Meta']
-    rho = X_train['rho']
+    lum = X_train['L']
     #print(lum)
     mass = Y_train["M"]
     # rad = Y_train['R']
@@ -150,14 +150,14 @@ def return_train_test(df, normalised=True):
     # Compute means and standard deviations for standardization
     mteff = np.mean(teff)
     mmet = np.mean(met)
-    mrho = np.mean(rho)
+    mlum = np.mean(lum)
     mtmass = np.mean(mass)
     
     #print(mteff, mlogg, mmet, mlum, mtmass, mrad)
 
     steff = np.std(teff)
     smet = np.std(met)
-    srho = np.std(rho)
+    slum = np.std(lum)
     smass = np.std(mass)
     
     #print(steff, slogg, smet, slum, smass, srad)
@@ -165,32 +165,32 @@ def return_train_test(df, normalised=True):
     # Standardize inputs 
     teff = (teff - mteff) / steff
     met = (met - mmet) / smet
-    rho = (rho - mrho) / srho
+    lum = (lum - mlum) / slum
     mass = (mass - mtmass) / smass
 
 
     # Uncertainties for the inputs
     eteff = X_train['eTeff'] / steff
     emet = abs(X_train['eMeta']) / smet
-    erho = X_train['erho'] / srho  
+    elum = X_train['eL'] / slum  
     emass = Y_train['eM'] / smass
 
-    x_train = pd.concat([teff, met, rho], axis=1)
-    x_train_er = pd.concat([eteff, emet, erho], axis=1)
+    x_train = pd.concat([teff, met, lum], axis=1)
+    x_train_er = pd.concat([eteff, emet, elum], axis=1)
 
     teff_test = (X_test['Teff'] - mteff) / steff
     met_test = (X_test['Meta'] - mmet) / smet
-    rho_test = (X_test['rho'] - mrho) / srho
+    lum_test = (X_test['L'] - mlum) / slum
     mass_test = (Y_test['M']- mtmass) / smass
 
-    x_test = pd.concat([teff_test, met_test, rho_test], axis=1)
+    x_test = pd.concat([teff_test, met_test, lum_test], axis=1)
 
     eteff_test = X_test['eTeff'] / steff
     emet_test = abs(X_test['eMeta']) / smet
-    erho_test = X_test['erho'] / srho 
+    elum_test = X_test['eL'] / slum 
     emass_test = Y_test['eM'] / smass
 
-    x_test_error = pd.concat([eteff_test, emet_test, erho_test], axis=1)
+    x_test_error = pd.concat([eteff_test, emet_test, elum_test], axis=1)
 
     
     if normalised == True:
@@ -271,7 +271,7 @@ def prepare_pred3(filename):
     
     X = pd.read_csv(filename)
     df = get_dataset('Datasets/database_A_old_format.txt', 'MS')
-    mteff, mmet, mrho, mtmass, steff, smet, srho, smass = return_norm(df)
+    mteff, mmet, mlum, mtmass, steff, smet, slum, smass = return_norm(df)
 
     # Helper function to normalize and handle missing values
     def normalize(value, mean, std):
@@ -289,13 +289,13 @@ def prepare_pred3(filename):
     norm_data = {
         'Teff': normalize(X['Teff'], mteff, steff),
         'Meta': normalize(X['Meta'], mmet, smet),
-        'rho': normalize(X['rho'], mrho, srho)
+        'L': normalize(X['L'], mlum, slum)
     }
     
     error_data = {
         'eTeff': normalize_error(X['eTeff'], steff),
         'eMeta': normalize_error(X['eMeta'], smet),
-        'erho': normalize_error(X['erho'], srho)
+        'eL': normalize_error(X['eL'], slum)
     }
     
     if (not hasattr(X['Teff'], '__len__') or isinstance(X['Teff'], str)) and X['Teff'] is not None:
