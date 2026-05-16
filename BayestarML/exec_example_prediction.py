@@ -24,7 +24,7 @@ from predict import predict3, predict4
 
 # For 3 variables
 def main():
-    print("Evaluating BHS on 20% holdout test set...")
+    print("Evaluating Dataset C logL-feature BHS on 20% holdout test set...")
     # X3, X3_er = prepare_pred3("Datasets/dataset_density_trimmed_6cols_NASAFLAG.csv")
     # will need to change the traces in predict3 if you re-train
     # trace files aren't included in the github repo due to size

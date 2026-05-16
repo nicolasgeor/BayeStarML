@@ -31,7 +31,7 @@ def get_dataset(data_file, star_class):
     pandas.DataFrame
         Cleaned DataFrame containing stars of the given class.
     """
-    data = pd.read_table(data_file, sep="\t")
+    data = pd.read_table(data_file, sep="\t", comment="%")
     # read data with errors
     data_MS = data[data['class'] == star_class]
     # select Main Sequence Stars

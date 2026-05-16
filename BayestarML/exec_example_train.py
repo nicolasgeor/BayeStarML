@@ -15,9 +15,12 @@ import numpy as np
 import pymc as pm
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 from sklearn.metrics import mean_absolute_error
 
-df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
+os.makedirs('Dataset_C_training', exist_ok=True)
+
+df_train = get_dataset('Datasets/database_A_old_format_logL.txt', 'MS')
 (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
   mass_test, emass_test
 ) = return_train_test(df_train)
@@ -40,14 +43,14 @@ def main():
     # model = hbnn.HBNN_M3(x_train, mass_train, x_train_er, emass_train, 15)
 
     
-    # trace = train(model, "Dataset_B_training/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015_bis_bis.nc", draw=3000, chains=4)
+    # trace = train(model, "Dataset_C_training/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015_bis_bis.nc", draw=3000, chains=4)
 
     
     model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
                                                                         x_train_er,
                                                                         mass_train, 100, 50)
     
-    trace = train(model, "Dataset_B_training/GP_mass_3param_L_1000_draws_2_chains_80_40_old.nc", draw=1000, chains=2)
+    trace = train(model, "Dataset_C_training/GP_mass_3param_L_3000_draws_4_chains_100_50_bis_bis_ignored.nc", draw=3000, chains=4)
 
     
     # model = hbnn.HBNN_M4(x_train, rad_train, x_train_er, erad_train, 15)
@@ -118,7 +121,7 @@ def main():
         'pull': np.where(M_pred_sigma != 0, residual_M / M_pred_sigma, np.nan),
         'abs_pull': np.abs(np.where(M_pred_sigma != 0, residual_M / M_pred_sigma, np.nan)),
     })
-    diagnostic_table.to_csv('Dataset_B_training/mass_prediction_results.tsv', sep='\t', index=False)
+    diagnostic_table.to_csv('Dataset_C_training/mass_prediction_results_GP_3000_ignore.tsv', sep='\t', index=False)
 
     print('\nTop 20 mass prediction errors by abs_relative_error_pct:')
     print(diagnostic_table.sort_values('abs_relative_error_pct', ascending=False).head(20).to_csv(sep='\t', index=False).strip())
@@ -134,8 +137,8 @@ def main():
     unorm_mass_plot = np.asarray(unorm_mass)[plot_mask]
     M_pred_mean_plot = M_pred_mean[plot_mask]
     M_pred_sigma_plot = M_pred_sigma[plot_mask]
-    plot_output_base = 'Dataset_B_training/GP_mass_3param_L_1000_draws_2_chains_80_40_old'
-    # plot_output_base = 'Dataset_B_training/HBNN_mass_3param_L_30_draws_4_chains_15_nodes_sig_015_bis_bis'
+    plot_output_base = 'Dataset_C_training/GP_mass_3param_L_3000_draws_4_chains_100_50_bis_bis_ignored'
+    # plot_output_base = 'Dataset_C_training/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015_bis_bis'
 
     # CHANGE NAMES HERE FOR THE PLOTS. 3 TIMES (ABOVE BELOW, AND SUPER BELOW)
 
