@@ -270,7 +270,7 @@ def prepare_pred3(filename):
     """
     
     X = pd.read_csv(filename)
-    df = get_dataset('Datasets/database_A_old_format.txt', 'MS')
+    df = get_dataset('Datasets/database_A_old_format_with_xiong_log_L.txt', 'MS')
     mteff, mmet, mlum, mtmass, steff, smet, slum, smass = return_norm(df)
 
     # Helper function to normalize and handle missing values

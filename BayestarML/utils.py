@@ -93,7 +93,7 @@ def train(model, filename, draw=1000, chains=2, target_accept=0.95):
     """
     print('target_accept=', target_accept)
     trace = pm.sample(draws=draw, tune=draw, chains=chains, model=model,
-                      target_accept=target_accept)
+                      target_accept=target_accept, random_seed=82)
     trace.extend(pm.compute_log_likelihood(trace, model=model, var_names='y'))
     trace.to_netcdf(filename)
 

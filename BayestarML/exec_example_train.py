@@ -18,9 +18,9 @@ import matplotlib.pyplot as plt
 import os
 from sklearn.metrics import mean_absolute_error
 
-os.makedirs('Dataset_C_training', exist_ok=True)
+os.makedirs('Dataset_C_training_with_Xiong', exist_ok=True)
 
-df_train = get_dataset('Datasets/database_A_old_format_logL.txt', 'MS')
+df_train = get_dataset('Datasets/database_A_old_format_with_xiong_log_L.txt', 'MS')
 (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
   mass_test, emass_test
 ) = return_train_test(df_train)
@@ -43,14 +43,14 @@ def main():
     # model = hbnn.HBNN_M3(x_train, mass_train, x_train_er, emass_train, 15)
 
     
-    # trace = train(model, "Dataset_C_training/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015_bis_bis.nc", draw=3000, chains=4)
+    # trace = train(model, "Dataset_C_training_with_Xiong/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015.nc", draw=3000, chains=4)
 
     
     model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
                                                                         x_train_er,
                                                                         mass_train, 100, 50)
     
-    trace = train(model, "Dataset_C_training/GP_mass_3param_L_3000_draws_4_chains_100_50_bis_bis_ignored.nc", draw=3000, chains=4)
+    trace = train(model, "Dataset_C_training_with_Xiong/GP_mass_3param_L_3000_draws_4_chains_100_50.nc", draw=3000, chains=4)
 
     
     # model = hbnn.HBNN_M4(x_train, rad_train, x_train_er, erad_train, 15)
@@ -104,13 +104,14 @@ def main():
     
     print('MRD', mrd(unorm_mass, M_pred_mean))
 
-    original_db = pd.read_table('Datasets/database_A_old_format.txt', sep='\t')
+    original_db = pd.read_table('Datasets/database_A_old_format_with_xiong_log_L.txt', sep='\t', comment='%')
     test_original_rows = original_db.loc[x_test.index]
     id_col = 'SIMBAD_ID' if 'SIMBAD_ID' in test_original_rows.columns else 'ID'
     residual_M = M_pred_mean - np.asarray(unorm_mass)
     diagnostic_table = pd.DataFrame({
         'original_row': x_test.index,
         'ID': test_original_rows[id_col].values if id_col in test_original_rows.columns else np.nan,
+        'catalog': test_original_rows['catalog'].values if 'catalog' in test_original_rows.columns else np.nan,
         'M_true': np.asarray(unorm_mass),
         'M_pred': M_pred_mean,
         'M_pred_sigma': M_pred_sigma,
@@ -121,24 +122,27 @@ def main():
         'pull': np.where(M_pred_sigma != 0, residual_M / M_pred_sigma, np.nan),
         'abs_pull': np.abs(np.where(M_pred_sigma != 0, residual_M / M_pred_sigma, np.nan)),
     })
-    diagnostic_table.to_csv('Dataset_C_training/mass_prediction_results_GP_3000_ignore.tsv', sep='\t', index=False)
+    diagnostic_table.to_csv('Dataset_C_training_with_Xiong/mass_prediction_results_GP_3000.tsv', sep='\t', index=False)
+    diagnostic_print_columns = ['original_row', 'ID', 'catalog', 'M_true', 'M_pred', 'M_pred_sigma',
+                                'residual_M', 'abs_residual_M', 'relative_error_pct',
+                                'abs_relative_error_pct', 'pull', 'abs_pull']
 
     print('\nTop 20 mass prediction errors by abs_relative_error_pct:')
-    print(diagnostic_table.sort_values('abs_relative_error_pct', ascending=False).head(20).to_csv(sep='\t', index=False).strip())
+    print(diagnostic_table.sort_values('abs_relative_error_pct', ascending=False).head(20).to_csv(sep='\t', index=False, columns=diagnostic_print_columns).strip())
 
     print('\nTop 10 mass prediction uncertainties by M_pred_sigma:')
-    print(diagnostic_table.sort_values('M_pred_sigma', ascending=False).head(10).to_csv(sep='\t', index=False).strip())
+    print(diagnostic_table.sort_values('M_pred_sigma', ascending=False).head(10).to_csv(sep='\t', index=False, columns=diagnostic_print_columns).strip())
 
     print('\nTop 10 mass prediction pulls by abs_pull:')
-    print(diagnostic_table.sort_values('abs_pull', ascending=False).head(10).to_csv(sep='\t', index=False).strip())
+    print(diagnostic_table.sort_values('abs_pull', ascending=False).head(10).to_csv(sep='\t', index=False, columns=diagnostic_print_columns).strip())
 
     sigma_cut = np.percentile(M_pred_sigma, 95)
     plot_mask = M_pred_sigma < sigma_cut
     unorm_mass_plot = np.asarray(unorm_mass)[plot_mask]
     M_pred_mean_plot = M_pred_mean[plot_mask]
     M_pred_sigma_plot = M_pred_sigma[plot_mask]
-    plot_output_base = 'Dataset_C_training/GP_mass_3param_L_3000_draws_4_chains_100_50_bis_bis_ignored'
-    # plot_output_base = 'Dataset_C_training/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015_bis_bis'
+    plot_output_base = 'Dataset_C_training_with_Xiong/GP_mass_3param_L_3000_draws_4_chains_100_50_bis_bis'
+    # plot_output_base = 'Dataset_C_training_with_Xiong/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015'
 
     # CHANGE NAMES HERE FOR THE PLOTS. 3 TIMES (ABOVE BELOW, AND SUPER BELOW)
 

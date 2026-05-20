@@ -3,3 +3,9 @@ We are currently using database_A_old_format.txt fro training our feature combin
 database_A_old_format_with_xiong.txt is the same, but without deleting xiong (and prolly with KIC9715099 and KIC4932691_B and KIC4932691_A). database2026_a_with_xiong.txt is the same as this last one, but in the format the WE DON'T USE ANYMORE
 
 database_A_old_format_logL.txt is the same as database_A_old_format.txt but susbtituitng L for Log L
+
+database_A_old_format_with_xiong_log_L.txt is the same as database_A_old_format_with_xiong.txt but with log L instead of L
+
+database_D_old_format.txt: same as database A, but with computed oblateness and roche, and related uncertainties. these are added as extra columns
+
+database_D_old_format_extended.txt: same as database_D_old_format.txt but with basically all original stars, no deleting special ones
