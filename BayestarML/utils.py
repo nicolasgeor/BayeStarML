@@ -37,12 +37,14 @@ def get_dataset(data_file, star_class):
     # select Main Sequence Stars
     df = data_MS[
         ['Seq','R', 'eR1', 'eR2', 'M', 'eM1', 'eM2', 'Teff', 'eTeff1',
-         'eTeff2', 'Meta', 'eMeta1', 'eMeta2', 'L', 'eL1', 'eL2']].copy()
+         'eTeff2', 'logg', 'elogg1', 'elogg2', 'Meta', 'eMeta1', 'eMeta2',
+         'L', 'eL1', 'eL2']].copy()
 
     # clean NA values (simply remove the corresponding rows)
     df.dropna(inplace=True, axis=0)
     uncertainty_cols = ['eM1', 'eM2', 'eTeff1', 'eTeff2',
-                        'eMeta1', 'eMeta2', 'eL1', 'eL2']
+                        'elogg1', 'elogg2', 'eMeta1', 'eMeta2',
+                        'eL1', 'eL2']
     df = df[(df[uncertainty_cols] != 0).all(axis=1)]
     df_complete = data_MS.loc[df.index].copy()
 
@@ -93,7 +95,7 @@ def train(model, filename, draw=1000, chains=2, target_accept=0.95):
     """
     print('target_accept=', target_accept)
     trace = pm.sample(draws=draw, tune=draw, chains=chains, model=model,
-                      target_accept=target_accept, random_seed=82)
+                      target_accept=target_accept, random_seed=29)
     trace.extend(pm.compute_log_likelihood(trace, model=model, var_names='y'))
     trace.to_netcdf(filename)
 

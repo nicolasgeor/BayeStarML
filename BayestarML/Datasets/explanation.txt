@@ -6,6 +6,16 @@ database_A_old_format_logL.txt is the same as database_A_old_format.txt but susb
 
 database_A_old_format_with_xiong_log_L.txt is the same as database_A_old_format_with_xiong.txt but with log L instead of L
 
-database_D_old_format.txt: same as database A, but with computed oblateness and roche, and related uncertainties. these are added as extra columns
+database_D_old_format.txt: same as database A, but with computed oblateness and roche, and related uncertainties and quantities. these are added as extra columns. it also has some updates to some entries (see table)
 
-database_D_old_format_extended.txt: same as database_D_old_format.txt but with basically all original stars, no deleting special ones
+database_D_old_format_extended.txt: same as database_D_old_format.txt but with basically all original stars, no deleting special ones.
+
+| SIMBAD_ID      | Changed existing values from database_A_old_format to database_D_old_format                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `KIC9641031_A` | `Meta: NA → -0.437`; `eMeta1: NA → 0.012`; `eMeta2: NA → 0.012`                                                                                         |
+| `KIC9641031_B` | `Meta: NA → -0.437`; `eMeta1: NA → 0.012`; `eMeta2: NA → 0.012`                                                                                         |
+| `HIP92984`     | `M: 1.069 → 0.499`; `eM1: 0.019 → 0.031`; `eM2: 0.019 → 0.031`; `logg: 4.48 → 4.23`; `rho: 1.108 → 0.517`; `erho1: 0.07 → 0.045`; `erho2: 0.07 → 0.045` |
+| `V443_Cyg_A`   | `Meta: NA → -0.213`; `eMeta1: NA → 0.025`; `eMeta2: NA → 0.025`                                                                                         |
+| `V443_Cyg_B`   | `Meta: NA → -0.213`; `eMeta1: NA → 0.025`; `eMeta2: NA → 0.025`                                                                                         |
+| `V1229_Tau_B`  | `L: NA → 30.832`; `eL1: NA → 10.283`; `eL2: NA → 10.283`                                                                                                |
+| `V1229_Tau_A`  | `L: NA → 6.295`; `eL1: NA → 1.74`; `eL2: NA → 1.74`                                                                                                     |

@@ -57,17 +57,17 @@ def return_norm(df):
         Mean and standard deviation for each variable, in the order:
         effective temperature, surface gravity, metallicity, luminosity, and mass.
     """
-    df1 = df[['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']].copy()
-    df2 = df[['eTeff2', 'eMeta2', 'eL2', 'eM2', 'eR2']].copy()
-    df2.columns = ['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']
+    df1 = df[['eTeff1', 'elogg1', 'eMeta1', 'eL1', 'eM1', 'eR1']].copy()
+    df2 = df[['eTeff2', 'elogg2', 'eMeta2', 'eL2', 'eM2', 'eR2']].copy()
+    df2.columns = ['eTeff1', 'elogg1', 'eMeta1', 'eL1', 'eM1', 'eR1']
 
     # Mean error if non-symetric
 
     X_error = (df1 + df2) / 2 
-    X_error.columns = ['eTeff', 'eMeta', 'eL', 'eM', 'eR']
+    X_error.columns = ['eTeff', 'elogg', 'eMeta', 'eL', 'eM', 'eR']
 
-    X = pd.concat([df[['Teff', 'Meta', 'L']],
-                   X_error[['eTeff', 'eMeta', 'eL']]],
+    X = pd.concat([df[['Teff', 'logg', 'Meta', 'L']],
+                   X_error[['eTeff', 'elogg', 'eMeta', 'eL']]],
                   axis=1)
     
     Y = pd.concat([df['M'], X_error['eM']], axis=1)
@@ -79,6 +79,7 @@ def return_norm(df):
 
     # Extract relevant columns for stellar mass prediction
     teff = X_train['Teff']
+    logg = X_train['logg']
     met = X_train['Meta']
     lum = X_train['L']
     mass = Y_train["M"]    
@@ -86,16 +87,18 @@ def return_norm(df):
 
     # Compute means and standard deviations for standardization
     mteff = np.mean(teff)
+    mlogg = np.mean(logg)
     mmet = np.mean(met)
     mlum = np.mean(lum)
     mtmass = np.mean(mass)
 
     steff = np.std(teff)
+    slogg = np.std(logg)
     smet = np.std(met)
     slum = np.std(lum)
     smass = np.std(mass)
     
-    return mteff, mmet, mlum, mtmass, steff, smet, slum, smass     
+    return mteff, mlogg, mmet, mlum, mtmass, steff, slogg, smet, slum, smass     
 
 def return_train_test(df, normalised=True):
     """
@@ -119,18 +122,18 @@ def return_train_test(df, normalised=True):
     if you want both just call twice
 
     """
-    df1 = df[['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']].copy()
-    df2 = df[['eTeff2', 'eMeta2', 'eL2', 'eM2', 'eR2']].copy()
-    df2.columns = ['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']
+    df1 = df[['eTeff1', 'elogg1', 'eMeta1', 'eL1', 'eM1', 'eR1']].copy()
+    df2 = df[['eTeff2', 'elogg2', 'eMeta2', 'eL2', 'eM2', 'eR2']].copy()
+    df2.columns = ['eTeff1', 'elogg1', 'eMeta1', 'eL1', 'eM1', 'eR1']
 
     # Mean error if non-symmetric
     X_error = (df1 + df2) / 2 
 
 
-    X_error.columns = ['eTeff', 'eMeta', 'eL', 'eM', 'eR']  
+    X_error.columns = ['eTeff', 'elogg', 'eMeta', 'eL', 'eM', 'eR']  
 
-    X = pd.concat([df[['Teff', 'Meta', 'L']],
-                    X_error[['eTeff', 'eMeta', 'eL']]],
+    X = pd.concat([df[['Teff', 'logg', 'Meta', 'L']],
+                    X_error[['eTeff', 'elogg', 'eMeta', 'eL']]],
                     axis=1)
     Y = pd.concat([df['M'], X_error['eM'], df['R'], X_error['eR']], axis=1)
     
@@ -141,6 +144,7 @@ def return_train_test(df, normalised=True):
 
     # Extract relevant columns for stellar mass prediction
     teff = X_train['Teff']
+    logg = X_train['logg']
     met = X_train['Meta']
     lum = X_train['L']
     #print(lum)
@@ -149,6 +153,7 @@ def return_train_test(df, normalised=True):
 
     # Compute means and standard deviations for standardization
     mteff = np.mean(teff)
+    mlogg = np.mean(logg)
     mmet = np.mean(met)
     mlum = np.mean(lum)
     mtmass = np.mean(mass)
@@ -156,6 +161,7 @@ def return_train_test(df, normalised=True):
     #print(mteff, mlogg, mmet, mlum, mtmass, mrad)
 
     steff = np.std(teff)
+    slogg = np.std(logg)
     smet = np.std(met)
     slum = np.std(lum)
     smass = np.std(mass)
@@ -164,6 +170,7 @@ def return_train_test(df, normalised=True):
 
     # Standardize inputs 
     teff = (teff - mteff) / steff
+    logg = (logg - mlogg) / slogg
     met = (met - mmet) / smet
     lum = (lum - mlum) / slum
     mass = (mass - mtmass) / smass
@@ -171,26 +178,29 @@ def return_train_test(df, normalised=True):
 
     # Uncertainties for the inputs
     eteff = X_train['eTeff'] / steff
+    elogg = X_train['elogg'] / slogg
     emet = abs(X_train['eMeta']) / smet
     elum = X_train['eL'] / slum  
     emass = Y_train['eM'] / smass
 
-    x_train = pd.concat([teff, met, lum], axis=1)
-    x_train_er = pd.concat([eteff, emet, elum], axis=1)
+    x_train = pd.concat([teff, logg, met, lum], axis=1)
+    x_train_er = pd.concat([eteff, elogg, emet, elum], axis=1)
 
     teff_test = (X_test['Teff'] - mteff) / steff
+    logg_test = (X_test['logg'] - mlogg) / slogg
     met_test = (X_test['Meta'] - mmet) / smet
     lum_test = (X_test['L'] - mlum) / slum
     mass_test = (Y_test['M']- mtmass) / smass
 
-    x_test = pd.concat([teff_test, met_test, lum_test], axis=1)
+    x_test = pd.concat([teff_test, logg_test, met_test, lum_test], axis=1)
 
     eteff_test = X_test['eTeff'] / steff
+    elogg_test = X_test['elogg'] / slogg
     emet_test = abs(X_test['eMeta']) / smet
     elum_test = X_test['eL'] / slum 
     emass_test = Y_test['eM'] / smass
 
-    x_test_error = pd.concat([eteff_test, emet_test, elum_test], axis=1)
+    x_test_error = pd.concat([eteff_test, elogg_test, emet_test, elum_test], axis=1)
 
     
     if normalised == True:
@@ -214,7 +224,8 @@ def prepare_pred4(filename):
     """
     
     X = pd.read_csv(filename)
-    df = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
+    df = get_dataset('Datasets/database_D_old_format.txt', 'MS')
+    df = df[df['mode'] == 'A']
     mteff, mlogg, mmet, mlum, mtmass, steff, slogg, smet, slum, smass = return_norm(df)
 
     # Helper function to normalize and handle missing values
@@ -271,7 +282,7 @@ def prepare_pred3(filename):
     
     X = pd.read_csv(filename)
     df = get_dataset('Datasets/database_A_old_format_with_xiong_log_L.txt', 'MS')
-    mteff, mmet, mlum, mtmass, steff, smet, slum, smass = return_norm(df)
+    mteff, mlogg, mmet, mlum, mtmass, steff, slogg, smet, slum, smass = return_norm(df)
 
     # Helper function to normalize and handle missing values
     def normalize(value, mean, std):
