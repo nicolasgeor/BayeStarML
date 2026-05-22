@@ -48,7 +48,7 @@ def main():
     model = hbnn.HBNN_M4(x_train, mass_train, x_train_er, emass_train, 15)
 
     
-    trace = train(model, "Dataset_D_training_with_Xiong/HBNN_mass_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_29.nc", draw=3000, chains=4)
+    trace = train(model, "Dataset_D_training_with_Xiong/HBNN_mass_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_392.nc", draw=3000, chains=4)
 
     
     # If training GP: uncomment the next 2 lines, and comment the HBNN model + trace above.
@@ -56,7 +56,7 @@ def main():
     #                                                                     x_train_er,
     #                                                                     mass_train, 100, 50)
     
-    # trace = train(model, "Dataset_D_training_with_Xiong/GP_mass_4param_L_3000_draws_4_chains_100_50.nc", draw=3000, chains=4)
+    # trace = train(model, "Dataset_D_training_with_Xiong/GP_mass_4param_L_3000_draws_4_chains_100_50_seed_392.nc", draw=3000, chains=4)
 
     
     # model = hbnn.HBNN_M4(x_train, rad_train, x_train_er, erad_train, 15)
@@ -129,7 +129,7 @@ def main():
         'abs_pull': np.abs(np.where(M_pred_sigma != 0, residual_M / M_pred_sigma, np.nan)),
     })
     # CHANGE THIS FILENAME
-    diagnostic_table.to_csv('Dataset_D_training_with_Xiong/mass_prediction_results_HBNN_3000_seed_29.tsv', sep='\t', index=False)
+    diagnostic_table.to_csv('Dataset_D_training_with_Xiong/mass_prediction_results_HBNN_3000_seed_392.tsv', sep='\t', index=False)
     diagnostic_print_columns = ['original_row', 'ID', 'catalog', 'M_true', 'M_pred', 'M_pred_sigma',
                                 'residual_M', 'abs_residual_M', 'relative_error_pct',
                                 'abs_relative_error_pct', 'pull', 'abs_pull']
@@ -149,10 +149,10 @@ def main():
     M_pred_mean_plot = M_pred_mean[plot_mask]
     M_pred_sigma_plot = M_pred_sigma[plot_mask]
     # Change this plot base to match the active GP or HBNN training filename above.
-    # plot_output_base = 'Dataset_D_training_with_Xiong/GP_mass_4param_L_3000_draws_4_chains_100_50'
-    plot_output_base = 'Dataset_D_training_with_Xiong/HBNN_mass_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_29'
+    # plot_output_base = 'Dataset_D_training_with_Xiong/GP_mass_4param_L_3000_draws_4_chains_100_50_seed_392'
+    plot_output_base = 'Dataset_D_training_with_Xiong/HBNN_mass_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_392'
 
-    # CHANGE NAMES HERE FOR THE PLOTS. 4 TIMES (ONE ABBOVE AND THREE BELOW)
+    # CHANGE NAMES HERE FOR THE PLOTS. 4 TIMES (ONE ABOVE AND THREE BELOW)
 
     plt.figure(figsize=(8, 6))
     plt.errorbar(unorm_mass, M_pred_mean, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
@@ -189,7 +189,7 @@ def main():
     plt.hlines(0, unorm_mass_plot.min(), unorm_mass_plot.max(), 'r', linestyle='--')
     plt.xlabel('True Mass')
     plt.ylabel('Residual Mass')
-    plt.title('HBNN Residual Mass (M_pred_sigma < 95th percentile)')
+    plt.title('GP Residual Mass (M_pred_sigma < 95th percentile)')
     plt.legend()
     plt.savefig(plot_output_base + '_filtered_residual.png', dpi=300, bbox_inches='tight')
     plt.show()
