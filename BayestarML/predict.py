@@ -99,14 +99,14 @@ def predict4(X, X_er, target, test=False):
                                       X,
                                       X_er, 'mass',
                                       3000, 4,
-                                      trace_filename='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_3000_draws_4_chains_seed_392.nc',
-                                      predictions_filename='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_3000_draws_4_chains_predictions_seed_392.nc')
+                                      trace_filename='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_3000_draws_4_chains_seed_82.nc',
+                                      predictions_filename='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_3000_draws_4_chains_predictions_seed_82.nc')
 
 
         gp4_model, μ_gp4, lg_σ_gp4, Xu4, Xu_er4 = gp.sparse_fully_heteroscedastic_gp(x_train, x_train_er, mass_train, 100, 50)
 
         # Loads the trace from the trained GP model (the learned weights and hyperparamenters)    
-        gp4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/GP_mass_4param_L_3000_draws_4_chains_100_50_seed_392.nc')
+        gp4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/GP_mass_4param_L_3000_draws_4_chains_100_50_seed_82.nc')
         gp4_pred, lpd_GP4 = posterior_predictive_GP(gp4_model, μ_gp4, lg_σ_gp4, 
                                             gp4_trace, X,
                                             X_er,
@@ -114,7 +114,7 @@ def predict4(X, X_er, target, test=False):
 
         
         # Loads the trace from the trained HBNN model (the learned weights and hyperparamenters)    
-        hbnn4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/HBNN_mass_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_392.nc')
+        hbnn4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/HBNN_mass_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_82.nc')
         hbnn4_pred, lpd_HBNN4 = sample_post_pred_HBNN_para(hbnn4_trace,  
                                                       X,
                                                       X_er,
@@ -126,7 +126,7 @@ def predict4(X, X_er, target, test=False):
                                             x_train, X, lpd_BART4, lpd_HBNN4,
                                             lpd_GP4,
                                             draws=3000, chains=4)
-        bhs_trace.to_netcdf('Dataset_D_training_with_Xiong/BHS_mass_4param_L_prediction_3000_draws_4_chains_seed_392.nc')
+        bhs_trace.to_netcdf('Dataset_D_training_with_Xiong/BHS_mass_4param_L_prediction_3000_draws_4_chains_seed_82.nc')
 
         if test == True:
             mard_BART = mard(unorm_mass, bart4_pred.mean(0))
@@ -154,9 +154,9 @@ def predict4(X, X_er, target, test=False):
             print('MRD BHS:', mrd_BHS)
             
             plot_mass_diagnostics(unorm_mass, bart4_pred, 'BART',
-                                  output_base='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_seed_392')
+                                  output_base='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_seed_82')
             plot_mass_diagnostics(unorm_mass, bhs_pred, 'BHS', filtered_percentiles=(95, 90),
-                                  output_base='Dataset_D_training_with_Xiong/BHS_mass_4param_L_prediction_seed_392')
+                                  output_base='Dataset_D_training_with_Xiong/BHS_mass_4param_L_prediction_seed_82')
             
         
         return [bart4_pred, gp4_pred, hbnn4_pred], bhs_pred, bhs_w

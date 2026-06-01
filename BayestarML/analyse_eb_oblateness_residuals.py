@@ -1,0 +1,611 @@
+#!/usr/bin/env python3
+"""
+Analyse EB mass-prediction residuals versus oblateness and Roche-lobe filling factor.
+
+Expected input: CSV produced by the EB mass-prediction step, containing the original
+stellar database columns plus at least:
+    mass_pred, mass_sigma, mass_p16, mass_p84, mass_p02_5, mass_p97_5
+
+Main outputs:
+    EB_mass_residuals_with_oblateness.csv
+    EB_residual_correlation_summary.csv
+    EB_residual_binned_by_oblateness.csv
+    EB_top_outliers_by_abs_frac_residual.csv
+    plots/*.png
+
+Usage:
+    python analyse_eb_oblateness_residuals.py
+"""
+
+from __future__ import annotations
+
+import math
+from pathlib import Path
+from typing import Iterable
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+try:
+    from scipy import stats
+except Exception:  # pragma: no cover
+    stats = None
+
+
+INPUT_CSV = Path("Dataset_D_predictions/EB_oblateness_fill_factor_mass_predictions_4_features_3000_draws_seed_29.csv")
+OUTPUT_DIR = Path("Dataset_D_predictions/seed 29")
+MIN_OBLATENESS = 0.0
+TOP_N = 30
+MASS_MIN = 0.950
+MASS_MAX = 1.500
+ROBUST = True
+ROBUST_FEATURE_RANGES = {
+    "Teff": (5500.0, 6800.0),
+    "logg": (3.750, 4.450),
+    "L": (1.000, 11.000),
+    "Meta": (-0.500, 0.270),
+}
+
+REQUIRED_COLUMNS = ["M", "mass_pred", "mass_sigma", "oblateness"]
+OPTIONAL_NUMERIC_COLUMNS = [
+    "eM1", "eM2",
+    "mass_p16", "mass_p84", "mass_p02_5", "mass_p97_5",
+    "eoblateness1", "eoblateness2",
+    "fill_factor", "efill_factor1", "efill_factor2",
+    "Teff", "eTeff1", "eTeff2",
+    "Meta", "eMeta1", "eMeta2",
+    "logg", "elogg1", "elogg2",
+    "L", "eL1", "eL2",
+    "R", "eR1", "eR2",
+    "orbit_a", "eOrbit_a",
+]
+
+
+def robust_to_numeric(series: pd.Series) -> pd.Series:
+    """Convert common catalogue number strings to float.
+
+    Handles blanks, NA-like strings, decimal comma strings, and occasional thousand
+    separators. This is intentionally conservative to avoid silently corrupting IDs.
+    """
+    s = series.astype("string").str.strip()
+    s = s.replace({"": pd.NA, "NA": pd.NA, "NaN": pd.NA, "nan": pd.NA, "None": pd.NA, "NULL": pd.NA})
+
+    # If a value has a comma but no dot, treat comma as decimal separator.
+    comma_decimal = s.str.contains(",", na=False) & ~s.str.contains(r"\.", na=False)
+    s = s.mask(comma_decimal, s[comma_decimal].str.replace(",", ".", regex=False))
+
+    return pd.to_numeric(s, errors="coerce")
+
+
+def symmetric_error(df: pd.DataFrame, plus_col: str, minus_col: str, out_col: str) -> None:
+    """Create a symmetric error column from two one-sided uncertainty columns."""
+    if plus_col in df.columns and minus_col in df.columns:
+        a = df[plus_col].abs()
+        b = df[minus_col].abs()
+        df[out_col] = np.nanmean(np.vstack([a.to_numpy(), b.to_numpy()]), axis=0)
+    elif plus_col in df.columns:
+        df[out_col] = df[plus_col].abs()
+    elif minus_col in df.columns:
+        df[out_col] = df[minus_col].abs()
+    else:
+        df[out_col] = np.nan
+
+
+def finite_mask(df: pd.DataFrame, columns: Iterable[str]) -> pd.Series:
+    mask = pd.Series(True, index=df.index)
+    for col in columns:
+        mask &= np.isfinite(df[col])
+    return mask
+
+
+def correlation_rows(df: pd.DataFrame, ycols: list[str], xcols: list[str]) -> pd.DataFrame:
+    rows = []
+    for xcol in xcols:
+        for ycol in ycols:
+            sub = df[[xcol, ycol]].replace([np.inf, -np.inf], np.nan).dropna()
+            n = len(sub)
+            row = {"x": xcol, "y": ycol, "n": n}
+            if n >= 3 and sub[xcol].nunique() > 1 and sub[ycol].nunique() > 1:
+                x = sub[xcol].to_numpy(float)
+                y = sub[ycol].to_numpy(float)
+                if stats is not None:
+                    pearson = stats.pearsonr(x, y)
+                    spearman = stats.spearmanr(x, y)
+                    row.update({
+                        "pearson_r": pearson.statistic,
+                        "pearson_p": pearson.pvalue,
+                        "spearman_rho": spearman.statistic,
+                        "spearman_p": spearman.pvalue,
+                    })
+                else:
+                    row.update({
+                        "pearson_r": np.corrcoef(x, y)[0, 1],
+                        "pearson_p": np.nan,
+                        "spearman_rho": pd.Series(x).rank().corr(pd.Series(y).rank()),
+                        "spearman_p": np.nan,
+                    })
+                slope, intercept = np.polyfit(x, y, deg=1)
+                row.update({"linear_slope": slope, "linear_intercept": intercept})
+            else:
+                row.update({
+                    "pearson_r": np.nan, "pearson_p": np.nan,
+                    "spearman_rho": np.nan, "spearman_p": np.nan,
+                    "linear_slope": np.nan, "linear_intercept": np.nan,
+                })
+            rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def add_reference_line(ax, horizontal: bool = True, vertical: bool = False) -> None:
+    if horizontal:
+        ax.axhline(0.0, linestyle="--", linewidth=1)
+    if vertical:
+        ax.axvline(0.0, linestyle="--", linewidth=1)
+
+
+def scatter_with_fit(df: pd.DataFrame, x: str, y: str, xlabel: str, ylabel: str, title: str, path: Path, color_by: str | None = None) -> None:
+    sub_cols = [x, y] + ([color_by] if color_by and color_by in df.columns else [])
+    sub = df[sub_cols].replace([np.inf, -np.inf], np.nan).dropna()
+
+    fig, ax = plt.subplots(figsize=(7.2, 5.0), dpi=160)
+    if color_by and color_by in sub.columns and sub[color_by].notna().any():
+        sc = ax.scatter(sub[x], sub[y], c=sub[color_by], s=28, alpha=0.8)
+        cbar = fig.colorbar(sc, ax=ax)
+        cbar.set_label(color_by)
+    else:
+        ax.scatter(sub[x], sub[y], s=28, alpha=0.8)
+
+    add_reference_line(ax, horizontal=True)
+
+    if len(sub) >= 3 and sub[x].nunique() > 1:
+        slope, intercept = np.polyfit(sub[x].to_numpy(float), sub[y].to_numpy(float), deg=1)
+        xx = np.linspace(sub[x].min(), sub[x].max(), 200)
+        ax.plot(xx, slope * xx + intercept, linewidth=1.5, label=f"linear fit: slope={slope:.3g}")
+        ax.legend(frameon=False)
+
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    fig.tight_layout()
+    fig.savefig(path)
+    plt.close(fig)
+
+
+def make_plots(df: pd.DataFrame, outdir: Path) -> None:
+    plots = outdir / "plots"
+    plots.mkdir(parents=True, exist_ok=True)
+
+    scatter_with_fit(
+        df, "log10_oblateness", "delta_M",
+        r"$\log_{10}(o)$", r"$\Delta M = M_{pred}-M_{true}$ [$M_\odot$]",
+        "Absolute mass residual vs oblateness",
+        plots / "01_deltaM_vs_log10_oblateness.png",
+        color_by="fill_factor",
+    )
+
+    scatter_with_fit(
+        df, "log10_oblateness", "frac_residual",
+        r"$\log_{10}(o)$", r"$(M_{pred}-M_{true})/M_{true}$",
+        "Fractional mass residual vs oblateness",
+        plots / "02_fractional_residual_vs_log10_oblateness.png",
+        color_by="fill_factor",
+    )
+
+    if "abs_frac_residual" in df.columns:
+        scatter_with_fit(
+            df, "log10_oblateness", "abs_frac_residual",
+            r"$\log_{10}(o)$", r"$|(M_{pred}-M_{true})/M_{true}|$",
+            "Absolute fractional mass residual vs oblateness",
+            plots / "02c_abs_fractional_residual_vs_log10_oblateness.png",
+            color_by="fill_factor",
+        )
+
+    scatter_with_fit(
+        df, "oblateness", "frac_residual",
+        "Oblateness", r"$(M_{pred}-M_{true})/M_{true}$",
+        "Fractional mass residual vs oblateness",
+        plots / "02b_fractional_residual_vs_oblateness.png",
+        color_by="fill_factor",
+    )
+
+    scatter_with_fit(
+        df, "log10_oblateness", "z_M",
+        r"$\log_{10}(o)$", r"$z_M$ using mass_sigma",
+        "Normalized mass residual vs oblateness",
+        plots / "03_zM_vs_log10_oblateness.png",
+        color_by="fill_factor",
+    )
+
+    if "z_M_q68" in df.columns and df["z_M_q68"].notna().sum() >= 3:
+        scatter_with_fit(
+            df, "log10_oblateness", "z_M_q68",
+            r"$\log_{10}(o)$", r"$z_M$ using $(p84-p16)/2$",
+            "Normalized residual from 68% predictive interval vs oblateness",
+            plots / "03b_zM_q68_vs_log10_oblateness.png",
+            color_by="fill_factor",
+        )
+
+    if "fill_factor" in df.columns and df["fill_factor"].notna().sum() >= 3:
+        scatter_with_fit(
+            df, "fill_factor", "frac_residual",
+            "Roche-lobe filling factor", r"$(M_{pred}-M_{true})/M_{true}$",
+            "Fractional mass residual vs filling factor",
+            plots / "04_fractional_residual_vs_fill_factor.png",
+            color_by="log10_oblateness",
+        )
+
+        scatter_with_fit(
+            df, "log10_fill_factor", "frac_residual",
+            r"$\log_{10}$(filling factor)", r"$(M_{pred}-M_{true})/M_{true}$",
+            "Fractional mass residual vs log filling factor",
+            plots / "05_fractional_residual_vs_log10_fill_factor.png",
+            color_by="log10_oblateness",
+        )
+
+    # Predicted vs true mass.
+    sub = df[["M", "mass_pred", "mass_sigma"]].replace([np.inf, -np.inf], np.nan).dropna()
+    fig, ax = plt.subplots(figsize=(6.0, 6.0), dpi=160)
+    ax.scatter(sub["M"], sub["mass_pred"], s=28, alpha=0.8)
+    lo = min(sub["M"].min(), sub["mass_pred"].min())
+    hi = max(sub["M"].max(), sub["mass_pred"].max())
+    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1)
+    ax.set_xlabel(r"True EB mass [$M_\odot$]")
+    ax.set_ylabel(r"Predicted mass [$M_\odot$]")
+    ax.set_title("Predicted vs true EB masses")
+    ax.set_aspect("equal", adjustable="box")
+    fig.tight_layout()
+    fig.savefig(plots / "07_mass_pred_vs_mass_true.png")
+    plt.close(fig)
+
+    scatter_with_fit(
+        df, "M", "frac_residual",
+        r"True EB mass [$M_\odot$]", r"$(M_{pred}-M_{true})/M_{true}$",
+        "Fractional mass residual vs true EB mass",
+        plots / "08_fractional_residual_vs_true_mass.png",
+        color_by="log10_oblateness",
+    )
+
+    for i, xcol in enumerate(["Teff", "Meta", "logg", "L", "log10_L"], start=9):
+        if xcol in df.columns and df[xcol].notna().sum() >= 3:
+            xlabel = {
+                "Teff": r"$T_{eff}$ [K]",
+                "Meta": "[Fe/H]",
+                "logg": r"$\log g$",
+                "L": r"$L$ [$L_\odot$]",
+                "log10_L": r"$\log_{10}(L/L_\odot)$",
+            }[xcol]
+            scatter_with_fit(
+                df, xcol, "frac_residual",
+                xlabel, r"$(M_{pred}-M_{true})/M_{true}$",
+                f"Fractional mass residual vs {xcol}",
+                plots / f"{i:02d}_fractional_residual_vs_{xcol}.png",
+                color_by="log10_oblateness",
+            )
+
+    # Histogram of fractional residuals.
+    sub = df[["frac_residual"]].replace([np.inf, -np.inf], np.nan).dropna()
+    fig, ax = plt.subplots(figsize=(7.2, 4.5), dpi=160)
+    ax.hist(sub["frac_residual"], bins=30, alpha=0.85)
+    ax.axvline(0.0, linestyle="--", linewidth=1)
+    ax.set_xlabel(r"$(M_{pred}-M_{true})/M_{true}$")
+    ax.set_ylabel("Number of EB components")
+    ax.set_title("Distribution of fractional mass residuals")
+    fig.tight_layout()
+    fig.savefig(plots / "13_hist_fractional_residuals.png")
+    plt.close(fig)
+
+
+def make_pretrim_plots(df: pd.DataFrame, outdir: Path) -> None:
+    plots = outdir / "plots_before_mass_cut"
+    plots.mkdir(parents=True, exist_ok=True)
+
+    scatter_with_fit(
+        df, "log10_oblateness", "frac_residual",
+        r"$\log_{10}(o)$", r"$(M_{pred}-M_{true})/M_{true}$",
+        "Fractional mass residual vs oblateness before mass cut",
+        plots / "02_fractional_residual_vs_log10_oblateness_before_mass_cut.png",
+        color_by="fill_factor",
+    )
+
+    if "abs_frac_residual" in df.columns:
+        scatter_with_fit(
+            df, "log10_oblateness", "abs_frac_residual",
+            r"$\log_{10}(o)$", r"$|(M_{pred}-M_{true})/M_{true}|$",
+            "Absolute fractional mass residual vs oblateness before mass cut",
+            plots / "02c_abs_fractional_residual_vs_log10_oblateness_before_mass_cut.png",
+            color_by="fill_factor",
+        )
+
+    scatter_with_fit(
+        df, "oblateness", "frac_residual",
+        "Oblateness", r"$(M_{pred}-M_{true})/M_{true}$",
+        "Fractional mass residual vs oblateness before mass cut",
+        plots / "02b_fractional_residual_vs_oblateness_before_mass_cut.png",
+        color_by="fill_factor",
+    )
+
+    if "fill_factor" in df.columns and df["fill_factor"].notna().sum() >= 3:
+        scatter_with_fit(
+            df, "fill_factor", "frac_residual",
+            "Roche-lobe filling factor", r"$(M_{pred}-M_{true})/M_{true}$",
+            "Fractional mass residual vs filling factor before mass cut",
+            plots / "04_fractional_residual_vs_fill_factor_before_mass_cut.png",
+            color_by="log10_oblateness",
+        )
+
+        scatter_with_fit(
+            df, "log10_fill_factor", "frac_residual",
+            r"$\log_{10}$(filling factor)", r"$(M_{pred}-M_{true})/M_{true}$",
+            "Fractional mass residual vs log filling factor before mass cut",
+            plots / "05_fractional_residual_vs_log10_fill_factor_before_mass_cut.png",
+            color_by="log10_oblateness",
+        )
+
+    sub = df[["M", "mass_pred", "mass_sigma"]].replace([np.inf, -np.inf], np.nan).dropna()
+    fig, ax = plt.subplots(figsize=(6.0, 6.0), dpi=160)
+    ax.scatter(sub["M"], sub["mass_pred"], s=28, alpha=0.8)
+    lo = min(sub["M"].min(), sub["mass_pred"].min())
+    hi = max(sub["M"].max(), sub["mass_pred"].max())
+    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1)
+    ax.set_xlabel(r"True EB mass [$M_\odot$]")
+    ax.set_ylabel(r"Predicted mass [$M_\odot$]")
+    ax.set_title("Predicted vs true EB masses before mass cut")
+    ax.set_aspect("equal", adjustable="box")
+    fig.tight_layout()
+    fig.savefig(plots / "07_mass_pred_vs_mass_true_before_mass_cut.png")
+    plt.close(fig)
+
+    scatter_with_fit(
+        df, "M", "frac_residual",
+        r"True EB mass [$M_\odot$]", r"$(M_{pred}-M_{true})/M_{true}$",
+        "Fractional mass residual vs true EB mass before mass cut",
+        plots / "08_fractional_residual_vs_true_mass_before_mass_cut.png",
+        color_by="log10_oblateness",
+    )
+
+    for i, xcol in enumerate(["Teff", "Meta", "logg", "L", "log10_L"], start=9):
+        if xcol in df.columns and df[xcol].notna().sum() >= 3:
+            xlabel = {
+                "Teff": r"$T_{eff}$ [K]",
+                "Meta": "[Fe/H]",
+                "logg": r"$\log g$",
+                "L": r"$L$ [$L_\odot$]",
+                "log10_L": r"$\log_{10}(L/L_\odot)$",
+            }[xcol]
+            scatter_with_fit(
+                df, xcol, "frac_residual",
+                xlabel, r"$(M_{pred}-M_{true})/M_{true}$",
+                f"Fractional mass residual vs {xcol} before mass cut",
+                plots / f"{i:02d}_fractional_residual_vs_{xcol}_before_mass_cut.png",
+                color_by="log10_oblateness",
+            )
+
+
+def robust_feature_mask(df: pd.DataFrame) -> pd.Series:
+    mask = pd.Series(True, index=df.index)
+    missing_cols = [col for col in ROBUST_FEATURE_RANGES if col not in df.columns]
+    if missing_cols:
+        raise ValueError(f"ROBUST=True requires columns: {missing_cols}")
+
+    for col, (lo, hi) in ROBUST_FEATURE_RANGES.items():
+        mask &= np.isfinite(df[col])
+        mask &= df[col].between(lo, hi, inclusive="both")
+
+    return mask
+
+
+def main() -> None:
+    input_path = INPUT_CSV
+    outdir = OUTPUT_DIR
+    outdir.mkdir(parents=True, exist_ok=True)
+
+    df = pd.read_csv(input_path)
+
+    missing = [c for c in REQUIRED_COLUMNS if c not in df.columns]
+    if missing:
+        raise ValueError(f"Missing required columns: {missing}")
+
+    numeric_cols = [c for c in REQUIRED_COLUMNS + OPTIONAL_NUMERIC_COLUMNS if c in df.columns]
+    for col in numeric_cols:
+        df[col] = robust_to_numeric(df[col])
+
+    symmetric_error(df, "eM1", "eM2", "sigma_M_true")
+    symmetric_error(df, "eoblateness1", "eoblateness2", "sigma_oblateness")
+    symmetric_error(df, "efill_factor1", "efill_factor2", "sigma_fill_factor")
+
+    # Main residual definitions.
+    df["delta_M"] = df["mass_pred"] - df["M"]
+    df["sigma_delta_M"] = np.sqrt(df["mass_sigma"] ** 2 + df["sigma_M_true"].fillna(0.0) ** 2)
+    df["frac_residual"] = df["delta_M"] / df["M"]
+
+    # Alternative predictive uncertainty estimated directly from posterior quantiles.
+    # This is often safer than blindly trusting mass_sigma if mass_sigma comes from
+    # a model-specific internal scale or has numerical pathologies.
+    if "mass_p16" in df.columns and "mass_p84" in df.columns:
+        df["sigma_pred_q68"] = 0.5 * (df["mass_p84"] - df["mass_p16"])
+        df["sigma_delta_M_q68"] = np.sqrt(df["sigma_pred_q68"] ** 2 + df["sigma_M_true"].fillna(0.0) ** 2)
+        df["z_M_q68"] = df["delta_M"] / df["sigma_delta_M_q68"]
+        df["ci68_contains_M_true"] = (df["M"] >= df["mass_p16"]) & (df["M"] <= df["mass_p84"])
+    else:
+        df["sigma_pred_q68"] = np.nan
+        df["sigma_delta_M_q68"] = np.nan
+        df["z_M_q68"] = np.nan
+        df["ci68_contains_M_true"] = False
+
+    if "mass_p02_5" in df.columns and "mass_p97_5" in df.columns:
+        df["ci95_contains_M_true"] = (df["M"] >= df["mass_p02_5"]) & (df["M"] <= df["mass_p97_5"])
+    else:
+        df["ci95_contains_M_true"] = False
+
+    # Linear uncertainty propagation for f = M_pred/M_true - 1.
+    df["sigma_frac_residual"] = np.sqrt(
+        (df["mass_sigma"] / df["M"]) ** 2
+        + ((df["mass_pred"] * df["sigma_M_true"].fillna(0.0)) / (df["M"] ** 2)) ** 2
+    )
+
+    df["z_M"] = df["delta_M"] / df["sigma_delta_M"]
+
+    # Credible-interval residuals, if prediction quantiles are present.
+    if "mass_p16" in df.columns and "mass_p84" in df.columns:
+        df["delta_M_p16"] = df["mass_p16"] - df["M"]
+        df["delta_M_p84"] = df["mass_p84"] - df["M"]
+        df["frac_residual_p16"] = df["delta_M_p16"] / df["M"]
+        df["frac_residual_p84"] = df["delta_M_p84"] / df["M"]
+    if "mass_p02_5" in df.columns and "mass_p97_5" in df.columns:
+        df["delta_M_p02_5"] = df["mass_p02_5"] - df["M"]
+        df["delta_M_p97_5"] = df["mass_p97_5"] - df["M"]
+        df["frac_residual_p02_5"] = df["delta_M_p02_5"] / df["M"]
+        df["frac_residual_p97_5"] = df["delta_M_p97_5"] / df["M"]
+
+    df["log10_oblateness"] = np.where(df["oblateness"] > MIN_OBLATENESS, np.log10(df["oblateness"]), np.nan)
+    if "fill_factor" in df.columns:
+        df["log10_fill_factor"] = np.where(df["fill_factor"] > 0, np.log10(df["fill_factor"]), np.nan)
+    if "L" in df.columns:
+        df["log10_L"] = np.where(df["L"] > 0, np.log10(df["L"]), np.nan)
+
+    # Keep only rows that can answer the core science question.
+    core_cols = ["M", "mass_pred", "mass_sigma", "oblateness", "log10_oblateness", "delta_M", "frac_residual", "z_M"]
+    clean = df[finite_mask(df, core_cols)].copy()
+
+    clean["abs_delta_M"] = clean["delta_M"].abs()
+    clean["abs_frac_residual"] = clean["frac_residual"].abs()
+    clean["abs_z_M"] = clean["z_M"].abs()
+    clean["flag_abs_z_gt_2"] = clean["abs_z_M"] > 2
+    clean["flag_abs_z_gt_3"] = clean["abs_z_M"] > 3
+
+    pretrim_n = len(clean)
+    make_pretrim_plots(clean, outdir)
+
+    mass_window_mask = clean["M"].between(MASS_MIN, MASS_MAX, inclusive="both")
+    clean = clean[mass_window_mask].copy()
+    mass_window_n = len(clean)
+
+    robust_n_before = len(clean)
+    robust_n_after = len(clean)
+    if ROBUST:
+        robust_mask = robust_feature_mask(clean)
+        clean = clean[robust_mask].copy()
+        robust_n_after = len(clean)
+
+    if clean.empty:
+        raise ValueError("No rows remain after the mass-window and robust filters.")
+
+    # Export full residual table.
+    residual_path = outdir / "EB_mass_residuals_with_oblateness.csv"
+    clean.to_csv(residual_path, index=False)
+
+    # Correlation and linear-fit summaries.
+    xcols = ["log10_oblateness"]
+    if "fill_factor" in clean.columns:
+        xcols += ["fill_factor", "log10_fill_factor"]
+    for maybe in ["M", "Teff", "Meta", "logg", "L", "log10_L"]:
+        if maybe in clean.columns:
+            xcols.append(maybe)
+
+    ycols = ["delta_M", "frac_residual", "z_M", "z_M_q68"]
+    corr = correlation_rows(clean, ycols=ycols, xcols=xcols)
+    corr.to_csv(outdir / "EB_residual_correlation_summary.csv", index=False)
+
+    # Bin by oblateness. Quantile bins are more stable than fixed-width bins for skewed o.
+    n_bins = min(6, max(2, clean["log10_oblateness"].nunique()))
+    clean["oblateness_bin"] = pd.qcut(clean["log10_oblateness"], q=n_bins, duplicates="drop")
+    binned = (
+        clean.groupby("oblateness_bin", observed=True)
+        .agg(
+            n=("frac_residual", "size"),
+            log10_o_min=("log10_oblateness", "min"),
+            log10_o_max=("log10_oblateness", "max"),
+            o_median=("oblateness", "median"),
+            frac_residual_mean=("frac_residual", "mean"),
+            frac_residual_median=("frac_residual", "median"),
+            frac_residual_std=("frac_residual", "std"),
+            delta_M_mean=("delta_M", "mean"),
+            delta_M_median=("delta_M", "median"),
+            z_M_median=("z_M", "median"),
+            fill_factor_median=("fill_factor", "median") if "fill_factor" in clean.columns else ("M", "median"),
+        )
+        .reset_index()
+    )
+    binned.to_csv(outdir / "EB_residual_binned_by_oblateness.csv", index=False)
+
+    # Outlier tables.
+    id_cols = [c for c in ["SIMBAD_ID", "catalog", "class", "type", "mode", "detached", "well_detached"] if c in clean.columns]
+    core_export_cols = id_cols + [
+        "M", "sigma_M_true", "mass_pred", "mass_sigma", "delta_M", "frac_residual",
+        "sigma_frac_residual", "z_M", "sigma_pred_q68", "z_M_q68", "ci68_contains_M_true", "ci95_contains_M_true", "oblateness", "log10_oblateness",
+        "fill_factor", "Teff", "Meta", "logg", "L",
+    ]
+    core_export_cols = [c for c in core_export_cols if c in clean.columns]
+    clean.sort_values("abs_frac_residual", ascending=False)[core_export_cols].head(TOP_N).to_csv(
+        outdir / "EB_top_outliers_by_abs_frac_residual.csv", index=False
+    )
+    clean.sort_values("abs_z_M", ascending=False)[core_export_cols].head(TOP_N).to_csv(
+        outdir / "EB_top_outliers_by_abs_zM.csv", index=False
+    )
+    if "z_M_q68" in clean.columns:
+        clean["abs_z_M_q68"] = clean["z_M_q68"].abs()
+        clean.sort_values("abs_z_M_q68", ascending=False)[core_export_cols].head(TOP_N).to_csv(
+            outdir / "EB_top_outliers_by_abs_zM_q68.csv", index=False
+        )
+
+    make_plots(clean, outdir)
+
+    # Compact text report.
+    summary_lines = []
+    summary_lines.append(f"Input file: {input_path}")
+    summary_lines.append(f"Input rows: {len(df)}")
+    summary_lines.append(f"Rows usable before mass cut: {pretrim_n}")
+    summary_lines.append(f"Pre-mass-cut plots directory: {(outdir / 'plots_before_mass_cut').resolve()}")
+    summary_lines.append(f"Mass window: {MASS_MIN:.3f} <= M <= {MASS_MAX:.3f} solar masses")
+    summary_lines.append(f"Rows after mass window: {mass_window_n}")
+    summary_lines.append(f"ROBUST: {ROBUST}")
+    if ROBUST:
+        summary_lines.append(f"Rows before robust cut: {robust_n_before}")
+        summary_lines.append(f"Rows after robust cut: {robust_n_after}")
+        for col, (lo, hi) in ROBUST_FEATURE_RANGES.items():
+            summary_lines.append(f"  robust {col}: {lo:g} <= {col} <= {hi:g}")
+    summary_lines.append(f"Rows used for final residual-vs-oblateness analysis: {len(clean)}")
+    summary_lines.append("")
+    summary_lines.append("Residual definitions:")
+    summary_lines.append("  delta_M = mass_pred - M")
+    summary_lines.append("  frac_residual = (mass_pred - M) / M")
+    summary_lines.append("  sigma_delta_M = sqrt(mass_sigma^2 + sigma_M_true^2)")
+    summary_lines.append("  z_M = delta_M / sigma_delta_M")
+    summary_lines.append("")
+    for col in ["delta_M", "frac_residual", "z_M", "z_M_q68", "oblateness", "fill_factor", "sigma_pred_q68", "mass_sigma"]:
+        if col in clean.columns and clean[col].notna().any():
+            s = clean[col].dropna()
+            summary_lines.append(
+                f"{col}: n={len(s)}, mean={s.mean():.6g}, median={s.median():.6g}, "
+                f"std={s.std():.6g}, min={s.min():.6g}, max={s.max():.6g}"
+            )
+    summary_lines.append("")
+    if "ci68_contains_M_true" in clean.columns:
+        summary_lines.append(f"68% interval coverage: {clean['ci68_contains_M_true'].mean():.3f}")
+    if "ci95_contains_M_true" in clean.columns:
+        summary_lines.append(f"95% interval coverage: {clean['ci95_contains_M_true'].mean():.3f}")
+    summary_lines.append("")
+    summary_lines.append("Most relevant correlations:")
+    key_corr = corr[(corr["x"].isin(["log10_oblateness", "fill_factor", "log10_fill_factor"])) & (corr["y"] == "frac_residual")]
+    summary_lines.append(key_corr.to_string(index=False))
+
+    report_path = outdir / "README_analysis_summary.txt"
+    report_path.write_text("\n".join(summary_lines), encoding="utf-8")
+
+    print("Analysis complete.")
+    print(f"Output directory: {outdir.resolve()}")
+    print(f"Residual table: {residual_path.resolve()}")
+    print(f"Plots directory: {(outdir / 'plots').resolve()}")
+    print(f"Pre-mass-cut plots directory: {(outdir / 'plots_before_mass_cut').resolve()}")
+    print(f"Usable rows before mass cut: {pretrim_n} / {len(df)}")
+    print(f"Rows after {MASS_MIN:.3f}-{MASS_MAX:.3f} solar-mass cut: {mass_window_n}")
+    if ROBUST:
+        print(f"Rows left by ROBUST=True feature-range cut: {robust_n_after} / {robust_n_before}")
+    else:
+        print("ROBUST=False; feature-range cut was not applied.")
+    print(f"Final usable rows: {len(clean)} / {len(df)}")
+
+
+if __name__ == "__main__":
+    main()

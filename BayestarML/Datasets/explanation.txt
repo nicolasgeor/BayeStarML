@@ -6,9 +6,9 @@ database_A_old_format_logL.txt is the same as database_A_old_format.txt but susb
 
 database_A_old_format_with_xiong_log_L.txt is the same as database_A_old_format_with_xiong.txt but with log L instead of L
 
-database_D_old_format.txt: same as database A, but with computed oblateness and roche, and related uncertainties and quantities. these are added as extra columns. it also has some updates to some entries (see table)
+database_D_old_format.txt: same as database A, but with computed oblateness and roche, and related uncertainties and quantities. these are added as extra columns. it also has some updates to some entries (see table). YO CREO QUE ESTO LLEVA XIONG; CASI SEGURO.
 
-database_D_old_format_extended.txt: same as database_D_old_format.txt but with basically all original stars, no deleting special ones.
+database_D_old_format_extended.txt: same as database_D_old_format.txt but with basically all original stars, not deleting special ones. 
 
 | SIMBAD_ID      | Changed existing values from database_A_old_format to database_D_old_format                                                                                                                            |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
