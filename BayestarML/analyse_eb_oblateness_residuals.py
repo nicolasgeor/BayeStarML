@@ -10,6 +10,7 @@ Main outputs:
     EB_mass_residuals_with_oblateness.csv
     EB_residual_correlation_summary.csv
     EB_residual_binned_by_oblateness.csv
+    EB_plot_binned_residuals_vs_log10_oblateness.csv
     EB_top_outliers_by_abs_frac_residual.csv
     plots/*.png
 
@@ -40,7 +41,7 @@ TOP_N = 30
 MASS_MIN = 0.950
 MASS_MAX = 1.500
 ROBUST = True
-N_OBLATENESS_BINS = 6
+N_OBLATENESS_BINS = 12
 MIN_BIN_COUNT = 3
 REGRESSION_PREDICTORS = ["log10_oblateness", "M", "Teff", "Meta", "logg", "L"]
 ROBUST_FEATURE_RANGES = {
@@ -206,6 +207,8 @@ def binned_scatter(
                 y_center = np.nanmedian(y_values) if bin_stat == "median" else np.nanmean(y_values)
                 y_std = np.nanstd(y_values, ddof=1) if len(g) > 1 else np.nan
                 rows.append({
+                    "plot_file": path.name,
+                    "plot_title": title,
                     "x": x,
                     "y": y,
                     "bin": str(interval),
@@ -215,6 +218,10 @@ def binned_scatter(
                     "n": len(g),
                     "y_center": y_center,
                     "y_std": y_std,
+                    "frac_residual_center": y_center if y == "frac_residual" else np.nan,
+                    "frac_residual_std": y_std if y == "frac_residual" else np.nan,
+                    "abs_frac_residual_center": y_center if y == "abs_frac_residual" else np.nan,
+                    "abs_frac_residual_std": y_std if y == "abs_frac_residual" else np.nan,
                     "statistic": bin_stat,
                 })
 
@@ -241,9 +248,24 @@ def binned_scatter(
     return binned
 
 
+def save_binned_plot_tables(tables: list[pd.DataFrame], path: Path) -> Path:
+    tables = [table for table in tables if table is not None and not table.empty]
+    if tables:
+        out = pd.concat(tables, ignore_index=True)
+    else:
+        out = pd.DataFrame(columns=[
+            "plot_file", "plot_title", "x", "y", "bin", "x_center", "x_min", "x_max", "n",
+            "y_center", "y_std", "frac_residual_center", "frac_residual_std",
+            "abs_frac_residual_center", "abs_frac_residual_std", "statistic",
+        ])
+    out.to_csv(path, index=False)
+    return path
+
+
 def make_plots(df: pd.DataFrame, outdir: Path) -> None:
     plots = outdir / "plots"
     plots.mkdir(parents=True, exist_ok=True)
+    plot_bin_tables = []
 
     scatter_with_fit(
         df, "log10_oblateness", "delta_M",
@@ -253,24 +275,26 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
         color_by="fill_factor",
     )
 
-    binned_scatter(
+    plot_bin_tables.append(binned_scatter(
         df, "log10_oblateness", "frac_residual",
         r"$\log_{10}(o)$", r"$(M_{pred}-M_{true})/M_{true}$",
         "Fractional mass residual vs oblateness",
         plots / "02_fractional_residual_vs_log10_oblateness.png",
         marker_color="black",
         bin_stat="mean",
-    )
+    ))
 
     if "abs_frac_residual" in df.columns:
-        binned_scatter(
+        plot_bin_tables.append(binned_scatter(
             df, "log10_oblateness", "abs_frac_residual",
             r"$\log_{10}(o)$", r"$|(M_{pred}-M_{true})/M_{true}|$",
             "Absolute fractional mass residual vs oblateness",
             plots / "02c_abs_fractional_residual_vs_log10_oblateness.png",
             marker_color="red",
             bin_stat="median",
-        )
+        ))
+
+    save_binned_plot_tables(plot_bin_tables, outdir / "EB_plot_binned_residuals_vs_log10_oblateness.csv")
 
     scatter_with_fit(
         df, "oblateness", "frac_residual",
@@ -370,25 +394,31 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
 def make_pretrim_plots(df: pd.DataFrame, outdir: Path) -> None:
     plots = outdir / "plots_before_mass_cut"
     plots.mkdir(parents=True, exist_ok=True)
+    plot_bin_tables = []
 
-    binned_scatter(
+    plot_bin_tables.append(binned_scatter(
         df, "log10_oblateness", "frac_residual",
         r"$\log_{10}(o)$", r"$(M_{pred}-M_{true})/M_{true}$",
         "Fractional mass residual vs oblateness before mass cut",
         plots / "02_fractional_residual_vs_log10_oblateness_before_mass_cut.png",
         marker_color="black",
         bin_stat="mean",
-    )
+    ))
 
     if "abs_frac_residual" in df.columns:
-        binned_scatter(
+        plot_bin_tables.append(binned_scatter(
             df, "log10_oblateness", "abs_frac_residual",
             r"$\log_{10}(o)$", r"$|(M_{pred}-M_{true})/M_{true}|$",
             "Absolute fractional mass residual vs oblateness before mass cut",
             plots / "02c_abs_fractional_residual_vs_log10_oblateness_before_mass_cut.png",
             marker_color="red",
             bin_stat="median",
-        )
+        ))
+
+    save_binned_plot_tables(
+        plot_bin_tables,
+        outdir / "EB_plot_binned_residuals_vs_log10_oblateness_before_mass_cut.csv",
+    )
 
     scatter_with_fit(
         df, "oblateness", "frac_residual",
@@ -720,6 +750,8 @@ def main() -> None:
         )
 
     make_plots(clean, outdir)
+    plot_bins_path = outdir / "EB_plot_binned_residuals_vs_log10_oblateness.csv"
+    pretrim_plot_bins_path = outdir / "EB_plot_binned_residuals_vs_log10_oblateness_before_mass_cut.csv"
 
     # Compact text report.
     summary_lines = []
@@ -764,6 +796,10 @@ def main() -> None:
     summary_lines.append("  Responses: frac_residual and abs_frac_residual")
     summary_lines.append("  Predictors are standardized before fitting; standard errors are HC3 robust.")
     summary_lines.append(f"  Table: {regression_path.resolve()}")
+    summary_lines.append("")
+    summary_lines.append("Plot-bin statistics:")
+    summary_lines.append(f"  Final plot bins: {plot_bins_path.resolve()}")
+    summary_lines.append(f"  Pre-mass-cut plot bins: {pretrim_plot_bins_path.resolve()}")
 
     report_path = outdir / "README_analysis_summary.txt"
     report_path.write_text("\n".join(summary_lines), encoding="utf-8")
@@ -772,6 +808,8 @@ def main() -> None:
     print(f"Output directory: {outdir.resolve()}")
     print(f"Residual table: {residual_path.resolve()}")
     print(f"Regression table: {regression_path.resolve()}")
+    print(f"Plot-bin table: {plot_bins_path.resolve()}")
+    print(f"Pre-mass-cut plot-bin table: {pretrim_plot_bins_path.resolve()}")
     print(f"Plots directory: {(outdir / 'plots').resolve()}")
     print(f"Pre-mass-cut plots directory: {(outdir / 'plots_before_mass_cut').resolve()}")
     print(f"Usable rows before mass cut: {pretrim_n} / {len(df)}")

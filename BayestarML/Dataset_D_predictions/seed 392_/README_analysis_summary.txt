@@ -41,3 +41,7 @@ Multivariable regression:
   Responses: frac_residual and abs_frac_residual
   Predictors are standardized before fitting; standard errors are HC3 robust.
   Table: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_predictions\seed 392_\EB_multivariable_regression_HC3.csv
+
+Plot-bin statistics:
+  Final plot bins: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_predictions\seed 392_\EB_plot_binned_residuals_vs_log10_oblateness.csv
+  Pre-mass-cut plot bins: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_predictions\seed 392_\EB_plot_binned_residuals_vs_log10_oblateness_before_mass_cut.csv
