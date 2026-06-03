@@ -36,3 +36,8 @@ Most relevant correlations:
  log10_oblateness frac_residual 85  -0.045716   0.677809     -0.107505    0.327425     -0.004025         -0.019705
       fill_factor frac_residual 85   0.051975   0.636635     -0.106226    0.333247      0.028346         -0.015866
 log10_fill_factor frac_residual 85  -0.046874   0.670113     -0.106226    0.333247     -0.012379         -0.016865
+
+Multivariable regression:
+  Responses: frac_residual and abs_frac_residual
+  Predictors are standardized before fitting; standard errors are HC3 robust.
+  Table: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_predictions\seed 392\EB_multivariable_regression_HC3.csv

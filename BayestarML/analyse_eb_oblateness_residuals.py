@@ -33,13 +33,16 @@ except Exception:  # pragma: no cover
     stats = None
 
 
-INPUT_CSV = Path("Dataset_D_predictions/EB_oblateness_fill_factor_mass_predictions_4_features_3000_draws_seed_29.csv")
-OUTPUT_DIR = Path("Dataset_D_predictions/seed 29")
+INPUT_CSV = Path("Dataset_D_predictions/EB_oblateness_fill_factor_mass_predictions_4_features_3000_draws_seed_392.csv")
+OUTPUT_DIR = Path("Dataset_D_predictions/seed 392_")
 MIN_OBLATENESS = 0.0
 TOP_N = 30
 MASS_MIN = 0.950
 MASS_MAX = 1.500
 ROBUST = True
+N_OBLATENESS_BINS = 6
+MIN_BIN_COUNT = 3
+REGRESSION_PREDICTORS = ["log10_oblateness", "M", "Teff", "Meta", "logg", "L"]
 ROBUST_FEATURE_RANGES = {
     "Teff": (5500.0, 6800.0),
     "logg": (3.750, 4.450),
@@ -172,6 +175,72 @@ def scatter_with_fit(df: pd.DataFrame, x: str, y: str, xlabel: str, ylabel: str,
     plt.close(fig)
 
 
+def binned_scatter(
+    df: pd.DataFrame,
+    x: str,
+    y: str,
+    xlabel: str,
+    ylabel: str,
+    title: str,
+    path: Path,
+    marker_color: str,
+    bin_stat: str = "mean",
+) -> pd.DataFrame:
+    sub = df[[x, y]].replace([np.inf, -np.inf], np.nan).dropna().copy()
+
+    fig, ax = plt.subplots(figsize=(7.2, 5.0), dpi=160)
+    ax.scatter(sub[x], sub[y], s=24, alpha=0.55, color="0.65", edgecolors="none", label="raw stars")
+    add_reference_line(ax, horizontal=True)
+
+    rows = []
+    if len(sub) >= MIN_BIN_COUNT and sub[x].nunique() > 1:
+        edges = np.linspace(sub[x].min(), sub[x].max(), N_OBLATENESS_BINS + 1)
+        edges = np.unique(edges)
+        if len(edges) >= 3:
+            sub["x_bin"] = pd.cut(sub[x], bins=edges, include_lowest=True)
+            for interval, g in sub.groupby("x_bin", observed=True):
+                if len(g) < MIN_BIN_COUNT:
+                    continue
+                y_values = g[y].to_numpy(float)
+                center = 0.5 * (interval.left + interval.right)
+                y_center = np.nanmedian(y_values) if bin_stat == "median" else np.nanmean(y_values)
+                y_std = np.nanstd(y_values, ddof=1) if len(g) > 1 else np.nan
+                rows.append({
+                    "x": x,
+                    "y": y,
+                    "bin": str(interval),
+                    "x_center": center,
+                    "x_min": interval.left,
+                    "x_max": interval.right,
+                    "n": len(g),
+                    "y_center": y_center,
+                    "y_std": y_std,
+                    "statistic": bin_stat,
+                })
+
+    binned = pd.DataFrame(rows)
+    if not binned.empty:
+        label = f"bin {bin_stat} +/- 1 sigma"
+        ax.errorbar(
+            binned["x_center"], binned["y_center"],
+            yerr=binned["y_std"],
+            fmt="s", markersize=5.5,
+            color=marker_color, ecolor=marker_color,
+            elinewidth=1.4, capsize=3,
+            label=label,
+        )
+        ax.legend(frameon=False)
+
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    fig.tight_layout()
+    fig.savefig(path)
+    plt.close(fig)
+
+    return binned
+
+
 def make_plots(df: pd.DataFrame, outdir: Path) -> None:
     plots = outdir / "plots"
     plots.mkdir(parents=True, exist_ok=True)
@@ -184,21 +253,23 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
         color_by="fill_factor",
     )
 
-    scatter_with_fit(
+    binned_scatter(
         df, "log10_oblateness", "frac_residual",
         r"$\log_{10}(o)$", r"$(M_{pred}-M_{true})/M_{true}$",
         "Fractional mass residual vs oblateness",
         plots / "02_fractional_residual_vs_log10_oblateness.png",
-        color_by="fill_factor",
+        marker_color="black",
+        bin_stat="mean",
     )
 
     if "abs_frac_residual" in df.columns:
-        scatter_with_fit(
+        binned_scatter(
             df, "log10_oblateness", "abs_frac_residual",
             r"$\log_{10}(o)$", r"$|(M_{pred}-M_{true})/M_{true}|$",
             "Absolute fractional mass residual vs oblateness",
             plots / "02c_abs_fractional_residual_vs_log10_oblateness.png",
-            color_by="fill_factor",
+            marker_color="red",
+            bin_stat="median",
         )
 
     scatter_with_fit(
@@ -300,21 +371,23 @@ def make_pretrim_plots(df: pd.DataFrame, outdir: Path) -> None:
     plots = outdir / "plots_before_mass_cut"
     plots.mkdir(parents=True, exist_ok=True)
 
-    scatter_with_fit(
+    binned_scatter(
         df, "log10_oblateness", "frac_residual",
         r"$\log_{10}(o)$", r"$(M_{pred}-M_{true})/M_{true}$",
         "Fractional mass residual vs oblateness before mass cut",
         plots / "02_fractional_residual_vs_log10_oblateness_before_mass_cut.png",
-        color_by="fill_factor",
+        marker_color="black",
+        bin_stat="mean",
     )
 
     if "abs_frac_residual" in df.columns:
-        scatter_with_fit(
+        binned_scatter(
             df, "log10_oblateness", "abs_frac_residual",
             r"$\log_{10}(o)$", r"$|(M_{pred}-M_{true})/M_{true}|$",
             "Absolute fractional mass residual vs oblateness before mass cut",
             plots / "02c_abs_fractional_residual_vs_log10_oblateness_before_mass_cut.png",
-            color_by="fill_factor",
+            marker_color="red",
+            bin_stat="median",
         )
 
     scatter_with_fit(
@@ -393,6 +466,99 @@ def robust_feature_mask(df: pd.DataFrame) -> pd.Series:
         mask &= df[col].between(lo, hi, inclusive="both")
 
     return mask
+
+
+def _two_sided_p_value(t_value: float, df_resid: int) -> float:
+    if not np.isfinite(t_value) or df_resid <= 0:
+        return np.nan
+    if stats is not None:
+        return 2.0 * stats.t.sf(abs(t_value), df_resid)
+    return math.erfc(abs(t_value) / math.sqrt(2.0))
+
+
+def _critical_value(df_resid: int) -> float:
+    if df_resid <= 0:
+        return np.nan
+    if stats is not None:
+        return stats.t.ppf(0.975, df_resid)
+    return 1.96
+
+
+def hc3_regression_table(df: pd.DataFrame, response: str, predictors: list[str]) -> pd.DataFrame:
+    cols = [response] + predictors
+    sub = df[cols].replace([np.inf, -np.inf], np.nan).dropna().copy()
+
+    rows = []
+    n = len(sub)
+    if n == 0:
+        return pd.DataFrame(rows)
+
+    usable_predictors = []
+    standardized = pd.DataFrame(index=sub.index)
+    for predictor in predictors:
+        mean = sub[predictor].mean()
+        std = sub[predictor].std(ddof=0)
+        if not np.isfinite(std) or std == 0.0:
+            continue
+        standardized[predictor] = (sub[predictor] - mean) / std
+        usable_predictors.append(predictor)
+
+    if not usable_predictors:
+        return pd.DataFrame(rows)
+
+    y = sub[response].to_numpy(float)
+    X_pred = standardized[usable_predictors].to_numpy(float)
+    X = np.column_stack([np.ones(n), X_pred])
+    names = ["intercept"] + usable_predictors
+
+    rank = np.linalg.matrix_rank(X)
+    if n <= rank:
+        return pd.DataFrame(rows)
+
+    xtx_inv = np.linalg.pinv(X.T @ X)
+    beta = xtx_inv @ X.T @ y
+    fitted = X @ beta
+    resid = y - fitted
+    h = np.sum((X @ xtx_inv) * X, axis=1)
+    denom = np.clip(1.0 - h, 1e-12, None)
+    omega = (resid / denom) ** 2
+    cov_hc3 = xtx_inv @ (X.T @ (X * omega[:, None])) @ xtx_inv
+    se = np.sqrt(np.clip(np.diag(cov_hc3), 0.0, np.inf))
+
+    df_resid = n - rank
+    tcrit = _critical_value(df_resid)
+    ss_res = np.sum(resid ** 2)
+    ss_tot = np.sum((y - y.mean()) ** 2)
+    r_squared = 1.0 - ss_res / ss_tot if ss_tot > 0 else np.nan
+
+    for name, coef, std_err in zip(names, beta, se):
+        t_value = coef / std_err if std_err > 0 else np.nan
+        rows.append({
+            "response": response,
+            "predictor": name,
+            "coefficient": coef,
+            "std_error_HC3": std_err,
+            "p_value": _two_sided_p_value(t_value, df_resid),
+            "ci95_low": coef - tcrit * std_err if np.isfinite(tcrit) else np.nan,
+            "ci95_high": coef + tcrit * std_err if np.isfinite(tcrit) else np.nan,
+            "n": n,
+            "df_resid": df_resid,
+            "r_squared": r_squared,
+            "predictors_standardized": name != "intercept",
+        })
+
+    return pd.DataFrame(rows)
+
+
+def multivariable_regression_table(df: pd.DataFrame) -> pd.DataFrame:
+    tables = [
+        hc3_regression_table(df, "frac_residual", REGRESSION_PREDICTORS),
+        hc3_regression_table(df, "abs_frac_residual", REGRESSION_PREDICTORS),
+    ]
+    tables = [table for table in tables if not table.empty]
+    if not tables:
+        return pd.DataFrame()
+    return pd.concat(tables, ignore_index=True)
 
 
 def main() -> None:
@@ -507,6 +673,10 @@ def main() -> None:
     corr = correlation_rows(clean, ycols=ycols, xcols=xcols)
     corr.to_csv(outdir / "EB_residual_correlation_summary.csv", index=False)
 
+    regression = multivariable_regression_table(clean)
+    regression_path = outdir / "EB_multivariable_regression_HC3.csv"
+    regression.to_csv(regression_path, index=False)
+
     # Bin by oblateness. Quantile bins are more stable than fixed-width bins for skewed o.
     n_bins = min(6, max(2, clean["log10_oblateness"].nunique()))
     clean["oblateness_bin"] = pd.qcut(clean["log10_oblateness"], q=n_bins, duplicates="drop")
@@ -589,6 +759,11 @@ def main() -> None:
     summary_lines.append("Most relevant correlations:")
     key_corr = corr[(corr["x"].isin(["log10_oblateness", "fill_factor", "log10_fill_factor"])) & (corr["y"] == "frac_residual")]
     summary_lines.append(key_corr.to_string(index=False))
+    summary_lines.append("")
+    summary_lines.append("Multivariable regression:")
+    summary_lines.append("  Responses: frac_residual and abs_frac_residual")
+    summary_lines.append("  Predictors are standardized before fitting; standard errors are HC3 robust.")
+    summary_lines.append(f"  Table: {regression_path.resolve()}")
 
     report_path = outdir / "README_analysis_summary.txt"
     report_path.write_text("\n".join(summary_lines), encoding="utf-8")
@@ -596,6 +771,7 @@ def main() -> None:
     print("Analysis complete.")
     print(f"Output directory: {outdir.resolve()}")
     print(f"Residual table: {residual_path.resolve()}")
+    print(f"Regression table: {regression_path.resolve()}")
     print(f"Plots directory: {(outdir / 'plots').resolve()}")
     print(f"Pre-mass-cut plots directory: {(outdir / 'plots_before_mass_cut').resolve()}")
     print(f"Usable rows before mass cut: {pretrim_n} / {len(df)}")
