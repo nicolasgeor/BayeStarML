@@ -18,39 +18,44 @@ import matplotlib.pyplot as plt
 import os
 from sklearn.metrics import mean_absolute_error
 
-os.makedirs('Dataset_B_training_for_Ariel', exist_ok=True)
+OUTPUT_DIR = r'C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_A_training_13_june'
+SAMPLING_SEED = 225
 
-df_train = get_dataset('Datasets/database_B.txt', 'MS')
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+df_train = get_dataset('Datasets/database_B.txt', 'MS', filter_mode='rho')
 (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
   mass_test, emass_test
-) = return_train_test(df_train)
+) = return_train_test(df_train, feature_set='rho')
 
 unorm_mass = denormalise_val(mass_test, 'mass')
 
-x_train = x_train[['Teff', 'Meta', 'L']]
-x_train_er = x_train_er[['eTeff', 'eMeta', 'eL']]
+x_train = x_train[['Teff', 'Meta', 'rho']]
+x_train_er = x_train_er[['eTeff', 'eMeta', 'erho']]
 
-x_test = x_test[['Teff', 'Meta', 'L']]
-x_test_er = x_test_err[['eTeff', 'eMeta', 'eL']]
+x_test = x_test[['Teff', 'Meta', 'rho']]
+x_test_er = x_test_err[['eTeff', 'eMeta', 'erho']]
 
 # print(x_test3_er)
 
 def main():
 
 
-    # PiCK ONE OF THESE TWO COMBINATiONS (model + trace)
+    # PiCK ONE OF THESE TWO COMBINATiONS (plot name + model + trace)
  
-    model = hbnn.HBNN_M3(x_train, mass_train, x_train_er, emass_train, 15)
+    # plot_model_name = 'HBNN'
+    # model = hbnn.HBNN_M3(x_train, mass_train, x_train_er, emass_train, 15)
 
     
-    trace = train(model, "Dataset_B_training_for_Ariel/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015_seed_504.nc", draw=3000, chains=4)
+    # trace = train(model, os.path.join(OUTPUT_DIR, f"HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_{SAMPLING_SEED}.nc"), draw=1000, chains=4, random_seed=SAMPLING_SEED)
 
     
-    # model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
-    #                                                                     x_train_er,
-    #                                                                     mass_train, 100, 50)
+    model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
+                                                                        x_train_er,
+                                                                        mass_train, 80, 40)
     
-    # trace = train(model, "Dataset_B_training_for_Ariel/GP_mass_3param_L_3000_draws_4_chains_100_50_seed_504.nc", draw=3000, chains=4)
+    plot_model_name = 'GP'
+    trace = train(model, os.path.join(OUTPUT_DIR, f"GP_mass_3param_L_1000_draws_4_chains_80_40_seed_{SAMPLING_SEED}.nc"), draw=1000, chains=4, random_seed=SAMPLING_SEED)
 
     
     # model = hbnn.HBNN_M4(x_train, rad_train, x_train_er, erad_train, 15)
@@ -80,14 +85,14 @@ def main():
     
     # PICK ONE OF THESE TWO
 
-    # pred, lpd = posterior_predictive_GP(
-    #     model, μ_gp, log_var_gp, trace,
-    #     x_test, x_test_er, Xu, Xu_er, 3, 'mass'
-    # )
-
-    pred, lpd = sample_post_pred_HBNN_para(
-        trace, x_test, x_test_er, 15, 3, 'mass'
+    pred, lpd = posterior_predictive_GP(
+        model, μ_gp, log_var_gp, trace,
+        x_test, x_test_er, Xu, Xu_er, 3, 'mass'
     )
+
+    # pred, lpd = sample_post_pred_HBNN_para(
+    #     trace, x_test, x_test_er, 15, 3, 'mass'
+    # )
 
     # pred, lpd = sample_post_pred_HBNN_para(trace, x_test, x_test_er, 15, 4, 'mass')
 
@@ -122,7 +127,7 @@ def main():
         'pull': np.where(M_pred_sigma != 0, residual_M / M_pred_sigma, np.nan),
         'abs_pull': np.abs(np.where(M_pred_sigma != 0, residual_M / M_pred_sigma, np.nan)),
     })
-    diagnostic_table.to_csv('Dataset_B_training_for_Ariel/mass_prediction_results_HBNN_3000_seed_504.tsv', sep='\t', index=False)
+    diagnostic_table.to_csv(os.path.join(OUTPUT_DIR, f'mass_prediction_results_{plot_model_name}_1000_seed_{SAMPLING_SEED}.tsv'), sep='\t', index=False)
     diagnostic_print_columns = ['original_row', 'ID', 'catalog', 'M_true', 'M_pred', 'M_pred_sigma',
                                 'residual_M', 'abs_residual_M', 'relative_error_pct',
                                 'abs_relative_error_pct', 'pull', 'abs_pull']
@@ -141,47 +146,55 @@ def main():
     unorm_mass_plot = np.asarray(unorm_mass)[plot_mask]
     M_pred_mean_plot = M_pred_mean[plot_mask]
     M_pred_sigma_plot = M_pred_sigma[plot_mask]
-    # plot_output_base = 'Dataset_B_training_for_Ariel/GP_mass_3param_L_3000_draws_4_chains_100_504_bis_bis_seed_50'
-    plot_output_base = 'Dataset_B_training_for_Ariel/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015_seed_504'
+    plot_output_base = os.path.join(OUTPUT_DIR, f'GP_mass_3param_L_1000_draws_4_chains_80_40_seed_{SAMPLING_SEED}')
+    # plot_output_base = os.path.join(OUTPUT_DIR, f'HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_{SAMPLING_SEED}')
 
-    # CHANGE NAMES HERE FOR THE PLOTS. 3 TIMES (ABOVE BELOW, AND SUPER BELOW)
+    # CHANGE NAMES HERE FOR THE PLOTS. ABOVE.
 
     plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_mass, M_pred_mean, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.errorbar(unorm_mass, M_pred_mean, yerr=M_pred_sigma, fmt='o',
+                 color='black', markerfacecolor='black', markeredgecolor='black',
+                 ecolor='cornflowerblue', label='Predictions with Uncertainty', alpha=0.7)
     plt.plot([unorm_mass.min(), unorm_mass.max()], [unorm_mass.min(), unorm_mass.max()], 'r--')
     plt.xlabel('True Mass')
     plt.ylabel('Predicted Mass')
-    plt.title('HBNN Predictions with Uncertainty')
+    plt.title(plot_model_name + ' Predictions with Uncertainty')
     plt.legend()
     plt.savefig(plot_output_base + '_full_prediction.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_mass, M_pred_mean - unorm_mass, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.errorbar(unorm_mass, M_pred_mean - unorm_mass, yerr=M_pred_sigma, fmt='o',
+                 color='black', markerfacecolor='black', markeredgecolor='black',
+                 ecolor='cornflowerblue', label='Predictions with Uncertainty', alpha=0.7)
     plt.hlines(0, unorm_mass.min(), unorm_mass.max(), 'r', linestyle='--')
     plt.xlabel('True Mass')
     plt.ylabel('Residual Mass')
-    # plt.title('GP Predictions with Uncertainty')
+    plt.title(plot_model_name + ' Residual Mass')
     plt.legend()
     plt.savefig(plot_output_base + '_full_residual.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_mass_plot, M_pred_mean_plot, yerr=M_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.errorbar(unorm_mass_plot, M_pred_mean_plot, yerr=M_pred_sigma_plot, fmt='o',
+                 color='black', markerfacecolor='black', markeredgecolor='black',
+                 ecolor='cornflowerblue', label='Predictions with Uncertainty', alpha=0.7)
     plt.plot([unorm_mass_plot.min(), unorm_mass_plot.max()], [unorm_mass_plot.min(), unorm_mass_plot.max()], 'r--')
     plt.xlabel('True Mass')
     plt.ylabel('Predicted Mass')
-    plt.title('HBNN Predictions with Uncertainty (M_pred_sigma < 95th percentile)')
+    plt.title(plot_model_name + ' Predictions with Uncertainty (M_pred_sigma < 95th percentile)')
     plt.legend()
     plt.savefig(plot_output_base + '_filtered_prediction.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_mass_plot, M_pred_mean_plot - unorm_mass_plot, yerr=M_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.errorbar(unorm_mass_plot, M_pred_mean_plot - unorm_mass_plot, yerr=M_pred_sigma_plot, fmt='o',
+                 color='black', markerfacecolor='black', markeredgecolor='black',
+                 ecolor='cornflowerblue', label='Predictions with Uncertainty', alpha=0.7)
     plt.hlines(0, unorm_mass_plot.min(), unorm_mass_plot.max(), 'r', linestyle='--')
     plt.xlabel('True Mass')
     plt.ylabel('Residual Mass')
-    plt.title('Residual Mass (M_pred_sigma < 95th percentile)')
+    plt.title(plot_model_name + ' Residual Mass (M_pred_sigma < 95th percentile)')
     plt.legend()
     plt.savefig(plot_output_base + '_filtered_residual.png', dpi=300, bbox_inches='tight')
     plt.show()

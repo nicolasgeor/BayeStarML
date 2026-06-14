@@ -27,7 +27,9 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
         os.makedirs(os.path.dirname(output_base), exist_ok=True)
 
     plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_mass, M_pred_mean, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.errorbar(unorm_mass, M_pred_mean, yerr=M_pred_sigma, fmt='o',
+                 color='black', markerfacecolor='black', markeredgecolor='black',
+                 ecolor='cornflowerblue', label='Predictions with Uncertainty', alpha=0.7)
     plt.plot([unorm_mass.min(), unorm_mass.max()], [unorm_mass.min(), unorm_mass.max()], 'r--')
     plt.xlabel('True Mass')
     plt.ylabel('Predicted Mass')
@@ -38,10 +40,13 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
     plt.show()
 
     plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_mass, M_pred_mean - unorm_mass, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.errorbar(unorm_mass, M_pred_mean - unorm_mass, yerr=M_pred_sigma, fmt='o',
+                 color='black', markerfacecolor='black', markeredgecolor='black',
+                 ecolor='cornflowerblue', label='Predictions with Uncertainty', alpha=0.7)
     plt.hlines(0, unorm_mass.min(), unorm_mass.max(), 'r', linestyle='--')
     plt.xlabel('True Mass')
     plt.ylabel('Residual Mass')
+    plt.title(model_name + ' Residual Mass')
     plt.legend()
     if output_base is not None:
         plt.savefig(output_base + '_full_residual.png', dpi=300, bbox_inches='tight')
@@ -55,7 +60,9 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
         M_pred_sigma_plot = M_pred_sigma[plot_mask]
 
         plt.figure(figsize=(8, 6))
-        plt.errorbar(unorm_mass_plot, M_pred_mean_plot, yerr=M_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+        plt.errorbar(unorm_mass_plot, M_pred_mean_plot, yerr=M_pred_sigma_plot, fmt='o',
+                     color='black', markerfacecolor='black', markeredgecolor='black',
+                     ecolor='cornflowerblue', label='Predictions with Uncertainty', alpha=0.7)
         plt.plot([unorm_mass_plot.min(), unorm_mass_plot.max()], [unorm_mass_plot.min(), unorm_mass_plot.max()], 'r--')
         plt.xlabel('True Mass')
         plt.ylabel('Predicted Mass')
@@ -66,7 +73,9 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
         plt.show()
 
         plt.figure(figsize=(8, 6))
-        plt.errorbar(unorm_mass_plot, M_pred_mean_plot - unorm_mass_plot, yerr=M_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+        plt.errorbar(unorm_mass_plot, M_pred_mean_plot - unorm_mass_plot, yerr=M_pred_sigma_plot, fmt='o',
+                     color='black', markerfacecolor='black', markeredgecolor='black',
+                     ecolor='cornflowerblue', label='Predictions with Uncertainty', alpha=0.7)
         plt.hlines(0, unorm_mass_plot.min(), unorm_mass_plot.max(), 'r', linestyle='--')
         plt.xlabel('True Mass')
         plt.ylabel('Residual Mass')
@@ -79,10 +88,10 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
 # This prediction for 4 variables is very probably broken now
 def predict4(X, X_er, target, test=False):
     
-    df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
+    df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS', filter_mode='rho')
     (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
     mass_test, emass_test
-    ) = return_train_test(df_train)
+    ) = return_train_test(df_train, feature_set='rho')
     
     if test == True:
         X = x_test
@@ -209,10 +218,10 @@ def predict4(X, X_er, target, test=False):
 
 def predictNAN(X, X_er, target, test=False):
     
-    df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS')
+    df_train = get_dataset('Datasets/data_sample_calculated_density.txt', 'MS', filter_mode='rho')
     (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
     mass_test, emass_test
-    ) = return_train_test(df_train)
+    ) = return_train_test(df_train, feature_set='rho')
     
     if test == True:
         X = x_test

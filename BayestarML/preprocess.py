@@ -97,7 +97,7 @@ def return_norm(df):
     
     return mteff, mmet, mlum, mtmass, steff, smet, slum, smass     
 
-def return_train_test(df, normalised=True):
+def return_train_test(df, normalised=True, feature_set='luminosity'):
     """
 
     Parameters
@@ -119,19 +119,29 @@ def return_train_test(df, normalised=True):
     if you want both just call twice
 
     """
-    df1 = df[['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']].copy()
-    df2 = df[['eTeff2', 'eMeta2', 'eL2', 'eM2', 'eR2']].copy()
-    df2.columns = ['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']
+    if feature_set == 'luminosity':
+        feature_cols = ['Teff', 'Meta', 'L']
+        error1_cols = ['eTeff1', 'eMeta1', 'eL1', 'eM1', 'eR1']
+        error2_cols = ['eTeff2', 'eMeta2', 'eL2', 'eM2', 'eR2']
+        error_cols = ['eTeff', 'eMeta', 'eL', 'eM', 'eR']
+    elif feature_set == 'rho':
+        feature_cols = ['Teff', 'Meta', 'rho']
+        error1_cols = ['eTeff1', 'eMeta1', 'erho1', 'eM1', 'eR1']
+        error2_cols = ['eTeff2', 'eMeta2', 'erho2', 'eM2', 'eR2']
+        error_cols = ['eTeff', 'eMeta', 'erho', 'eM', 'eR']
+    else:
+        raise ValueError("feature_set must be either 'luminosity' or 'rho'")
+
+    df1 = df[error1_cols].copy()
+    df2 = df[error2_cols].copy()
+    df2.columns = error1_cols
 
     # Mean error if non-symmetric
     X_error = (df1 + df2) / 2 
+    X_error.columns = error_cols
 
-
-    X_error.columns = ['eTeff', 'eMeta', 'eL', 'eM', 'eR']  
-
-    X = pd.concat([df[['Teff', 'Meta', 'L']],
-                    X_error[['eTeff', 'eMeta', 'eL']]],
-                    axis=1)
+    feature_error_cols = error_cols[:len(feature_cols)]
+    X = pd.concat([df[feature_cols], X_error[feature_error_cols]], axis=1)
     Y = pd.concat([df['M'], X_error['eM'], df['R'], X_error['eR']], axis=1)
     
     # do split
@@ -140,57 +150,35 @@ def return_train_test(df, normalised=True):
                                                         random_state=RANDOM_SEED)
 
     # Extract relevant columns for stellar mass prediction
-    teff = X_train['Teff']
-    met = X_train['Meta']
-    lum = X_train['L']
-    #print(lum)
     mass = Y_train["M"]
     # rad = Y_train['R']
 
     # Compute means and standard deviations for standardization
-    mteff = np.mean(teff)
-    mmet = np.mean(met)
-    mlum = np.mean(lum)
     mtmass = np.mean(mass)
+    feature_means = X_train[feature_cols].mean()
     
     #print(mteff, mlogg, mmet, mlum, mtmass, mrad)
 
-    steff = np.std(teff)
-    smet = np.std(met)
-    slum = np.std(lum)
     smass = np.std(mass)
+    feature_stds = X_train[feature_cols].std(ddof=0)
     
     #print(steff, slogg, smet, slum, smass, srad)
 
     # Standardize inputs 
-    teff = (teff - mteff) / steff
-    met = (met - mmet) / smet
-    lum = (lum - mlum) / slum
+    x_train = (X_train[feature_cols] - feature_means) / feature_stds
     mass = (mass - mtmass) / smass
 
-
     # Uncertainties for the inputs
-    eteff = X_train['eTeff'] / steff
-    emet = abs(X_train['eMeta']) / smet
-    elum = X_train['eL'] / slum  
+    x_train_er = abs(X_train[feature_error_cols]) / feature_stds.to_numpy()
+    x_train_er.columns = feature_error_cols
     emass = Y_train['eM'] / smass
 
-    x_train = pd.concat([teff, met, lum], axis=1)
-    x_train_er = pd.concat([eteff, emet, elum], axis=1)
-
-    teff_test = (X_test['Teff'] - mteff) / steff
-    met_test = (X_test['Meta'] - mmet) / smet
-    lum_test = (X_test['L'] - mlum) / slum
+    x_test = (X_test[feature_cols] - feature_means) / feature_stds
     mass_test = (Y_test['M']- mtmass) / smass
 
-    x_test = pd.concat([teff_test, met_test, lum_test], axis=1)
-
-    eteff_test = X_test['eTeff'] / steff
-    emet_test = abs(X_test['eMeta']) / smet
-    elum_test = X_test['eL'] / slum 
+    x_test_error = abs(X_test[feature_error_cols]) / feature_stds.to_numpy()
+    x_test_error.columns = feature_error_cols
     emass_test = Y_test['eM'] / smass
-
-    x_test_error = pd.concat([eteff_test, emet_test, elum_test], axis=1)
 
     
     if normalised == True:

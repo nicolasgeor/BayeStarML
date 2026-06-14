@@ -252,7 +252,7 @@ def sparse_fully_heteroscedastic_gp(
                               weight_by_error=True,
                               seed=seed)
     
-    X_var = np.hstack([X[:,:2], X_err[:,:2]])  # use only Teff and logg to model log variance
+    X_var = np.hstack([X[:,:2], X_err[:,:2]])  # use first two features to model log variance
     # X_var = X_err 
     Xu_var = make_inducing_points(X_var, M=M_var,
                                   method="kmeans",
