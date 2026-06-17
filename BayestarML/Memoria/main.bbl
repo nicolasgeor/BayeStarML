@@ -1,0 +1,229 @@
+\begin{thebibliography}{}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\href{#1}{#1}}
+\providecommand{\dodoi}[1]{doi:~\href{http://doi.org/#1}{\nolinkurl{#1}}}
+\providecommand{\doeprint}[1]{\href{http://ascl.net/#1}{\nolinkurl{http://ascl.net/#1}}}
+\providecommand{\doarXiv}[1]{\href{https://arxiv.org/abs/#1}{\nolinkurl{https://arxiv.org/abs/#1}}}
+
+\bibitem[{{Ariel Stellar Characterisation Working
+  Group}({n.d.})}]{arielAMRsubwg}
+{Ariel Stellar Characterisation Working Group}. {n.d.}, {Age Mass Radius
+  sub-WG},
+  \url{https://sites.google.com/inaf.it/arielstellarcatalogue/the-team/age-mass-radius-sub-wg}
+
+\bibitem[{Asplund {et~al.}(2009)Asplund, Grevesse, Sauval, \&
+  Scott}]{asplund2009}
+Asplund, M., Grevesse, N., Sauval, A.~J., \& Scott, P. 2009, Annual Review of
+  Astronomy and Astrophysics, 47, 481,
+  \dodoi{10.1146/annurev.astro.46.060407.145222}
+
+\bibitem[{Bardenet {et~al.}(2017)Bardenet, Doucet, \&
+  Holmes}]{bardenet2017mcmc}
+Bardenet, R., Doucet, A., \& Holmes, C. 2017, Journal of Machine Learning
+  Research, 18, 1.
+\newblock \url{https://jmlr.org/papers/v18/15-205.html}
+
+\bibitem[{Bellinger {et~al.}(2019)Bellinger, Hekker, Angelou, Stokholm, \&
+  Basu}]{Bellinger2019}
+Bellinger, E.~P., Hekker, S., Angelou, G.~C., Stokholm, A., \& Basu, S. 2019,
+  Astronomy \& Astrophysics, 622, A130, \dodoi{10.1051/0004-6361/201834461}
+
+\bibitem[{Bilir {et~al.}(2008)Bilir, Karaali, Ak, Yaz, Cabrera-Lavers, \&
+  Co{\c{s}}kuno{\u{g}}lu}]{bilir2008}
+Bilir, S., Karaali, S., Ak, S., {et~al.} 2008, Monthly Notices of the Royal
+  Astronomical Society, 390, 1569, \dodoi{10.1111/j.1365-2966.2008.13839.x}
+
+\bibitem[{Blundell {et~al.}(2015)Blundell, Cornebise, Kavukcuoglu, \&
+  Wierstra}]{blundell2015weight}
+Blundell, C., Cornebise, J., Kavukcuoglu, K., \& Wierstra, D. 2015, in
+  Proceedings of Machine Learning Research, Vol.~37, Proceedings of the 32nd
+  International Conference on Machine Learning, ed. F.~Bach \& D.~Blei (Lille,
+  France: PMLR), 1613--1622.
+\newblock \doarXiv{1505.05424}
+
+\bibitem[{Bressan {et~al.}(2012)Bressan, Marigo, Girardi, Salasnich, Dal~Cero,
+  Rubele, \& Nanni}]{bressan2012}
+Bressan, A., Marigo, P., Girardi, L., {et~al.} 2012, Monthly Notices of the
+  Royal Astronomical Society, 427, 127,
+  \dodoi{10.1111/j.1365-2966.2012.21948.x}
+
+\bibitem[{Chabrier \& Baraffe(2000)}]{chabrier2000}
+Chabrier, G., \& Baraffe, I. 2000, Annual Review of Astronomy and Astrophysics,
+  38, 337, \dodoi{10.1146/annurev.astro.38.1.337}
+
+\bibitem[{Chandrasekhar(1933)}]{chandrasekhar1933double}
+Chandrasekhar, S. 1933, Monthly Notices of the Royal Astronomical Society, 93,
+  462, \dodoi{10.1093/mnras/93.6.462}
+
+\bibitem[{Chipman {et~al.}(2010)Chipman, George, \&
+  McCulloch}]{chipman2010bart}
+Chipman, H.~A., George, E.~I., \& McCulloch, R.~E. 2010, The Annals of Applied
+  Statistics, 4, 266, \dodoi{10.1214/09-AOAS285}
+
+\bibitem[{Cho {et~al.}(2026)Cho, Kim, \& Hazlett}]{cho2026}
+Cho, S., Kim, D., \& Hazlett, C. 2026, Political Analysis, 1,
+  \dodoi{10.1017/pan.2026.10032}
+
+\bibitem[{Eker {et~al.}(2018)Eker, Bak{\i}{\c s}, Bilir, Soydugan, Steer,
+  Soydugan, Bak{\i}{\c s}, Ali{\c c}avu{\c s}, Aslan, \& Alpsoy}]{Eker2018}
+Eker, Z., Bak{\i}{\c s}, V., Bilir, S., {et~al.} 2018, Monthly Notices of the
+  Royal Astronomical Society, 479, 5491, \dodoi{10.1093/mnras/sty1834}
+
+\bibitem[{Graczyk {et~al.}(2021)Graczyk, Pietrzy{\'n}ski, Ga{\l}an, Gieren,
+  Tkachenko, Anderson, Gallenne, G{\'o}rski, Hajdu, Ka{\l}uszy{\'n}ski,
+  Karczmarek, Kervella, Maxted, Nardetto, Narloch, Pavlovski, Pilecki, Pych,
+  Southworth, Storm, Suchomska, Taormina, Villanova, Wielg{\'o}rski, Zgirski,
+  \& Konorski}]{Graczyk2021}
+Graczyk, D., Pietrzy{\'n}ski, G., Ga{\l}an, C., {et~al.} 2021, Astronomy \&
+  Astrophysics, 649, A109, \dodoi{10.1051/0004-6361/202140571}
+
+\bibitem[{Graczyk {et~al.}(2022)Graczyk, Pietrzy{\'n}ski, Ga{\l}an, Southworth,
+  Gieren, Ka{\l}uszy{\'n}ski, Zgirski, Gallenne, G{\'o}rski, Hajdu, Karczmarek,
+  Kervella, Maxted, Nardetto, Narloch, Pilecki, Pych, Rojas~Garc{\'i}a, Storm,
+  Suchomska, Taormina, \& Wielg{\'o}rski}]{Graczyk2022}
+---. 2022, Astronomy \& Astrophysics, 666, A128,
+  \dodoi{10.1051/0004-6361/202244122}
+
+\bibitem[{Hastings(1970)}]{hastings1970}
+Hastings, W.~K. 1970, Biometrika, 57, 97, \dodoi{10.1093/biomet/57.1.97}
+
+\bibitem[{He{\l}miniak {et~al.}(2019)He{\l}miniak, Konacki, Maehara, Kambe,
+  Ukita, Ratajczak, Pigulski, \& Koz{\l}owski}]{Helminiak2019}
+He{\l}miniak, K.~G., Konacki, M., Maehara, H., {et~al.} 2019, Monthly Notices
+  of the Royal Astronomical Society, 484, 451, \dodoi{10.1093/mnras/sty3528}
+
+\bibitem[{Hill {et~al.}(2020)Hill, Linero, \& Murray}]{hill2020}
+Hill, J., Linero, A.~R., \& Murray, J. 2020, Annual Review of Statistics and
+  Its Application, 7, 251, \dodoi{10.1146/annurev-statistics-031219-041110}
+
+\bibitem[{Izmailov {et~al.}(2021)Izmailov, Vikram, Hoffman, \&
+  Wilson}]{izmailov2021}
+Izmailov, P., Vikram, S., Hoffman, M.~D., \& Wilson, A. G.~G. 2021, in
+  Proceedings of Machine Learning Research, Vol. 139, Proceedings of the 38th
+  International Conference on Machine Learning, ed. M.~Meila \& T.~Zhang
+  (PMLR), 4629--4640.
+\newblock \url{https://proceedings.mlr.press/v139/izmailov21a.html}
+
+\bibitem[{Jospin {et~al.}(2022)Jospin, Buntine, Boussaid, Laga, \&
+  Bennamoun}]{jospin2022bnn}
+Jospin, L.~V., Buntine, W., Boussaid, F., Laga, H., \& Bennamoun, M. 2022, IEEE
+  Computational Intelligence Magazine, 17, 29, \dodoi{10.1109/MCI.2022.3155327}
+
+\bibitem[{Laughlin {et~al.}(1997)Laughlin, Bodenheimer, \&
+  Adams}]{laughlin1997}
+Laughlin, G., Bodenheimer, P., \& Adams, F.~C. 1997, The Astrophysical Journal,
+  482, 420, \dodoi{10.1086/304125}
+
+\bibitem[{Le {et~al.}(2005)Le, Smola, \& Canu}]{le2005heteroscedasticgp}
+Le, Q.~V., Smola, A.~J., \& Canu, S. 2005, in Proceedings of the 22nd
+  International Conference on Machine Learning (Association for Computing
+  Machinery), 489--496, \dodoi{10.1145/1102351.1102413}
+
+\bibitem[{Li \& Chao(2021)}]{li2021dataquality}
+Li, Y., \& Chao, X. 2021, Frontiers in Plant Science, 12, 811241,
+  \dodoi{10.3389/fpls.2021.811241}
+
+\bibitem[{Maas {et~al.}(2013)Maas, Hannun, \& Ng}]{maas2013rectifier}
+Maas, A.~L., Hannun, A.~Y., \& Ng, A.~Y. 2013, in Proceedings of the ICML 2013
+  Workshop on Deep Learning for Audio, Speech and Language Processing, 3.
+\newblock
+  \url{https://ai.stanford.edu/~amaas/papers/relu_hybrid_icml2013_final.pdf}
+
+\bibitem[{MacKay(1998)}]{mackay1998gp}
+MacKay, D. J.~C. 1998, in NATO ASI Series F: Computer and Systems Sciences,
+  Vol. 168, Neural Networks and Machine Learning, ed. C.~M. Bishop (Berlin:
+  Springer), 133--165
+
+\bibitem[{Maxted(2023)}]{maxted2023benchmark}
+Maxted, P. F.~L. 2023, Monthly Notices of the Royal Astronomical Society, 522,
+  2683, \dodoi{10.1093/mnras/stad1112}
+
+\bibitem[{McElreath(2020{\natexlab{a}})}]{mcelreath2020rethinking}
+McElreath, R. 2020{\natexlab{a}}, Statistical Rethinking: A Bayesian Course
+  with Examples in {R} and {Stan}, 2nd edn. (Boca Raton: Chapman and Hall/CRC),
+  \dodoi{10.1201/9780429029608}
+
+\bibitem[{McElreath(2020{\natexlab{b}})}]{mcelreath2020}
+---. 2020{\natexlab{b}}, Statistical Rethinking: A Bayesian Course with
+  Examples in {R} and {Stan}, 2nd edn. (Boca Raton: Chapman and Hall/CRC),
+  \dodoi{10.1201/9780429029608}
+
+\bibitem[{Moya \& L{\'o}pez-Sastre(2022)}]{moya2022}
+Moya, A., \& L{\'o}pez-Sastre, R.~J. 2022, Astronomy \& Astrophysics, 663,
+  A112, \dodoi{10.1051/0004-6361/202142930}
+
+\bibitem[{Moya {et~al.}(2018)Moya, Zuccarino, Chaplin, \& Davies}]{moya2018}
+Moya, A., Zuccarino, F., Chaplin, W.~J., \& Davies, G.~R. 2018, The
+  Astrophysical Journal Supplement Series, 237, 21,
+  \dodoi{10.3847/1538-4365/aacdae}
+
+\bibitem[{Nsamba {et~al.}(2025)Nsamba, Weiss, \& Kamulali}]{Nsamba2025}
+Nsamba, B., Weiss, A., \& Kamulali, J. 2025, Monthly Notices of the Royal
+  Astronomical Society, 536, 2558, \dodoi{10.1093/mnras/stae2704}
+
+\bibitem[{Pecaut \& Mamajek(2013)}]{pecaut2013}
+Pecaut, M.~J., \& Mamajek, E.~E. 2013, The Astrophysical Journal Supplement
+  Series, 208, 9, \dodoi{10.1088/0067-0049/208/1/9}
+
+\bibitem[{Qui{\~n}onero-Candela \& Rasmussen(2005)}]{quinonero2005sparsegp}
+Qui{\~n}onero-Candela, J., \& Rasmussen, C.~E. 2005, Journal of Machine
+  Learning Research, 6, 1939
+
+\bibitem[{Rasmussen \& Williams(2006)}]{rasmussen2006gpml}
+Rasmussen, C.~E., \& Williams, C. K.~I. 2006, Gaussian Processes for Machine
+  Learning (Cambridge, MA: MIT Press), \dodoi{10.7551/mitpress/3206.001.0001}
+
+\bibitem[{Sayeed {et~al.}(2025)Sayeed, Huber, Chontos, \& Li}]{Sayeed2025}
+Sayeed, M., Huber, D., Chontos, A., \& Li, Y. 2025, The Astronomical Journal,
+  170, 212, \dodoi{10.3847/1538-3881/adf648}
+
+\bibitem[{Serenelli {et~al.}(2021)Serenelli, Weiss, Aerts, Angelou, Baroch,
+  Bastian, Beck, Bergemann, Bestenlehner, Czekala, Elias-Rosa, Escorza,
+  Van~Eylen, Feuillet, Gandolfi, Gieles, Girardi, Lebreton, Lodieu, Martig,
+  Miller~Bertolami, Mombarg, Morales, Moya, Nsamba, Pavlovski, Pedersen, Ribas,
+  Schneider, Silva~Aguirre, Stassun, Tolstoy, Tremblay, \&
+  Zwintz}]{Serenelli2021}
+Serenelli, A., Weiss, A., Aerts, C., {et~al.} 2021, Astronomy and Astrophysics
+  Review, 29, 4, \dodoi{10.1007/s00159-021-00132-9}
+
+\bibitem[{Soubiran {et~al.}(2024)Soubiran, Creevey, Lagarde, Brouillet,
+  Jofr{\'e}, Casamiquela, Heiter, Aguilera-G{\'o}mez, Vitali, Worley, \&
+  de~Brito~Silva}]{Soubiran2024}
+Soubiran, C., Creevey, O.~L., Lagarde, N., {et~al.} 2024, Astronomy \&
+  Astrophysics, 682, A145, \dodoi{10.1051/0004-6361/202347136}
+
+\bibitem[{Southworth(2015)}]{Southworth2015}
+Southworth, J. 2015, in Astronomical Society of the Pacific Conference Series,
+  Vol. 496, Living Together: Planets, Host Stars and Binaries, ed. S.~M.
+  Rucinski, G.~Torres, \& M.~Zejda (Astronomical Society of the Pacific),
+  164--166.
+\newblock \doarXiv{1411.1219}
+
+\bibitem[{Vehtari {et~al.}(2017)Vehtari, Gelman, \& Gabry}]{vehtari2017loo}
+Vehtari, A., Gelman, A., \& Gabry, J. 2017, Statistics and Computing, 27, 1413,
+  \dodoi{10.1007/s11222-016-9696-4}
+
+\bibitem[{Wolpert(1992)}]{wolpert1992stacked}
+Wolpert, D.~H. 1992, Neural Networks, 5, 241,
+  \dodoi{10.1016/S0893-6080(05)80023-1}
+
+\bibitem[{Xiong {et~al.}(2023)Xiong, Liu, Li, Li, Zhang, Chen, Luo, Cao, \&
+  Zhao}]{Xiong2023}
+Xiong, J., Liu, C., Li, J., {et~al.} 2023, The Astronomical Journal, 165, 30,
+  \dodoi{10.3847/1538-3881/aca288}
+
+\bibitem[{Yao {et~al.}(2022)Yao, Pir{\v{s}}, Vehtari, \&
+  Gelman}]{yao2022hierarchicalstacking}
+Yao, Y., Pir{\v{s}}, G., Vehtari, A., \& Gelman, A. 2022, Bayesian Analysis,
+  17, 1043, \dodoi{10.1214/21-BA1287}
+
+\bibitem[{Y{\i}ld{\i}z {et~al.}(2019)Y{\i}ld{\i}z, {\c C}elik~Orhan, \&
+  Kayhan}]{Yildiz2019}
+Y{\i}ld{\i}z, M., {\c C}elik~Orhan, Z., \& Kayhan, C. 2019, Monthly Notices of
+  the Royal Astronomical Society, 489, 1753, \dodoi{10.1093/mnras/stz2223}
+
+\bibitem[{Zhang {et~al.}(2019)Zhang, Nettleton, \& Zhu}]{zhang2019rerf}
+Zhang, H., Nettleton, D., \& Zhu, Z. 2019, Regression-Enhanced Random Forests,
+  \dodoi{10.48550/arXiv.1904.10416}
+
+\end{thebibliography}
