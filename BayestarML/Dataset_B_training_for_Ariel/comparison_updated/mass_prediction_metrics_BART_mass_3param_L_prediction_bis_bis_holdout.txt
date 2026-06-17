@@ -1,0 +1,5 @@
+BART holdout metrics from C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_B_training\mass_prediction_results.tsv
+N = 154
+MAE = 0.0595746588525
+MARD = 4.85641407222
+MRD = -0.670086590627

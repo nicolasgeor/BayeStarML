@@ -1,0 +1,5 @@
+BHS holdout metrics from C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_B_training_for_Ariel\mass_prediction_results_holdout_all_models_seed_504.tsv
+N = 154
+MAE = 0.0777192927364
+MARD = 7.13635358996
+MRD = -1.33970498539

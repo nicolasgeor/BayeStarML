@@ -1,0 +1,7 @@
+BHS holdout metrics from C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_B_training_for_Ariel\mass_prediction_results_holdout_all_models_seed_504.tsv
+Filter: BHS_pred_sigma < 94th percentile
+BHS_pred_sigma_94th_percentile = 0.329641053573
+N filtered = 144
+MAE = 0.0653831786855
+MARD = 6.25519081782
+MRD = -1.62174910982
