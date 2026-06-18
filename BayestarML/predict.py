@@ -16,9 +16,52 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+from matplotlib.lines import Line2D
 # import pymc as pm
 # from sklearn.metrics import mean_absolute_error
 # from utils import find_pointwise_loo
+
+OUTPUT_DIR = r'C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_B_training_17_june'
+TRAINING_FILE = 'Datasets/database_B.txt'
+SAMPLING_SEED = 176
+MASS_AXIS_LIMITS = (0.4, 2.0)
+PLOT_BLUE = '#2563EB'
+AXIS_LABEL_SIZE = 18
+TICK_LABEL_SIZE = 14
+LEGEND_SIZE = 15
+
+
+def _legend_handle():
+    return Line2D(
+        [0], [0],
+        marker='o',
+        color=PLOT_BLUE,
+        markerfacecolor='black',
+        markeredgecolor='black',
+        linestyle='-',
+        linewidth=1.5,
+    )
+
+
+def _style_mass_axis(ax, ylabel):
+    ax.set_xlim(*MASS_AXIS_LIMITS)
+    ax.set_xlabel('True Mass', fontsize=AXIS_LABEL_SIZE)
+    ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_SIZE)
+    ax.tick_params(axis='both', labelsize=TICK_LABEL_SIZE)
+    ax.legend(
+        [_legend_handle()],
+        ['Predictions with Uncertainty'],
+        fontsize=LEGEND_SIZE,
+        loc='upper left',
+        frameon=True,
+    )
+
+
+def _residual_spread(residual, pred_sigma):
+    spread = np.nanmax(np.abs(residual) + pred_sigma)
+    if not np.isfinite(spread):
+        return 0.25
+    return max(0.25, float(spread) * 1.1)
 
 def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95,), output_base=None):
     M_pred_sigma = pred.std(0)
@@ -26,26 +69,33 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
     if output_base is not None:
         os.makedirs(os.path.dirname(output_base), exist_ok=True)
 
-    plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_mass, M_pred_mean, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
-    plt.plot([unorm_mass.min(), unorm_mass.max()], [unorm_mass.min(), unorm_mass.max()], 'r--')
-    plt.xlabel('True Mass')
-    plt.ylabel('Predicted Mass')
-    plt.title(model_name + ' Predictions with Uncertainty')
-    plt.legend()
+    fig, ax = plt.subplots(figsize=(8, 6))
+    ax.errorbar(unorm_mass, M_pred_mean, yerr=M_pred_sigma, fmt='o',
+                color='black', markerfacecolor='black', markeredgecolor='black',
+                ecolor=PLOT_BLUE, elinewidth=1.5, alpha=0.75)
+    ax.plot(MASS_AXIS_LIMITS, MASS_AXIS_LIMITS, 'r--', linewidth=1.7)
+    ax.set_ylim(*MASS_AXIS_LIMITS)
+    ax.set_xticks(np.arange(0.4, 2.01, 0.2))
+    ax.set_yticks(np.arange(0.4, 2.01, 0.2))
+    _style_mass_axis(ax, 'Predicted Mass')
     if output_base is not None:
-        plt.savefig(output_base + '_full_prediction.png', dpi=300, bbox_inches='tight')
+        fig.savefig(output_base + '_full_prediction.png', dpi=300, bbox_inches='tight')
     plt.show()
+    plt.close(fig)
 
-    plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_mass, M_pred_mean - unorm_mass, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
-    plt.hlines(0, unorm_mass.min(), unorm_mass.max(), 'r', linestyle='--')
-    plt.xlabel('True Mass')
-    plt.ylabel('Residual Mass')
-    plt.legend()
+    residual = M_pred_mean - unorm_mass
+    fig, ax = plt.subplots(figsize=(8, 6))
+    ax.errorbar(unorm_mass, residual, yerr=M_pred_sigma, fmt='o',
+                color='black', markerfacecolor='black', markeredgecolor='black',
+                ecolor=PLOT_BLUE, elinewidth=1.5, alpha=0.75)
+    ax.hlines(0, *MASS_AXIS_LIMITS, colors='red', linestyles='--', linewidth=1.7)
+    ax.set_xticks(np.arange(0.4, 2.01, 0.2))
+    ax.set_ylim(-_residual_spread(residual, M_pred_sigma), _residual_spread(residual, M_pred_sigma))
+    _style_mass_axis(ax, 'Residual Mass')
     if output_base is not None:
-        plt.savefig(output_base + '_full_residual.png', dpi=300, bbox_inches='tight')
+        fig.savefig(output_base + '_full_residual.png', dpi=300, bbox_inches='tight')
     plt.show()
+    plt.close(fig)
 
     for percentile in filtered_percentiles:
         sigma_cut = np.percentile(M_pred_sigma, percentile)
@@ -54,27 +104,33 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
         M_pred_mean_plot = M_pred_mean[plot_mask]
         M_pred_sigma_plot = M_pred_sigma[plot_mask]
 
-        plt.figure(figsize=(8, 6))
-        plt.errorbar(unorm_mass_plot, M_pred_mean_plot, yerr=M_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
-        plt.plot([unorm_mass_plot.min(), unorm_mass_plot.max()], [unorm_mass_plot.min(), unorm_mass_plot.max()], 'r--')
-        plt.xlabel('True Mass')
-        plt.ylabel('Predicted Mass')
-        plt.title(model_name + f' Predictions with Uncertainty (M_pred_sigma < {percentile}th percentile)')
-        plt.legend()
+        fig, ax = plt.subplots(figsize=(8, 6))
+        ax.errorbar(unorm_mass_plot, M_pred_mean_plot, yerr=M_pred_sigma_plot, fmt='o',
+                    color='black', markerfacecolor='black', markeredgecolor='black',
+                    ecolor=PLOT_BLUE, elinewidth=1.5, alpha=0.75)
+        ax.plot(MASS_AXIS_LIMITS, MASS_AXIS_LIMITS, 'r--', linewidth=1.7)
+        ax.set_ylim(*MASS_AXIS_LIMITS)
+        ax.set_xticks(np.arange(0.4, 2.01, 0.2))
+        ax.set_yticks(np.arange(0.4, 2.01, 0.2))
+        _style_mass_axis(ax, 'Predicted Mass')
         if output_base is not None:
-            plt.savefig(output_base + f'_filtered_{percentile}_prediction.png', dpi=300, bbox_inches='tight')
+            fig.savefig(output_base + f'_filtered_{percentile}_prediction.png', dpi=300, bbox_inches='tight')
         plt.show()
+        plt.close(fig)
 
-        plt.figure(figsize=(8, 6))
-        plt.errorbar(unorm_mass_plot, M_pred_mean_plot - unorm_mass_plot, yerr=M_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
-        plt.hlines(0, unorm_mass_plot.min(), unorm_mass_plot.max(), 'r', linestyle='--')
-        plt.xlabel('True Mass')
-        plt.ylabel('Residual Mass')
-        plt.title(model_name + f' Residual Mass (M_pred_sigma < {percentile}th percentile)')
-        plt.legend()
+        residual_plot = M_pred_mean_plot - unorm_mass_plot
+        fig, ax = plt.subplots(figsize=(8, 6))
+        ax.errorbar(unorm_mass_plot, residual_plot, yerr=M_pred_sigma_plot, fmt='o',
+                    color='black', markerfacecolor='black', markeredgecolor='black',
+                    ecolor=PLOT_BLUE, elinewidth=1.5, alpha=0.75)
+        ax.hlines(0, *MASS_AXIS_LIMITS, colors='red', linestyles='--', linewidth=1.7)
+        ax.set_xticks(np.arange(0.4, 2.01, 0.2))
+        ax.set_ylim(-_residual_spread(residual_plot, M_pred_sigma_plot), _residual_spread(residual_plot, M_pred_sigma_plot))
+        _style_mass_axis(ax, 'Residual Mass')
         if output_base is not None:
-            plt.savefig(output_base + f'_filtered_{percentile}_residual.png', dpi=300, bbox_inches='tight')
+            fig.savefig(output_base + f'_filtered_{percentile}_residual.png', dpi=300, bbox_inches='tight')
         plt.show()
+        plt.close(fig)
 
 # This prediction for 4 variables is very probably broken now
 def predict4(X, X_er, target, test=False):
@@ -255,7 +311,7 @@ def predictNAN(X, X_er, target, test=False):
 
 def predict3(X, X_er, target, test=False): # Default: not test-mode
     
-    df_train = get_dataset('Datasets/database_A_old_format_with_xiong_log_L.txt', 'MS')
+    df_train = get_dataset(TRAINING_FILE, 'MS')
     (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
     mass_test, emass_test
     ) = return_train_test(df_train)
@@ -280,24 +336,24 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
                                       X,
                                       X_er, 'mass',
                                       3000, 4,
-                                      trace_filename='Dataset_C_training_with_Xiong/BART_mass_3param_logL_prediction_3000_draws_4_chains.nc',
-                                      predictions_filename='Dataset_C_training_with_Xiong/BART_mass_3param_logL_prediction_3000_draws_4_chains_predictions.nc') # Made 2000 draws bc better MARD on test set
+                                      trace_filename=os.path.join(OUTPUT_DIR, f'BART_mass_3param_L_prediction_3000_draws_4_chains_seed_{SAMPLING_SEED}.nc'),
+                                      predictions_filename=os.path.join(OUTPUT_DIR, f'BART_mass_3param_L_prediction_3000_draws_4_chains_predictions_seed_{SAMPLING_SEED}.nc')) # Made 2000 draws bc better MARD on test set
 
         gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train3,
                                                                                       x_train3_er, 
                                                                                       mass_train, 
-                                                                                      100, 50)
+                                                                                      80, 40)
         
         # CHANGE NAMES HERE
         # Change gp3_trace and hbnn3_trace according to which training we did
 
-        gp3_trace = az.from_netcdf('Dataset_C_training_with_Xiong/GP_mass_3param_L_3000_draws_4_chains_100_50_bis_bis.nc')
+        gp3_trace = az.from_netcdf(os.path.join(OUTPUT_DIR, f'GP_mass_3param_L_1000_draws_4_chains_80_40_seed_{SAMPLING_SEED}.nc'))
         gp3_pred, lpd_GP3 = posterior_predictive_GP(gp3_model, μ_gp3, lg_σ_gp3, 
                                             gp3_trace, X,
                                             X_er,
                                             Xu3, Xu_er3, 3, 'mass')
         
-        hbnn3_trace = az.from_netcdf('Dataset_C_training_with_Xiong/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015_bis_bis.nc')
+        hbnn3_trace = az.from_netcdf(os.path.join(OUTPUT_DIR, f'HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_{SAMPLING_SEED}.nc'))
         hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(hbnn3_trace,  
                                                       X,
                                                       X_er,
@@ -307,7 +363,7 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
                                             x_train3, X, lpd_BART3, lpd_HBNN3,
                                             lpd_GP3,
                                             draws=3000, chains=4)
-        bhs_trace.to_netcdf('Dataset_C_training_with_Xiong/BHS_mass_3param_logL_prediction_3000_draws_4_chains.nc')
+        bhs_trace.to_netcdf(os.path.join(OUTPUT_DIR, f'BHS_mass_3param_L_prediction_3000_draws_4_chains_seed_{SAMPLING_SEED}.nc'))
         
         if test == True:
             mard_BART = mard(unorm_mass, bart3_pred.mean(0))
@@ -335,9 +391,9 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
             print('MRD BHS:', mrd_BHS)
 
             plot_mass_diagnostics(unorm_mass, bart3_pred, 'BART',
-                                  output_base='Dataset_C_training_with_Xiong/BART_mass_3param_logL_prediction')
+                                  output_base=os.path.join(OUTPUT_DIR, f'BART_mass_3param_L_prediction_seed_{SAMPLING_SEED}'))
             plot_mass_diagnostics(unorm_mass, bhs_pred, 'BHS', filtered_percentiles=(95, 90),
-                                  output_base='Dataset_C_training_with_Xiong/BHS_mass_3param_logL_prediction')
+                                  output_base=os.path.join(OUTPUT_DIR, f'BHS_mass_3param_L_prediction_seed_{SAMPLING_SEED}'))
         
         return [bart3_pred, gp3_pred, hbnn3_pred], bhs_pred, bhs_w
     
@@ -405,22 +461,17 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         
         
 def main():
-    # X, X_er = prepare_pred4("Datasets/dataset_A_trimmed_8cols_NASAFLAG.csv")
-    # # evaluate_missingness_grid(target='mass', save_path='mass_metrics_missing_params.csv')
-    # # evaluate_missingness_grid(target='radius',
-    # #                           gp_trace_path='models/model_artifacts/gp_radius.nc',
-    # #                           hbnn_trace_path='models/model_artifacts/HBNN_sig_015_15_nodes_radius_4_param.nc',
-    # #                           save_path='radius_metrics_missing_params.csv')
-    # #print(X)
-    # pred, w4 = predict4(X, X_er, 'radius')
-    # pred.to_csv("Results/NASAFLAG_8col_radius_res.csv")
-    # w4.to_csv("Results/NASAFLAG_8col_A_radius_w.csv")
-    
-    X3, X3_er = prepare_pred3("Datasets/dataset_density_trimmed_6cols_NASAFLAG.csv")
-    base_preds, bhs_pred, bhs_w = predict3(X3, X3_er, 'mass', test=True)
+    base_preds, bhs_pred, bhs_w = predict3(None, None, 'mass', test=True)
 
-    pd.DataFrame(bhs_pred.mean(0)).to_csv("Results/3_features_post_pred_bhs_6col_mass_res.csv", index=False)
-    pd.DataFrame(bhs_w.mean(0)).to_csv("Results/3_features_post_pred_bhs_6col_mass_w.csv", index=False)
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    pd.DataFrame(bhs_pred.mean(0)).to_csv(
+        os.path.join(OUTPUT_DIR, "3_features_post_pred_bhs_mass_res.csv"),
+        index=False,
+    )
+    pd.DataFrame(bhs_w.mean(0)).to_csv(
+        os.path.join(OUTPUT_DIR, "3_features_post_pred_bhs_mass_w.csv"),
+        index=False,
+    )
 
     # X1, X1_er = prepare_pred4("Datasets/dataset_C_trimmed_8cols_NASAFLAG.csv")
     

@@ -585,23 +585,129 @@ Surface gravity, $g$, is a physically informative quantity for the estimation of
 
 The procedure described in Section \ref{subsec:dataset_a} was then repeated using this updated set of input features, yielding similar results, both visually and quantitatively. In this case, however, an additional comparison was possible. The Institute of Astrophysics of the Universidade do Porto provided a complementary dataset of stellar masses obtained through stellar-modelling methods. These estimates are based on PARSEC, the PAdova and TRieste Stellar Evolution Code, which provides stellar evolutionary tracks and isochrones used to infer stellar properties from theoretical models \citep{bressan2012}. This dataset was first cleaned to remove stars that had already been used during training, and was then used to obtain mass predictions with the trained models. The new mass predictions, including their uncertainties, were compared with the masses obtained from stellar evolutionary grids. Linear relations developed by \citet{moya2022} were added to the comparison as well. This provides a benchmark against both model-based mass estimates and previously published data-driven mass-estimation methods.
 \subsubsection*{Results}
+The evaluations against the $20\%$ holdout test were performed using the MAE, MARD and MRD indicators introduced in Section \ref{subsec:dataset_a}. Table \ref{tab:dataset_b_mard_mrd} shows that the behaviour of the models is consistent with that found when training with $\rho$ instead of $L$, although the performance is slightly worse, with MARD values increasing by about two percentage points. This supports the conclusion of \citet{moya2018} that $\rho$ is a particularly informative parameter for stellar-mass prediction. Nevertheless, Figure \ref{fig:mass_holdout_all_models_B} puts this loss of accuracy into context, since the points remain only moderately dispersed around the 1:1 relation. Even with this decrease in performance, the results remain acceptable for the purposes of this comparison; the MAE values obtained, all within the range $0.07$--$0.08 \ M_\odot$, are comparable to those reported for different models by \citet{moya2022}, which lie within the range $0.06$--$0.08 \ M_\odot$.
 
+\begin{table}[H]
+\centering
+\caption{Comparison of the residual metrics obtained by the mass-prediction models on the holdout set. The models were trained with $T_{\mathrm{eff}}$, $L$ and $[\mathrm{Fe}/\mathrm{H}]$ as input features, and stellar mass as the target.}
+\label{tab:dataset_b_mard_mrd}
+\begin{tabular}{lcccc}
+\hline\hline
+Metric & BART & GP & HBNN & BHS \\
+\hline
+MAE ($M_\odot$) & 0.076 & 0.077 & 0.074 & 0.072 \\
+MARD [\%] & 6.99 & 6.79 & 7.02 & 6.53 \\
+MRD [\%]  & -2.39 & -1.14 & -1.89 & -1.36 \\
+\hline
+\end{tabular}
+\end{table}
+
+GP is the level-0 model with the best MRD value, while BART and HBNN show signs of systematic misprediction. For HBNN, the tendency of the model to shift masses towards values close to $1.25 \ M_\odot$ is still visible in Figure \ref{fig:hbnn_mass_residuals_B}, although the MRD value of $-1.89\%$ shows that overpredictions are more common. These mispredictions were expected, since the training set was not expanded and some regions of parameter space remain poorly represented. The same behaviour is also found for BART, which reaches an even more negative MRD of $-2.39\%$. BART also returns comparatively large uncertainties in these regions.
+
+The GP model also shows underconfident behaviour. The plots must therefore be trimmed to the 95th percentile of predicted mass uncertainty to prevent a small number of outliers with very large uncertainties from masking the population. The indicators in Table \ref{tab:dataset_b_mard_mrd} suggest a slight trend towards overprediction, while Figure \ref{fig:gp_mass_residuals_B} shows that this corresponds to a modest positive offset that remains approximately constant across the $M_{\mathrm{true}}$ axis.
+
+\begin{figure}[H]
+\centering
+\captionsetup[subfigure]{font=small}
+
+% Top row: HBNN, GP
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png}
+\caption{HBNN prediction.}
+\label{fig:hbnn_mass_predictions_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png}
+\caption{HBNN residuals.}
+\label{fig:hbnn_mass_residuals_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png}
+\caption{GP prediction.}
+\label{fig:gp_mass_predictions_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png}
+\caption{GP residuals.}
+\label{fig:gp_mass_residuals_B}
+\end{subfigure}
+
+\vspace{0.4cm}
+
+% Bottom row: BART, BHS
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png}
+\caption{BART prediction.}
+\label{fig:bart_mass_predictions_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png}
+\caption{BART residuals.}
+\label{fig:bart_mass_residuals_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png}
+\caption{BHS prediction.}
+\label{fig:bhs_mass_predictions_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png}
+\caption{BHS residuals.}
+\label{fig:bhs_mass_residuals_B}
+\end{subfigure}
+
+\caption{Holdout-test performance of the HBNN, GP, BART and BHS mass models trained with $T_{\mathrm{eff}}$, $L$ and $[\mathrm{Fe}/\mathrm{H}]$. For each model, the prediction panel shows $M_{\mathrm{pred}}$ as a function of $M_{\mathrm{true}}$, while the residual panel shows $M_{\mathrm{pred}}-M_{\mathrm{true}}$ as a function of $M_{\mathrm{true}}$. Vertical error bars represent the predictive uncertainty returned by each model. The GP and BHS panels are restricted to the stars below the 95th percentile of predicted mass uncertainty in order to keep the main population visually readable. The full calibration sample contains $n=767$ stars, with $20\%$ reserved for the holdout test.}
+\label{fig:mass_holdout_all_models_B}
+
+\end{figure}
+
+BHS combines the behaviours of the three level-0 models and remains the most stable compromise between residual accuracy and global bias. Since GP performs better away from $1 \ M_\odot$ than BART and HBNN, the stacking approach is expected to assign it larger weight in those regions. In the central region, however, BHS can favour the other models when they provide more reliable predictions. Overall, the points remain well concentrated around the 1:1 relation, with no clear systematic trend. Although the BHS MRD is slightly worse than the GP value, this is expected because the stacking model does not simply reproduce the GP predictions, but balances them with the contributions of BART and HBNN. This behaviour is consistent with the evaluation metrics. The large individual predictive uncertainties of the stacking model suggest that it inherits part of the underconfidence already present in BART and GP, a behaviour also observed in the $\rho$-training case.
+
+
+The mass predictions, including their uncertainties, are then compared with the stellar evolutionary-grid estimates based on PARSEC and with the linear-relation masses presented by \citet{moya2022}. The differences are analysed through fractional residuals, defined as $(M_1-M_2)/M_2$, where $M_1$ and $M_2$ correspond to the first and second methods indicated in each comparison label in Figure \ref{fig:frac_res_distrib_dataset_b}. The closest agreement is found between the BHS predictions and the grid-model masses: in this case, all residuals remain within approximately $\pm 10\%$. The stacking approach gives systematically higher masses than the grid models, but in a relatively homogeneous way, since both the mean and the median lie close to each other, near a fractional difference of $+2\%$.
+
+When BHS is compared with the \citet{moya2022} linear relations, the behaviour changes, showing a more dispersed distribution with a tail of mass differences up to about $15\%$. The near-zero mean residual should not be interpreted as evidence that the stacking approach and the linear relations are consistently equivalent, but rather as the result of a broader residual distribution in which positive and negative deviations partly cancel. Table \ref{tab:residuals_dataset_b} confirms this interpretation: the mean residual is $-0.38\%$, while the mean absolute residual increases to $3.14\%$, larger than the BHS-grid comparison value of $2.86\%$. The two methods therefore provide different predictions for individual stars, even though their average signed offset is small.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png}
+\caption{Distributions of fractional mass residuals for the comparison between the Bayesian Hierarchical Stacking predictions and the two reference mass estimates used for the ARIEL sample. The green distribution compares BHS with the stellar-model grid masses provided by the IA-Porto group, while the orange distribution compares BHS with the linear-relation masses from \citet{moya2022}. The purple distribution shows the direct comparison between the linear-relation and grid masses. The fractional residuals are defined as $(M_1-M_2)/M_2$, following the order of the two methods shown on the horizontal axis. The sample contains $n=184$ stars.}
+\label{fig:frac_res_distrib_dataset_b}
+\end{figure}
+
+The two reference models do not produce equivalent predictions either. Figure \ref{fig:frac_res_distrib_dataset_b} and Table \ref{tab:residuals_dataset_b} show that the linear-relation and grid masses differ more strongly from each other than BHS differs from either of them, with a MARD above $5\%$ and a broad residual distribution that includes a tail of large negative residuals extending almost to $-20\%$. This tail is consistent with the one observed in the BHS-linear comparison, suggesting that the linear relations produce comparatively low masses for a small number of stars.
+
+\begin{table}[H]
+\centering
+\caption{Mass-comparison metrics for the ARIEL sample using the same fractional-residual convention as in Figure \ref{fig:frac_res_distrib_dataset_b}.}
+\begin{tabular}{lccc}
+\hline\hline
+Metric & BHS - Grid & BHS - Linear & Linear - Grid \\
+\hline
+MAE ($M_\odot$) & 0.031 & 0.035 & 0.061 \\
+MARD [\%] & 2.86 & 3.14 & 5.60 \\
+MRD [\%] & 1.39 & -0.38 & 2.01 \\
+\hline
+\end{tabular}
+\label{tab:residuals_dataset_b}
+\end{table}
 
 \subsection{Oblateness and mass predictions of eclipsing binaries} \label{sec:dataset_C}
 
-As explained in Section \ref{subsec:dataset_a}, one of the aims of this work is to predict the masses of FGK-type components in eclipsing-binary systems, so that information can then be inferred for their M-type companions. This is relevant because M-type stars are intrinsically difficult to characterise: they are cool, low-mass stars with slow evolution, and precise observational constraints are generally harder to obtain. Eclipsing binaries therefore provide one of the most useful routes for obtaining information about these objects. However, this also raises an important question: whether the information inferred from stars in eclipsing-binary systems can be extrapolated to isolated stars of similar type.
-
-Eclipsing-binary components are not completely independent objects. Their mutual gravitational interaction determines their orbital motion, but it can also modify their morphology through tidal forces. In systems with stronger interaction, the stars may become tidally distorted rather than remaining perfectly spherical. This distortion can be quantified through the oblateness parameter $o$, given by equation (43) of \citet{chandrasekhar1933double}:
-
-\begin{equation}
-o = 0.6446 \cdot \left(1 + 4\frac{m}{m_\star}\right) \cdot \left(\frac{R}{a}\right)^3,
-\label{eq:oblateness}
-\end{equation}
-where $m_\star$ is the mass of the star whose oblateness is being computed, $m$ is the mass of its companion, $R$ is the stellar radius, and $a$ is the orbital semi-major axis.
-
-To test whether this tidal distortion affects the mass predictions, the models are trained on asteroseismic stars, which are treated here as the single-star reference sample, and then applied to the eclipsing-binary components available in the catalogue. The predicted masses are compared with the reference masses of the eclipsing-binary stars, and the resulting residuals are analysed as a function of oblateness. This follows the general approach of \citet{maxted2023benchmark}, where eclipsing binaries are used to evaluate how well single-star relations can be transferred to binary systems.
-
-Since the goal in this section is to obtain the most accurate possible mass predictions before analysing the residual dependence on oblateness, four input features are used, following the recommendation of \citet{moya2022}: $T_{\mathrm{eff}}$, $\log g$, $L$ and [Fe/H].
 
 \subsubsection*{Results: holdout test}
 
