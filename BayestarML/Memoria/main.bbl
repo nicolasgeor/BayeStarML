@@ -55,6 +55,10 @@ Chabrier, G., \& Baraffe, I. 2000, Annual Review of Astronomy and Astrophysics,
 Chandrasekhar, S. 1933, Monthly Notices of the Royal Astronomical Society, 93,
   462, \dodoi{10.1093/mnras/93.6.462}
 
+\bibitem[{Chaplin \& Miglio(2013)}]{chaplin2013}
+Chaplin, W.~J., \& Miglio, A. 2013, Annual Review of Astronomy and
+  Astrophysics, 51, 353, \dodoi{10.1146/annurev-astro-082812-140938}
+
 \bibitem[{Chipman {et~al.}(2010)Chipman, George, \&
   McCulloch}]{chipman2010bart}
 Chipman, H.~A., George, E.~I., \& McCulloch, R.~E. 2010, The Annals of Applied
@@ -122,6 +126,11 @@ Le, Q.~V., Smola, A.~J., \& Canu, S. 2005, in Proceedings of the 22nd
 \bibitem[{Li \& Chao(2021)}]{li2021dataquality}
 Li, Y., \& Chao, X. 2021, Frontiers in Plant Science, 12, 811241,
   \dodoi{10.3389/fpls.2021.811241}
+
+\bibitem[{Ligi {et~al.}(2016)Ligi, Creevey, Mourard, Crida, Lagrange, Nardetto,
+  Perraut, Schultheis, Tallon-Bosc, \& ten Brummelaar}]{ligi2016}
+Ligi, R., Creevey, O., Mourard, D., {et~al.} 2016, Astronomy \& Astrophysics,
+  586, A94, \dodoi{10.1051/0004-6361/201527054}
 
 \bibitem[{Maas {et~al.}(2013)Maas, Hannun, \& Ng}]{maas2013rectifier}
 Maas, A.~L., Hannun, A.~Y., \& Ng, A.~Y. 2013, in Proceedings of the ICML 2013
@@ -198,6 +207,12 @@ Southworth, J. 2015, in Astronomical Society of the Pacific Conference Series,
   Rucinski, G.~Torres, \& M.~Zejda (Astronomical Society of the Pacific),
   164--166.
 \newblock \doarXiv{1411.1219}
+
+\bibitem[{Tsantaki {et~al.}(2018)Tsantaki, Andreasen, Teixeira, Sousa, Santos,
+  Delgado-Mena, \& Bruzual}]{tsantaki2018}
+Tsantaki, M., Andreasen, D.~T., Teixeira, G. D.~C., {et~al.} 2018, Monthly
+  Notices of the Royal Astronomical Society, 473, 5066,
+  \dodoi{10.1093/mnras/stx2564}
 
 \bibitem[{Vehtari {et~al.}(2017)Vehtari, Gelman, \& Gabry}]{vehtari2017loo}
 Vehtari, A., Gelman, A., \& Gabry, J. 2017, Statistics and Computing, 27, 1413,

@@ -177,7 +177,7 @@ The network itself uses Gaussian priors for the weights and biases and a two-lay
 
 
 
-% for the presentation, also keep in mind that andy always describes these neural neetworks as a sort of one layer, many branches to many layers, many levels of layers, and then they converge to one putput (mas o menos). the key is the boceto, to illustrate it. might look for somehting similar, either for resentation itself or for blackboard explanation when in questions
+% for the presentation, also keep in mind that andy always describes these neural neetworks as a sort of one layer, many branches to many layers, many levels of layers, and then they converge to one putput (see fig 1 of 2022). the key is the boceto, to illustrate it. might look for somehting similar, either for resentation itself or for blackboard explanation when in questions
 
 
 
@@ -264,26 +264,26 @@ Despite its statistical advantages, standard $k$-fold cross-validation imposes s
 \section{Methods} \label{methods}
 % A medida que expliques como cada uno de los metodos utiliza las observaicioens directas para calcular parametros, puedes mencionar los papers qu ehayas ido usando. Esto hazlo en el futuro, cuando releas los papers para hacer unos parrafos de explicacion de cada uno de ellos
 
-This section introduces the observational basis of the stellar labels used later to construct the final catalogue. The catalogue is built from three reference methods: detached eclipsing binaries, asteroseismology and interferometry. Spectroscopy is discussed first as context, because it is essential for atmospheric quantities, especially metallicity, but relies strongly on stellar-atmosphere modelling. This contrast motivates the use of the other three methods as the main sources of high-quality labels, while also making clear that they are not completely free from auxiliary assumptions \citep{Serenelli2021}.
+This section introduces the observational basis of the stellar labels used later to construct the final catalogue. The catalogue is built from three reference methods: detached eclipsing binaries, asteroseismology and interferometry. Spectroscopy is discussed first as context, because it is essential for many stellar parameters, but relies strongly on stellar-atmosphere modelling. This contrast motivates the use of the other three methods as the main sources of high-quality labels, while also making clear that they are not completely free from auxiliary assumptions.
 
 \subsection{Spectroscopy}
 %revisar si esta(s) seccion(es) tiene un tono demasiado didactico, lejos de un paper/TFG
 
 %  spectroscopy study the distribution of electromagnetic radiation as a function of wavelength. photometry studies this distribution in large intervals, selected by means of filters, while spectroscopy makes a finer analysis, with higher resolution, by means of optical dispersion devices, such as optical prisms and diffraction gratings. So spectroscopy = wavelength separation
-Spectroscopy analyses the stellar radiation received as a function of wavelength. The continuum, discontinuities, absorption lines and molecular bands are produced by physical processes in the stellar atmosphere, and therefore contain information about quantities such as $T_{\text{eff}}$, $\log g$ and $[\text{Fe}/\text{H}]$.
+Spectroscopy analyses the stellar radiation received as a function of wavelength. The continuum, discontinuities, absorption lines and molecular bands are produced by physical processes in the stellar atmosphere, and therefore contain information about stellar parameters.
 
-The difficulty is that these quantities are not usually obtained by direct measurement. They are inferred by comparing the observed spectrum with synthetic spectra, line lists and stellar-atmosphere models (REFERENCE NEEDED). Spectroscopy is therefore essential, especially for metallicity, but it can also introduce model-dependent assumptions into any machine-learning model trained on those labels.
+The difficulty is that these quantities are not usually obtained by direct measurement. They are inferred by comparing the observed spectrum with synthetic spectra, line lists and stellar-atmosphere models \citep{tsantaki2018}. Spectroscopy is therefore essential, especially for $T_{\mathrm{eff}}$ and [Fe/H], but it can also introduce model-dependent assumptions into any machine-learning model trained on those input features.
 
 %maybe add something about photometry . say that it is very similar or smth. it prolly need atmospheric methods as well. also mention astrometry, which I think doesn't rely on atmopshere, but needs very precise and hard to obtain data, and take too much time to measure. exoplanet transits happen very rarely
 
 
-\subsection{Detached Eclipsing Binaries}
+\subsection{Eclipsing Binaries}
 %add this somewhere, if I find a refernce: DEBs are considered the absolute pinnacle for determining stellar mass and radius.
-Detached eclipsing binaries are systems in which two stars orbit each other without significant mass transfer, while their orbital plane causes periodic eclipses as seen from Earth. Because the components are dynamically linked but remain physically separated, they are especially valuable for obtaining fundamental stellar parameters \citep{Southworth2015,Eker2018}.
+Detached eclipsing binaries are systems in which two stars orbit each other without significant mass transfer, while their orbital plane causes periodic eclipses as seen from Earth. Because the components are dynamically linked but remain physically separated, they are especially valuable for obtaining fundamental stellar parameters such as $M$ \citep{Southworth2015,Eker2018}.
 
-The light curve gives the orbital period, eclipse geometry, relative radii and temperature ratio. Radial-velocity measurements from Doppler shifts then provide the orbital velocities. Combining these observables with Keplerian dynamics yields absolute masses and radii, from which density and surface gravity follow. These quantities are therefore mainly geometric and dynamical.
+The measured light curve gives the orbital period, eclipse geometry, relative radii and temperature ratio. Radial-velocity measurements from Doppler shifts then provide the orbital velocities. Combining these observables with Keplerian dynamics yields absolute masses and radii, from which density and surface gravity follow. These quantities are therefore mainly geometric and dynamical.
 
-The atmospheric quantities are less direct. Absolute temperatures and luminosities usually require either spectroscopy, colour-temperature relations, parallax and bolometric fluxes, or a combination of these ingredients \citep{Graczyk2022}. For this reason, detached eclipsing binaries are treated as a strong reference source for masses and radii, while their temperature and luminosity labels still require attention to the assumptions used to derive them.
+The atmospheric quantities are less direct. Absolute temperatures and luminosities usually require spectroscopy, colour-temperature relations, parallax, bolometric fluxes, or a combination of these ingredients \citep{Graczyk2022}. For this reason, detached eclipsing binaries are treated as a strong reference source for masses and radii, while their temperature and luminosity labels still require attention to the assumptions used to derive them.
 
 % Revisar que estos dos metodos se cumplan luego en los papers. Puede haber menos, o mas.
 
@@ -291,75 +291,40 @@ The atmospheric quantities are less direct. Absolute temperatures and luminositi
 %revisar si esta(s) seccion(es) tiene un tono demasiado didactico, lejos de un paper/TFG. sobre todo el final sobre los harmonicos
 
 % Rodrigues 2017 explains well this method (especially the used parameters delta nu and nu_max) in its introduction
-Asteroseismology studies stellar oscillations. In solar-like stars, turbulent motion in the outer convective envelope excites pressure waves that propagate through the interior and produce small brightness variations. Time-series photometry and Fourier analysis reveal the characteristic oscillation frequencies of the star \citep{Bellinger2019,Serenelli2021}.
+Asteroseismology studies stellar oscillations. An extensively studied type of oscillations occurs in solar-like stars, where turbulent motion in the outer convective envelope excites pressure waves that propagate through the interior and produce small brightness variations. Time-series photometry and Fourier analysis reveal the characteristic oscillation frequencies of the star \citep{Bellinger2019,Serenelli2021}.
 
 Two global seismic quantities are especially useful. The large frequency separation, $\Delta\nu$, scales with the square root of the mean density, while the frequency of maximum oscillation power, $\nu_{\text{max}}$, is related to surface gravity and effective temperature:
-\[
+\begin{equation}
 \Delta\nu \propto \sqrt{\frac{M}{R^3}}, \qquad
-\nu_{\text{max}} \propto \frac{M}{R^2\sqrt{T_{\text{eff}}}} .
-\]
-With an external estimate of $T_{\text{eff}}$, these relations constrain mass, radius and $\log g$ (REFERENCE NEEDED).
+\nu_{\mathrm{max}} \propto \frac{M}{R^2\sqrt{T_{\mathrm{eff}}}} .
+\end{equation}
+With an external estimate of $T_{\text{eff}}$, these relations constrain mass, radius and $\log g$ \citep{chaplin2013}.
 
 This makes asteroseismology particularly useful for single stars, where direct dynamical masses are usually unavailable. However, the method still depends on scaling relations, external atmospheric inputs and, in more detailed analyses, stellar models. It therefore provides strong constraints, but not completely model-independent labels.
 
 % Asteroseismic $\log g$ values are far more precise than any other method for single stars. (add reference
 
 \subsection{Interferometry}
-Interferometry combines the light collected by separated telescopes, effectively increasing the angular resolution beyond that of a single aperture. For nearby bright stars, this makes it possible to measure the angular diameter. Together with an independent distance, usually from parallax, the stellar radius can then be obtained geometrically (REFERENCE NEEDED).
+Interferometry combines the light collected by separated telescopes, effectively increasing the angular resolution beyond that of a single aperture. For nearby bright stars, this makes it possible to measure the angular diameter. Together with an independent distance, usually from parallax, the stellar radius can then be obtained geometrically \citep{ligi2016}.
 
-If the bolometric flux is also known, the effective temperature follows from the Stefan-Boltzmann relation. This makes interferometry one of the most empirical routes to stellar radii and temperatures, and it is used in benchmark-star calibrations \citep{Soubiran2024}. The method is not fully assumption-free, because bolometric flux estimates require extinction corrections and model-dependent treatment of unobserved spectral regions. It is also limited to stars with sufficiently large angular diameters, so its contribution to the total sample is small.
+If the bolometric flux is also known, the effective temperature follows from the Stefan--Boltzmann relation. This makes interferometry one of the most empirical routes to stellar radii and temperatures, and it is used in benchmark-star calibrations \citep{Soubiran2024}. The method is not fully assumption-free, because bolometric flux estimates require extinction corrections and model-dependent treatment of unobserved spectral regions. It is also limited to stars with sufficiently large angular diameters, so its contribution to the total sample is small.
 
 \subsection{Limits of Model Independence}
-The methods described above are used because they reduce the dependence on stellar-atmosphere models, but they do not remove modelling assumptions completely. Metallicity is the clearest case: $[\mathrm{Fe}/\mathrm{H}]$ or $[\mathrm{M}/\mathrm{H}]$ must be inferred from spectra through line-formation calculations, synthetic spectra and atmospheric models (REFERENCE NEEDED). Detached eclipsing binaries still require external calibrations for absolute temperatures and luminosities \citep{Graczyk2022}. Asteroseismic masses and radii depend on scaling relations and an external $T_{\mathrm{eff}}$ estimate, while interferometric temperatures require bolometric fluxes and extinction corrections \citep{Serenelli2021,Soubiran2024}.
+MIGHT REMOVE THIS SECTION. NOT BECAUSE OF SPACE; BUT AVOIDING UNNCESSARY REPETITION
+
+The methods described above are used because they reduce the dependence on stellar-atmosphere models, but they do not remove modelling assumptions completely. Eclipsing binaries still require external calibrations for absolute temperatures and luminosities, asteroseismic masses and radii depend on scaling relations and an external $T_{\mathrm{eff}}$ estimate, and interferometric temperatures require bolometric fluxes and extinction corrections.
 
 For this reason, the catalogues used in this work should not be interpreted as perfectly model-independent ground truth. They are instead high-quality reference labels, selected because their central constraints are closer to geometry or dynamics than to atmospheric modelling: eclipsing binaries provide strong masses and radii, asteroseismology constrains stellar density and surface gravity, and interferometry gives empirical radii and temperatures for suitable nearby stars. This compromise is important for the machine-learning models trained later, since their predictions cannot be more physically reliable than the labels from which they learn.
-
-
-
-
 
 
 \section{Data} \label{sec:data}
 % This paper talks about prioritising Data instead of models. Not prioritising good data over a large quantity of data. It explicitly says it wants high quality and quantity of data. Might use it in the future, tho. https://www.semanticscholar.org/paper/Data-centric-Artificial-Intelligence%3A-A-Survey-Zha-Bhat/12c6be503e4e5b7c9cb1810152d4364f26628a8d Zha et al., 2023
 
-In supervised machine learning, the quality of the labels can be as important as the size of the training set. Large catalogues affected by heterogeneous systematics may lead the models to reproduce those biases instead of learning the underlying physical relations \citep{li2021dataquality}. For this reason, this work follows a quality-centred strategy, prioritising a smaller, traceable and physically reliable calibration set over a larger but less controlled sample.
+In supervised machine learning, the quality of the input features can be as important as the size of the training set. Large catalogues affected by heterogeneous systematics may lead the models to reproduce those biases instead of learning the underlying physical relations \citep{li2021dataquality}. For this reason, this work follows a quality-centred strategy, prioritising a smaller, traceable and physically reliable calibration set over a larger but less controlled sample.
 
-Following the guidance of \citet{moya2018}, an extended stellar catalogue was assembled from literature sources with complementary parameter coverage. The aim was to obtain a statistically meaningful and heterogeneous sample, while keeping the provenance and uncertainties of the stellar parameters as clear as possible.
+Following the guidance of \citet{moya2018}, whose catalogue covered approximately the mass range $0.7 \ M_\odot <M < 2.5 \ M_\odot$, an extended stellar catalogue was assembled from literature sources with complementary parameter coverage. The lower boundary has been reduced to $0.5 \ M_\odot$, since one of the aims of this extension was to improve the coverage at lower masses. Such reference stars are needed to calibrate predictions for M-type stars, which are especially relevant in exoplanet studies (see Section \ref{subsec:dataset_b}). The aim was to obtain a statistically meaningful and heterogeneous sample, while preserving clear information on the uncertainties of the stellar parameters. Because the reported uncertainties are propagated into the final mass predictions in the probabilistic models in this work, this uncertainty-treatment is a key aspect.
 
-As explained in Section \ref{methods}, the reference sources were selected around three observational methods: detached eclipsing binaries, asteroseismology and interferometry. Studies published between 2018 and 2025 were reviewed when they provided uncertainties and as many of the required stellar parameters as possible, listed in Table \ref{MS_catalog_database_D}. Stellar mass and radius were mandatory, since stellar densities were computed from them. This initial compilation contained 16094 stars, before duplicate removal and quality cleaning.
-
-\subsection{Catalogues}
-
-The literature sources used to compile the complete data sample are briefly described below. \citet{Eker2018} provided accurately measured components of detached eclipsing spectroscopic binaries, used to calibrate $L$ and $T_{\mathrm{eff}}$ for main-sequence stars over a broad mass range. \citet{Helminiak2019} is also based on detached eclipsing binaries, but includes spectroscopic support; these entries therefore required additional care. Its reported chemical information was given as [$\alpha$/Fe] and was not directly usable in the metallicity scale adopted here.
-
-\citet{Graczyk2021} and \citet{Graczyk2022} used detached eclipsing binaries to calibrate surface-brightness--colour relations; the latter work provides the dwarf-star calibrating sample adopted in this catalogue. \citet{Nsamba2025} presents a collection of pre-existing benchmark stars, whose overlap with other samples required careful duplicate removal. \citet{Bellinger2019} provided asteroseismic masses and radii for mostly solar-like stars, although several objects lacked some of the atmospheric parameters required in this work.
-
-\citet{Serenelli2021} is a broad review and benchmark compilation of stellar mass-determination methods across the HR diagram, including detached eclipsing binaries and asteroseismology. It contributed a large number of reliable stars, although luminosity and metallicity were not always available. \citet{Soubiran2024} provided the third version of the Gaia FGK benchmark-star catalogue, with fundamental $T_{\mathrm{eff}}$ and $\log g$ values derived from angular diameters, bolometric fluxes, parallaxes and masses, but without luminosities in the form required here. \citet{Xiong2023} constructed an empirical library from eclipsing binaries while including some spectroscopic information; because of the non-standard identifiers and some comparatively large uncertainties, these entries were treated with additional caution during cross-matching.
-
-\citet{Sayeed2025} presented a homogeneous catalogue of Kepler main-sequence and subgiant solar-like oscillators, deriving global asteroseismic parameters, although some quantities, such as metallicity, were not accompanied by uncertainties. Finally, \citet{Yildiz2019} derived masses and radii for Kepler and CoRoT solar-like oscillators using asteroseismic frequency diagnostics. When metallicities were provided as surface metal mass fractions $Z_s$, they were converted to the logarithmic scale using $[\mathrm{M}/\mathrm{H}] = \log_{10}\left[(Z_s/X_s)/(Z/X)_\odot\right]$, adopting $X_s \simeq 0.7381$ and $(Z/X)_\odot = 0.0181$ from \citet{asplund2009}.
-
-
-% \citet{Southworth2015} is the famous DEBCat, but it didn't finally make the sample because L was computed from model-dependet methods
-
-\subsection{Cleaning} \label{sec:cleaning}
-When the same star appeared in several catalogues, the retained entry was chosen according to the reliability of the source. Priority was given to catalogues providing the most direct stellar parameters, smaller reported uncertainties and better parameter completeness. Regularly updated catalogues and benchmark-star compilations were also preferred over more heterogeneous or less traceable sources. In practice, this meant favouring high-precision eclipsing-binary catalogues such as \citet{Eker2018} and the calibrating samples of \citet{Graczyk2022}, benchmark compilations such as the Gaia FGK benchmark-star catalogue \citep{Soubiran2024}, and samples cross-validated across different methods, such as those in \citet{Serenelli2021}. After duplicate removal, 13783 stars remained.
-
-The cleaned sample was then restricted to main-sequence candidates using a criterion based on $\log g$. Following \citet{bilir2008}, stars with $\log g > 4.0$ were classified as main-sequence objects. Surface gravities in this range are characteristic of dwarf stars, while lower values are generally associated with more evolved objects, such as subgiants, post-main-sequence stars and red giants. Extremely large values of $\log g$ ($\gtrsim 5.5$) were not interpreted as normal main-sequence stars.
-
-Although this threshold is approximate, the effect of applying different classification criteria was already analysed by \citet{moya2018}. They found that the choice between a simple threshold and a more robust classification method had little influence on the final results. The $\log g$ criterion adopted here was therefore considered sufficient for the purposes of this work.
-
-After this selection, 1915 stars remained. Not all of them contained every required parameter. In principle, incomplete entries could be retained in a Bayesian framework by treating missing quantities as latent variables, provided that an explicit model for the missing-data process is specified \citep[p.~511]{mcelreath2020}. In this work, however, parameter completeness and direct traceability were prioritised, so this kind of imputation was not used. % IDK what latent means here
-
-% \begin{table}[H]
-% \centering
-% \caption{Secondary sources used to complement missing stellar parameters. During the catalogue merging process, when a preferred primary source (Output catalogue) lacked data for specific parameters, the gaps were filled using the secondary catalogues listed in the corresponding columns.}
-% \begin{tabular}{c}
-% Ejemplo tabla que tarda poco en compilar\\
-% \end{tabular}
-% \label{Tab:secondary sources}
-% \end{table}
-
-The 1915-star sample was then cross-matched with the Moya 2022 catalogue in order to merge both sources, avoid duplicates and retain only the highest-quality entries. Following the same data-centred strategy, stars were removed when they had excessively large uncertainties, zero reported uncertainty in any parameter except $a$, were not classified as main-sequence stars in both catalogues, or had duplicated identifiers. This reduced the sample to 784 stars. Section \ref{subsec:dataset_a} explains the later removal of 17 additional objects, leading to the final training sample of $n=767$ stars.
+As explained in Section \ref{methods}, the reference sources were selected according to three observational methods: eclipsing binaries, asteroseismology and interferometry. Studies published between 2018 and 2025 were reviewed when they provided uncertainties and as many of the required stellar parameters as possible, listed in Table \ref{MS_catalog_database_D}. Stellar mass and radius were mandatory, since stellar densities were computed from them. This initial compilation contained 16094 stars before duplicate removal and quality cleaning.
 
 \begin{table}[H]
 \centering
@@ -369,7 +334,7 @@ The 1915-star sample was then cross-matched with the Moya 2022 catalogue in orde
 \begin{tabular}{lrrrrrrrr}
 \hline\hline
 Catalogue & $M$ & $R$ & $T_{\mathrm{eff}}$ & $L$ & Meta & $\log g$ & $\rho$ & $a$\\
-~ & ($M_\odot$) & ($R_\odot$) & (K) & ($L_\odot$) & (dex) & (cm s$^{-2}$) & ($\rho_\odot$) & ($R_\odot$)\\
+~ & ($M_\odot$) & ($R_\odot$) & (K) & ($L_\odot$) & (dex) & (dex) & ($\rho_\odot$) & ($R_\odot$)\\
 \hline
 Serenelli et al. (2017) & 240 & 240 & 240 & 240 & 240 & 240 & 240 & 0\\
 Xiong et al. (2023) & 141 & 141 & 141 & 141 & 141 & 141 & 141 & 141\\
@@ -414,9 +379,70 @@ Total & 767 & 767 & 767 & 767 & 767 & 729 & 767 & 295\\
 \label{MS_catalog_database_D}
 \end{table}
 
-Although each star in the final merged sample is assigned a primary catalogue identifier according to the reliability criteria described above, the individual stellar parameters for a given entry do not always originate from that single source. To maximise completeness, the merging algorithm constructed composite entries: when the primary catalogue lacked a given parameter, the missing value was filled from an available secondary catalogue. The final parameter set for a star can therefore be heterogeneous in origin. To preserve traceability, a more detailed internal provenance table was used alongside Table \ref{MS_catalog_database_D}; for each primary source, it records which secondary catalogues were queried to fill each missing parameter. When several secondary sources were available, they were prioritised according to the same reliability hierarchy.
+\subsection{Catalogues}
+The literature sources used to compile the catalogue are summarised in Table \ref{tab:catalogue_sources}. The main role of each source in the construction of the final sample, is also indicated, since not all catalogues contributed the same type of information.
 
-The Hertzsprung--Russell diagram was used as a final consistency check for the cleaned sample. This diagram relates stellar luminosity to effective temperature and is commonly used to identify evolutionary stages, especially the main sequence. As shown in Figure \ref{fig:HRdiagram}, the stars mostly follow the expected main-sequence behaviour, with luminosity decreasing toward lower effective temperatures. FGK stars occupy approximately $T_{\mathrm{eff}}\sim3500$--$7400\,\mathrm{K}$ \citep{pecaut2013}, or $\log_{10}T_{\mathrm{eff}}\sim3.54$--$3.87$. Most of the sample lies in this regime, especially the asteroseismic and interferometric stars. The eclipsing-binary subsample is also mainly concentrated around the main sequence, but spans a broader region of the diagram, including both hotter and more luminous objects and cooler, less luminous ones.
+\begin{table}[H]
+\centering
+\caption{Summary of the main literature sources used to build the stellar catalogue. The initial-entries column gives the number of main-sequence stars taken from each source before duplicate removal and further quality cleaning (see Section \ref{sec:cleaning}). The method column indicates the main observational basis of each source, while the final column summarises its role in the catalogue construction and any relevant technical treatment applied during the merging process.}
+\label{tab:catalogue_sources}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{p{0.17\linewidth}p{0.09\linewidth}p{0.18\linewidth}p{0.22\linewidth}p{0.27\linewidth}}
+\hline\hline
+Source & Initial entries & Main method & Main contribution & Notes for this work \\
+\hline
+\citet{Eker2018} & 508 & Detached eclipsing binaries & Accurate stellar parameters for main-sequence binary components over a broad mass range & Used as a high-quality reference for masses and radii; also relevant for calibrating $L$ and $T_{\mathrm{eff}}$. \\
+\hline
+\citet{Helminiak2019} & 22 & Detached eclipsing binaries with spectroscopic support & Binary-star parameters with additional atmospheric information & Treated with care because the reported abundance information was given as $[\alpha/\mathrm{Fe}]$, not directly in the metallicity scale adopted here. \\
+\hline
+\citet{Graczyk2021,Graczyk2022} & 28 & Detached eclipsing binaries & Surface-brightness--colour calibration samples & The dwarf-star calibrating sample of \citet{Graczyk2022} was adopted as a strong reference source. \\
+\hline
+\citet{Nsamba2025} & 8 & Benchmark stars & Pre-existing benchmark-star compilation & Required careful duplicate removal because of overlap with other catalogues. \\
+\hline
+\citet{Bellinger2019} & 97 & Asteroseismology & Asteroseismic masses and radii for mostly solar-like stars & Several objects lacked some atmospheric parameters required in this work. \\
+\hline
+\citet{Serenelli2021} & 106 & Mixed benchmark compilation & Stellar mass-determination methods across the HR diagram, including eclipsing binaries and asteroseismology & Contributed a large number of reliable stars, although luminosity and metallicity were not always available. \\
+\hline
+\citet{Soubiran2024} & 31 & Interferometry and benchmark-star calibration & Gaia FGK benchmark stars with fundamental $T_{\mathrm{eff}}$ and $\log g$ & Luminosities were provided as $\log L$, requiring conversion before use in the catalogue. \\
+\hline
+\citet{Xiong2023} & 354 & Eclipsing binaries with spectroscopic information & Empirical library based on binary-star parameters & Treated with additional caution because of non-standard identifiers and some comparatively large uncertainties. \\
+\hline
+\citet{Sayeed2025} & 694 & Asteroseismology & Homogeneous catalogue of Kepler main-sequence and subgiant solar-like oscillators & Metallicity was not always accompanied by uncertainty. \\
+\hline
+\citet{Yildiz2019} & 74 & Asteroseismology & Masses and radii for Kepler and CoRoT solar-like oscillators & Metallicities reported as surface metal mass fractions were converted to the logarithmic scale. \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\citet{Yildiz2019} provided metallicities as surface metal mass fractions $Z_s$. They were converted to the logarithmic scale using $[\mathrm{M}/\mathrm{H}] = \log \left[(Z_s/X_s)/(Z/X)_\odot\right]$, adopting $X_s \simeq 0.7381$ and $(Z/X)_\odot = 0.0181$ from \citet{asplund2009}.
+
+
+% \citet{Southworth2015} is the famous DEBCat, but it didn't finally make the sample because L was computed from model-dependet methods
+
+\subsection{Cleaning} \label{sec:cleaning}
+When the same star appeared in several catalogues, the retained entry was chosen according to the reliability of the source. Priority was given to catalogues providing the most direct stellar parameters, smaller reported uncertainties and a more complete set of parameters. Regularly updated catalogues and benchmark-star compilations were also preferred over more heterogeneous or less traceable sources. This meant favouring high-precision eclipsing-binary catalogues such as \citet{Eker2018} and the calibrating samples of \citet{Graczyk2022}, benchmark compilations such as the Gaia FGK benchmark-star catalogue \citep{Soubiran2024}, and samples cross-validated across different methods, such as those in \citet{Serenelli2021}. After duplicate removal, 13783 stars remained.
+
+The cleaned sample was then restricted to main-sequence candidates using a criterion based on $\log g$. Following \citet{bilir2008}, stars with $\log g > 4.0$ were classified as main-sequence objects, except for extremely large values of $\log g$ ($\gtrsim 5.5$), which were not interpreted as normal main-sequence stars. Although this threshold is approximate, the effect of applying different classification criteria was already analysed by \citet{moya2018}. They found that the choice between a simple threshold and a more robust classification method had little influence on the final results. The $\log g$ criterion adopted here was therefore considered sufficient for the purposes of this work.
+
+1915 stars remained after this selection, although not all of them contained every required parameter. In principle, incomplete entries could be retained in a Bayesian framework by treating missing quantities as latent variables, provided that an explicit model for the missing-data process is specified \citep[p.~511]{mcelreath2020}. In this work, however, parameter completeness and direct traceability were prioritised, so this kind of imputation was not used. % IDK what latent means here
+
+% \begin{table}[H]
+% \centering
+% \caption{Secondary sources used to complement missing stellar parameters. During the catalogue merging process, when a preferred primary source (Output catalogue) lacked data for specific parameters, the gaps were filled using the secondary catalogues listed in the corresponding columns.}
+% \begin{tabular}{c}
+% Ejemplo tabla que tarda poco en compilar\\
+% \end{tabular}
+% \label{Tab:secondary sources}
+% \end{table}
+
+The newly compiled 1915-star sample was then cross-matched with the catalogue of \citet{moya2018} in order to merge both sources, while avoiding duplicates and retaining only the highest-quality entries. Following the same data-centred strategy, stars were removed when they had excessively large uncertainties, zero reported uncertainty in any parameter except $a$, were not classified as main-sequence stars in both catalogues, or had duplicated identifiers. This reduced the sample to 784 stars. Section \ref{subsec:dataset_a} explains the later removal of 17 additional objects, leading to the final training sample of $n=767$ stars.
+
+Although each star in the final merged sample is assigned a primary catalogue identifier according to the reliability criteria described above, the individual stellar parameters for a given entry do not always originate from that single source. To maximise completeness, the merging algorithm constructed composite entries: when the primary catalogue lacked a given parameter, the missing value was filled from an available secondary catalogue. The final parameter set for a star can therefore be heterogeneous in origin. To preserve traceability, a more detailed internal provenance table was used alongside Table \ref{MS_catalog_database_D}; for each primary source, it records which secondary catalogues were queried to fill each missing parameter. When several secondary sources were available, they were prioritised according to the reliability hierarchy described above.
+
+The Hertzsprung--Russell diagram was used as a final consistency check for the cleaned sample. This diagram relates stellar luminosity to effective temperature and is commonly used to identify evolutionary stages, especially the main sequence. As shown in Figure \ref{fig:HRdiagram}, the stars mostly follow the expected main-sequence behaviour, with luminosity decreasing towards lower effective temperatures. FGK stars occupy approximately $T_{\mathrm{eff}}\sim3500$--$7400\,\mathrm{K}$ \citep{pecaut2013}, or $\log_{10}T_{\mathrm{eff}}\sim3.54$--$3.87$. Most of the sample lies in this regime, especially the asteroseismic and interferometric stars. The eclipsing-binary subsample is also mainly concentrated around the main sequence, but it spans a broader region of the diagram.
 
 \begin{figure}[H]
     \centering
@@ -425,9 +451,17 @@ The Hertzsprung--Russell diagram was used as a final consistency check for the c
     \label{fig:HRdiagram}
 \end{figure}
 
-Finally, Section \ref{sec:dataset_C} requires the computation of oblateness (Eq. \ref{eq:oblateness}), which depends on the orbital semimajor axis $a$. This parameter was often reported without an uncertainty. To retain a statistically meaningful sample, the missing uncertainty was estimated from four significant digits of the reported value. This produced 295 stars with computed oblateness, 48 of which used this uncertainty estimate.
+Finally, Section \ref{sec:dataset_C} requires the computation of oblateness (Equation \ref{eq:oblateness}), which depends on the orbital semi-major axis $a$. This parameter was often reported without an uncertainty. To retain a statistically meaningful sample, the missing uncertainty was estimated from four significant digits of the reported value. This produced 295 stars with computed oblateness, 48 of which used this uncertainty estimate.
+
+
 
 \section{Machine Learning Model Training} \label{sec:results}
+The behaviours and quantitative results described in these sections were consistent across different random-seed runs for the four analysed models, keeping the same inputs, target and training strategy. The main evaluation metrics are the Mean Absolute Error (MAE), which measures the average absolute difference between the true masses $m_i$ and the model estimates $\hat{m}_i$; the Mean Absolute Relative Difference (MARD), which measures the average relative accuracy across $N$ samples; and the Mean Relative Difference (MRD), which measures the signed relative bias of the predictions with respect to the true values.
+
+\begin{equation}
+\text{MAE} = \frac{\sum_{i=1}^N |m_i - \hat{m}_i|}{N}, \quad \text{MARD} = \frac{\sum_{i=1}^N \frac{|m_i - \hat{m}_i|}{m_i}}{N}, \quad \text{MRD} = \frac{\sum_{i=1}^N \frac{m_i - \hat{m}_i}{m_i}}{N}.
+\end{equation}
+
 \subsection{Mass Predictions for FGK-type Stars} \label{subsec:dataset_a}
 Main-sequence stars of spectral types F, G and K are especially useful in stellar studies because they are common survey targets and therefore often have well-measured atmospheric parameters. By contrast, main-sequence M-type stars are less extensively documented. They are cooler, low-mass objects that burn hydrogen slowly and evolve very little over the age of the Universe \citep{laughlin1997}. Their intrinsic faintness and slow evolution make precise stellar parameters difficult to obtain \citep{chabrier2000}.
 
@@ -543,7 +577,7 @@ The predictive uncertainties observed in the plots of the BHS model are, however
 
 \begin{table}[H]
 \centering
-\caption{Comparison of the residual metrics obtained by the mass-prediction models on the holdout set. The models were trained with $T_{\mathrm{eff}}$, $\rho$ and [Fe/H] as input features, and stellar mass as the target. MAE gives the average absolute error in solar masses, MARD gives the average absolute relative error, and MRD gives the signed relative bias.}
+\caption{Comparison of the residual metrics obtained by the mass-prediction models on the holdout set. The models were trained with $T_{\mathrm{eff}}$, $\rho$ and [Fe/H] as input features, and stellar mass as the target.}
 \label{tab:model_mard_mrd}
 \begin{tabular}{lcccc}
 \hline\hline
@@ -585,89 +619,199 @@ Surface gravity, $g$, is a physically informative quantity for the estimation of
 
 The procedure described in Section \ref{subsec:dataset_a} was then repeated using this updated set of input features, yielding similar results, both visually and quantitatively. In this case, however, an additional comparison was possible. The Institute of Astrophysics of the Universidade do Porto provided a complementary dataset of stellar masses obtained through stellar-modelling methods. These estimates are based on PARSEC, the PAdova and TRieste Stellar Evolution Code, which provides stellar evolutionary tracks and isochrones used to infer stellar properties from theoretical models \citep{bressan2012}. This dataset was first cleaned to remove stars that had already been used during training, and was then used to obtain mass predictions with the trained models. The new mass predictions, including their uncertainties, were compared with the masses obtained from stellar evolutionary grids. Linear relations developed by \citet{moya2022} were added to the comparison as well. This provides a benchmark against both model-based mass estimates and previously published data-driven mass-estimation methods.
 \subsubsection*{Results}
+The evaluations against the $20\%$ holdout test were performed using the MAE, MARD and MRD indicators introduced in Section \ref{subsec:dataset_a}. Table \ref{tab:dataset_b_mard_mrd} shows that the behaviour of the models is consistent with that found when training with $\rho$ instead of $L$, although the performance is slightly worse, with MARD values increasing by about two percentage points. This supports the conclusion of \citet{moya2018} that $\rho$ is a particularly informative parameter for stellar-mass prediction. Nevertheless, Figure \ref{fig:mass_holdout_all_models_B} puts this loss of accuracy into context, since the points remain only moderately dispersed around the 1:1 relation. Even with this decrease in performance, the results remain acceptable for the purposes of this comparison; the MAE values obtained, all within the range $0.07$--$0.08 \ M_\odot$, are comparable to those reported for different models by \citet{moya2022}, which lie within the range $0.06$--$0.08 \ M_\odot$.
 
+\begin{table}[H]
+\centering
+\caption{Comparison of the residual metrics obtained by the mass-prediction models on the holdout set. The models were trained with $T_{\mathrm{eff}}$, $L$ and $[\mathrm{Fe}/\mathrm{H}]$ as input features, and stellar mass as the target.}
+\label{tab:dataset_b_mard_mrd}
+\begin{tabular}{lcccc}
+\hline\hline
+Metric & BART & GP & HBNN & BHS \\
+\hline
+MAE ($M_\odot$) & 0.076 & 0.077 & 0.074 & 0.072 \\
+MARD [\%] & 6.99 & 6.79 & 7.02 & 6.53 \\
+MRD [\%]  & -2.39 & -1.14 & -1.89 & -1.36 \\
+\hline
+\end{tabular}
+\end{table}
+
+GP is the level-0 model with the best MRD value, while BART and HBNN show signs of systematic misprediction. For HBNN, the tendency of the model to shift masses towards values close to $1.25 \ M_\odot$ is still visible in Figure \ref{fig:hbnn_mass_residuals_B}, although the MRD value of $-1.89\%$ shows that overpredictions are more common. These mispredictions were expected, since the training set was not expanded and some regions of parameter space remain poorly represented. The same behaviour is also found for BART, which reaches an even more negative MRD of $-2.39\%$. BART also returns comparatively large uncertainties in these regions.
+
+The GP model also shows underconfident behaviour. The plots must therefore be trimmed to the 95th percentile of predicted mass uncertainty to prevent a small number of outliers with very large uncertainties from masking the population. The indicators in Table \ref{tab:dataset_b_mard_mrd} suggest a slight trend towards overprediction, while Figure \ref{fig:gp_mass_residuals_B} shows that this corresponds to a modest positive offset that remains approximately constant across the $M_{\mathrm{true}}$ axis.
+
+\begin{figure}[H]
+\centering
+\captionsetup[subfigure]{font=small}
+
+% Top row: HBNN, GP
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png}
+\caption{HBNN prediction.}
+\label{fig:hbnn_mass_predictions_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png}
+\caption{HBNN residuals.}
+\label{fig:hbnn_mass_residuals_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png}
+\caption{GP prediction.}
+\label{fig:gp_mass_predictions_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png}
+\caption{GP residuals.}
+\label{fig:gp_mass_residuals_B}
+\end{subfigure}
+
+\vspace{0.4cm}
+
+% Bottom row: BART, BHS
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png}
+\caption{BART prediction.}
+\label{fig:bart_mass_predictions_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png}
+\caption{BART residuals.}
+\label{fig:bart_mass_residuals_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png}
+\caption{BHS prediction.}
+\label{fig:bhs_mass_predictions_B}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.24\textwidth}
+\centering
+\includegraphics[width=\linewidth]{BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png}
+\caption{BHS residuals.}
+\label{fig:bhs_mass_residuals_B}
+\end{subfigure}
+
+\caption{Holdout-test performance of the HBNN, GP, BART and BHS mass models trained with $T_{\mathrm{eff}}$, $L$ and $[\mathrm{Fe}/\mathrm{H}]$. For each model, the prediction panel shows $M_{\mathrm{pred}}$ as a function of $M_{\mathrm{true}}$, while the residual panel shows $M_{\mathrm{pred}}-M_{\mathrm{true}}$ as a function of $M_{\mathrm{true}}$. Vertical error bars represent the predictive uncertainty returned by each model. The GP and BHS panels are restricted to the stars below the 95th percentile of predicted mass uncertainty in order to keep the main population visually readable. The full calibration sample contains $n=767$ stars, with $20\%$ reserved for the holdout test.}
+\label{fig:mass_holdout_all_models_B}
+
+\end{figure}
+
+BHS combines the behaviours of the three level-0 models and remains the most stable compromise between residual accuracy and global bias. Since GP performs better away from $1 \ M_\odot$ than BART and HBNN, the stacking approach is expected to assign it larger weight in those regions. In the central region, however, BHS can favour the other models when they provide more reliable predictions. Overall, the points remain well concentrated around the 1:1 relation, with no clear systematic trend. Although the BHS MRD is slightly worse than the GP value, this is expected because the stacking model does not simply reproduce the GP predictions, but balances them with the contributions of BART and HBNN. This behaviour is consistent with the evaluation metrics. The large individual predictive uncertainties of the stacking model suggest that it inherits part of the underconfidence already present in BART and GP, a behaviour also observed in the $\rho$-training case.
+
+
+The mass predictions, including their uncertainties, are then compared with the stellar evolutionary-grid estimates based on PARSEC and with the linear-relation masses presented by \citet{moya2022}. The differences are analysed through fractional residuals, defined as $(M_1-M_2)/M_2$, where $M_1$ and $M_2$ correspond to the first and second methods indicated in each comparison label in Figure \ref{fig:frac_res_distrib_dataset_b}. The closest agreement is found between the BHS predictions and the grid-model masses: in this case, all residuals remain within approximately $\pm 10\%$. The stacking approach gives systematically higher masses than the grid models, but in a relatively homogeneous way, since both the mean and the median lie close to each other, near a fractional difference of $+2\%$.
+
+When BHS is compared with the \citet{moya2022} linear relations, the behaviour changes, showing a more dispersed distribution with a tail of mass differences up to about $15\%$. The near-zero mean residual should not be interpreted as evidence that the stacking approach and the linear relations are consistently equivalent, but rather as the result of a broader residual distribution in which positive and negative deviations partly cancel. Table \ref{tab:residuals_dataset_b} confirms this interpretation: the mean residual is $-0.38\%$, while the mean absolute residual increases to $3.14\%$, larger than the BHS-grid comparison value of $2.86\%$. The two methods therefore provide different predictions for individual stars, even though their average signed offset is small.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png}
+\caption{Distributions of fractional mass residuals for the comparison between the Bayesian Hierarchical Stacking predictions and the two reference mass estimates used for the ARIEL sample. The green distribution compares BHS with the stellar-model grid masses provided by the IA-Porto group, while the orange distribution compares BHS with the linear-relation masses from \citet{moya2022}. The purple distribution shows the direct comparison between the linear-relation and grid masses. The fractional residuals are defined as $(M_1-M_2)/M_2$, following the order of the two methods shown on the horizontal axis. The sample contains $n=184$ stars.}
+\label{fig:frac_res_distrib_dataset_b}
+\end{figure}
+
+The two reference models do not produce equivalent predictions either. Figure \ref{fig:frac_res_distrib_dataset_b} and Table \ref{tab:residuals_dataset_b} show that the linear-relation and grid masses differ more strongly from each other than BHS differs from either of them, with a MARD above $5\%$ and a broad residual distribution that includes a tail of large negative residuals extending almost to $-20\%$. This tail is consistent with the one observed in the BHS-linear comparison, suggesting that the linear relations produce comparatively low masses for a small number of stars.
+
+\begin{table}[H]
+\centering
+\caption{Mass-comparison metrics for the ARIEL sample using the same fractional-residual convention as in Figure \ref{fig:frac_res_distrib_dataset_b}.}
+\begin{tabular}{lccc}
+\hline\hline
+Metric & BHS - Grid & BHS - Linear & Linear - Grid \\
+\hline
+MAE ($M_\odot$) & 0.031 & 0.035 & 0.061 \\
+MARD [\%] & 2.86 & 3.14 & 5.60 \\
+MRD [\%] & 1.39 & -0.38 & 2.01 \\
+\hline
+\end{tabular}
+\label{tab:residuals_dataset_b}
+\end{table}
 
 \subsection{Oblateness and mass predictions of eclipsing binaries} \label{sec:dataset_C}
+As explained in Section \ref{subsec:dataset_a}, one of the aims of this work is to predict the masses of FGK-type components in eclipsing-binary systems, so that information can then be inferred for their difficult-to-study M-type companions. Eclipsing binaries therefore provide one of the most useful routes for obtaining information about these objects, but it must be assessed whether the information inferred from stars in eclipsing-binary systems can be extrapolated to isolated stars of similar type.
 
-As explained in Section \ref{subsec:dataset_a}, one of the aims of this work is to predict the masses of FGK-type components in eclipsing-binary systems, so that information can then be inferred for their M-type companions. This is relevant because M-type stars are intrinsically difficult to characterise: they are cool, low-mass stars with slow evolution, and precise observational constraints are generally harder to obtain. Eclipsing binaries therefore provide one of the most useful routes for obtaining information about these objects. However, this also raises an important question: whether the information inferred from stars in eclipsing-binary systems can be extrapolated to isolated stars of similar type.
-
-Eclipsing-binary components are not completely independent objects. Their mutual gravitational interaction determines their orbital motion, but it can also modify their morphology through tidal forces. In systems with stronger interaction, the stars may become tidally distorted rather than remaining perfectly spherical. This distortion can be quantified through the oblateness parameter $o$, given by equation (43) of \citet{chandrasekhar1933double}:
+Eclipsing-binary components are not completely independent objects. Their mutual gravitational interaction can modify their morphology through tidal forces, preventing them from remaining perfectly spherical. This distortion can be quantified through the oblateness parameter $o$, given by Equation (43) of \citet{chandrasekhar1933double}, which classifies stars from perfectly spherical ($o=0$) to highly oblate ($o \sim 1$):
 
 \begin{equation}
-o = 0.6446 \cdot \left(1 + 4\frac{m}{m_\star}\right) \cdot \left(\frac{R}{a}\right)^3,
+o = 0.6446 \cdot \left(1 + 4\frac{m}{m_\star}\right) \cdot \left(\frac{R_\star}{a}\right)^3,
 \label{eq:oblateness}
 \end{equation}
-where $m_\star$ is the mass of the star whose oblateness is being computed, $m$ is the mass of its companion, $R$ is the stellar radius, and $a$ is the orbital semi-major axis.
+where $R_\star$ and $m_\star$ are the radius and mass of the star whose oblateness is being computed, $m$ is the mass of its companion, and $a$ is the orbital semi-major axis.
 
-To test whether this tidal distortion affects the mass predictions, the models are trained on asteroseismic stars, which are treated here as the single-star reference sample, and then applied to the eclipsing-binary components available in the catalogue. The predicted masses are compared with the reference masses of the eclipsing-binary stars, and the resulting residuals are analysed as a function of oblateness. This follows the general approach of \citet{maxted2023benchmark}, where eclipsing binaries are used to evaluate how well single-star relations can be transferred to binary systems.
-
-Since the goal in this section is to obtain the most accurate possible mass predictions before analysing the residual dependence on oblateness, four input features are used, following the recommendation of \citet{moya2022}: $T_{\mathrm{eff}}$, $\log g$, $L$ and [Fe/H].
+To test whether this tidal distortion affects the mass predictions, the models are trained on asteroseismic stars, which are treated here as the single-star reference sample. Predictions are then obtained for the eclipsing-binary components available in the catalogue. The predicted masses are compared with the reference masses of the eclipsing-binary stars, and the resulting residuals are analysed as a function of oblateness. This follows the general approach of \citet{maxted2023benchmark}, where eclipsing binaries are used to evaluate how well single-star relations can be transferred to binary systems.
 
 \subsubsection*{Results: holdout test}
-
-The models were trained using the asteroseismic stars in the dataset, listed in Table \ref{MS_catalog_database_D}. This subset contains 420 stars, of which 154 were retained as the holdout set. Before analysing the residuals as a function of oblateness, it is useful to evaluate the performance of the models on this holdout set. Two competing effects are present. On the one hand, the models now use four input features instead of three, which should improve the precision of the predictions. On the other hand, the available sample is reduced from the original 767 stars to 420 stars. Therefore, there are reasons to expect an improvement in predictive performance, but also reasons to expect a degradation due to the smaller and less heterogeneous training set.
-
-The predictions and residuals behaved similarly to those discussed in Figure \ref{fig:mass_holdout_all_models}. The characteristic GP behaviour, with a small number of objects showing extremely large predictive uncertainties, was still present, and these outliers continued to vary across different random seeds. This reinforces the interpretation that the effect is mainly related to the model and its uncertainty treatment, rather than to a fixed set of problematic stars. In this case, however, the training sample is not identical to the previous one, since only the asteroseismic stars from the original catalogue are used.
-
-For HBNN and BART, the systematic behaviour away from $M=1 \ M_\odot$ was again observed, and in this case it appeared slightly amplified. The residual indicators in Table \ref{tab:dataset_D_model_mard_mrd} support this interpretation: the absolute MRD values are larger than those reported in Table \ref{tab:model_mard_mrd}. This indicates that, when the models are trained only with asteroseismic stars, the predictions develop a stronger signed bias.
+The models were trained using the asteroseismic stars from the dataset in Table \ref{MS_catalog_database_D}. Since the goal in this section is to obtain accurate mass predictions before analysing the residual dependence on oblateness, four input features were used, following the recommendation of \citet{moya2022}: $T_{\mathrm{eff}}$, $\log g$, $L$ and [Fe/H]. This subset contains 420 stars, of which 84 were retained as the holdout set. There are therefore two competing effects on the predictive performance of the models. On the one hand, the models now use four input features instead of three, which should improve the precision of the predictions. On the other hand, the available sample is reduced from the original 767 stars to 420 stars. 
 
 \begin{table}[H]
     \centering
-    \caption{Comparison of the relative residual metrics obtained for the different models on the holdout set. Input features are $T_{\mathrm{eff}}$, $\rho$ and [Fe/H]; target is mass.}
+    \caption{Comparison of the residual metrics obtained by the mass-prediction models on the holdout set. The models were trained with $T_{\mathrm{eff}}$, $\log g$, $L$ and [Fe/H] as input features, and stellar mass as the target.}
     \label{tab:dataset_D_model_mard_mrd}
     \begin{tabular}{lcccc}
         \hline\hline
         Metric & BART & GP & HBNN & BHS \\
         \hline
-        MAE ($M_\odot$) & 0.057 & 0.053 & 0.060 & 0.052 \\
-        MARD [\%] & 4.98 & 4.79 & 5.27 & 4.66 \\
-        MRD [\%]  & -0.63 & 0.34 & 0.71 & 0.29 \\
+        MAE ($M_\odot$) & 0.052 & 0.042 & 0.045 & 0.043 \\
+        MARD [\%] & 4.50 & 3.84 & 3.98 & 3.85 \\
+        MRD [\%]  & -0.99 & -0.69 & -0.61 & -0.65 \\
         \hline
     \end{tabular}
 \end{table}
 
-The increase in the absolute MRD values indicates the presence of a systematic trend in the predictions after training only with asteroseismic stars. This is expected, since the training sample is now much less heterogeneous. As shown in Figure \ref{fig:HRdiagram}, the asteroseismic stars are concentrated in a relatively narrow mass range, approximately between $0.8 \ M_\odot$ and $1.5 \ M_\odot$. This makes the predictions more robust within this specific region of the mass spectrum, but less reliable for stars outside it. The repeatedly negative MRD values, meaning predicted masses larger than true masses, show an overprediction trend in the four models. Low-mass stars lie away from the most populated region near $\sim 1 \ M_\odot$, and their predicted masses therefore tend to be overestimated. This behaviour is particularly interesting for the GP model: in the larger and more heterogeneous dataset no clear global trend was observed, whereas in this restricted asteroseismic sample the MRD value of $-1.32\%$ is the largest in absolute value among the four models, clearly indicating an overprediction trend.
+The predictions and residuals behave similarly to those discussed in Figure \ref{fig:mass_holdout_all_models}. The characteristic GP behaviour, with a small number of objects showing extremely large predictive uncertainties, is still present, reinforcing the interpretation that the effect is mainly related to the model and its uncertainty treatment, rather than to a fixed set of problematic stars. For HBNN and BART, the systematic behaviour away from $M=1 \ M_\odot$ is observed and appears slightly amplified, as seen in Table \ref{tab:dataset_D_model_mard_mrd}. This indicates that, when the models are trained only with asteroseismic stars, the predictions develop a stronger signed bias. However, with $\log g$ included, the resulting metrics have lower values than those of Section \ref{subsec:dataset_b} (Table \ref{tab:dataset_b_mard_mrd}), consistently with the results of \citet{moya2022}.
 
-However, the related effect of increased precision is also observed. By training the models on a specific region of mass space, the predictions become more tightly constrained within that same region. Since the holdout test is evaluated against asteroseismic stars from the same population, which mostly occupy the same region of the HR diagram, the predictions are very precise and the MARD consequently decreases. It would therefore be useful to test the same models against a different stellar sample, more evenly distributed in mass, in order to analyse whether this reduction in scatter is preserved outside the asteroseismic regime.
+The stronger signed bias is expected, since the training sample is now less heterogeneous. As shown in Figure \ref{fig:HRdiagram}, the asteroseismic stars are concentrated in a relatively narrow mass range, approximately between $0.8 \ M_\odot$ and $1.5 \ M_\odot$. This makes the predictions more robust within this specific region of the mass spectrum. Since the holdout test is evaluated against asteroseismic stars from the same population, which mostly occupy the same region of the HR diagram, MARD consequently decreases. However, the predictive performance is expected to be less reliable for stars outside this range, where systematic trends are reflected in the larger absolute MRD values.
 
-Regarding the BHS indicators, it is important to note that the stacking model does not yield the best values in this case. This can be understood by returning to one of the conclusions of Section \ref{subsec:dataset_a}: good MRD values can result from systematic mispredictions cancelling out, rather than from uniformly good predictive performance. Since an overprediction trend is now present, and since HBNN and BART previously showed stronger systematic behaviour, the stacking model is probably assigning more weight to GP over much of the analysed interval.
-
-Because the holdout stars now cover a relatively narrow range of masses, if one model dominates in that region, the other two models have little opportunity to contribute in other parts of mass space. Their influence on the final stacked prediction is therefore reduced. In this run, the BHS model most likely prioritised GP, and possibly BART, over most of the analysed interval, while rarely following the HBNN predictions, which happen to give the lowest residual metrics in this particular holdout test.
+Regarding the stacking model, BHS yields the best or nearly best predictions across the evaluated metrics. Although HBNN has a slightly lower MRD, this may reflect the cancellation of systematic overpredictions and underpredictions, as discussed in previous sections. BHS instead provides a more balanced compromise: its MARD is almost identical to that of GP, and its absolute MRD remains well below $1\%$.
 
 \subsubsection*{Results: oblateness}
+The effect of binary interaction was studied by predicting the masses of the stars in the original dataset that belong to eclipsing-binary systems. From this group, only systems with an available orbital semi-major axis $a$ could be used, since this parameter is required to compute the oblateness. As explained in Section \ref{sec:cleaning}, this leaves 295 stars with available oblateness estimates before applying the final selection cuts. Once $o$ was computed, the models trained on the asteroseismic stars were applied to these eclipsing-binary components, and the resulting mass residuals were analysed as a function of oblateness.
 
-The interaction effects were studied by predicting the masses of the stars in the original dataset that belong to eclipsing-binary systems. From this group, only systems with available orbital semi-major axis $a$ could be used, since this parameter is required to compute the oblateness. As explained in Section \ref{sec:cleaning}, this leaves 295 stars with available oblateness estimates before applying the final selection cuts. Once $o$ was computed, the models trained on the asteroseismic stars were applied to these eclipsing-binary components, and the resulting mass residuals were analysed as a function of oblateness.
+To avoid interpreting extrapolation effects as physical binary effects, the eclipsing-binary sample was restricted to stars well covered by the asteroseismic training set. First, only stars with $0.950 \ M_\odot<M<1.500 \ M_\odot$ were retained, corresponding approximately to the 5th and 95th mass percentiles of the asteroseismic sample. In addition, the final sample was restricted to the input-parameter domain $5500<T_{\mathrm{eff}}<6800 \ \mathrm{K}$, $3.750<\log g<4.450$, $1.000<L/L_\odot<11.000$ and $-0.500<[\mathrm{Fe/H}]<0.270$, corresponding to the 2nd and 98th percentiles of the asteroseismic training distribution. The final eclipsing-binary sample contains $n=85$ stars. This conservative selection reduces the number of systems, but makes the comparison more reliable, since the remaining stars lie inside the region of parameter space where the model is expected to have predictive validity.
 
-To avoid interpreting extrapolation effects as physical binary effects, the eclipsing-binary sample was restricted to stars well covered by the asteroseismic training set. First, only stars with $0.950<M/M_\odot<1.500$ were retained, corresponding approximately to the 5th and 95th mass percentiles of the asteroseismic sample. In addition, the final sample was restricted to the input-parameter domain $5500<T_{\mathrm{eff}}<6800,\mathrm{K}$, $3.750<\log g<4.450$, $1.000<L/L_\odot<11.000$ and $-0.500<[\mathrm{Fe/H}]<0.270$, corresponding to the 2nd and 98th percentiles of the asteroseismic training distribution. The final eclipsing-binary sample contains $n=85$ stars. This conservative selection reduces the number of systems, but makes the comparison more reliable, since the remaining stars lie inside the region of parameter space where the model is expected to have predictive validity.
-
-Figure \ref{fig:dataset_D_o} shows that the oblateness values span several orders of magnitude, from $o=4.9\times10^{-7}$ to $o=1.18\times10^{-1}$. For this reason, the analysis was carried out using $\log o$. Globally, the signed residuals show no strong systematic tendency towards either overprediction or underprediction. The Pearson and Spearman tests also support this interpretation, since both yield correlation coefficients close to zero. The mean fractional residual is $\overline{\delta M}=-0.85\%$, while the standard deviation reaches $10.43\%$, driven partly by a small number of large residuals. Therefore, the model is approximately unbiased on the selected eclipsing-binary sample, but the scatter is not negligible.
+The analysis was carried out using $\log o$, since the oblateness values span several orders of magnitude, as Figure \ref{fig:dataset_D_o} shows. Globally, the signed residuals show no strong systematic tendency towards either overprediction or underprediction. Pearson and Spearman tests support this interpretation, since both yield correlation coefficients close to zero. The mean fractional residual is $\overline{\delta M}=-0.85\%$, while the standard deviation reaches $10.43\%$, driven partly by a small number of large residuals and the reduced number of training stars. Therefore, the model is approximately unbiased on the selected eclipsing-binary sample, but the scatter is not negligible.
 
 \begin{figure}[H]
 \centering
 
 \begin{subfigure}[t]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{02_fractional_residual_vs_log10_oblateness.png}
+    \includegraphics[width=\textwidth]{10_bins_02_fractional_residual_vs_log10_oblateness.png}
     \caption{Signed fractional mass residuals.}
     \label{fig:dataset_D_o_residuals}
 \end{subfigure}
 \hfill
     \begin{subfigure}[t]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{01_abs_fractional_residual_vs_log10_oblateness.png}
+    \includegraphics[width=\textwidth]{10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png}
     \caption{Absolute fractional mass residuals.}
     \label{fig:dataset_D_o_residuals_abs}
 \end{subfigure}
-\caption{Dependence of the BHS mass residuals on stellar oblateness $o$, as defined in equation \ref{eq:oblateness}, for the selected eclipsing-binary sample. The model uses $T_{\mathrm{eff}}$, $L$, $\log g$ and [Fe/H] as input parameters. The left panel shows signed fractional residuals, while the right panel shows their absolute values. Grey points correspond to individual eclipsing-binary components, and the blue and red squares show binned means and medians with $1\sigma$ scatter. The sample contains $n=85$ stars.}
+\caption{Dependence of the BHS mass residuals on stellar oblateness $o$, as defined in Equation \ref{eq:oblateness}, for the selected eclipsing-binary sample. The model uses $T_{\mathrm{eff}}$, $L$, $\log g$ and [Fe/H] as input parameters. Grey points correspond to individual eclipsing-binary components, and the blue and red squares show binned means and medians with $1\sigma$ scatter. The sample contains $n=85$ stars.}
 \label{fig:dataset_D_o}
 
 \end{figure}
 
-Figure \ref{fig:dataset_D_o_residuals_abs} shows that the dispersion of the residuals increases with $o$. In the binned analysis, the standard deviation of $\delta M$ rises from values of a few percent at low oblateness to much larger values in the most deformed systems: $1.23\%$, $2.65\%$, $6.50\%$, $9.89\%$, $6.23\%$, $7.57\%$, $9.77\%$, $13.87\%$ and $22.74\%$. The first bin contains only three stars and should not be overinterpreted, but the overall behaviour is consistent with a degradation of precision at larger oblateness. The same trend is visible in the absolute fractional residuals: most bins remain below about $7\%$, whereas the highest-oblateness bin reaches approximately $15\%$. Therefore, the main effect of oblateness is not a clear change in the sign of the residuals, but an increase in their spread.
+Figure \ref{fig:dataset_D_o_residuals_abs} shows that the dispersion of the residuals increases with $o$. In the signed residual analysis, the standard deviation of $\delta M$ rises from values of a few percent at low oblateness to much larger values in the most deformed systems: $1.06\%$, $2.65\%$, $6.50\%$, $9.89\%$, $6.23\%$, $7.57\%$, $9.77\%$, $13.87\%$ and $22.74\%$. The overall behaviour is consistent with a degradation of precision at larger oblateness. The same trend is visible in the absolute fractional residuals: most bins remain below about $7\%$, whereas the highest-oblateness bin reaches approximately $15\%$. Therefore, the main effect of oblateness is not a clear change in the sign of the residuals, but an increase in their spread.
 
-This distinction is important. The results do not indicate a systematic loss of accuracy, since the average residual remains close to zero. Instead, they indicate a loss of precision: as the stars become more oblate, the model predictions become more dispersed around the true eclipsing-binary masses. This is consistent with the idea that highly distorted binary components deviate more strongly from the approximately isolated stellar evolution represented by the asteroseismic training sample. Nevertheless, this interpretation should remain cautious, because the number of stars is limited and the binned dispersions depend on the chosen bin edges.
+This distinction is important. The results do not indicate a systematic loss of accuracy, since the average residual remains close to zero. Instead, they indicate a loss of precision; as the stars become more oblate, the model predictions become more dispersed around the true eclipsing-binary masses. This is consistent with the idea that highly distorted binary components deviate more strongly from the approximately isolated stellar evolution represented by the asteroseismic training sample. Nevertheless, this interpretation should remain cautious, because the number of stars is limited and the binned dispersions depend on the chosen bin edges.
 
-Since Section \ref{subsec:dataset_a} showed that stellar mass has a strong effect on the predictions, it is necessary to check whether the observed increase in scatter could instead be driven by $M$. Figure \ref{fig:dataset_D_mass} shows that this is not the case: the residual dispersion does not display a clear dependence on stellar mass. If anything, the residual panel in Figure \ref{fig:dataset_D_mass_residuals} again shows a slight tendency for the models to pull predictions towards values close to $1.25 \ M_\odot$. This behaviour was already discussed in detail and is not associated with an increase in prediction scatter; the precision loss appears to be mass-independent. The mass-coloured residual panel in Figure \ref{fig:dataset_D_o_residuals_mass_colored} adds the true stellar mass as a colour scale. The points again scatter around zero, and many error bars cross the zero-residual line. At the same time, the increase in dispersion at larger oblateness remains visible, showing that the effect is not confined to a single narrow mass interval.
+Since Sections \ref{subsec:dataset_a} and \ref{subsec:dataset_b} showed that stellar mass has a strong effect on the predictions, it is necessary to check whether the observed increase in scatter could instead be driven by $M$. Figure \ref{fig:dataset_D_mass} shows that this is not the case: the residual dispersion does not display a clear dependence on stellar mass. If anything, the residual panel in Figure \ref{fig:dataset_D_mass_residuals} shows a slight tendency for the models to pull predictions towards values close to $1.25 \ M_\odot$. This behaviour was already discussed in detail and is not associated with an increase in prediction scatter; the precision loss appears to be mass-independent. 
+
+The mass-coloured residual panel in Figure \ref{fig:dataset_D_o_residuals_mass_colored} adds the true stellar mass as a colour scale. The points scatter around zero, and many error bars cross the zero-residual line. At the same time, the increase in dispersion at larger oblateness remains visible and not associated with increasing $M_{\mathrm{true}}$, showing that the effect is not confined to a single mass interval.
 
 \begin{figure}[H]
 \centering
@@ -682,7 +826,7 @@ Since Section \ref{subsec:dataset_a} showed that stellar mass has a strong effec
 \begin{subfigure}[t]{0.31\textwidth}
     \centering
     \includegraphics[width=\linewidth]{03_fractional_residual_vs_true_EB_mass.png}
-    \caption{Fractional residuals mass.}
+    \caption{Fractional residuals.}
     \label{fig:dataset_D_mass_residuals}
 \end{subfigure}
 \hfill
@@ -698,17 +842,13 @@ Since Section \ref{subsec:dataset_a} showed that stellar mass has a strong effec
 
 \end{figure}
 
-
 To test the dependence of the residuals on the different input parameters, a multivariable linear regression was performed on the eclipsing-binary residuals. Each feature, together with $o$ and $M$, was assigned a regression coefficient, $\beta$, quantifying its influence on the residual behaviour. Since the predictors were standardised, the coefficients can be directly compared.
 
-The signed residuals are not significantly associated with oblateness, with $\beta_{\log o}=0.002\pm0.005$, consistent with zero. Therefore, $o$ does not introduce an overall positive or negative bias in the predictions. Instead, the signed residuals are mainly associated with the stellar parameters themselves. As already seen in Figure \ref{fig:dataset_D_mass}, mass has a clear effect on the tendency towards overprediction or underprediction, with $\beta_M=-0.108\pm0.005$. Other relevant contributions are found for $T_{\mathrm{eff}}$, with $\beta_{T_{\mathrm{eff}}}=0.077\pm0.007$, and for [Fe/H], with $\beta_{[\mathrm{Fe/H}]}=0.048\pm0.002$.
+The signed residuals are not significantly associated with oblateness, with $\beta_{\log o}=0.002 \pm 0.005$, consistent with zero; $o$ does not introduce an overall positive or negative bias in the predictions. Instead, the signed residuals are mainly associated with the stellar parameters themselves. As already seen in Figure \ref{fig:dataset_D_mass}, mass affects the tendency towards overprediction or underprediction, with $\beta_M=-0.108\pm0.005$. Other relevant contributions are found for $T_{\mathrm{eff}}$, with $\beta_{T_{\mathrm{eff}}}=0.077\pm0.007$, and for [Fe/H], with $\beta_{[\mathrm{Fe/H}]}=0.048\pm0.002$.
 
-The result changes when the absolute fractional residual is used as the response variable. In this case, $\log_{10}o$ is the only statistically significant predictor, with $\beta_{\log o}=0.030\pm0.012$. Since the predictors are standardised, this means that a one-standard-deviation increase in $\log_{10}o$ is associated with an increase of about $3.0$ percentage points in $|\delta M|$, after controlling for $M$, $T_{\mathrm{eff}}$, [Fe/H], $\log g$ and $\log_{10}L$. The remaining predictors are not significant in this regression. Although the explanatory power is moderate, with $R^2=0.188$, this is the expected type of result: oblateness does not determine the signed residual of each individual star, but it contributes to the increase in residual magnitude, i.e. to the loss of precision.
+The result changes when the absolute fractional residual is used as the response variable. In this case, $\log o$ is the only statistically significant predictor, with $\beta_{\log o}=0.030\pm0.012$. Since the predictors are standardised, this means that a one-standard-deviation increase in $\log o$ is associated with an increase of about $3.0$ percentage points in $|\delta M|$. The remaining predictors are not significant in this regression.
 
 The uncertainty calibration also suggests that eclipsing-binary stars are harder to predict than stars drawn from the training distribution, since an additional source of scatter appears when the asteroseismic-trained model is applied to eclipsing binaries. Only $30/85$ stars, or $35.3\%$, have their true mass within $1\sigma$ of the predictive interval.
-
-The analysis was repeated for different training seeds, keeping the same inputs, target and training strategy. The qualitative behaviour remained unchanged: the signed residuals remain approximately centred around zero, while the scatter increases with oblateness. This makes the result unlikely to be an artefact of a particular random split or training realisation.
-
 
 \section{Conclusions} \label{sec:conclusions}
 
