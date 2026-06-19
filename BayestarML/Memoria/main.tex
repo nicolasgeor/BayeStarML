@@ -169,38 +169,6 @@ The model is treated in a fully Bayesian way. As described in Section \ref{sec:b
 
 % Training a GP therefore describes selecting a kernel and inferring its constraints, usually referred to as hyperparameters. The amplitude of the kernel controls the overall scale of the functions, and its length-scale controls how rapidly function values can change along the input axes. In this work, the kernel is chosen to favour smooth functions: nearby points in the input space are strongly correlated, while the correlation decreases as their separation increases. Figure \ref{fig:gp_lengthscale_example} illustrates this behaviour for the same set of observations under different length-scales: small length-scales allow more rapidly varying functions, whereas large length-scales produce smoother posterior predictions \citep{rasmussen2006gpml}.
 
-\begin{figure}[H]
-\centering
-
-
-\begin{subfigure}[t]{0.31\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{ell0comma3.png}
-    \caption{Small length-scale}
-    \label{fig:gp_small_lengthscale}
-\end{subfigure}
-\hfill
-\begin{subfigure}[t]{0.31\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{ell=1.png}
-    \caption{Intermediate length-scale}
-    \label{fig:gp_intermediate_lengthscale}
-\end{subfigure}
-\hfill
-\begin{subfigure}[t]{0.31\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{ell3.png}
-    \caption{Large length-scale}
-    \label{fig:gp_large_lengthscale}
-\end{subfigure}
-
-\caption{Example of Gaussian Process posterior predictions obtained for the same training points using different length-scales. The shaded regions show the corresponding predictive uncertainty. Reproduced from Figure 2.5 of \citet{rasmussen2006gpml}.}
-\label{fig:gp_lengthscale_example}
-
-
-\end{figure}
-
-
 % % (additional info at the end of the text, to help you explain it better in the presentation)
 
 % % FINAL VERSION: MIGHT ERASE LAST SENTENCE OF THIS PARAGRAPH
