@@ -1,0 +1,2663 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.28)  16 JUN 2026 10:56
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**./configuracion.tex
+(configuracion.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+(main.tex (configuracion.tex
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
+rartcl.cls
+Document Class: scrartcl 2026/02/02 v3.49.2 KOMA-Script document class (article
+)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
+rkbase.sty
+Package: scrkbase 2026/02/02 v3.49.2 KOMA-Script package (KOMA-Script-dependent
+ basics and keyval usage)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
+rbase.sty
+Package: scrbase 2026/02/02 v3.49.2 KOMA-Script package (KOMA-Script-independen
+t basics and keyval usage)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
+rlfile.sty
+Package: scrlfile 2026/02/02 v3.49.2 KOMA-Script package (file load hooks)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
+rlfile-hook.sty
+Package: scrlfile-hook 2026/02/02 v3.49.2 KOMA-Script package (using LaTeX hook
+s)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
+rlogo.sty
+Package: scrlogo 2026/02/02 v3.49.2 KOMA-Script package (logo)
+)))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyva
+l.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+Applying: [2021/05/01] Usage of raw or classic option list on input line 254.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line
+ 370.
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\to
+cbasic.sty
+Package: tocbasic 2026/02/02 v3.49.2 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip49
+\scr@dte@tocline@numbox=\box53
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 141.
+Class scrartcl Info: File `scrsize12pt.clo' used to setup font sizes on input l
+ine 2489.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\sc
+rsize12pt.clo
+File: scrsize12pt.clo 2026/02/02 v3.49.2 KOMA-Script font size class option (12
+pt)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\ty
+pearea.sty
+Package: typearea 2026/02/02 v3.49.2 KOMA-Script package (type area)
+\ta@bcor=\skip50
+\ta@div=\count275
+\ta@hblk=\skip51
+\ta@vblk=\skip52
+\ta@temp=\skip53
+\footheight=\skip54
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 12
+(typearea)             BCOR = 0.0pt
+(typearea)             \paperwidth      = 597.50793pt
+(typearea)              \textwidth      = 448.13095pt
+(typearea)              DIV departure   = -6%
+(typearea)              \evensidemargin = 2.4185pt
+(typearea)              \oddsidemargin  = 2.4185pt
+(typearea)             \paperheight     = 845.04694pt
+(typearea)              \textheight     = 635.5pt
+(typearea)              \topmargin      = -41.72441pt
+(typearea)              \headheight     = 18.125pt
+(typearea)              \headsep        = 21.75pt
+(typearea)              \topskip        = 12.0pt
+(typearea)              \footskip       = 50.75pt
+(typearea)              \baselineskip   = 14.5pt
+(typearea)              on input line 1810.
+)
+\c@part=\count276
+\c@section=\count277
+\c@subsection=\count278
+\c@subsubsection=\count279
+\c@paragraph=\count280
+\c@subparagraph=\count281
+\scr@dte@section@maxnumwidth=\skip55
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\section on input line 5015.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\section on input line 5015.
+\scr@dte@part@maxnumwidth=\skip56
+Class scrartcl Info: using compatibility default `afterindent=false'
+(scrartcl)           for `\part on input line 5023.
+\scr@dte@subsection@maxnumwidth=\skip57
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subsection on input line 5033.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subsection on input line 5033.
+\scr@dte@subsubsection@maxnumwidth=\skip58
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subsubsection on input line 5043.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subsubsection on input line 5043.
+\scr@dte@paragraph@maxnumwidth=\skip59
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\paragraph on input line 5054.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\paragraph on input line 5054.
+\scr@dte@subparagraph@maxnumwidth=\skip60
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subparagraph on input line 5064.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subparagraph on input line 5064.
+\abovecaptionskip=\skip61
+\belowcaptionskip=\skip62
+\c@pti@nb@sid@b@x=\box54
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 6287.
+\scr@dte@figure@maxnumwidth=\skip63
+\c@figure=\count282
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 6299.
+\scr@dte@table@maxnumwidth=\skip64
+\c@table=\count283
+Class scrartcl Info: Redefining `\numberline' on input line 6469.
+\bibindent=\dimen148
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.
+sty
+Package: babel 2025/12/11 v25.17 The multilingual framework for LuaLaTeX, pdfLa
+TeX and XeLaTeX
+\babel@savecnt=\count284
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input li
+ne 2068.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input li
+ne 2070.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input lin
+e 2072.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input lin
+e 2073.
+LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) 
+on input line 2074.
+LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) 
+on input line 2076.
+LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) 
+on input line 2101.
+\U@D=\dimen149
+\l@unhyphenated=\language79
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbab
+el.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count285
+Package babel Info: Configuration files are deprecated, as
+(babel)             they can break document portability.
+(babel)             Reported on input line 4196.
+
+*************************************
+* Local config file bblopts.cfg used
+*
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.
+cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale
+/en\babel-british.tex)
+Package babel Info: Importing font and identification data for british
+(babel)             from babel-en-GB.ini. Reported on input line 4320.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\
+british.ldf
+Language: british 2017/06/06 v3.3r English support from the babel system
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\
+english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
+(babel)             (\language73). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
+(babel)             (\language73). Reported on input line 108.
+)))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.
+sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks18
+\inpenc@posthook=\toks19
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.s
+ty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmat
+h.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip65
+
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstex
+t.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen
+.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks20
+\ex@=\dimen150
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy
+.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen151
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn
+.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count286
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count287
+\leftroot@=\count288
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count289
+\DOTSCASE@=\count290
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box55
+\strutbox@=\box56
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen152
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count291
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count292
+\dotsspace@=\muskip17
+\c@parentequation=\count293
+\dspbrk@lvl=\count294
+\tag@help=\toks21
+\row@=\count295
+\column@=\count296
+\maxfields@=\count297
+\andhelp@=\toks22
+\eqnshift@=\dimen153
+\alignsep@=\dimen154
+\tagshift@=\dimen155
+\tagwidth@=\dimen156
+\totwidth@=\dimen157
+\lineht@=\dimen158
+\@envbody=\toks23
+\multlinegap=\skip66
+\multlinetaggap=\skip67
+\mathdisplay@stack=\toks24
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfo
+nts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssy
+mb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.
+sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks25
+\thm@bodyfont=\toks26
+\thm@headfont=\toks27
+\thm@notefont=\toks28
+\thm@headpunct=\toks29
+\thm@preskip=\skip68
+\thm@postskip=\skip69
+\thm@headsep=\skip70
+\dth@everypar=\toks30
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/xpatch\xpatch.
+sty
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3
+.sty
+Package: expl3 2025-12-24 L3 programming layer (loader) 
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3ba
+ckend-pdftex.def
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count298
+))
+Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xpa
+rse\xparse.sty
+Package: xparse 2025-10-09 L3 Experimental document command parser
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etool
+box.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count299
+))
+Class scrartcl Info: amsthm's \deferred@thm@head patched.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/accents\accent
+s.sty
+Package: accents 2006/05/12 v1.4 Math Accent Tools
+\cc@skew=\dimen159
+\cc@wd=\dimen160
+\cc@code=\count300
+\cc@group=\count301
+\cc@skewchar=\count302
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/cancel\cancel.
+sty
+Package: cancel 2013/04/12 v2.2 Cancel math terms
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/siunitx\siunit
+x.sty
+Package: siunitx 2026-05-15 v3.5.5 A comprehensive (SI) units package
+\l__siunitx_number_uncert_offset_int=\count303
+\l__siunitx_number_exponent_fixed_int=\count304
+\l__siunitx_number_min_decimal_int=\count305
+\l__siunitx_number_min_integer_int=\count306
+\l__siunitx_number_round_precision_int=\count307
+\l__siunitx_number_lower_threshold_int=\count308
+\l__siunitx_number_upper_threshold_int=\count309
+\l__siunitx_number_group_first_int=\count310
+\l__siunitx_number_group_size_int=\count311
+\l__siunitx_number_group_min_int=\count312
+\l__siunitx_number_group_minimum_int=\count313
+\l__siunitx_compound_count_int=\count314
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/translations\t
+ranslations.sty
+Package: translations 2022/02/05 v1.12 internationalization of LaTeX2e packages
+ (CN)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\p
+dftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\in
+fwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.
+sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxc
+mds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+\l__siunitx_table_tmp_box=\box57
+\l__siunitx_table_tmp_dim=\dimen161
+\l__siunitx_table_column_width_dim=\dimen162
+\l__siunitx_table_integer_box=\box58
+\l__siunitx_table_decimal_box=\box59
+\l__siunitx_table_uncert_box=\box60
+\l__siunitx_table_before_box=\box61
+\l__siunitx_table_after_box=\box62
+\l__siunitx_table_before_dim=\dimen163
+\l__siunitx_table_carry_dim=\dimen164
+\l__siunitx_unit_tmp_int=\count315
+\l__siunitx_unit_position_int=\count316
+\l__siunitx_unit_total_int=\count317
+\l__siunitx_sexagesimal_tmp_dim=\dimen165
+\l__siunitx_sexagesimal_marker_box=\box63
+\l__siunitx_sexagesimal_unit_box=\box64
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.st
+y
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen166
+\ar@mcellbox=\box65
+\extrarowheight=\dimen167
+\NC@list=\toks31
+\extratabsurround=\skip71
+\backup@length=\skip72
+\ar@cellbox=\box66
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graph
+icx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graph
+ics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.
+sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\g
+raphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\p
+dftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen168
+\Gin@req@width=\dimen169
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\e
+pstopdf.sty
+Package: epstopdf 2020-01-24 v2.11 Conversion with epstopdf on the fly (HO)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.
+sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys
+\kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvop
+tions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvse
+tkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\e
+pstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epsto
+pdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+)))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/float\float.st
+y
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count318
+\float@exts=\toks32
+\float@box=\box67
+\@float@everytoks=\toks33
+\@floatcapt=\box68
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/caption\captio
+n.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+Package tocbasic Info: Loading of class-dependent code for package caption3
+(tocbasic)             prevented on line 50.
+
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/caption\captio
+n3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen170
+\captionmargin=\dimen171
+\caption@leftmargin=\dimen172
+\caption@rightmargin=\dimen173
+\caption@width=\dimen174
+\caption@indent=\dimen175
+\caption@parindent=\dimen176
+\caption@hangindent=\dimen177
+)
+\c@caption@flags=\count319
+\c@continuedfloat=\count320
+Package caption Info: float package is loaded.
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcap
+tion.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count321
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count322
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/sectsty\sectst
+y.sty
+Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading sty
+les
+
+
+LaTeX Warning: Command \underbar  has changed.
+               Check if current package is valid.
+
+
+LaTeX Warning: Command \underline  has changed.
+               Check if current package is valid.
+
+)
+
+Class scrartcl Warning: Incompatible package `sectsty' loaded!
+(scrartcl)              Package `sectsty' up to version 2.0.2 is incompatible
+(scrartcl)              with KOMA-Script from version 2.8e released in 2001.
+(scrartcl)              You should avoid that package and configure the
+(scrartcl)              section titles of your document using the KOMA-Script
+(scrartcl)              user interface, e.g., \chapterlinesformat,
+(scrartcl)              \RedeclareSectionCommand etc. or you should ask
+(scrartcl)              the `sectsty' maintainer for a more compatible release.
+
+(scrartcl)              Ignoring this warning could result in several error
+(scrartcl)              messages and formatting issues after loading package
+(scrartcl)              `sectsty' on input line 33.
+
+
+Class scrartcl Warning: Usage of package `fancyhdr' together
+(scrartcl)              with a KOMA-Script class is not recommended.
+(scrartcl)              I'd suggest to use 
+(scrartcl)              package `scrlayer' or `scrlayer-scrpage', because
+(scrartcl)              they support KOMA-Script classes.
+(scrartcl)              With `fancyhdr' several features of class `scrartcl'
+(scrartcl)              like options `headsepline', `footsepline' or command
+(scrartcl)              `\MakeMarkcase' and the commands `\setkomafont' and
+(scrartcl)              `\addtokomafont' for the page style elements need
+(scrartcl)              explicite user intervention to work.
+(scrartcl)              Nevertheless, using requested
+(scrartcl)              package `fancyhdr' on input line 38.
+
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancy
+hdr.sty
+Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
+
+\f@nch@headwidth=\skip73
+\f@nch@offset@elh=\skip74
+\f@nch@offset@erh=\skip75
+\f@nch@offset@olh=\skip76
+\f@nch@offset@orh=\skip77
+\f@nch@offset@elf=\skip78
+\f@nch@offset@erf=\skip79
+\f@nch@offset@olf=\skip80
+\f@nch@offset@orf=\skip81
+\f@nch@height=\skip82
+\f@nch@footalignment=\skip83
+\f@nch@widthL=\skip84
+\f@nch@widthC=\skip85
+\f@nch@widthR=\skip86
+\@temptokenb=\toks34
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setsp
+ace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/lipsum\lipsum.
+sty
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/l3k
+eys2e\l3keys2e.sty
+Package: l3keys2e 2025-10-09 LaTeX2e option processing using LaTeX3 keys
+)
+Package: lipsum 2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
+\g__lipsum_par_int=\count323
+\l__lipsum_a_int=\count324
+\l__lipsum_b_int=\count325
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/lipsum\lipsum.
+ltd.tex))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.
+sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\c
+olor.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathc
+olor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/base\makeidx.s
+ty
+Package: makeidx 2021/10/04 v1.0m Standard LaTeX package
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/fancybox\fancy
+box.sty
+Package: fancybox 2010/05/15 1.4
+
+Style option: `fancybox' v1.4 <2010/05/15> (tvz)
+\@fancybox=\box69
+\shadowsize=\dimen178
+\@Sbox=\box70
+\do@VerbBox=\toks35
+\the@fancyput=\toks36
+\this@fancyput=\toks37
+\EndVerbatimTokens=\toks38
+\Verbatim@Outfile=\write3
+\Verbatim@Infile=\read3
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendla
+yer\tikz.sty
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer
+\pgf.sty
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\
+pgfrcs.sty
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilitie
+s\pgfutil-common.tex
+\pgfutil@everybye=\toks39
+\pgfutil@tempdima=\dimen179
+\pgfutil@tempdimb=\dimen180
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilitie
+s\pgfutil-latex.def
+\pgfutil@abb=\box71
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilitie
+s\pgfrcs.code.tex
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revi
+sion.tex)
+Package: pgfrcs 2025-08-29 v3.1.11a (3.1.11a)
+))
+Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer
+\pgfcore.sty
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlaye
+r\pgfsys.sty
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemla
+yer\pgfsys.code.tex
+Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilitie
+s\pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks40
+\pgfkeys@temptoks=\toks41
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilitie
+s\pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks42
+))
+\pgf@x=\dimen181
+\pgf@y=\dimen182
+\pgf@xa=\dimen183
+\pgf@ya=\dimen184
+\pgf@xb=\dimen185
+\pgf@yb=\dimen186
+\pgf@xc=\dimen187
+\pgf@yc=\dimen188
+\pgf@xd=\dimen189
+\pgf@yd=\dimen190
+\w@pgf@writea=\write4
+\r@pgf@reada=\read4
+\c@pgf@counta=\count326
+\c@pgf@countb=\count327
+\c@pgf@countc=\count328
+\c@pgf@countd=\count329
+\t@pgf@toka=\toks43
+\t@pgf@tokb=\toks44
+\t@pgf@tokc=\toks45
+\pgf@sys@id@count=\count330
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemla
+yer\pgf.cfg
+File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemla
+yer\pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2025-08-29 v3.1.11a (3.1.11a)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemla
+yer\pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2025-08-29 v3.1.11a (3.1.11a)
+)))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemla
+yer\pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfsyssoftpath@smallbuffer@items=\count331
+\pgfsyssoftpath@bigbuffer@items=\count332
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemla
+yer\pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcore.code.tex
+Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+math.code.tex
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathutil.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathparser.code.tex
+\pgfmath@dimen=\dimen191
+\pgfmath@count=\count333
+\pgfmath@box=\box72
+\pgfmath@toks=\toks46
+\pgfmath@stack@operand=\toks47
+\pgfmath@stack@operation=\toks48
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathfunctions.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathfunctions.basic.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathfunctions.trigonometric.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathfunctions.random.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathfunctions.comparison.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathfunctions.base.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathfunctions.round.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathfunctions.misc.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathfunctions.integerarithmetics.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathcalc.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+mathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count334
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+int.code.tex)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@picminx=\dimen192
+\pgf@picmaxx=\dimen193
+\pgf@picminy=\dimen194
+\pgf@picmaxy=\dimen195
+\pgf@pathminx=\dimen196
+\pgf@pathmaxx=\dimen197
+\pgf@pathminy=\dimen198
+\pgf@pathmaxy=\dimen199
+\pgf@xx=\dimen256
+\pgf@xy=\dimen257
+\pgf@yx=\dimen258
+\pgf@yy=\dimen259
+\pgf@zx=\dimen260
+\pgf@zy=\dimen261
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@path@lastx=\dimen262
+\pgf@path@lasty=\dimen263
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@shorten@end@additional=\dimen264
+\pgf@shorten@start@additional=\dimen265
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfpic=\box73
+\pgf@hbox=\box74
+\pgf@layerbox@main=\box75
+\pgf@picture@serial@count=\count335
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgflinewidth=\dimen266
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@pt@x=\dimen267
+\pgf@pt@y=\dimen268
+\pgf@pt@temp=\dimen269
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowsep=\dimen270
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@max=\dimen271
+\pgf@sys@shading@range@num=\count336
+\pgf@shadingcount=\count337
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfexternal@startupbox=\box76
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclay
+er\pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\
+pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfnodeparttextbox=\box77
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\
+pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibil
+ity\pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@nodesepstart=\dimen272
+\pgf@nodesepend=\dimen273
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibil
+ity\pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\
+pgffor.sty
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\
+pgfkeys.sty
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilitie
+s\pgfkeys.code.tex))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfma
+th.sty
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgf
+math.code.tex))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilitie
+s\pgffor.code.tex
+Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
+\pgffor@iter=\dimen274
+\pgffor@skip=\dimen275
+\pgffor@stack=\toks49
+\pgffor@toks=\toks50
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontend
+layer/tikz\tikz.code.tex
+Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/librarie
+s\pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@plot@mark@count=\count338
+\pgfplotmarksize=\dimen276
+)
+\tikz@lastx=\dimen277
+\tikz@lasty=\dimen278
+\tikz@lastxsaved=\dimen279
+\tikz@lastysaved=\dimen280
+\tikz@lastmovetox=\dimen281
+\tikz@lastmovetoy=\dimen282
+\tikzleveldistance=\dimen283
+\tikzsiblingdistance=\dimen284
+\tikz@figbox=\box78
+\tikz@figbox@bg=\box79
+\tikz@tempbox=\box80
+\tikz@tempbox@bg=\box81
+\tikztreelevel=\count339
+\tikznumberofchildren=\count340
+\tikznumberofcurrentchild=\count341
+\tikz@fig@count=\count342
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\
+pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfmatrixcurrentrow=\count343
+\pgfmatrixcurrentcolumn=\count344
+\pgf@matrix@numberofcolumns=\count345
+)
+\tikz@expandcount=\count346
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontend
+layer/tikz/libraries\tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcol
+orbox.sty
+Package: tcolorbox 2025/11/28 version 6.9.0 text color boxes
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim
+.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks51
+\verbatim@line=\toks52
+\verbatim@in@stream=\read5
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/environ\enviro
+n.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/trimspaces\tri
+mspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\tcb@titlebox=\box82
+\tcb@upperbox=\box83
+\tcb@lowerbox=\box84
+\tcb@phantombox=\box85
+\c@tcbbreakpart=\count347
+\c@tcblayer=\count348
+\c@tcolorbox@number=\count349
+\l__tcobox_tmpa_box=\box86
+\l__tcobox_tmpa_dim=\dimen285
+\tcb@temp=\box87
+\tcb@temp=\box88
+\tcb@temp=\box89
+\tcb@temp=\box90
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbr
+aster.code.tex
+Library (tcolorbox): 'tcbraster.code.tex' version '6.9.0'
+\c@tcbrastercolumn=\count350
+\c@tcbrasterrow=\count351
+\c@tcbrasternum=\count352
+\c@tcbraster=\count353
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbs
+kins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.9.0'
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tikzfill\tikzf
+ill.image.sty
+Package: tikzfill.image 2026/03/26 v1.1.0 Image filling library for TikZ
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tikzfill\tikzl
+ibraryfill.image.code.tex
+File: tikzlibraryfill.image.code.tex 2026/03/26 v1.1.0 Image filling library
+\l__tikzfill_tmpa_dim=\dimen286
+\l__tikzfill_tmpb_dim=\dimen287
+\l__tikzfill_img_box=\box91
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbs
+kinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.9.0'
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbb
+reakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.9.0'
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/pdfcol\pdfcol.
+sty
+Package: pdfcol 2022-09-21 v1.7 Handle new color stacks for pdfTeX (HO)
+)
+Package pdfcol Info: New color stack `tcb@breakable' = 1 on input line 23.
+\tcb@testbox=\box92
+\tcb@totalupperbox=\box93
+\tcb@totallowerbox=\box94
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbh
+ooks.code.tex
+Library (tcolorbox): 'tcbhooks.code.tex' version '6.9.0'
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbt
+heorems.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '6.9.0'
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbf
+itting.code.tex
+Library (tcolorbox): 'tcbfitting.code.tex' version '6.9.0'
+\tcbfitdim=\dimen288
+\tcb@lowerfitdim=\dimen289
+\tcb@upperfitdim=\dimen290
+\tcb@cur@hbadness=\count354
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbl
+istingsutf8.code.tex
+Library (tcolorbox): 'tcblistingsutf8.code.tex' version '6.9.0'
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbl
+istings.code.tex
+Library (tcolorbox): 'tcblistings.code.tex' version '6.9.0'
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/listings\listi
+ngs.sty
+\lst@mode=\count355
+\lst@gtempboxa=\box95
+\lst@token=\toks53
+\lst@length=\count356
+\lst@currlwidth=\dimen291
+\lst@column=\count357
+\lst@pos=\count358
+\lst@lostspace=\dimen292
+\lst@width=\dimen293
+\lst@newlines=\count359
+\lst@lineno=\count360
+\lst@maxwidth=\dimen294
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpa
+tch.sty
+File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmi
+sc.sty
+File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
+\c@lstnumber=\count361
+\lst@skipnumbers=\count362
+\lst@framebox=\box96
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/listings\listi
+ngs.cfg
+File: listings.cfg 2025/11/14 1.11b listings configuration
+))
+Package: listings 2025/11/14 1.11b (Carsten Heinz)
+
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbl
+istingscore.code.tex
+Library (tcolorbox): 'tcblistingscore.code.tex' version '6.9.0'
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbp
+rocessing.code.tex
+Library (tcolorbox): 'tcbprocessing.code.tex' version '6.9.0'
+)
+\c@tcblisting=\count363
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/listingsutf8\l
+istingsutf8.sty
+Package: listingsutf8 2019-12-10 v1.5 Allow UTF-8 in listings input (HO)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\st
+ringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pd
+fescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+))))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbe
+xternal.code.tex
+Library (tcolorbox): 'tcbexternal.code.tex' version '6.9.0'
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbm
+agazine.code.tex
+Library (tcolorbox): 'tcbmagazine.code.tex' version '6.9.0'
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbv
+ignette.code.tex
+Library (tcolorbox): 'tcbvignette.code.tex' version '6.9.0'
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontend
+layer/tikz/libraries\tikzlibraryfadings.code.tex
+File: tikzlibraryfadings.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/pgf/librarie
+s\pgflibraryfadings.code.tex
+File: pgflibraryfadings.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbp
+oster.code.tex
+Library (tcolorbox): 'tcbposter.code.tex' version '6.9.0'
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol
+.sty
+Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
+\c@tracingmulticols=\count364
+\mult@box=\box97
+\multicol@leftmargin=\dimen295
+\c@unbalance=\count365
+\c@collectmore=\count366
+\doublecol@number=\count367
+\multicoltolerance=\count368
+\multicolpretolerance=\count369
+\full@width=\dimen296
+\page@free=\dimen297
+\premulticols=\dimen298
+\postmulticols=\dimen299
+\multicolsep=\skip87
+\multicolbaselineskip=\skip88
+\partial@page=\box98
+\last@line=\box99
+\mc@boxedresult=\box100
+\maxbalancingoverflow=\dimen300
+\mult@rightbox=\box101
+\mult@grightbox=\box102
+\mult@firstbox=\box103
+\mult@gfirstbox=\box104
+\@tempa=\box105
+\@tempa=\box106
+\@tempa=\box107
+\@tempa=\box108
+\@tempa=\box109
+\@tempa=\box110
+\@tempa=\box111
+\@tempa=\box112
+\@tempa=\box113
+\@tempa=\box114
+\@tempa=\box115
+\@tempa=\box116
+\@tempa=\box117
+\@tempa=\box118
+\@tempa=\box119
+\@tempa=\box120
+\@tempa=\box121
+\@tempa=\box122
+\@tempa=\box123
+\@tempa=\box124
+\@tempa=\box125
+\@tempa=\box126
+\@tempa=\box127
+\@tempa=\box128
+\@tempa=\box129
+\@tempa=\box130
+\@tempa=\box131
+\@tempa=\box132
+\@tempa=\box133
+\@tempa=\box134
+\@tempa=\box135
+\@tempa=\box136
+\@tempa=\box137
+\@tempa=\box138
+\@tempa=\box139
+\@tempa=\box140
+\c@minrows=\count370
+\c@columnbadness=\count371
+\c@finalcolumnbadness=\count372
+\last@try=\dimen301
+\multicolovershoot=\dimen302
+\multicolundershoot=\dimen303
+\mult@nat@firstbox=\box141
+\colbreak@box=\box142
+\mc@col@check@num=\count373
+\g__mc_curr_col_int=\count374
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/background\bac
+kground.sty
+Package: background 2014/03/04 v2.1 background material
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyva
+l.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkey
+val.tex
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvu
+tils.tex
+\XKV@toks=\toks54
+\XKV@tempa@toks=\toks55
+)
+\XKV@depth=\count375
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/everypage\ever
+ypage.sty
+Package: everypage 2020/10/17 R2.0b Hooks to run on every page
+
+
+Package everypage Warning: Functionality similar to this package has recently
+(everypage)                been implemented in LaTeX. This package is now in
+(everypage)                legacy status.
+(everypage)                Please, don't use it in new documents and packages.
+
+
+Package everypage Warning: You appear to be running a version of LaTeX
+(everypage)                providing the new functionality.
+(everypage)                Doing the best to deliver the original `everypage`
+(everypage)                interface on top of it. Strict equivalence is
+(everypage)                not possible, breakage may occur.
+(everypage)                If truly needed, Use `everypage-1x` to force the
+(everypage)                loading of an older code base.
+
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tools\afterpag
+e.sty
+Package: afterpage 2023/07/04 v1.08 After-Page Package (DPC)
+\AP@output=\toks56
+\AP@partial=\box143
+\AP@footins=\box144
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/wallpaper\wall
+paper.sty
+Package: wallpaper 2005/01/18, v1.01 easy wallpaper formatting (MHFW)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.st
+y
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count376
+\calc@Bcount=\count377
+\calc@Adimen=\dimen304
+\calc@Bdimen=\dimen305
+\calc@Askip=\skip89
+\calc@Bskip=\skip90
+LaTeX Info: Redefining \setlength on input line 86.
+LaTeX Info: Redefining \addtolength on input line 87.
+\calc@Ccount=\count378
+\calc@Cskip=\skip91
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pi
+c.sty
+Package: eso-pic 2025/12/10 v3.0d eso-pic (RN)
+\ESO@tempdima=\dimen306
+\ESO@tempdimb=\dimen307
+)
+\wpXoffset=\skip92
+\wpYoffset=\skip93
+\tileXoffset=\skip94
+\tileYoffset=\skip95
+\tilewidth=\skip96
+\tileheight=\skip97
+\tileX=\skip98
+\tileY=\skip99
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.
+sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip100
+\bibsep=\skip101
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count379
+))
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyper
+ref.sty
+Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolo
+r.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\namer
+ef.sty
+Package: nameref 2025-06-21 v2.57 Cross-referencing by name of section
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refco
+unt.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestri
+ng\gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count380
+)
+\@linkdim=\dimen308
+\Hy@linkcounter=\count381
+\Hy@pagecounter=\count382
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1en
+c.def
+File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intc
+alc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count383
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc
+.def
+File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+
+Package hyperref Warning: Unexpected value for option `hidelinks'
+(hyperref)                is ignored on input line 4066.
+
+Package hyperref Info: Option `hyperfootnotes' set `false' on input line 4066.
+Package hyperref Info: Hyper figures OFF on input line 4195.
+Package hyperref Info: Link nesting OFF on input line 4200.
+Package hyperref Info: Hyper index ON on input line 4203.
+Package hyperref Info: Plain pages OFF on input line 4210.
+Package hyperref Info: Backreferencing OFF on input line 4215.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4462.
+\c@Hy@tempcnt=\count384
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4801.
+\XeTeXLinkMargin=\dimen309
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitse
+t.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\b
+igintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count385
+\Field@Width=\dimen310
+\Fld@charsize=\dimen311
+Package hyperref Info: Hyper figures OFF on input line 6078.
+Package hyperref Info: Link nesting OFF on input line 6083.
+Package hyperref Info: Hyper index ON on input line 6086.
+Package hyperref Info: backreferencing OFF on input line 6093.
+Package hyperref Info: Link coloring OFF on input line 6098.
+Package hyperref Info: Link coloring with OCG OFF on input line 6103.
+Package hyperref Info: PDF/A mode OFF on input line 6108.
+\Hy@abspage=\count386
+\c@Item=\count387
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdft
+ex.def
+File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
+\Fld@listcount=\count388
+\c@bookmark@seq@number=\count389
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck
+\rerunfilecheck.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounte
+r\uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+84.
+)
+\Hy@SectionHShift=\skip102
+)
+Class scrartcl Info: loading recommended package `bookmark'.
+(scrartcl)           Using `bookmark' together with `hyperref' is recommended,
+(scrartcl)           because of handling of possible bookmark level gaps.
+(scrartcl)           You can avoid loading `bookmark' with KOMA-Script option
+(scrartcl)           `bookmarkpackage=false' before \begin{document} and
+(scrartcl)           you can avoid this message adding:
+(scrartcl)             \usepackage{bookmark}
+(scrartcl)           before \begin{document} on input line 5.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookm
+ark.sty
+Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-p
+dftex.def
+File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO
+)
+\BKM@id=\count390
+))
+No file configuracion.aux.
+\openout1 = `configuracion.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+Package scrbase Info: activating british \abstractname on input line 5.
+Package scrbase Info: activating british \partname on input line 5.
+Package scrbase Info: activating british \figurename on input line 5.
+Package scrbase Info: activating british \tablename on input line 5.
+Package scrbase Info: activating british \contentsname on input line 5.
+Package scrbase Info: activating british \listfigurename on input line 5.
+Package scrbase Info: activating british \listtablename on input line 5.
+Package scrbase Info: activating british \refname on input line 5.
+Package scrbase Info: activating british \indexname on input line 5.
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/translations/d
+icts\translations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `tra
+nslations-basic-dictionary')
+)
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\su
+pp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count391
+\scratchdimen=\dimen312
+\scratchbox=\box145
+\nofMPsegments=\count392
+\nofMParguments=\count393
+\everyMPshowfont=\toks57
+\MPscratchCnt=\count394
+\MPscratchDim=\dimen313
+\MPnumerator=\count395
+\makeMPintoPDFobject=\count396
+\everyMPtoPDFconversion=\toks58
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count397
+Package tocbasic Info: setting babel extension for `lol' on input line 5.
+\scr@dte@lstlisting@maxnumwidth=\skip103
+Package hyperref Info: Link coloring OFF on input line 5.
+ (portada.tex
+<Figuras/uv.png, id=42, 388.45125pt x 388.45125pt>
+File: Figuras/uv.png Graphic file (type png)
+<use Figuras/uv.png>
+Package pdftex.def Info: Figuras/uv.png  used on input line 10.
+(pdftex.def)             Requested size: 125.4761pt x 125.47461pt.
+<Figuras/Fondo.pdf, id=44, 597.23125pt x 845.1575pt>
+File: Figuras/Fondo.pdf Graphic file (type pdf)
+<use Figuras/Fondo.pdf>
+Package pdftex.def Info: Figuras/Fondo.pdf  used on input line 23.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+ [1
+
+{C:/Users/ngeorgakopulos/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./F
+iguras/Fondo.pdf> <./Figuras/uv.png>])
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line 9.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+No file configuracion.toc.
+\tf@toc=\write5
+\openout5 = `configuracion.toc'.
+
+File: Figuras/Fondo.pdf Graphic file (type pdf)
+<use Figuras/Fondo.pdf>
+Package pdftex.def Info: Figuras/Fondo.pdf  used on input line 11.
+(pdftex.def)             Requested size: 597.16599pt x 845.04694pt.
+[2]
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                14.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 22.
+
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.
+fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 22.
+
+
+(C:\Users\ngeorgakopulos\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.
+fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [3]
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                30.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                34.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `mcelreath2020rethinking' on page 4 undefined 
+on input line 36.
+
+
+Package natbib Warning: Citation `chipman2010bart' on page 4 undefined on input
+ line 38.
+
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 4 undefined on inp
+ut line 38.
+
+
+Package natbib Warning: Citation `jospin2022bnn' on page 4 undefined on input l
+ine 38.
+
+[4]
+
+Package natbib Warning: Citation `hastings1970' on page 5 undefined on input li
+ne 40.
+
+
+Package natbib Warning: Citation `bardenet2017mcmc' on page 5 undefined on inpu
+t line 40.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                59.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `chipman2010bart' on page 5 undefined on input
+ line 64.
+
+[5]
+
+LaTeX Warning: Reference `sec:bayesian-inference' on page 6 undefined on input 
+line 72.
+
+
+Package natbib Warning: Citation `chipman2010bart' on page 6 undefined on input
+ line 72.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                80.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `mackay1998gp' on page 6 undefined on input li
+ne 81.
+
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 6 undefined on inp
+ut line 81.
+
+[6]
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 7 undefined on inp
+ut line 90.
+
+[7]
+
+Package natbib Warning: Citation `quinonero2005sparsegp' on page 8 undefined on
+ input line 99.
+
+
+LaTeX Warning: Reference `sec:bayesian-inference' on page 8 undefined on input 
+line 101.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                113.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `jospin2022bnn' on page 8 undefined on input l
+ine 128.
+
+
+Package natbib Warning: Citation `blundell2015weight' on page 8 undefined on in
+put line 130.
+
+
+Package natbib Warning: Citation `jospin2022bnn' on page 8 undefined on input l
+ine 130.
+
+<understandBNN.png, id=108, 651.93562pt x 423.08063pt>
+File: understandBNN.png Graphic file (type png)
+<use understandBNN.png>
+Package pdftex.def Info: understandBNN.png  used on input line 134.
+(pdftex.def)             Requested size: 358.50612pt x 232.66278pt.
+
+Package natbib Warning: Citation `jospin2022bnn' on page 8 undefined on input l
+ine 135.
+
+
+Package natbib Warning: Citation `jospin2022bnn' on page 8 undefined on input l
+ine 135.
+
+[8]
+
+Package natbib Warning: Citation `jospin2022bnn' on page 9 undefined on input l
+ine 139.
+
+
+Package natbib Warning: Citation `depeweg2018decomposition' on page 9 undefined
+ on input line 139.
+
+
+Package natbib Warning: Citation `maas2013rectifier' on page 9 undefined on inp
+ut line 143.
+
+
+LaTeX Warning: Reference `sec:bayesian-inference' on page 9 undefined on input 
+line 143.
+
+
+Package natbib Warning: Citation `jospin2022bnn' on page 9 undefined on input l
+ine 143.
+
+[9 <./understandBNN.png>]
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                173.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `wolpert1992stacked' on page 10 undefined on i
+nput line 174.
+
+<stacking_arquitecture.png, id=120, 540.21825pt x 218.61674pt>
+File: stacking_arquitecture.png Graphic file (type png)
+<use stacking_arquitecture.png>
+Package pdftex.def Info: stacking_arquitecture.png  used on input line 178.
+(pdftex.def)             Requested size: 358.50612pt x 145.08807pt.
+
+Package natbib Warning: Citation `yao2022hierarchicalstacking' on page 10 undef
+ined on input line 188.
+
+
+LaTeX Warning: Reference `sec:evaluation' on page 10 undefined on input line 19
+0.
+
+
+Package natbib Warning: Citation `vehtari2017loo' on page 10 undefined on input
+ line 190.
+
+[10 <./stacking_arquitecture.png>]
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                217.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 11 undefined on in
+put line 220.
+
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 11 undefined on in
+put line 222.
+
+
+Package natbib Warning: Citation `vehtari2017loo' on page 11 undefined on input
+ line 224.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                238.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `Serenelli2021' on page 11 undefined on input 
+line 241.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                243.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+[11]
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                254.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `Southworth2015' on page 12 undefined on input
+ line 256.
+
+
+Package natbib Warning: Citation `Eker2018' on page 12 undefined on input line 
+256.
+
+
+Package natbib Warning: Citation `Graczyk2022' on page 12 undefined on input li
+ne 260.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                264.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `Bellinger2019' on page 12 undefined on input 
+line 268.
+
+
+Package natbib Warning: Citation `Serenelli2021' on page 12 undefined on input 
+line 268.
+
+[12]
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                281.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `Soubiran2024' on page 13 undefined on input l
+ine 284.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                286.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `Graczyk2022' on page 13 undefined on input li
+ne 287.
+
+
+Package natbib Warning: Citation `Serenelli2021' on page 13 undefined on input 
+line 287.
+
+
+Package natbib Warning: Citation `Soubiran2024' on page 13 undefined on input l
+ine 287.
+
+[13]
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                296.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `li2021dataquality' on page 14 undefined on in
+put line 299.
+
+
+Package natbib Warning: Citation `moya2018' on page 14 undefined on input line 
+301.
+
+
+LaTeX Warning: Reference `methods' on page 14 undefined on input line 303.
+
+
+LaTeX Warning: Reference `MS_catalog_database_D' on page 14 undefined on input 
+line 303.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                305.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `Eker2018' on page 14 undefined on input line 
+307.
+
+
+Package natbib Warning: Citation `Helminiak2019' on page 14 undefined on input 
+line 307.
+
+
+Package natbib Warning: Citation `Graczyk2021' on page 14 undefined on input li
+ne 309.
+
+
+Package natbib Warning: Citation `Graczyk2022' on page 14 undefined on input li
+ne 309.
+
+
+Package natbib Warning: Citation `Nsamba2025' on page 14 undefined on input lin
+e 309.
+
+
+Package natbib Warning: Citation `Bellinger2019' on page 14 undefined on input 
+line 309.
+
+[14]
+
+Package natbib Warning: Citation `Serenelli2021' on page 15 undefined on input 
+line 311.
+
+
+Package natbib Warning: Citation `Soubiran2024' on page 15 undefined on input l
+ine 311.
+
+
+Package natbib Warning: Citation `Xiong2023' on page 15 undefined on input line
+ 311.
+
+
+Package natbib Warning: Citation `Sayeed2025' on page 15 undefined on input lin
+e 313.
+
+
+Package natbib Warning: Citation `Yildiz2019' on page 15 undefined on input lin
+e 313.
+
+
+Package natbib Warning: Citation `asplund2009' on page 15 undefined on input li
+ne 313.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                318.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `Eker2018' on page 15 undefined on input line 
+319.
+
+
+Package natbib Warning: Citation `Graczyk2022' on page 15 undefined on input li
+ne 319.
+
+
+Package natbib Warning: Citation `Soubiran2024' on page 15 undefined on input l
+ine 319.
+
+
+Package natbib Warning: Citation `Serenelli2021' on page 15 undefined on input 
+line 319.
+
+
+Package natbib Warning: Citation `bilir2008' on page 15 undefined on input line
+ 321.
+
+[15]
+
+Package natbib Warning: Citation `moya2018' on page 16 undefined on input line 
+323.
+
+
+Package natbib Warning: Citation `mcelreath2020' on page 16 undefined on input 
+line 325.
+
+
+LaTeX Warning: Reference `subsec:dataset_a' on page 16 undefined on input line 
+336.
+
+
+Package natbib Warning: Citation `moya2018' on page 16 undefined on input line 
+341.
+
+[16]
+
+LaTeX Warning: Reference `MS_catalog_database_D' on page 17 undefined on input 
+line 391.
+
+[17]
+
+LaTeX Warning: Reference `fig:HRdiagram' on page 18 undefined on input line 393
+.
+
+
+Package natbib Warning: Citation `pecaut2013' on page 18 undefined on input lin
+e 393.
+
+<hr_diagram_parsec_sample_clean.png, id=177, 834.9594pt x 254.3904pt>
+File: hr_diagram_parsec_sample_clean.png Graphic file (type png)
+<use hr_diagram_parsec_sample_clean.png>
+Package pdftex.def Info: hr_diagram_parsec_sample_clean.png  used on input line
+ 397.
+(pdftex.def)             Requested size: 380.91403pt x 116.05446pt.
+
+Package natbib Warning: Citation `bressan2012' on page 18 undefined on input li
+ne 398.
+
+
+Package natbib Warning: Citation `bressan2012' on page 18 undefined on input li
+ne 398.
+
+
+LaTeX Warning: Reference `sec:dataset_C' on page 18 undefined on input line 402
+.
+
+
+LaTeX Warning: Reference `eq:oblateness' on page 18 undefined on input line 402
+.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                404.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                405.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+[18 <./hr_diagram_parsec_sample_clean.png>]
+
+Package natbib Warning: Citation `laughlin1997' on page 19 undefined on input l
+ine 406.
+
+
+Package natbib Warning: Citation `chabrier2000' on page 19 undefined on input l
+ine 406.
+
+
+Package natbib Warning: Citation `maxted2023benchmark' on page 19 undefined on 
+input line 408.
+
+
+Package natbib Warning: Citation `Southworth2015' on page 19 undefined on input
+ line 408.
+
+
+LaTeX Warning: Reference `fig:HRdiagram' on page 19 undefined on input line 410
+.
+
+
+Package natbib Warning: Citation `moya2018' on page 19 undefined on input line 
+410.
+
+
+LaTeX Warning: Reference `sec:data' on page 19 undefined on input line 410.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                412.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+[19]
+
+LaTeX Warning: Reference `fig:hbnn_mass_predictions' on page 20 undefined on in
+put line 420.
+
+
+LaTeX Warning: Reference `tab:model_mard_mrd' on page 20 undefined on input lin
+e 420.
+
+
+LaTeX Warning: Reference `fig:hbnn_mass_residuals' on page 20 undefined on inpu
+t line 422.
+
+<HBNN_mass_3param_L_1000_seed_225_full_prediction.png, id=193, 569.9694pt x 425
+.1885pt>
+File: HBNN_mass_3param_L_1000_seed_225_full_prediction.png Graphic file (type p
+ng)
+<use HBNN_mass_3param_L_1000_seed_225_full_prediction.png>
+Package pdftex.def Info: HBNN_mass_3param_L_1000_seed_225_full_prediction.png  
+used on input line 431.
+(pdftex.def)             Requested size: 107.55388pt x 80.2287pt.
+<HBNN_mass_3param_L_1000_seed_225_full_residual.png, id=194, 569.9694pt x 425.6
+703pt>
+File: HBNN_mass_3param_L_1000_seed_225_full_residual.png Graphic file (type png
+)
+<use HBNN_mass_3param_L_1000_seed_225_full_residual.png>
+Package pdftex.def Info: HBNN_mass_3param_L_1000_seed_225_full_residual.png  us
+ed on input line 438.
+(pdftex.def)             Requested size: 107.55388pt x 80.3196pt.
+<GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png, id=195, 569.0058pt 
+x 425.6703pt>
+File: GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png Graphic file (t
+ype png)
+<use GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png>
+Package pdftex.def Info: GP_mass_3param_L_1000_seed_225_filtered_95_prediction.
+png  used on input line 445.
+(pdftex.def)             Requested size: 107.55388pt x 80.45601pt.
+<GP_mass_3param_L_1000_seed_225_filtered_95_residual.png, id=196, 569.0058pt x 
+425.6703pt>
+File: GP_mass_3param_L_1000_seed_225_filtered_95_residual.png Graphic file (typ
+e png)
+<use GP_mass_3param_L_1000_seed_225_filtered_95_residual.png>
+Package pdftex.def Info: GP_mass_3param_L_1000_seed_225_filtered_95_residual.pn
+g  used on input line 452.
+(pdftex.def)             Requested size: 107.55388pt x 80.45601pt.
+<BART_mass_3param_L_prediction_seed_225_full_prediction.png, id=197, 569.9694pt
+ x 425.4294pt>
+File: BART_mass_3param_L_prediction_seed_225_full_prediction.png Graphic file (
+type png)
+<use BART_mass_3param_L_prediction_seed_225_full_prediction.png>
+Package pdftex.def Info: BART_mass_3param_L_prediction_seed_225_full_prediction
+.png  used on input line 462.
+(pdftex.def)             Requested size: 107.55388pt x 80.27414pt.
+<BART_mass_3param_L_prediction_seed_225_full_residual.png, id=198, 569.9694pt x
+ 425.1885pt>
+File: BART_mass_3param_L_prediction_seed_225_full_residual.png Graphic file (ty
+pe png)
+<use BART_mass_3param_L_prediction_seed_225_full_residual.png>
+Package pdftex.def Info: BART_mass_3param_L_prediction_seed_225_full_residual.p
+ng  used on input line 469.
+(pdftex.def)             Requested size: 107.55388pt x 80.2287pt.
+<BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png, id=199, 569.
+0058pt x 425.6703pt>
+File: BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png Graphic 
+file (type png)
+<use BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png>
+Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_225_filtered_95_pred
+iction.png  used on input line 476.
+(pdftex.def)             Requested size: 107.55388pt x 80.45601pt.
+<BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png, id=200, 569.24
+67pt x 425.4294pt>
+File: BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png Graphic fi
+le (type png)
+<use BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png>
+Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_225_filtered_95_resi
+dual.png  used on input line 483.
+(pdftex.def)             Requested size: 107.55388pt x 80.378pt.
+[20]
+
+Package natbib Warning: Citation `izmailov2021' on page 21 undefined on input l
+ine 514.
+
+
+LaTeX Warning: Reference `fig:gp_mass_predictions' on page 21 undefined on inpu
+t line 516.
+
+
+LaTeX Warning: Reference `fig:gp_mass_residuals' on page 21 undefined on input 
+line 518.
+
+
+LaTeX Warning: Reference `fig:hbnn_mass_residuals' on page 21 undefined on inpu
+t line 518.
+
+
+LaTeX Warning: Reference `tab:model_mard_mrd' on page 21 undefined on input lin
+e 518.
+
+[21 <./HBNN_mass_3param_L_1000_seed_225_full_prediction.png> <./HBNN_mass_3para
+m_L_1000_seed_225_full_residual.png> <./GP_mass_3param_L_1000_seed_225_filtered
+_95_prediction.png> <./GP_mass_3param_L_1000_seed_225_filtered_95_residual.png>
+ <./BART_mass_3param_L_prediction_seed_225_full_prediction.png> <./BART_mass_3p
+aram_L_prediction_seed_225_full_residual.png> <./BHS_mass_3param_L_prediction_s
+eed_225_filtered_95_prediction.png> <./BHS_mass_3param_L_prediction_seed_225_fi
+ltered_95_residual.png>]
+
+Package natbib Warning: Citation `cho2026' on page 22 undefined on input line 5
+43.
+
+
+LaTeX Warning: Reference `fig:gp_mass_predictions' on page 22 undefined on inpu
+t line 543.
+
+
+LaTeX Warning: Reference `fig:gp_mass_residuals' on page 22 undefined on input 
+line 543.
+
+
+Package natbib Warning: Citation `le2005' on page 22 undefined on input line 54
+5.
+
+
+Package natbib Warning: Citation `zhang2019rerf' on page 22 undefined on input 
+line 570.
+
+[22]
+
+LaTeX Warning: Reference `fig:bhs_mass_predictions' on page 23 undefined on inp
+ut line 572.
+
+
+LaTeX Warning: Reference `fig:bhs_mass_residuals' on page 23 undefined on input
+ line 572.
+
+
+LaTeX Warning: Reference `fig:bhs_mass_predictions' on page 23 undefined on inp
+ut line 595.
+
+
+Package natbib Warning: Citation `moya2022' on page 23 undefined on input line 
+629.
+
+[23]
+
+Package natbib Warning: Citation `moya2022' on page 24 undefined on input line 
+631.
+
+
+Package natbib Warning: Citation `moya2022' on page 24 undefined on input line 
+631.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                636.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 638--638
+  [][][]$\T1/cmtt/m/n/10 https : / / sites . google . com / inaf . it / arielst
+ellarcatalogue / the-[]team /
+ []
+
+
+Package natbib Warning: Citation `moya2018' on page 24 undefined on input line 
+640.
+
+[24]
+
+LaTeX Warning: Reference `subsec:dataset_a' on page 25 undefined on input line 
+642.
+
+
+Package natbib Warning: Citation `moya2022' on page 25 undefined on input line 
+644.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                645.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+LaTeX Warning: Reference `fig:frac_res_distrib_dataset_b' on page 25 undefined 
+on input line 651.
+
+
+LaTeX Warning: Reference `tab:residuals_dataset_b' on page 25 undefined on inpu
+t line 653.
+
+[25]
+<mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.p
+ng, id=247, 714.0276pt x 425.6703pt>
+File: mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributi
+ons.png Graphic file (type png)
+<use mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributio
+ns.png>
+Package pdftex.def Info: mass_predictions_seed_819_without_bhs_2022_fractional_
+residual_distributions.png  used on input line 657.
+(pdftex.def)             Requested size: 448.13095pt x 267.16045pt.
+
+
+Package natbib Warning: Citation `moya2022' on page 26 undefined on input line 
+658.
+
+
+Package natbib Warning: Citation `moya2022' on page 26 undefined on input line 
+658.
+
+
+LaTeX Warning: Reference `fig:frac_res_distrib_dataset_b' on page 26 undefined 
+on input line 662.
+
+
+LaTeX Warning: Reference `tab:residuals_dataset_b' on page 26 undefined on inpu
+t line 662.
+
+[26 <./mass_predictions_seed_819_without_bhs_2022_fractional_residual_distribut
+ions.png>]
+
+LaTeX Warning: Reference `fig:frac_res_distrib_dataset_b' on page 27 undefined 
+on input line 666.
+
+
+LaTeX Warning: Reference `fig:mass_comparison_grid_vs_linear' on page 27 undefi
+ned on input line 679.
+
+
+LaTeX Warning: Reference `subsec:dataset_a' on page 27 undefined on input line 
+679.
+
+
+LaTeX Warning: Reference `subsec:dataset_a' on page 27 undefined on input line 
+681.
+
+
+Package natbib Warning: Citation `moya2022' on page 27 undefined on input line 
+683.
+
+<mass_predictions_seed_819_mass_comparison_BHSGRID.png, id=254, 497.57895pt x 3
+88.45125pt>
+File: mass_predictions_seed_819_mass_comparison_BHSGRID.png Graphic file (type 
+png)
+<use mass_predictions_seed_819_mass_comparison_BHSGRID.png>
+Package pdftex.def Info: mass_predictions_seed_819_mass_comparison_BHSGRID.png 
+ used on input line 690.
+(pdftex.def)             Requested size: 143.40518pt x 111.95448pt.
+<mass_predictions_seed_819_prediction_uncertainty_p95_mass_comparison_BHSGRID.p
+ng, id=255, 497.57895pt x 386.28316pt>
+File: mass_predictions_seed_819_prediction_uncertainty_p95_mass_comparison_BHSG
+RID.png Graphic file (type png)
+<use mass_predictions_seed_819_prediction_uncertainty_p95_mass_comparison_BHSGR
+ID.png>
+Package pdftex.def Info: mass_predictions_seed_819_prediction_uncertainty_p95_m
+ass_comparison_BHSGRID.png  used on input line 694.
+(pdftex.def)             Requested size: 143.40518pt x 111.32962pt.
+<mass_predictions_seed_819_prediction_uncertainty_p95_residuals_vs_mean_mass_BH
+SGRID.png, id=256, 497.57895pt x 386.28316pt>
+File: mass_predictions_seed_819_prediction_uncertainty_p95_residuals_vs_mean_ma
+ss_BHSGRID.png Graphic file (type png)
+<use mass_predictions_seed_819_prediction_uncertainty_p95_residuals_vs_mean_mas
+s_BHSGRID.png>
+Package pdftex.def Info: mass_predictions_seed_819_prediction_uncertainty_p95_r
+esiduals_vs_mean_mass_BHSGRID.png  used on input line 698.
+(pdftex.def)             Requested size: 143.40518pt x 111.32962pt.
+<mass_predictions_seed_819_mass_comparison_BHSLINEAR.png, id=257, 497.57895pt x
+ 388.45125pt>
+File: mass_predictions_seed_819_mass_comparison_BHSLINEAR.png Graphic file (typ
+e png)
+<use mass_predictions_seed_819_mass_comparison_BHSLINEAR.png>
+Package pdftex.def Info: mass_predictions_seed_819_mass_comparison_BHSLINEAR.pn
+g  used on input line 706.
+(pdftex.def)             Requested size: 143.40518pt x 111.95448pt.
+<mass_predictions_seed_819_prediction_uncertainty_p95_mass_comparison_BHSLINEAR
+.png, id=258, 497.57895pt x 386.28316pt>
+File: mass_predictions_seed_819_prediction_uncertainty_p95_mass_comparison_BHSL
+INEAR.png Graphic file (type png)
+<use mass_predictions_seed_819_prediction_uncertainty_p95_mass_comparison_BHSLI
+NEAR.png>
+Package pdftex.def Info: mass_predictions_seed_819_prediction_uncertainty_p95_m
+ass_comparison_BHSLINEAR.png  used on input line 710.
+(pdftex.def)             Requested size: 143.40518pt x 111.32962pt.
+<mass_predictions_seed_819_prediction_uncertainty_p95_residuals_vs_mean_mass_BH
+SLINEAR.png, id=259, 497.57895pt x 386.28316pt>
+File: mass_predictions_seed_819_prediction_uncertainty_p95_residuals_vs_mean_ma
+ss_BHSLINEAR.png Graphic file (type png)
+<use mass_predictions_seed_819_prediction_uncertainty_p95_residuals_vs_mean_mas
+s_BHSLINEAR.png>
+Package pdftex.def Info: mass_predictions_seed_819_prediction_uncertainty_p95_r
+esiduals_vs_mean_mass_BHSLINEAR.png  used on input line 714.
+(pdftex.def)             Requested size: 143.40518pt x 111.32962pt.
+[27]
+
+LaTeX Warning: Reference `fig:mass_comparison_grid_vs_linear' on page 28 undefi
+ned on input line 724.
+
+
+LaTeX Warning: Reference `fig:frac_res_distrib_dataset_b' on page 28 undefined 
+on input line 724.
+
+
+LaTeX Warning: Reference `fig:frac_res_distrib_dataset_b' on page 28 undefined 
+on input line 724.
+
+
+LaTeX Warning: Reference `bhslinearresiduals' on page 28 undefined on input lin
+e 724.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                726.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+LaTeX Warning: Reference `subsec:dataset_a' on page 28 undefined on input line 
+728.
+
+[28 <./mass_predictions_seed_819_mass_comparison_BHSGRID.png> <./mass_predictio
+ns_seed_819_prediction_uncertainty_p95_mass_comparison_BHSGRID.png> <./mass_pre
+dictions_seed_819_prediction_uncertainty_p95_residuals_vs_mean_mass_BHSGRID.png
+> <./mass_predictions_seed_819_mass_comparison_BHSLINEAR.png> <./mass_predictio
+ns_seed_819_prediction_uncertainty_p95_mass_comparison_BHSLINEAR.png> <./mass_p
+redictions_seed_819_prediction_uncertainty_p95_residuals_vs_mean_mass_BHSLINEAR
+.png>]
+
+Package natbib Warning: Citation `chandrasekhar1933double' on page 29 undefined
+ on input line 730.
+
+
+Package natbib Warning: Citation `maxted2023benchmark' on page 29 undefined on 
+input line 738.
+
+
+Package natbib Warning: Citation `moya2022' on page 29 undefined on input line 
+740.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                742.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+LaTeX Warning: Reference `MS_catalog_database_D' on page 29 undefined on input 
+line 744.
+
+[29]
+
+LaTeX Warning: Reference `fig:mass_holdout_all_models' on page 30 undefined on 
+input line 746.
+
+
+LaTeX Warning: Reference `tab:dataset_D_model_mard_mrd' on page 30 undefined on
+ input line 748.
+
+
+LaTeX Warning: Reference `tab:model_mard_mrd' on page 30 undefined on input lin
+e 748.
+
+
+LaTeX Warning: Reference `fig:HRdiagram' on page 30 undefined on input line 765
+.
+
+[30]
+
+LaTeX Warning: Reference `subsec:dataset_a' on page 31 undefined on input line 
+769.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                773.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+LaTeX Warning: Reference `sec:cleaning' on page 31 undefined on input line 775.
+
+
+[31]
+
+LaTeX Warning: Reference `fig:dataset_D_o' on page 32 undefined on input line 7
+79.
+
+<02_fractional_residual_vs_log10_oblateness.png, id=294, 805.0878pt x 516.7305p
+t>
+File: 02_fractional_residual_vs_log10_oblateness.png Graphic file (type png)
+<use 02_fractional_residual_vs_log10_oblateness.png>
+Package pdftex.def Info: 02_fractional_residual_vs_log10_oblateness.png  used o
+n input line 786.
+(pdftex.def)             Requested size: 219.58662pt x 140.93834pt.
+<01_abs_fractional_residual_vs_log10_oblateness.png, id=295, 805.0878pt x 516.7
+305pt>
+File: 01_abs_fractional_residual_vs_log10_oblateness.png Graphic file (type png
+)
+<use 01_abs_fractional_residual_vs_log10_oblateness.png>
+Package pdftex.def Info: 01_abs_fractional_residual_vs_log10_oblateness.png  us
+ed on input line 793.
+(pdftex.def)             Requested size: 219.58662pt x 140.93834pt.
+
+LaTeX Warning: Reference `eq:oblateness' on page 32 undefined on input line 797
+.
+
+
+LaTeX Warning: Reference `eq:oblateness' on page 32 undefined on input line 797
+.
+
+
+LaTeX Warning: Reference `fig:dataset_D_o_residuals_abs' on page 32 undefined o
+n input line 802.
+
+[32 <./02_fractional_residual_vs_log10_oblateness.png> <./01_abs_fractional_res
+idual_vs_log10_oblateness.png>]
+
+LaTeX Warning: Reference `subsec:dataset_a' on page 33 undefined on input line 
+806.
+
+
+LaTeX Warning: Reference `fig:dataset_D_mass' on page 33 undefined on input lin
+e 806.
+
+
+LaTeX Warning: Reference `fig:dataset_D_mass_residuals' on page 33 undefined on
+ input line 806.
+
+
+LaTeX Warning: Reference `fig:dataset_D_o_residuals_mass_colored' on page 33 un
+defined on input line 806.
+
+<04_predicted_vs_true_EB_masses.png, id=303, 733.0587pt x 552.6246pt>
+File: 04_predicted_vs_true_EB_masses.png Graphic file (type png)
+<use 04_predicted_vs_true_EB_masses.png>
+Package pdftex.def Info: 04_predicted_vs_true_EB_masses.png  used on input line
+ 813.
+(pdftex.def)             Requested size: 138.9195pt x 104.7215pt.
+<03_fractional_residual_vs_true_EB_mass.png, id=304, 732.0951pt x 552.6246pt>
+File: 03_fractional_residual_vs_true_EB_mass.png Graphic file (type png)
+<use 03_fractional_residual_vs_true_EB_mass.png>
+Package pdftex.def Info: 03_fractional_residual_vs_true_EB_mass.png  used on in
+put line 820.
+(pdftex.def)             Requested size: 138.9195pt x 104.86484pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 821--821
+[][][]|\T1/cmr/m/n/10.95 Frac-tional re-sid-uals
+ []
+
+<05_fractional_residual_vs_log10_oblateness_mass_colored.png, id=305, 785.334pt
+ x 516.4896pt>
+File: 05_fractional_residual_vs_log10_oblateness_mass_colored.png Graphic file 
+(type png)
+<use 05_fractional_residual_vs_log10_oblateness_mass_colored.png>
+Package pdftex.def Info: 05_fractional_residual_vs_log10_oblateness_mass_colore
+d.png  used on input line 827.
+(pdftex.def)             Requested size: 156.84856pt x 103.15422pt.
+[33]
+
+LaTeX Warning: Reference `fig:dataset_D_mass' on page 34 undefined on input lin
+e 840.
+
+[34 <./04_predicted_vs_true_EB_masses.png> <./03_fractional_residual_vs_true_EB
+_mass.png> <./05_fractional_residual_vs_log10_oblateness_mass_colored.png>]
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                849.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+[35]
+
+Package natbib Warning: Citation `moya2022' on page 36 undefined on input line 
+857.
+
+[36]
+No file configuracion.bbl.
+[37]
+
+Package natbib Warning: There were undefined citations.
+
+(configuracion.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2020/03/25>
+ ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) ) 
+Here is how much of TeX's memory you used:
+ 39891 strings out of 467871
+ 875628 string characters out of 5414020
+ 1494317 words of memory out of 5000000
+ 68068 multiletter control sequences out of 15000+600000
+ 657339 words of font info for 102 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 119i,12n,113p,11266b,1154s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/
+dpi600\ectt1000.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfo
+ur/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTe
+X\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\ngeorgakopulos\AppD
+ata\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\ngeo
+rgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk>
+ <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi6
+00\ecrm1000.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/j
+knappen/ec/dpi600\ecrm0800.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fo
+nts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\ngeorgakopulos\AppData\
+Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1440.pk> <C:\Users\ngeorgak
+opulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:
+\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\e
+cxc1728.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\ecbx1728.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/
+pk/ljfour/jknappen/ec/dpi600\ecti1728.pk> <C:\Users\ngeorgakopulos\AppData\Loca
+l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\ngeorgakopul
+os\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc2488.pk> <C:\Use
+rs\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc2
+488.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/
+ec/dpi600\eccc1728.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/l
+jfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/ngeorgakopulos/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ngeorgakopulos
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Us
+ers/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmmi10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmmi12.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/ngeorgakopulos/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ngeor
+gakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pf
+b><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmr12.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ngeorgakopulos/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/ngeorgakopulos/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/ng
+eorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmsy7.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/ngeorgakopulos/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on configuracion.pdf (37 pages, 4781994 bytes).
+PDF statistics:
+ 951 PDF objects out of 1000 (max. 8388607)
+ 80 named destinations out of 1000 (max. 500000)
+ 458 words of extra memory for PDF output out of 10000 (max. 10000000)
+

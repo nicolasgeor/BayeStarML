@@ -1,0 +1,104 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=24.5mm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english,catalan]{babel}
+%%%\usepackage[english,spanish]{babel}
+\usepackage{natbib}
+
+\usepackage{float} 
+\usepackage{graphicx}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Titlepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newgeometry{margin=1in}
+\begin{titlepage}
+   \noindent\raisebox{0pt}[0pt][0pt]{
+	\includegraphics[width=10.5cm]{marca-Facultat-Fisica-UV-1-linia.pdf}}\par
+   \vspace{8.5cm}
+   % Titles
+   {\centering
+      \scalebox{1.125}{\bfseries\sffamily\Huge
+		Treball de Fi de Grau en Física}\par
+      \rule{16.13cm}{1.5pt}\par
+      \vspace{4.5cm}
+      {\bfseries\sffamily\LARGE Títol del treball}\par
+   }
+   \vfill
+   {\raggedleft\sffamily
+		MES d'ANY\par
+      \vspace{\baselineskip}
+		Alumne/a: Nom Cognom 1 Cognom 2\par
+      \vspace{\baselineskip}
+		Tutor/a (1): Nom Cognom 1 Cognom 2\par
+		Tutor/a (2): Nom Cognom 1 Cognom 2\par
+   }
+\end{titlepage}
+\restoregeometry
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Resum / \emph{Abstract}}
+
+Resum\ldots
+
+\vspace{\baselineskip}
+
+\begin{otherlanguage}{english}\itshape
+
+\noindent Abstract\ldots
+
+\end{otherlanguage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Section 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Secció 1}
+
+Secció 1\ldots
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Section 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Secció 2}
+
+Secció 2\ldots
+
+\mbox{}\par$\qquad{\vdots}$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Section N
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtocounter{section}{96} %%% to remove !!!
+
+\section{Conclusions / \emph{Conclusions}}
+
+Conclusions\ldots
+
+\vspace{\baselineskip}
+
+\begin{otherlanguage}{english}\itshape
+
+\noindent Conclusions\ldots
+
+\end{otherlanguage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{99}
+
+Bib\ldots
+
+\end{thebibliography}
+
+\end{document}
