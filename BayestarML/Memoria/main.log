@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.28)  18 JUN 2026 23:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.28)  19 JUN 2026 19:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1497,42 +1497,42 @@ Package scrartcl Warning: Usage of \@startsection detected.
 <HBNN_mass_3param_L_1000_seed_225_full_prediction.png, id=440, 569.9694pt x 425.1885pt>
 File: HBNN_mass_3param_L_1000_seed_225_full_prediction.png Graphic file (type png)
 <use HBNN_mass_3param_L_1000_seed_225_full_prediction.png>
-Package pdftex.def Info: HBNN_mass_3param_L_1000_seed_225_full_prediction.png  used on input line 504.
+Package pdftex.def Info: HBNN_mass_3param_L_1000_seed_225_full_prediction.png  used on input line 498.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
 <HBNN_mass_3param_L_1000_seed_225_full_residual.png, id=441, 569.9694pt x 425.1885pt>
 File: HBNN_mass_3param_L_1000_seed_225_full_residual.png Graphic file (type png)
 <use HBNN_mass_3param_L_1000_seed_225_full_residual.png>
-Package pdftex.def Info: HBNN_mass_3param_L_1000_seed_225_full_residual.png  used on input line 511.
+Package pdftex.def Info: HBNN_mass_3param_L_1000_seed_225_full_residual.png  used on input line 505.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
 <GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png, id=442, 566.115pt x 425.1885pt>
 File: GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png Graphic file (type png)
 <use GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png>
-Package pdftex.def Info: GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png  used on input line 518.
+Package pdftex.def Info: GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png  used on input line 512.
 (pdftex.def)             Requested size: 113.35837pt x 85.13998pt.
 <GP_mass_3param_L_1000_seed_225_filtered_95_residual.png, id=443, 565.1514pt x 425.1885pt>
 File: GP_mass_3param_L_1000_seed_225_filtered_95_residual.png Graphic file (type png)
 <use GP_mass_3param_L_1000_seed_225_filtered_95_residual.png>
-Package pdftex.def Info: GP_mass_3param_L_1000_seed_225_filtered_95_residual.png  used on input line 525.
+Package pdftex.def Info: GP_mass_3param_L_1000_seed_225_filtered_95_residual.png  used on input line 519.
 (pdftex.def)             Requested size: 113.35837pt x 85.28273pt.
 <BART_mass_3param_L_prediction_seed_225_full_prediction.png, id=444, 569.9694pt x 425.1885pt>
 File: BART_mass_3param_L_prediction_seed_225_full_prediction.png Graphic file (type png)
 <use BART_mass_3param_L_prediction_seed_225_full_prediction.png>
-Package pdftex.def Info: BART_mass_3param_L_prediction_seed_225_full_prediction.png  used on input line 535.
+Package pdftex.def Info: BART_mass_3param_L_prediction_seed_225_full_prediction.png  used on input line 529.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
 <BART_mass_3param_L_prediction_seed_225_full_residual.png, id=445, 569.9694pt x 425.1885pt>
 File: BART_mass_3param_L_prediction_seed_225_full_residual.png Graphic file (type png)
 <use BART_mass_3param_L_prediction_seed_225_full_residual.png>
-Package pdftex.def Info: BART_mass_3param_L_prediction_seed_225_full_residual.png  used on input line 542.
+Package pdftex.def Info: BART_mass_3param_L_prediction_seed_225_full_residual.png  used on input line 536.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
 <BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png, id=446, 569.9694pt x 425.1885pt>
 File: BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png Graphic file (type png)
 <use BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png>
-Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png  used on input line 549.
+Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png  used on input line 543.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
 <BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png, id=447, 569.9694pt x 425.1885pt>
 File: BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png Graphic file (type png)
 <use BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png>
-Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png  used on input line 556.
+Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png  used on input line 550.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
 [17] [18 <./HBNN_mass_3param_L_1000_seed_225_full_prediction.png> <./HBNN_mass_3param_L_1000_seed_225_full_residual.png> <./GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png> <./GP_mass_3param_L_1000_seed_225_filtered_95_residual.png> <./BART_mass_3param_L_prediction_seed_225_full_prediction.png> <./BART_mass_3param_L_prediction_seed_225_full_residual.png> <./BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png> <./BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png>] [19]
 
@@ -1541,7 +1541,7 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                625.
+(scrartcl)                619.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
@@ -1553,77 +1553,78 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                634.
+(scrartcl)                628.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
 [21]
-<HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png, id=540, 504.2037pt x 382.3083pt>
+<HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png, id=537, 504.2037pt x 382.3083pt>
 File: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png Graphic file (type png)
 <use HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png>
-Package pdftex.def Info: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png  used on input line 663.
+Package pdftex.def Info: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png  used on input line 655.
 (pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
-<HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png, id=541, 504.2037pt x 382.3083pt>
+<HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png, id=538, 504.2037pt x 382.3083pt>
 File: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png Graphic file (type png)
 <use HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png>
-Package pdftex.def Info: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png  used on input line 670.
+Package pdftex.def Info: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png  used on input line 662.
 (pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
-<GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png, id=542, 504.2037pt x 382.3083pt>
+<GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png, id=539, 504.2037pt x 382.3083pt>
 File: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png Graphic file (type png)
 <use GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png>
-Package pdftex.def Info: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png  used on input line 677.
+Package pdftex.def Info: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png  used on input line 669.
 (pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
-<GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png, id=543, 504.2037pt x 382.3083pt>
+<GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png, id=540, 504.2037pt x 382.3083pt>
 File: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png Graphic file (type png)
 <use GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png>
-Package pdftex.def Info: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png  used on input line 684.
+Package pdftex.def Info: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png  used on input line 676.
 (pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
-<BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png, id=544, 528.0528pt x 386.6445pt>
+<BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png, id=541, 528.0528pt x 386.6445pt>
 File: BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png Graphic file (type png)
 <use BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png>
-Package pdftex.def Info: BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png  used on input line 694.
+Package pdftex.def Info: BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png  used on input line 686.
 (pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
-<BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png, id=545, 528.0528pt x 386.6445pt>
+<BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png, id=542, 528.0528pt x 386.6445pt>
 File: BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png Graphic file (type png)
 <use BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png>
-Package pdftex.def Info: BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png  used on input line 701.
+Package pdftex.def Info: BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png  used on input line 693.
 (pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
-<BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png, id=546, 528.0528pt x 386.6445pt>
+<BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png, id=543, 528.0528pt x 386.6445pt>
 File: BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png Graphic file (type png)
 <use BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png>
-Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png  used on input line 708.
+Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png  used on input line 700.
 (pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
-<BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png, id=547, 528.0528pt x 386.6445pt>
+<BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png, id=544, 528.0528pt x 386.6445pt>
 File: BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png Graphic file (type png)
 <use BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png>
-Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png  used on input line 715.
+Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png  used on input line 707.
 (pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
- [22] [23 <./HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png> <./HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png> <./GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png> <./GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png> <./BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png> <./BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png> <./BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png> <./BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png>]
-<mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png, id=574, 714.0276pt x 425.6703pt>
+ [22 <./HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png> <./HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png> <./GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png> <./GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png> <./BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png> <./BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png> <./BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png> <./BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png>]
+<mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png, id=566, 714.0276pt x 425.6703pt>
 File: mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png Graphic file (type png)
 <use mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png>
-Package pdftex.def Info: mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png  used on input line 734.
+Package pdftex.def Info: mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png  used on input line 725.
 (pdftex.def)             Requested size: 377.85405pt x 225.26642pt.
- [24 <./mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png>]
+ [23]
 
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                756.
+(scrartcl)                747.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
+[24 <./mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png>]
 
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                769.
+(scrartcl)                760.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
@@ -1635,42 +1636,52 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                793.
+(scrartcl)                784.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
-[26]
-<10_bins_02_fractional_residual_vs_log10_oblateness.png, id=618, 520.344pt x 361.35pt>
+<10_bins_02_fractional_residual_vs_log10_oblateness.png, id=609, 520.344pt x 361.35pt>
 File: 10_bins_02_fractional_residual_vs_log10_oblateness.png Graphic file (type png)
 <use 10_bins_02_fractional_residual_vs_log10_oblateness.png>
-Package pdftex.def Info: 10_bins_02_fractional_residual_vs_log10_oblateness.png  used on input line 805.
+Package pdftex.def Info: 10_bins_02_fractional_residual_vs_log10_oblateness.png  used on input line 796.
 (pdftex.def)             Requested size: 231.43732pt x 160.72029pt.
-<10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png, id=619, 520.344pt x 361.35pt>
+<10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png, id=610, 520.344pt x 361.35pt>
 File: 10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png Graphic file (type png)
 <use 10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png>
-Package pdftex.def Info: 10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png  used on input line 812.
+Package pdftex.def Info: 10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png  used on input line 803.
 (pdftex.def)             Requested size: 231.43732pt x 160.72029pt.
- [27 <./10_bins_02_fractional_residual_vs_log10_oblateness.png> <./10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png>]
-<04_predicted_vs_true_EB_masses.png, id=635, 733.0587pt x 552.6246pt>
+[26] [27 <./10_bins_02_fractional_residual_vs_log10_oblateness.png> <./10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png>]
+<04_predicted_vs_true_EB_masses.png, id=632, 733.0587pt x 552.6246pt>
 File: 04_predicted_vs_true_EB_masses.png Graphic file (type png)
 <use 04_predicted_vs_true_EB_masses.png>
-Package pdftex.def Info: 04_predicted_vs_true_EB_masses.png  used on input line 834.
+Package pdftex.def Info: 04_predicted_vs_true_EB_masses.png  used on input line 825.
 (pdftex.def)             Requested size: 146.41673pt x 110.37117pt.
-<03_fractional_residual_vs_true_EB_mass.png, id=636, 732.0951pt x 552.6246pt>
+<03_fractional_residual_vs_true_EB_mass.png, id=633, 732.0951pt x 552.6246pt>
 File: 03_fractional_residual_vs_true_EB_mass.png Graphic file (type png)
 <use 03_fractional_residual_vs_true_EB_mass.png>
-Package pdftex.def Info: 03_fractional_residual_vs_true_EB_mass.png  used on input line 841.
+Package pdftex.def Info: 03_fractional_residual_vs_true_EB_mass.png  used on input line 832.
 (pdftex.def)             Requested size: 146.41673pt x 110.52295pt.
-<05_fractional_residual_vs_log10_oblateness_mass_colored.png, id=637, 785.334pt x 516.4896pt>
+<05_fractional_residual_vs_log10_oblateness_mass_colored.png, id=634, 785.334pt x 516.4896pt>
 File: 05_fractional_residual_vs_log10_oblateness_mass_colored.png Graphic file (type png)
 <use 05_fractional_residual_vs_log10_oblateness_mass_colored.png>
-Package pdftex.def Info: 05_fractional_residual_vs_log10_oblateness_mass_colored.png  used on input line 848.
+Package pdftex.def Info: 05_fractional_residual_vs_log10_oblateness_mass_colored.png  used on input line 839.
 (pdftex.def)             Requested size: 165.3134pt x 108.7182pt.
 
-Underfull \hbox (badness 3780) in paragraph at lines 849--849
+Underfull \hbox (badness 3780) in paragraph at lines 840--840
 [][][]|\T1/cmr/m/n/10.95 Frac-tional re-sid-uals, colour-
  []
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                857.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
 
 [28 <./04_predicted_vs_true_EB_masses.png> <./03_fractional_residual_vs_true_EB_mass.png> <./05_fractional_residual_vs_log10_oblateness_mass_colored.png>]
 
@@ -1679,24 +1690,12 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                866.
+(scrartcl)                867.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
-[29]
-
-Package scrartcl Warning: Usage of \@startsection detected.
-(scrartcl)                Note, the sectioning of scrartcl does neither use
-(scrartcl)                nor support the usage of \@startsection command.
-(scrartcl)                This means, that none of the KOMA-Script features
-(scrartcl)                for headings is available for the heading on line
-(scrartcl)                876.
-(scrartcl)                If you need additional sectioning commands, you
-(scrartcl)                should define them using \DeclareNewSectionCommand
-(scrartcl)                instead.
-
-[30] (main.bbl
+[29] [30] (main.bbl
 
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
@@ -1724,17 +1723,17 @@ L3 programming layer <2020/03/25>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 40550 strings out of 467871
- 890163 string characters out of 5414020
+ 40549 strings out of 467871
+ 890153 string characters out of 5414020
  1517396 words of memory out of 5000000
  68666 multiletter control sequences out of 15000+600000
  656107 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 113i,13n,110p,11313b,1295s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1440.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (33 pages, 5158383 bytes).
+ 113i,13n,110p,11313b,1307s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1440.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on main.pdf (33 pages, 5154875 bytes).
 PDF statistics:
- 1489 PDF objects out of 1728 (max. 8388607)
- 127 named destinations out of 1000 (max. 500000)
+ 1482 PDF objects out of 1728 (max. 8388607)
+ 126 named destinations out of 1000 (max. 500000)
  468 words of extra memory for PDF output out of 10000 (max. 10000000)
 
