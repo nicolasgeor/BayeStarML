@@ -1,40 +1,47 @@
 {
-  "latex-workshop.latex.recipe.default": "pdflatex",
+  "latex-workshop.latex.recipe.default": "main: pdflatex",
+  "latex-workshop.latex.outDir": "%DIR%",
+  "latex-workshop.latex.rootFile.useSubFile": false,
+  "latex-workshop.latex.build.forceRecipeUsage": true,
   "latex-workshop.latex.clean.method": "glob",
   "latex-workshop.latex.autoClean.run": "never",
   "latex-workshop.latex.tools": [
     {
-      "name": "pdflatex",
+      "name": "main-pdflatex",
       "command": "pdflatex",
       "args": [
         "-synctex=1",
         "-interaction=nonstopmode",
         "-file-line-error",
-        "main.tex"
-      ]
+        "-halt-on-error",
+        "-output-directory=%DIR%",
+        "%DOC%"
+      ],
+      "cwd": "%DIR%"
     },
     {
-      "name": "bibtex",
+      "name": "main-bibtex",
       "command": "bibtex",
       "args": [
-        "main"
-      ]
+        "%DOCFILE%"
+      ],
+      "cwd": "%DIR%"
     }
   ],
   "latex-workshop.latex.recipes": [
     {
-      "name": "pdflatex",
+      "name": "main: pdflatex",
       "tools": [
-        "pdflatex"
+        "main-pdflatex"
       ]
     },
     {
-      "name": "pdflatex -> bibtex -> pdflatex*2",
+      "name": "main: pdflatex -> bibtex -> pdflatex*2",
       "tools": [
-        "pdflatex",
-        "bibtex",
-        "pdflatex",
-        "pdflatex"
+        "main-pdflatex",
+        "main-bibtex",
+        "main-pdflatex",
+        "main-pdflatex"
       ]
     }
   ]
