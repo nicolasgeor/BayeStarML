@@ -6,44 +6,44 @@ The style file: aasjournal.bst
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: references.bib
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
-You've used 46 entries,
+You've used 44 entries,
             3168 wiz_defined-function locations,
-            1004 strings with 16592 characters,
-and the built_in function-call counts, 22224 in all, are:
-= -- 1853
-> -- 1638
-< -- 22
-+ -- 547
-- -- 588
-* -- 2012
-:= -- 4005
-add.period$ -- 51
-call.type$ -- 46
-change.case$ -- 267
-chr.to.int$ -- 51
-cite$ -- 46
-duplicate$ -- 827
-empty$ -- 1404
-format.name$ -- 644
-if$ -- 4523
-int.to.chr$ -- 2
+            990 strings with 16424 characters,
+and the built_in function-call counts, 21318 in all, are:
+= -- 1771
+> -- 1618
+< -- 18
++ -- 540
+- -- 585
+* -- 1939
+:= -- 3863
+add.period$ -- 49
+call.type$ -- 44
+change.case$ -- 258
+chr.to.int$ -- 47
+cite$ -- 44
+duplicate$ -- 783
+empty$ -- 1310
+format.name$ -- 638
+if$ -- 4316
+int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 38
-newline$ -- 151
-num.names$ -- 188
-pop$ -- 306
+missing$ -- 36
+newline$ -- 145
+num.names$ -- 179
+pop$ -- 296
 preamble$ -- 1
-purify$ -- 263
+purify$ -- 256
 quote$ -- 0
-skip$ -- 707
+skip$ -- 663
 stack$ -- 0
-substring$ -- 869
-swap$ -- 60
-text.length$ -- 4
+substring$ -- 808
+swap$ -- 46
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 405
+type$ -- 390
 warning$ -- 0
-while$ -- 188
+while$ -- 176
 width$ -- 0
-write$ -- 518
+write$ -- 495

@@ -138,23 +138,13 @@ Maas, A.~L., Hannun, A.~Y., \& Ng, A.~Y. 2013, in Proceedings of the ICML 2013
 \newblock
   \url{https://ai.stanford.edu/~amaas/papers/relu_hybrid_icml2013_final.pdf}
 
-\bibitem[{MacKay(1998)}]{mackay1998gp}
-MacKay, D. J.~C. 1998, in NATO ASI Series F: Computer and Systems Sciences,
-  Vol. 168, Neural Networks and Machine Learning, ed. C.~M. Bishop (Berlin:
-  Springer), 133--165
-
 \bibitem[{Maxted(2023)}]{maxted2023benchmark}
 Maxted, P. F.~L. 2023, Monthly Notices of the Royal Astronomical Society, 522,
   2683, \dodoi{10.1093/mnras/stad1112}
 
-\bibitem[{McElreath(2020{\natexlab{a}})}]{mcelreath2020rethinking}
-McElreath, R. 2020{\natexlab{a}}, Statistical Rethinking: A Bayesian Course
-  with Examples in {R} and {Stan}, 2nd edn. (Boca Raton: Chapman and Hall/CRC),
-  \dodoi{10.1201/9780429029608}
-
-\bibitem[{McElreath(2020{\natexlab{b}})}]{mcelreath2020}
----. 2020{\natexlab{b}}, Statistical Rethinking: A Bayesian Course with
-  Examples in {R} and {Stan}, 2nd edn. (Boca Raton: Chapman and Hall/CRC),
+\bibitem[{McElreath(2020)}]{mcelreath2020rethinking}
+McElreath, R. 2020, Statistical Rethinking: A Bayesian Course with Examples in
+  {R} and {Stan}, 2nd edn. (Boca Raton: Chapman and Hall/CRC),
   \dodoi{10.1201/9780429029608}
 
 \bibitem[{Moya \& L{\'o}pez-Sastre(2022)}]{moya2022}
@@ -208,15 +198,17 @@ Southworth, J. 2015, in Astronomical Society of the Pacific Conference Series,
   164--166.
 \newblock \doarXiv{1411.1219}
 
+\bibitem[{Tamames-Rodero {et~al.}(2025)Tamames-Rodero, Moya, L{\'o}pez, \&
+  Sarro}]{tamamesrodero2025bnn}
+Tamames-Rodero, V., Moya, A., L{\'o}pez, R.~J., \& Sarro, L.~M. 2025, Unveiling
+  the Power of Uncertainty: A Journey into {Bayesian} Neural Networks for
+  Stellar Dating, \dodoi{10.48550/arXiv.2503.21153}
+
 \bibitem[{Tsantaki {et~al.}(2018)Tsantaki, Andreasen, Teixeira, Sousa, Santos,
   Delgado-Mena, \& Bruzual}]{tsantaki2018}
 Tsantaki, M., Andreasen, D.~T., Teixeira, G. D.~C., {et~al.} 2018, Monthly
   Notices of the Royal Astronomical Society, 473, 5066,
   \dodoi{10.1093/mnras/stx2564}
-
-\bibitem[{Vehtari {et~al.}(2017)Vehtari, Gelman, \& Gabry}]{vehtari2017loo}
-Vehtari, A., Gelman, A., \& Gabry, J. 2017, Statistics and Computing, 27, 1413,
-  \dodoi{10.1007/s11222-016-9696-4}
 
 \bibitem[{Wolpert(1992)}]{wolpert1992stacked}
 Wolpert, D.~H. 1992, Neural Networks, 5, 241,

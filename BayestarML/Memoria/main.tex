@@ -19,7 +19,7 @@
     Reliable stellar masses are required for stellar astrophysics and for the interpretation of exoplanet observations, but direct and homogeneous mass determinations are available only for limited samples. This work presents an uncertainty-aware machine-learning study of main-sequence stellar mass prediction based on a high-quality sample of 767 stars assembled mainly from eclipsing binaries, asteroseismic stars and interferometric benchmark stars. Bayesian Additive Regression Trees, a two-process heteroscedastic sparse Gaussian Process and a Hierarchical Bayesian Neural Network are trained as level-0 predictors, whose posterior predictive distributions are combined through Bayesian Hierarchical Stacking.
 
     \par\smallskip
-    For FGK-type stars, using $T_{\mathrm{eff}}$, $\rho$ and $[\mathrm{Fe}/\mathrm{H}]$ as input features, the stacking model reaches a mean absolute difference below $5\%$ on a holdout test set, while showing no clear mass-dependent bias. The same framework is then applied to eclipsing-binary components using $T_{\mathrm{eff}}$, $L$, $\log g$ and $[\mathrm{Fe}/\mathrm{H}]$, in order to test whether tidal distortion affects mass predictions transferred from a purely asteroseismic training sample. For the selected sample of 85 binaries, oblateness does not produce a significant signed bias, but it is associated with an increase in the absolute mass residuals, indicating a loss of precision rather than a systematic loss of accuracy. Finally, an experiment motivated by the ESA ARIEL mission uses $T_{\mathrm{eff}}$, $[\mathrm{Fe}/\mathrm{H}]$ and $L$, excluding $\log g$ to reduce direct dependence on stellar evolutionary models, and yields mean absolute differences below $7\%$. The comparison with stellar-grid and linear-relation masses shows that the methods give broadly consistent but not identical results, supporting the use of probabilistic stacking as a data-driven tool for stellar-mass estimation with reduced model dependence and explicit uncertainty propagation.
+    For FGK-type stars, using $T_{\mathrm{eff}}$, $\rho$ and $[\mathrm{Fe}/\mathrm{H}]$ as input features, the stacking model reaches a mean absolute difference below $5\%$ on a holdout test set, while showing no clear mass-dependent bias. The same framework is then applied to eclipsing-binary components using $T_{\mathrm{eff}}$, $L$, $\log g$ and $[\mathrm{Fe}/\mathrm{H}]$, in order to test whether tidal distortion affects mass predictions transferred from a purely asteroseismic training sample. For the selected sample of 85 binary components, oblateness does not produce a significant signed bias, but it is associated with an increase in the absolute mass residuals, indicating a loss of precision rather than a systematic loss of accuracy. Finally, an experiment motivated by the ESA ARIEL mission uses $T_{\mathrm{eff}}$, $[\mathrm{Fe}/\mathrm{H}]$ and $L$, excluding $\log g$ to reduce direct dependence on stellar evolutionary models, and yields mean absolute differences below $7\%$. The comparison with stellar-grid and linear-relation masses shows that the methods give broadly consistent but not identical results, supporting the use of probabilistic stacking as a data-driven tool for stellar-mass estimation with reduced model dependence and explicit uncertainty propagation.
 \end{minipage}}\hfill
 \resizebox{0.48\textwidth}{!}{%
 \begin{minipage}[t]{0.785\textwidth}
@@ -31,7 +31,7 @@
     La obtenci\'on fiable de masas estelares es necesaria para la astrof\'isica estelar y para la interpretaci\'on de observaciones de exoplanetas, pero su determinaci\'on directa y homog\'enea s\'olo es posible mediante muestras limitadas. Este trabajo presenta un estudio mediante machine learning con tratamiento expl\'icito de incertidumbres para la predicci\'on de masas de estrellas de la secuencia principal, basado en una muestra de alta calidad de 767 estrellas, construida principalmente a partir de binarias eclipsantes, m\'etodos astros\'ismicos y estrellas de referencia interferom\'etricas. Bayesian Additive Regression Trees, una Red Neuronal Bayesiana Jer\'arquica y un Gaussian Process disperso heteroced\'astico de dos procesos se entrenan como predictores de nivel 0, cuyas distribuciones predictivas posteriores se combinan mediante Bayesian Hierarchical Stacking.
 
     \par\smallskip
-    Para estrellas de tipo FGK, usando $T_{\mathrm{eff}}$, $\rho$ y $[\mathrm{Fe}/\mathrm{H}]$ como variables de entrada, el modelo de stacking alcanza una diferencia media absoluta inferior al $5\%$ en un conjunto de prueba reservado a partir del dataset original, sin mostrar un sesgo signado claro dependiente de la masa. El mismo marco se aplica despu\'es a componentes de binarias eclipsantes usando $T_{\mathrm{eff}}$, $[\mathrm{Fe}/\mathrm{H}]$, $L$ y $\log g$, con el objetivo de comprobar si la distorsi\'on por mareas afecta a las predicciones de masa transferidas desde una muestra de entrenamiento puramente astros\'ismica. Para la muestra seleccionada de 85 binarias, la oblaticidad no produce un sesgo signado significativo, pero s\'i est\'a asociada con un aumento de los residuos absolutos de masa, lo que indica una p\'erdida de precisi\'on m\'as que una p\'erdida sistem\'atica de exactitud. Finalmente, un experimento motivado por la misi\'on ARIEL de la ESA usa $T_{\mathrm{eff}}$, $[\mathrm{Fe}/\mathrm{H}]$ y $L$, excluyendo $\log g$ para reducir la dependencia directa de modelos de evoluci\'on estelar, y obtiene diferencias medias absolutas inferiores al $7\%$. La comparaci\'on con masas obtenidas mediante modelos de evoluci\'on estelar y relaciones lineales muestra que los m\'etodos proporcionan resultados ampliamente consistentes, aunque no id\'enticos, apoyando el uso del stacking probabil\'istico como herramienta basada en datos para la estimaci\'on de masas estelares con menor dependencia de modelos y propagaci\'on expl\'icita de incertidumbres.
+    Para estrellas de tipo FGK, usando $T_{\mathrm{eff}}$, $\rho$ y $[\mathrm{Fe}/\mathrm{H}]$ como variables de entrada, el modelo de stacking alcanza una diferencia media absoluta inferior al $5\%$ en un conjunto de prueba reservado a partir del dataset original, sin mostrar un sesgo signado claro dependiente de la masa. El mismo marco se aplica despu\'es a componentes de binarias eclipsantes usando $T_{\mathrm{eff}}$, $[\mathrm{Fe}/\mathrm{H}]$, $L$ y $\log g$, con el objetivo de comprobar si la distorsi\'on por mareas afecta a las predicciones de masa transferidas desde una muestra de entrenamiento puramente astros\'ismica. Para la muestra seleccionada de 85 componentes de sistemas binarios, la oblaticidad no produce un sesgo signado significativo, pero s\'i est\'a asociada con un aumento de los residuos absolutos de masa, lo que indica una p\'erdida de precisi\'on m\'as que una p\'erdida sistem\'atica de exactitud. Finalmente, un experimento motivado por la misi\'on ARIEL de la ESA usa $T_{\mathrm{eff}}$, $[\mathrm{Fe}/\mathrm{H}]$ y $L$, excluyendo $\log g$ para reducir la dependencia directa de modelos de evoluci\'on estelar, y obtiene diferencias medias absolutas inferiores al $7\%$. La comparaci\'on con masas obtenidas mediante modelos de evoluci\'on estelar y relaciones lineales muestra que los m\'etodos proporcionan resultados ampliamente consistentes, aunque no id\'enticos, apoyando el uso del stacking probabil\'istico como herramienta basada en datos para la estimaci\'on de masas estelares con menor dependencia de modelos y propagaci\'on expl\'icita de incertidumbres.
 \end{minipage}}
 \par\vspace{0.05cm}
 {\setstretch{0.7}\tableofcontents}
@@ -55,13 +55,7 @@ The second application is motivated by ESA's ARIEL space mission, for which accu
 
 Finally, this work examines whether eclipsing-binary components can be treated as approximately individual stars, for the purposes of mass prediction. To test this, asteroseismic stars are taken as a reference sample of approximately isolated stellar evolution. The models are trained only on asteroseismic stars, and then applied to eclipsing-binary components. The differences between the predicted and reference masses are analysed as a function of the oblateness parameter, used here as an indicator of binary interaction. This makes it possible to assess whether mass relations calibrated on individual stars remain valid for eclipsing-binary components, or whether increasing tidal distortion produces a measurable degradation in the predictions.
 
-MIGHT DELETE THIS PARAGRPAH
-Overall, this thesis combines catalogue construction, Bayesian machine learning and astrophysical validation tests in order to assess how reliably stellar masses can be inferred from observable stellar parameters. The emphasis is placed not only on predictive performance, but also on uncertainty calibration and model dependence.
-
-
 \section{Machine Learning Models} \label{sec:models}
-
-
 
 \subsection{Bayesian Framework for the Models} \label{sec:bayesian-inference}
 %could the cafeteria reference be used gere?
@@ -103,47 +97,125 @@ Among the three level-0 models used in this work, the practical deployment of th
 
 % Explanation of "At each step, the algorithm selects the threshold that maximizes the homogeneity of the target variable in the resulting subsets.": Assume a parent node contains five stars with known masses: $[1.0, 1.1, 1.2, 5.0, 5.2]$.The algorithm tests possible splitting thresholds on an input variable (e.g., Effective Temperature).Split Option A: Creates Subset 1 $[1.0, 5.0]$ and Subset 2 $[1.1, 1.2, 5.2]$. Both subsets contain extreme high and low values. Internal variance is high. Homogeneity is low. The algorithm rejects this threshold.Split Option B: Creates Subset 1 $[1.0, 1.1, 1.2]$ and Subset 2 $[5.0, 5.2]$. The values inside Subset 1 are nearly identical to each other. The values inside Subset 2 are nearly identical to each other. Internal variance is minimized. Homogeneity is maximized. The algorithm selects this threshold.
 
-The Bayesian Additive Regression Trees framework, introduced by \citet{chipman2010bart}, employs a sum-of-trees architecture to approximate complex non-linear functions. A Random Forest constructs an ensemble of deep, independent regression trees. By training each one of such trees on a random sample of the dataset and averaging the predictions of all of them, it produces a final output which reduces variance. BART follows this dataset subsampling logic, but the final predictions are not the average of the independent models, but the cumulative sum of the terminal node values across all interdependent trees in the ensemble. Therefore, in Random Forests every tree is a strong learner which produces an absolute value prediction for the target; while in BART the trees are weak learners, which just produce a part of the answer \citep{chipman2010bart}.
+The Bayesian Additive Regression Trees framework, introduced by \citet{chipman2010bart}, employs a sum-of-trees architecture to approximate complex non-linear functions. A Random Forest constructs an ensemble of deep, independent regression trees. By training each one of such predictors on a random sample of the dataset and averaging the predictions of all of them, it produces a final output which reduces variance. BART follows this dataset subsampling logic, but the final predictions are not the average of the independent models, but the cumulative sum of the terminal node values across all interdependent trees in the ensemble. Therefore, in Random Forests every tree is a strong learner which produces an absolute value prediction for the target; while in BART the components are weak learners, which just produce a part of the prediction \citep{chipman2010bart}. This weak learner approach is mathematically guaranteed by regularisation priors, which constrain the size and structural influence of each tree, preventing any single component from dominating the overall model.
 
 % Explanation of last part: in RF, you have 3 trees that give 1.9, 2.0 and 2.1. in BART, they giuve 1.5, 0.2 and 0.3.
 
-This weak learner approach is mathematically guaranteed by regularisation priors, which constrain the size and structural influence of each tree. These mathematical penalties prevent any single tree component from dominating the overall model, thereby preserving the functional and computational advantages of the additive representation. Left unconstrained, the algorithm naturally drives individual trees to grow massive in pursuit of tighter data fits \citep{chipman2010bart}. The priors counteract this by forcing each tree to function as a weak learner, modelling only a restricted subset of the underlying function. This way, each tree provides only a small part of the predictor space, not a prediction itself.
-
-Since each individual tree recursively partitions the predictor space utilising binary decision rules, the overall capacity and complexity of the model depends on the total number of trees. Predictive performance generally improves as this quantity increases, eventually reaching an asymptote.
-
-Model optimisation follows the Bayesian backfitting MCMC scheme introduced in Section \ref{sec:bayesian-inference}. During each sweep, the algorithm updates one tree conditional on the partial residual left by the rest of the ensemble, proposing local changes such as growing, pruning or modifying a split. Repeating this process samples plausible tree structures and terminal-node values rather than selecting a fixed ensemble \citep{chipman2010bart}.
+Since each individual tree recursively partitions the predictor space utilising binary decision rules, the overall capacity and complexity of BART depends on the total number of trees. The model may be optimized following the Bayesian backfitting MCMC scheme introduced in Section \ref{sec:bayesian-inference}. During each sweep, the algorithm updates one tree conditional on the partial residual left by the rest of the ensemble, proposing local changes such as growing, pruning or modifying a split. Repeating this process samples plausible tree structures and terminal-node values rather than selecting a fixed ensemble \citep{chipman2010bart}.
 
 Crucially for stellar characterization, where uncertainty of the input features is a dominant factor, the framework used in this work accommodates an errors-in-variables approach. Inputs are not treated as static, exact measurements; rather, they are modeled as latent variables characterised by a Gaussian distribution whose variance is fixed by the observational uncertainties. This allows the model to account for the diverse uncertainties present across the entire star catalogue.
 
 
 
 \subsection{Two-process Heteroscedastic Sparse Gaussian Process (GP)}
-In classical parametric modelling, the functional form of the predictor is fixed in advance and inference is performed over its parameters. A Gaussian Process (GP) takes a different approach: it defines a probability distribution over possible functions. Any finite set of function values is assumed to follow a joint Gaussian distribution, so the model is specified by a mean function and a covariance function, or kernel. In many applications, the covariance function carries most of the information, while the mean function can be set to zero. Therefore, the main modelling choices are the prior covariance structure and the observational noise model, rather than an explicit fixed equation for the underlying function \citep{mackay1998gp,rasmussen2006gpml}.
 
+In classical parametric modelling, the functional form of the predictor is fixed in advance, and inference is performed over its parameters. A Gaussian Process (GP) takes a different approach: it defines a probability distribution over possible functions. Any finite set of function values is assumed to follow a joint Gaussian distribution, so the model is specified by a mean function and a covariance function, or kernel. In this work, the covariance between two input points is modelled with an ARD squared-expontential kernel:
+\begin{equation}
+k(\boldsymbol{x},\boldsymbol{x}')=
+A^2
+\exp\left[
+\sum_{d=1}^{D}
+-\frac{(x_{d}-x'_{d})^2}{2 \ \ell_d^2}
+\right],
+\end{equation}
+where $A$ controls the overall scale of the functions and $\ell_d$ is the length-scale associated with input dimension $d$, at points $\boldsymbol{x}$ and $\boldsymbol{x}'$. The diagonal terms describe the variance associated with each point, while the off-diagonal terms describe how strongly two different stars are correlated.
 
+This covariance matrix is the object through which the correlations between the probability distributions of the different training points are propagated. Since the matrix has $N^2$ entries for $N$ training stars, treating all of these correlations as independent quantities would place the model in a highly flexible regime, with enough freedom to reproduce noise or local fluctuations in the training data (see Figure \ref{fig:gp_small_lengthscale}). A GP avoids this overfitting by not adjusting the covariance matrix element by element. Instead, a prior is imposed on the length-scale $\ell$: nearby stars in feature space have large covariance, while the covariance decreases as the separation between their input features increases. The resulting matrix is thus condensed around the diagonal \citep{rasmussen2006gpml}.
 
-% First, understand a multivariate gaussian: many variables, each in a gaussian distribution. A multivariate gaussian lives in a vector space, since each individual point has many components: point x has (x1, x2,...), point y has (y1, y2,...) and the gaussians followed are the gaussian conformed by (x1, y1...) the gaussian formed by (x2, y2...) and so on. If we extend these multivariate gaussian from a finite vector space to a continuous function space, we have a Gaussian Process (GP), where the elements are the functions (one element might be f(x, y) = sin x + y, the other might be g(x, y) = 2x + 6y). And the gaussian distributions are followed by the functions evaluated at the same points (f(2, 5) and g(2, 5); f(1, 0) and g(1,0)...). 
+\begin{figure}[H]
+\centering
 
-% The result of a gaussian distribution of vectors is a vector: the components of this result vector follow a gaussian, so for each iteration different numbers will be obtained, but overall they form a gaussian. The result of a gaussian distribution of functions is a function, where each point of the variable space follows a gaussian. But again, the result of an iteration is just a function with a fixed number for every coordinate in space. But these fixed numbers come from a gaussian dsitribution.
+\begin{subfigure}[t]{0.31\linewidth}
+\centering
+\includegraphics[width=\linewidth]{ell0comma3.png}
+\caption{Small length-scale}
+\label{fig:gp_small_lengthscale}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.31\linewidth}
+\centering
+\includegraphics[width=\linewidth]{ell=1.png}
+\caption{Intermediate length-scale}
+\label{fig:gp_intermediate_lengthscale}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.31\linewidth}
+\centering
+\includegraphics[width=\linewidth]{ell3.png}
+\caption{Large length-scale}
+\label{fig:gp_large_lengthscale}
+\end{subfigure}
 
+\caption{Example of Gaussian Process posterior predictions obtained for the same training points using different length-scales. Smaller length-scales allow the model to follow local variations more closely, while larger length-scales impose smoother correlations across the input space. The shaded regions show the corresponding predictive uncertainty. Reproduced from Figure 2.5 of \citet{rasmussen2006gpml}.}
+\label{fig:gp_lengthscale_example}
 
-Training a GP therefore amounts to selecting a kernel and inferring its constraints, usually referred to as hyperparameters. The amplitude of the kernel controls the overall scale of the functions, and its length-scale controls how rapidly function values can change along the input axes. In this work, the kernel is chosen to favour smooth functions: nearby points in the input space are strongly correlated, while the correlation decreases as their separation increases. Large length-scales are thus dominant, since they produce slowly varying functions \citep{rasmussen2006gpml}.
+\end{figure}
 
-% (additional info at the end of the text, to help you explain it better in the presentation)
+MIGHT DELETE THIS PRAGRAPH
+The version used in this work is the Automatic Relevance Determination (ARD) kernel, where each input dimension has its own length-scale rather than sharing a single one. Dimensions with little predictive information can therefore be assigned very large length-scales, making them contribute less to the covariance structure \citep{rasmussen2006gpml}.
 
-% FINAL VERSION: MIGHT ERASE LAST SENTENCE OF THIS PARAGRAPH
-To prevent the model from choosing unphysical hyperparameter values, priors are placed on the kernel length-scales and amplitudes. The version used in this work is the Automatic Relevance Determination (ARD) kernel, where each input dimension has its own length-scale, rather than sharing a single one. Dimensions with little predictive information can therefore be assigned very large length-scales, making them contribute less to the covariance structure \citep{rasmussen2006gpml}. The priors regularise this process by keeping the length-scales compatible with the spacing and span of the training data, while weakly informative amplitude priors avoid variances that collapse to zero or diverge.
-
-The standard GP formulation usually assumes homoscedastic observational noise, meaning a single constant noise variance across the dataset. Stellar catalogues, however, contain measurements with uncertainties that vary between stars and between parameters. To account for this, the model used in this work follows a two-process heteroscedastic construction: one GP, $f(\boldsymbol{x})$, represents the latent predictive mean as a function of the stellar parameters, while a second GP, $g(\boldsymbol{\epsilon})$, models the logarithm of the noise variance from the reported measurement errors. This allows the predictive uncertainty to vary across the input space instead of being forced into a single global noise level \citep{le2005heteroscedasticgp}.
-
-This flexibility comes with a computational cost. Because the kernel compares each data point with every other one, standard GP inference constructs an $N \times N$ covariance matrix; its diagonal terms describe each point's variance, while the off-diagonal terms encode similarity between different observations \citep{rasmussen2006gpml}. GP inference scales as $\mathcal{O}(N^3)$ because it requires operations on the full covariance matrix. To make inference feasible, both processes $f(\boldsymbol{x})$ and $g(\boldsymbol{\epsilon})$ are represented through a sparse approximation with $M$ inducing points, which act as representatives of the entire training set. Predictive covariances are therefore computed through the inducing set rather than directly through all pairwise relations between the $N$ observations, reducing the computational complexity to approximately $\mathcal{O}(NM^2)$ \citep{quinonero2005sparsegp}. Even so, Gaussian Processes can remain computationally demanding for large datasets.
+Since stellar catalogues contain measurements with uncertainties that vary between stars and between parameters, the model used in this work follows a two-process heteroscedastic construction: the predictive mean and the noise are represented by different Gaussian Processes. This allows the predictive uncertainty to vary across the input space instead of being forced into a single global noise level \citep{le2005heteroscedasticgp}. To reduce computational costs, a sparse approximation is also applied: both processes are represented through a reduced number of inducing points, which act as representatives of the entire training set. Predictive covariances are then computed through the inducing set rather than through all pairwise relations between the $N$ observations, reducing the computational complexity \citep{quinonero2005sparsegp}. Even so, Gaussian Processes can remain computationally demanding for large datasets.
 
 The model is treated in a fully Bayesian way. As described in Section \ref{sec:bayesian-inference}, MCMC sampling explores plausible kernel hyperparameters, inducing variables and noise structures rather than fixing them at a single point with no uncertainty. Predictions are then averaged over these samples, propagating measurement and model uncertainty into the reported intervals.
 
+% In classical parametric modelling, the functional form of the predictor is fixed in advance, and inference is performed over its parameters. A Gaussian Process (GP) takes a different approach: it defines a probability distribution over possible functions. Any finite set of function values is assumed to follow a joint Gaussian distribution, so the model is specified by a mean function and a covariance function, or kernel. In many applications, the covariance function carries most of the information, while the mean function can be set to zero. Therefore, the main modelling choices are the prior covariance structure and the observational noise model, rather than an explicit fixed equation for the underlying function \citep{mackay1998gp,rasmussen2006gpml}.
 
-% Additional info on the kernel function. First, picture the weight space. You have a set of data x, that we can fit to a linear regression model. But if we first apply a fixed function to these data, we can do the regression in the results (weight) space. We execute standard, computationally cheap linear matrix algebra in the 3D feature space, but the result projects back into the 1D input space as a non-linear parabola. Weight space allows linear algorithms to model non-linear geometries. We can extend the definition to function space: specifying a weight space and performing linear regression with a distribution of weights is mathematically identical to directly evaluating a kernel function between two points (evaluating the function itself, not fixed in this case).
 
-% Additional way of understanding the length scale $\ell$: how far does one need to move (along a particular axis) in the input space for the function values to become uncorrelated.
+
+% % First, understand a multivariate gaussian: many variables, each in a gaussian distribution. A multivariate gaussian lives in a vector space, since each individual point has many components: point x has (x1, x2,...), point y has (y1, y2,...) and the gaussians followed are the gaussian conformed by (x1, y1...) the gaussian formed by (x2, y2...) and so on. If we extend these multivariate gaussian from a finite vector space to a continuous function space, we have a Gaussian Process (GP), where the elements are the functions (one element might be f(x, y) = sin x + y, the other might be g(x, y) = 2x + 6y). And the gaussian distributions are followed by the functions evaluated at the same points (f(2, 5) and g(2, 5); f(1, 0) and g(1,0)...). 
+
+% % The result of a gaussian distribution of vectors is a vector: the components of this result vector follow a gaussian, so for each iteration different numbers will be obtained, but overall they form a gaussian. The result of a gaussian distribution of functions is a function, where each point of the variable space follows a gaussian. But again, the result of an iteration is just a function with a fixed number for every coordinate in space. But these fixed numbers come from a gaussian dsitribution.
+
+
+% Training a GP therefore describes selecting a kernel and inferring its constraints, usually referred to as hyperparameters. The amplitude of the kernel controls the overall scale of the functions, and its length-scale controls how rapidly function values can change along the input axes. In this work, the kernel is chosen to favour smooth functions: nearby points in the input space are strongly correlated, while the correlation decreases as their separation increases. Figure \ref{fig:gp_lengthscale_example} illustrates this behaviour for the same set of observations under different length-scales: small length-scales allow more rapidly varying functions, whereas large length-scales produce smoother posterior predictions \citep{rasmussen2006gpml}.
+
+\begin{figure}[H]
+\centering
+
+
+\begin{subfigure}[t]{0.31\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{ell0comma3.png}
+    \caption{Small length-scale}
+    \label{fig:gp_small_lengthscale}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.31\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{ell=1.png}
+    \caption{Intermediate length-scale}
+    \label{fig:gp_intermediate_lengthscale}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.31\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{ell3.png}
+    \caption{Large length-scale}
+    \label{fig:gp_large_lengthscale}
+\end{subfigure}
+
+\caption{Example of Gaussian Process posterior predictions obtained for the same training points using different length-scales. The shaded regions show the corresponding predictive uncertainty. Reproduced from Figure 2.5 of \citet{rasmussen2006gpml}.}
+\label{fig:gp_lengthscale_example}
+
+
+\end{figure}
+
+
+% % (additional info at the end of the text, to help you explain it better in the presentation)
+
+% % FINAL VERSION: MIGHT ERASE LAST SENTENCE OF THIS PARAGRAPH
+% To prevent the model from choosing unphysical hyperparameter values, priors are placed on the kernel length-scales and amplitudes. The version used in this work is the Automatic Relevance Determination (ARD) kernel, where each input dimension has its own length-scale, rather than sharing a single one. Dimensions with little predictive information can therefore be assigned very large length-scales, making them contribute less to the covariance structure \citep{rasmussen2006gpml}. The priors regularise this process by keeping the length-scales compatible with the spacing and span of the training data, while weakly informative amplitude priors avoid variances that collapse to zero or diverge.
+
+% The standard GP formulation usually assumes homoscedastic observational noise, meaning a single constant noise variance across the dataset. Stellar catalogues, however, contain measurements with uncertainties that vary between stars and between parameters. To account for this, the model used in this work follows a two-process heteroscedastic construction: one GP, $f(\boldsymbol{x})$, represents the latent predictive mean as a function of the stellar parameters, while a second GP, $g(\boldsymbol{\epsilon})$, models the logarithm of the noise variance from the reported measurement errors. This allows the predictive uncertainty to vary across the input space instead of being forced into a single global noise level \citep{le2005heteroscedasticgp}.
+
+% This flexibility comes with a computational cost. Because the kernel compares each data point with every other one, standard GP inference constructs an $N \times N$ covariance matrix; its diagonal terms describe each point's variance, while the off-diagonal terms encode similarity between different observations \citep{rasmussen2006gpml}. GP inference scales as $\mathcal{O}(N^3)$ because it requires operations on the full covariance matrix. To make inference feasible, both processes $f(\boldsymbol{x})$ and $g(\boldsymbol{\epsilon})$ are represented through a sparse approximation with $M$ inducing points, which act as representatives of the entire training set. Predictive covariances are therefore computed through the inducing set rather than directly through all pairwise relations between the $N$ observations, reducing the computational complexity to approximately $\mathcal{O}(NM^2)$ \citep{quinonero2005sparsegp}. Even so, Gaussian Processes can remain computationally demanding for large datasets.
+
+% The model is treated in a fully Bayesian way. As described in Section \ref{sec:bayesian-inference}, MCMC sampling explores plausible kernel hyperparameters, inducing variables and noise structures rather than fixing them at a single point with no uncertainty. Predictions are then averaged over these samples, propagating measurement and model uncertainty into the reported intervals.
+
+
+% % Additional info on the kernel function. First, picture the weight space. You have a set of data x, that we can fit to a linear regression model. But if we first apply a fixed function to these data, we can do the regression in the results (weight) space. We execute standard, computationally cheap linear matrix algebra in the 3D feature space, but the result projects back into the 1D input space as a non-linear parabola. Weight space allows linear algorithms to model non-linear geometries. We can extend the definition to function space: specifying a weight space and performing linear regression with a distribution of weights is mathematically identical to directly evaluating a kernel function between two points (evaluating the function itself, not fixed in this case).
+
+% % Additional way of understanding the length scale $\ell$: how far does one need to move (along a particular axis) in the input space for the function values to become uncorrelated.
 
 
 
@@ -184,7 +256,7 @@ Bayesian Neural Networks (BNNs) address this limitation by assigning probability
 \label{fig:noseno}
 \end{figure}
 
-The network itself uses Gaussian priors for the weights and biases and a two-layer architecture with Leaky ReLU activations \citep{maas2013rectifier}. As discussed in Section \ref{sec:bayesian-inference}, MCMC sampling explores the posterior distribution rather than converging to a single point with no uncertainty. The HBNN therefore keeps the flexibility of neural networks while preserving the probabilistic interpretation required for calibrated stellar predictions \citep{jospin2022bnn}.
+The network itself uses Gaussian priors for the weights and biases and a two-layer architecture with Leaky ReLU activations \citep{maas2013rectifier}. As discussed in Section \ref{sec:bayesian-inference}, MCMC sampling explores the posterior distribution rather than converging to a single point with no uncertainty. The HBNN therefore keeps the flexibility of neural networks while preserving the probabilistic interpretation required for calibrated stellar predictions \citep{jospin2022bnn,tamamesrodero2025bnn}.
 
 
 
@@ -260,8 +332,6 @@ Model evaluation estimates how well a trained model will generalize to stars tha
 
 Cross-validation reduces this dependence on a single split. In $k$-fold cross-validation, the dataset is divided into $k$ subsets; each subset is used once for validation while the remaining subsets are used for training. The reported performance is then averaged over the folds, so every star contributes both to fitting and to out-of-sample assessment \citep{rasmussen2006gpml}. This provides a more stable basis for evaluating the target-variable predictions produced by the models used in this work, allowing for a better comparison between them.
 
-The most exhaustive version is Leave-One-Out Cross-Validation (LOO-CV), where each observation is validated once while the model is trained on all remaining observations. For complex Bayesian models, explicitly refitting the model for every observation is usually too expensive. Therefore, when appropriate, this work uses the efficient LOO approximation proposed by \citet{vehtari2017loo}: Pareto-smoothed importance sampling (PSIS-LOO). This gives a common evaluation criterion without requiring a separate validation set.
-
 \iffalse
 
 To evaluate predictive performance, datasets are traditionally partitioned into distinct training and validation subsets. The model optimizes its parameters on the training set, while the validation set provides an empirical measure of the generalization error, defined as the expected prediction error on unseen, independent data points. 
@@ -277,7 +347,7 @@ Despite its statistical advantages, standard $k$-fold cross-validation imposes s
 \section{Methods} \label{methods}
 % A medida que expliques como cada uno de los metodos utiliza las observaicioens directas para calcular parametros, puedes mencionar los papers qu ehayas ido usando. Esto hazlo en el futuro, cuando releas los papers para hacer unos parrafos de explicacion de cada uno de ellos
 
-This section introduces the observational basis of the stellar labels used later to construct the final catalogue. The catalogue was built from three reference methods: detached eclipsing binaries, asteroseismology and interferometry. Spectroscopy is discussed first as context, because it is essential for many stellar parameters, but relies strongly on stellar-atmosphere modelling. This contrast motivates the use of the other three methods as the main sources of high-quality labels, while also making clear that they are not completely free from auxiliary assumptions.
+This section introduces the observational basis of the stellar features used later to construct the final catalogue. The catalogue was built from three reference methods: detached eclipsing binaries, asteroseismology and interferometry. Spectroscopy is discussed first as context, because it is essential for many stellar parameters, but relies strongly on stellar-atmosphere modelling. This contrast motivates the use of the other three methods as the main sources of high-quality parameters, while also making clear that they are not completely free from auxiliary assumptions.
 
 \subsection{Spectroscopy}
 %revisar si esta(s) seccion(es) tiene un tono demasiado didactico, lejos de un paper/TFG
@@ -330,7 +400,7 @@ In supervised machine learning, the quality of the input features can be as impo
 
 Following the guidance of \citet{moya2018}, whose catalogue covered approximately the mass range $0.7\,M_\odot < M < 2.5\,M_\odot$, an extended stellar catalogue was assembled from literature sources with complementary parameter coverage. The lower boundary was reduced to $0.5\,M_\odot$, since one of the aims of this extension was to improve the coverage at lower masses. Such reference stars are needed to calibrate predictions for M-type stars, which are especially relevant in exoplanet studies (see Section \ref{subsec:dataset_b}). The aim was to obtain a statistically meaningful and heterogeneous sample, while preserving clear information on the uncertainties of the stellar parameters. Because the reported uncertainties are propagated into the final mass predictions in the probabilistic models in this work, this uncertainty-treatment is a key aspect.
 
-As explained in Section \ref{methods}, the reference sources were selected according to three observational methods: eclipsing binaries, asteroseismology and interferometry. Studies published between 2018 and 2025 were reviewed when they provided uncertainties and as many of the required stellar parameters as possible, listed in Table \ref{MS_catalog_database_D}. Stellar mass and radius were mandatory, since stellar densities were computed from them. This initial compilation contained 16094 stars before duplicate removal and quality cleaning.
+As explained in Section \ref{methods}, the reference sources were selected according to three observational methods: eclipsing binaries, asteroseismology and interferometry. Studies published between 2018 and 2026 were reviewed when they provided uncertainties and as many of the required stellar parameters as possible, listed in Table \ref{MS_catalog_database_D}. Stellar mass and radius were mandatory, since stellar densities were computed from them. This initial compilation contained 16094 stars before duplicate removal and quality cleaning.
 
 \begin{table}[H]
 \centering
@@ -343,41 +413,41 @@ Catalogue & $M$ & $R$ & $T_{\mathrm{eff}}$ & $L$ & Meta & $\log g$ & $\rho$ & $a
 ~ & ($M_\odot$) & ($R_\odot$) & (K) & ($L_\odot$) & (dex) & (dex) & ($\rho_\odot$) & ($R_\odot$)\\
 \hline
 Serenelli et al. (2017) & 240 & 240 & 240 & 240 & 240 & 240 & 240 & 0\\
-Xiong et al. (2023) & 141 & 141 & 141 & 141 & 141 & 141 & 141 & 141\\
-Chaplin et al. (2014, SDSS) & 62 & 62 & 62 & 62 & 62 & 62 & 62 & 0\\
+\citet{Xiong2023} & 141 & 141 & 141 & 141 & 141 & 141 & 141 & 141\\
+Chaplin et al. (2014) & 62 & 62 & 62 & 62 & 62 & 62 & 62 & 0\\
 Eker et al. (2014) & 54 & 54 & 54 & 54 & 54 & 54 & 54 & 54\\
-Yildiz et al. (2019) & 42 & 42 & 42 & 42 & 42 & 42 & 42 & 0\\
-Lund et al. (2016) & 28 & 28 & 28 & 28 & 28 & 28 & 28 & 0\\
+\citet{Yildiz2019} & 42 & 42 & 42 & 42 & 42 & 42 & 42 & 0\\
+Lund et al. (2017) & 28 & 28 & 28 & 28 & 28 & 28 & 28 & 0\\
 Huber et al. (2013) & 24 & 24 & 24 & 24 & 24 & 0 & 24 & 0\\
 Silva Aguirre et al. (2015) & 24 & 24 & 24 & 24 & 24 & 24 & 24 & 0\\
 Wang et al. (2025) & 20 & 20 & 20 & 20 & 20 & 20 & 20 & 20\\
-Eker et al. (2014, 2018) & 17 & 17 & 17 & 17 & 17 & 17 & 17 & 17\\
+Eker et al. (2014, \citeyear{Eker2018}) & 17 & 17 & 17 & 17 & 17 & 17 & 17 & 17\\
 Silva Aguirre et al. (2017) & 15 & 15 & 15 & 15 & 15 & 15 & 15 & 0\\
-Soubiran et al. (2024) & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 0\\
-Helminiak et al. (2019) & 11 & 11 & 11 & 11 & 11 & 11 & 11 & 11\\
+\citet{Soubiran2024} & 13 & 13 & 13 & 13 & 13 & 13 & 13 & 0\\
+\citet{Helminiak2019} & 11 & 11 & 11 & 11 & 11 & 11 & 11 & 11\\
 Pan et al. (2025) & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10\\
-Ligi et al. (2016) & 10 & 10 & 10 & 10 & 10 & 0 & 10 & 0\\
-Chaplin et al. (2014, Bruntt) & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 0\\
-Özdarcan et al. (2025, Feb.) & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7\\
+\citet{ligi2016} & 10 & 10 & 10 & 10 & 10 & 0 & 10 & 0\\
+Chaplin et al. (2014) & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 0\\
+{\"O}zdarcan et al. (2025) & 7 & 7 & 7 & 7 & 7 & 7 & 7 & 7\\
 Malkov et al. (2007) & 4 & 4 & 4 & 4 & 4 & 0 & 4 & 0\\
 Welsh et al. (2012) & 4 & 4 & 4 & 4 & 4 & 4 & 4 & 4\\
 Brogaard et al. (2018) & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3\\
-Özdarcan et al. (2024) & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3\\
+{\"O}zdarcan et al. (2024) & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3\\
 Torres et al. (2010) & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3\\
-Çakırlı et al. (2025, Apr.) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
-Çakırlı et al. (2025, Dec.) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
+{\c C}ak{\i}rl{\i} et al. (2025a) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
+{\c C}ak{\i}rl{\i} et al. (2025b) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
 Knudstrup et al. (2020) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
-Martin et al. (2024, Dec.) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
+Mart{\'i}n-Ravelo et al. (2024) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
 Miller et al. (2022) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
 Miller et al. (2026) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
 O'Brien et al. (2025) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
 Xu et al. (2026) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
-Yücel et al. (2026) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
+Y{\"u}cel et al. (2026) & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
 Bond et al. (2020) & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
 Jennings et al. (2024) & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0\\
-Lund et al. (2019) & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0\\
-Maxted et al. (2023) & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
-Maxted et al. (2025) & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+Lund (2019) & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0\\
+\citet{maxted2023benchmark} & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+Maxted (2025) & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
 Thomsen et al. (2022) & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
 Total & 767 & 767 & 767 & 767 & 767 & 729 & 767 & 295\\
 \hline
@@ -429,11 +499,11 @@ Source & Initial entries & Main method & Main contribution & Notes for this work
 % \citet{Southworth2015} is the famous DEBCat, but it didn't finally make the sample because L was computed from model-dependet methods
 
 \subsection{Cleaning} \label{sec:cleaning}
-When the same star appeared in several catalogues, the retained entry was chosen according to the reliability of the source. Priority was given to catalogues providing the most direct stellar parameters, smaller reported uncertainties and a more complete set of parameters. Regularly updated catalogues and benchmark-star compilations were also preferred over more heterogeneous or less traceable sources. This meant favouring high-precision eclipsing-binary catalogues such as \citet{Eker2018} and the calibrating samples of \citet{Graczyk2022}, benchmark compilations such as the Gaia FGK benchmark-star catalogue \citep{Soubiran2024}, and samples cross-validated across different methods, such as those in \citet{Serenelli2021}. After duplicate removal, 13783 stars remained.
+When the same star appeared in several catalogues, the retained entry was chosen according to the reliability of the source. Priority was given to catalogues providing the most direct stellar parameters, smaller reported uncertainties and a more complete set of parameters. Regularly updated sources and benchmark-star compilations were also preferred over more heterogeneous or less traceable ones. This meant favouring high-precision eclipsing-binary catalogues such as \citet{Eker2018} and the calibrating samples of \citet{Graczyk2022}, benchmark compilations such as the Gaia FGK benchmark-star catalogue \citep{Soubiran2024}, and samples cross-validated across different methods, such as those in \citet{Serenelli2021}. After duplicate removal, 13783 stars remained.
 
 The cleaned sample was then restricted to main-sequence candidates using a criterion based on $\log g$. Following \citet{bilir2008}, stars with $\log g > 4.0$ were classified as main-sequence objects, except for extremely large values of $\log g$ ($\gtrsim 5.5$), which were not interpreted as normal main-sequence stars. Although this threshold is approximate, the effect of applying different classification criteria was already analysed by \citet{moya2018}. They found that the choice between a simple threshold and a more robust classification method had little influence on the final results. The $\log g$ criterion adopted here was therefore considered sufficient for the purposes of this work.
 
-1915 stars remained after this selection, although not all of them contained every required parameter. In principle, incomplete entries could be retained in a Bayesian framework by treating missing quantities as latent variables, provided that an explicit model for the missing-data process is specified \citep[p.~511]{mcelreath2020}. In this work, however, parameter completeness and direct traceability were prioritised, so this kind of imputation was not used. % IDK what latent means here
+Given the large number of red giants, only 1915 stars remained after this selection, although not all of them contained every required parameter. In principle, incomplete entries could be retained in a Bayesian framework by treating missing quantities as latent variables, provided that an explicit model for the missing-data process is specified \citep[p.~511]{mcelreath2020rethinking}. In this work, however, parameter completeness and direct traceability were prioritised, so this kind of imputation was not used. % IDK what latent means here
 
 % \begin{table}[H]
 % \centering
@@ -446,7 +516,7 @@ The cleaned sample was then restricted to main-sequence candidates using a crite
 
 The newly compiled 1915-star sample was then cross-matched with the catalogue of \citet{moya2018} in order to merge both sources, while avoiding duplicates and retaining only the highest-quality entries. Following the same data-centred strategy, stars were removed when they had excessively large uncertainties, zero reported uncertainty in any parameter except $a$, were not classified as main-sequence stars in both catalogues, or had duplicated identifiers. This reduced the sample to 784 stars. Section \ref{subsec:dataset_a} explains the later removal of 17 additional objects, leading to the final training sample of $n=767$ stars.
 
-Although each star in the final merged sample is assigned a primary catalogue identifier according to the reliability criteria described above, the individual stellar parameters for a given entry do not always originate from that single source. To maximise completeness, the merging algorithm constructed composite entries: when the primary catalogue lacked a given parameter, the missing value was filled from an available secondary catalogue. The final parameter set for a star can therefore be heterogeneous in origin. To preserve traceability, a more detailed internal provenance table was used alongside Table \ref{MS_catalog_database_D}; for each primary source, it records which secondary catalogues were queried to fill each missing parameter. When several secondary sources were available, they were prioritised according to the reliability hierarchy described above.
+Although each star in the final merged sample is assigned a primary catalogue identifier according to the reliability criteria described above, the individual stellar parameters for a given entry do not always originate from that single source. To maximise completeness, the merging algorithm constructed composite entries: when the primary catalogue lacked a given parameter, the missing value was filled from an available secondary source. The final parameter set for a star can therefore be heterogeneous in origin. To preserve traceability, a more detailed internal provenance table was used alongside Table \ref{MS_catalog_database_D}; for each primary source, it records which secondary catalogues were queried to fill each missing parameter. When several secondary sources were available, they were prioritised according to the reliability hierarchy described above.
 
 The Hertzsprung--Russell diagram was used as a final consistency check for the cleaned sample. This diagram relates stellar luminosity to effective temperature and is commonly used to identify evolutionary stages, especially the main sequence. As shown in Figure \ref{fig:HRdiagram}, the stars mostly follow the expected main-sequence behaviour, with luminosity decreasing towards lower effective temperatures. FGK stars occupy approximately $T_{\mathrm{eff}} \sim 3500$--$7400\,\mathrm{K}$ \citep{pecaut2013}, or $\log_{10}T_{\mathrm{eff}} \sim 3.54$--$3.87$. Most of the sample lies in this regime, especially the asteroseismic and interferometric stars. The eclipsing-binary subsample is also mainly concentrated around the main sequence, but it spans a broader region of the diagram.
 
@@ -473,7 +543,7 @@ Main-sequence stars of spectral types F, G and K are especially useful in stella
 
 \citet{maxted2023benchmark} proposed a way to obtain information about M-type stars by studying eclipsing-binary systems in which the M star is the secondary component of a better-characterized primary star. Because many eclipsing-binary parameters are measured relative to the two components, information about one star can help constrain the other \citep{Southworth2015}. This motivates a focus on systems with an FGK-type primary and an M-type secondary: accurate mass predictions for the better-characterized FGK component can improve the future calibration of the lower-mass companion. This would help to extend the calibration towards the M-star regime, where high-quality masses remain scarce.
 
-As discussed in Section \ref{sec:cleaning}, Figure \ref{fig:HRdiagram} shows that the catalogue compiled in this work is rich in FGK-type stars, making this first mass-prediction experiment well suited to the available data. Following \citet{moya2018}, $T_{\mathrm{eff}}$, $\rho$ and $[\mathrm{Fe}/\mathrm{H}]$ were adopted as input parameters for stellar-mass estimation. This choice is motivated by well-studied eclipsing binaries, for which these quantities can be obtained more precisely than alternatives such as $\log g$ or $L$. After combining the stars compiled in this work with the Moya catalogue, applying the main-sequence selection described in Section \ref{sec:data}, requiring these three input parameters, and removing stars with zero reported uncertainty, the final available set contained 767 stars. Of these, 618 were used for training and the remaining 155 stars, corresponding to $20\%$, were retained as a holdout set for testing. The holdout set was repeatedly randomly selected for each seed run.
+As discussed in Section \ref{sec:cleaning}, Figure \ref{fig:HRdiagram} shows that the catalogue compiled in this work is rich in FGK-type stars, making this first mass-prediction experiment well suited to the available data. Following \citet{moya2018}, $T_{\mathrm{eff}}$, $\rho$ and $[\mathrm{Fe}/\mathrm{H}]$ were adopted as input parameters for stellar-mass estimation. This choice is motivated by well-studied eclipsing binaries, for which these quantities can be obtained more precisely than alternatives such as $\log g$ or $L$. After combining the stars compiled in this work with the Moya catalogue, applying the main-sequence selection described in Section \ref{sec:data}, requiring these three input parameters, and removing stars with zero reported uncertainty, the final available set contained 767 stars. Of these, 614 were used for training and the remaining 153 stars, corresponding to $20\%$, were retained as a holdout set for testing. The holdout set was repeatedly randomly selected for each seed run.
 
 \subsubsection*{Results}
 
@@ -609,7 +679,7 @@ This interpretation is also supported by the MAE comparison. \citet{moya2022} re
 
 Finally, all MRD values are below $1\%$. For GP and BHS, this is consistent with the absence of a clear global bias in the prediction plots. For HBNN and BART, however, the near-zero MRD should not be interpreted alone: in those cases, it is mainly a consequence of systematic overpredictions and underpredictions cancelling when averaged over the full holdout set.
 
-\subsection{ARIEL: Model-independent predictions} \label{subsec:dataset_b}
+\subsection{ARIEL: Predictions with reduced model dependence} \label{subsec:dataset_b}
 
 ARIEL, the Atmospheric Remote-sensing Infrared Exoplanet Large-survey, is ESA's fourth medium-class mission, M4, within the Cosmic Vision programme, and is planned for launch around 2030. It is dedicated to the atmospheric characterization of exoplanets and will study the chemical composition of the atmospheres of approximately 1000 transiting planets. The mission is based on spectroscopic and photometric observations, where the planetary signal is measured relative to the emission of the host star. Accurate and homogeneous stellar characterisation is therefore essential for the interpretation of ARIEL observations.
 
@@ -702,12 +772,12 @@ BART and HBNN again show the strongest systematic residual structure, with a ten
 \label{fig:bhs_mass_residuals_B}
 \end{subfigure}
 
-\caption{Holdout-test performance of the HBNN, GP, BART and BHS mass models trained with $T_{\mathrm{eff}}$, $L$ and $[\mathrm{Fe}/\mathrm{H}]$. For each model, the prediction panel shows $M_{\mathrm{pred}}$ as a function of $M_{\mathrm{true}}$, while the residual panel shows $M_{\mathrm{pred}}-M_{\mathrm{true}}$ as a function of $M_{\mathrm{true}}$. Vertical error bars represent the predictive uncertainty returned by each model. The GP and BHS panels are restricted to the stars below the 95th percentile of predicted mass uncertainty in order to keep the main population visually readable. The full calibration sample contains $n=767$ stars, with $20\%$ reserved for the holdout test.}
+\caption{Holdout-test performance of the HBNN, GP, BART and BHS mass models trained with $T_{\mathrm{eff}}$, $L$ and $[\mathrm{Fe}/\mathrm{H}]$. For each model, the prediction panel shows $M_{\mathrm{pred}}$ as a function of $M_{\mathrm{true}}$, while the residual panel shows $M_{\mathrm{pred}}-M_{\mathrm{true}}$ as a function of $M_{\mathrm{true}}$. Vertical error bars represent the predictive uncertainty returned by each model. The GP and BHS panels are restricted to the stars below the 90th percentile of predicted mass uncertainty in order to keep the main population visually readable. The full calibration sample contains $n=767$ stars, with $20\%$ reserved for the holdout test.}
 \label{fig:mass_holdout_all_models_B}
 
 \end{figure}
 
-BHS combines the behaviours of the three level-0 models and remains the most stable compromise between residual accuracy and global bias, since its predictions remain well concentrated around the 1:1 relation, with no clear systematic trend. Since GP performs better away from $1\,M_\odot$ than BART and HBNN, the stacking approach is expected to assign it larger weights, although the reported MRD is slightly worse for BHS than for GP. This is expected because the stacking model does not simply reproduce the GP predictions, but balances them with the contributions of BART and HBNN. The large individual predictive uncertainties of the stacking model also suggest that it inherits part of the underconfidence already present in BART and GP, a behaviour also observed in the $\rho$-training case.
+BHS combines the behaviours of the three level-0 models and remains the most stable compromise between residual accuracy and global bias, since its predictions remain well concentrated around the 1:1 relation, with no clear systematic trend. Since GP performs better away from $1\,M_\odot$ than BART and HBNN, the stacking approach is expected to assign it larger weights, although the reported MRD is slightly worse for BHS than for GP. This is expected because the stacking model does not simply reproduce the GP predictions, but balances them with the contributions of BART and HBNN. The large individual predictive uncertainties of BHS also suggest that it inherits part of the underconfidence already present in BART and GP, a behaviour also observed in the $\rho$-training case.
 
 The mass predictions, including their uncertainties, were then compared with the stellar evolutionary-grid estimates based on PARSEC \citep{bressan2012} and with the linear-relation masses presented by \citet{moya2018}. The differences were analysed through fractional residuals, defined as $(M_1-M_2)/M_2$, where $M_1$ and $M_2$ correspond to the first and second methods indicated in each comparison label in Figure \ref{fig:frac_res_distrib_dataset_b}. The closest agreement is found between the BHS predictions and the grid-model masses: in this case, all residuals remain within approximately $\pm 10\%$. The stacking approach gives systematically higher masses than the grid models, but in a relatively homogeneous way, since both the mean and the median lie close to each other, near a fractional difference of $+2\%$.
 
@@ -724,7 +794,7 @@ The two reference models do not produce equivalent predictions either. Figure \r
 
 \begin{table}[H]
 \centering
-\caption{Mass-comparison metrics for the ARIEL sample using the same fractional-residual convention as in Figure \ref{fig:frac_res_distrib_dataset_b}.}
+\caption{Comparison of the residual metrics obtained for the ARIEL mass estimates. The columns compare the BHS predictions with the \citet{bressan2012} stellar evolutionary-grid masses, the \citet{moya2018} linear-relation masses, and the linear-relation masses with the grid masses, using the same fractional-residual convention as in Figure \ref{fig:frac_res_distrib_dataset_b}.}
 \begin{tabular}{lccc}
 \hline\hline
 Metric & BHS - Grid & BHS - Linear & Linear - Grid \\
@@ -775,7 +845,7 @@ Nevertheless, the signed biases are slightly amplified. This is explained by Fig
 Regarding the stacking model, BHS yields the best or nearly best predictions across the evaluated metrics. Although HBNN has a slightly lower MRD, this may reflect the cancellation of systematic overpredictions and underpredictions, as discussed in previous sections. BHS instead provides a more balanced compromise: its MARD is almost identical to that of GP, and its absolute MRD remains well below $1\%$.
 
 \subsubsection*{Results: oblateness}
-The effect of binary interaction was studied by predicting the masses of the stars in the original dataset that belong to eclipsing-binary systems. From this group, only systems with an available orbital semi-major axis $a$ could be used, since this parameter is required to compute the oblateness. As explained in Section \ref{sec:cleaning}, this leaves 295 stars with available oblateness estimates before applying the final selection cuts. Once $o$ was computed, the models trained on the asteroseismic stars were applied to these eclipsing-binary components, and the resulting mass residuals were analysed as a function of oblateness.
+The effect of binary interaction was studied by predicting the masses of the stars in the original dataset that belong to eclipsing-binary systems. From this group, only inputs with an available orbital semi-major axis $a$ could be used, since this parameter is required to compute the oblateness. As explained in Section \ref{sec:cleaning}, this leaves 295 stars with available oblateness estimates before applying the final selection cuts. Once $o$ was computed, the models trained on the asteroseismic stars were applied to these eclipsing-binary components, and the resulting mass residuals were analysed as a function of oblateness.
 
 To avoid interpreting extrapolation effects as physical binary effects, the eclipsing-binary sample was restricted to stars well covered by the asteroseismic training set. First, only stars with $0.950\,M_\odot < M < 1.500\,M_\odot$ were retained, corresponding approximately to the 5th and 95th mass percentiles of the asteroseismic sample. In addition, the final sample was restricted to the input-parameter domain $5500 < T_{\mathrm{eff}} < 6800\,\mathrm{K}$, $3.750 < \log g < 4.450$, $1.000 < L/L_\odot < 11.000$ and $-0.500 < [\mathrm{Fe}/\mathrm{H}] < 0.270$, corresponding to the 2nd and 98th percentiles of the asteroseismic training distribution. The final eclipsing-binary sample contains $n=85$ stars. This conservative selection reduces the number of systems, but makes the comparison more reliable, since the remaining stars lie inside the region of parameter space where the model is expected to have predictive validity.
 
@@ -834,7 +904,7 @@ The mass-coloured residual panel in Figure \ref{fig:dataset_D_o_residuals_mass_c
     \label{fig:dataset_D_o_residuals_mass_colored}
 \end{subfigure}
 
-\caption{Mass-prediction performance and mass dependence of the BHS residuals for the selected eclipsing-binary sample. The model uses $T_{\mathrm{eff}}$, $L$, $\log g$ and $[\mathrm{Fe}/\mathrm{H}]$ as input parameters. The left panel compares predicted and reference EB masses, the central panel shows the corresponding fractional residuals as a function of true mass, and the right panel shows the fractional residuals as a function of stellar oblateness $o$, colour-coded by true mass. Error bars show the propagated predictive uncertainty, and the dashed red line marks zero residual. The sample contains $n=85$ stars.}
+\caption{Analysis of BHS residuals for the selected eclipsing-binary sample of 85 stars. The model uses $T_{\mathrm{eff}}$, $L$, $\log g$ and $[\mathrm{Fe}/\mathrm{H}]$ as input parameters. The left panel compares predicted and reference EB masses, the central panel shows the corresponding fractional residuals as a function of true mass, and the right panel shows the fractional residuals as a function of stellar oblateness $o$, colour-coded by true mass. Error bars show the propagated predictive uncertainty, and the dashed red line marks zero residual.}
 \label{fig:dataset_D_mass}
 
 \end{figure}
@@ -851,7 +921,7 @@ The uncertainty calibration also suggests that eclipsing-binary stars are harder
 
 This work employed an uncertainty-aware stacking approach to obtain posterior predictive distributions for stellar masses using probabilistic machine-learning models. Three level-0 models, BART, HBNN and GP, were combined through Bayesian Hierarchical Stacking. The training set was constructed from high-quality reference catalogues based mainly on asteroseismology, detached eclipsing binaries and interferometry. The starting point was the 726 main-sequence-star catalogue of \citet{moya2018}, which was extended with recent literature sources published from 2018 onwards. After cleaning and cross-matching the samples, the final usable set consisted of 767 main-sequence stars, all of which had $M$, $T_{\mathrm{eff}}$, $L$, $[\mathrm{Fe}/\mathrm{H}]$ and $\rho$; 729 also had $\log g$, and 295 had $o$.
 
-The first experiment tested the models on FGK-type stars, since this was the dominant stellar population in the final sample. Using a $20\%$ holdout set yielded mean absolute relative differences between predicted and reference masses which were all close to $5\%$, with the level-1 BHS model giving the best overall performance. HBNN and BART showed a systematic tendency to pull predictions towards approximately $1.25\,M_\odot$, where the training set is most densely populated. In contrast, GP showed no clear mass-dependent bias, although it produced a small number of outliers with unphysically large predictive uncertainties. The stacking model benefited from the complementary behaviour of the level-0 predictors and achieved an MRD of $0.20\%$, indicating negligible global bias.
+The first experiment tested the models on FGK-type stars, since this was the dominant stellar population in the final sample. Using a $20\%$ holdout set yielded mean absolute relative differences between predicted and reference masses which were all close to $5\%$, with the level-1 BHS model giving the best overall performance. HBNN and BART showed a systematic tendency to pull predictions towards approximately $1.25\,M_\odot$, where the training set is most densely populated. In contrast, GP showed no clear mass-dependent bias, although it produced a small number of outliers with unphysically large predictive uncertainties. The stacking model benefited from the complementary behaviour of the level-0 predictors and achieved an MRD of $0.29\%$, indicating negligible global bias.
 
 The second experiment focused on a feature set with reduced model dependence, using $T_{\mathrm{eff}}$, $L$ and $[\mathrm{Fe}/\mathrm{H}]$ to estimate stellar masses. The qualitative behaviour of the three level-0 models and the stacking model remained similar to that found in the previous experiment, although the predictive precision worsened by approximately two percentage points. The models also showed a small overpredicting tendency, with the BHS model giving an MRD of $-1.36\%$. The predictions were then compared with evolutionary-grid estimates based on PARSEC \citep{bressan2012} and with linear-relation masses presented by \citet{moya2018}. The three approaches gave broadly compatible, but not identical results. A natural continuation of this analysis would be to combine all three approaches within a single stacking framework, so that the final estimate can benefit from the strengths of each method.
 
@@ -862,11 +932,11 @@ The third experiment showed that models trained on approximately single-star dat
 {\itshape
 \noindent Este trabajo tom\'o un enfoque de stacking con tratamiento expl\'icito de incertidumbres para obtener distribuciones predictivas posteriores de masas estelares mediante modelos probabil\'isticos de machine learning. Tres modelos de nivel 0, BART, HBNN y GP, fueron combinados mediante Bayesian Hierarchical Stacking. El dataset de entrenamiento se construy\'o a partir de cat\'alogos de referencia de alta calidad, basados principalmente en astrosismolog\'ia, binarias eclipsantes e interferometr\'ia. El punto de partida fue el cat\'alogo de 726 estrellas de la secuencia principal recopilado por \citet{moya2018}, que se ampli\'o con fuentes bibliogr\'aficas recientes publicadas a partir de 2018. Tras la limpieza y el cruce de las muestras, el conjunto final utilizable qued\'o formado por 767 estrellas de la secuencia principal, todas ellas con $M$, $T_{\mathrm{eff}}$, $L$, $[\mathrm{Fe}/\mathrm{H}]$ y $\rho$; 729 tambi\'en ten\'ian $\log g$, y 295 ten\'ian $o$.
 
-El primer experimento evalu\'o los modelos en estrellas de tipo FGK, dado que esta era la poblaci\'on estelar dominante en la muestra final. Utilizando un conjunto de prueba reservado del $20\%$, las diferencias relativas absolutas medias entre las masas predichas y las masas de referencia fueron todas pr\'oximas al $5\%$, con el modelo de stacking proporcionando el mejor rendimiento global. HBNN y BART mostraron una tendencia sistem\'atica a desplazar las predicciones hacia aproximadamente $1.25\,M_\odot$, donde el conjunto de entrenamiento se muestra m\'as densamente poblado. En cambio, GP no mostr\'o un sesgo claro dependiente de la masa, aunque produjo un reducido n\'umero de predicciones con incertidumbres f\'isicamente inveros\'imiles. El modelo de stacking se benefici\'o del comportamiento complementario de los predictores de nivel 0 y alcanz\'o un MRD de $0.20\%$, lo que indica un sesgo global despreciable.
+El primer experimento evalu\'o los modelos en estrellas de tipo FGK, dado que esta era la poblaci\'on estelar dominante en la muestra final. Utilizando un conjunto de prueba reservado del $20\%$, las diferencias relativas absolutas medias entre las masas predichas y las masas de referencia fueron todas pr\'oximas al $5\%$, con el modelo de stacking proporcionando el mejor rendimiento global. HBNN y BART mostraron una tendencia sistem\'atica a desplazar las predicciones hacia aproximadamente $1.25\,M_\odot$, donde el conjunto de entrenamiento se muestra m\'as densamente poblado. En cambio, GP no mostr\'o un sesgo claro dependiente de la masa, aunque produjo un reducido n\'umero de predicciones con incertidumbres f\'isicamente inveros\'imiles. El modelo de stacking se benefici\'o del comportamiento complementario de los predictores de nivel 0 y alcanz\'o un MRD de $0.29\%$, lo que indica un sesgo global despreciable.
 
-El segundo experimento se centr\'o en un conjunto de variables de entrada con menor dependencia de modelos, utilizando $T_{\mathrm{eff}}$, $L$ y $[\mathrm{Fe}/\mathrm{H}]$. El comportamiento cualitativo de los tres modelos de nivel 0 y del modelo BHS se mantuvo similar al encontrado en el experimento anterior, aunque la precisi\'on predictiva empeor\'o en aproximadamente dos puntos porcentuales. Los modelos tambi\'en mostraron una leve tendencia a la sobrepredicci\'on, con el modelo BHS dando un MRD de $-1.36\%$. Las predicciones se compararon posteriormente con estimaciones basadas en modelos estelares de PARSEC \citep{bressan2012} y con predicciones mediante las relaciones lineales presentadas por \citet{moya2018}. Los tres enfoques dieron resultados compatibles, aunque no id\'enticos. La continuaci\'on natural de este an\'alisis ser\'ia combinar los tres enfoques dentro de un \'unico marco de stacking, de modo que la estimaci\'on final pueda beneficiarse de las fortalezas de cada m\'etodo.
+El segundo experimento se centr\'o en un conjunto de variables de entrada con menor dependencia de modelos, utilizando $T_{\mathrm{eff}}$, $L$ y $[\mathrm{Fe}/\mathrm{H}]$. El comportamiento cualitativo de los tres modelos de nivel 0 y del BHS se mantuvo similar al encontrado en el experimento anterior, aunque la precisi\'on predictiva empeor\'o en aproximadamente dos puntos porcentuales. Los modelos tambi\'en mostraron una leve tendencia a la sobrepredicci\'on, con BHS dando un MRD de $-1.36\%$. Las predicciones se compararon posteriormente con estimaciones basadas en modelos estelares de PARSEC \citep{bressan2012} y con predicciones mediante las relaciones lineales presentadas por \citet{moya2018}. Los tres enfoques dieron resultados compatibles, aunque no id\'enticos. La continuaci\'on natural de este an\'alisis ser\'ia combinar los tres m\'etodos dentro de un \'unico marco de stacking, de modo que la estimaci\'on final pueda beneficiarse de las fortalezas de cada m\'etodo.
 
-El tercer experimento mostr\'o que los modelos entrenados con datos de estrellas individuales pueden transferirse a componentes de binarias eclipsantes, aunque no sin limitaciones. El par\'ametro de oblaticidad $o$ se introdujo para cuantificar el grado de interacci\'on entre las dos componentes, y los modelos se entrenaron \'unicamente con la muestra astrosismol\'ogica recopilada. Las diferencias entre las predicciones de masas y los valores de referencia para las estrellas binarias eclipsantes se analizaron entonces como funci\'on de $o$. Para la muestra seleccionada, 85 estrellas binarias eclipsantes, la oblaticidad no introdujo un sesgo signado de masa significativo, con $\beta_{\log o} = 0.002 \pm 0.005$. Sin embargo, s\'i aument\'o los residuos absolutos, con $\beta_{\log o} = 0.030 \pm 0.012$, lo que indica una p\'erdida de precisi\'on m\'as que una p\'erdida sistem\'atica de exactitud. Se encontr\'o un punto de transici\'on pr\'actico alrededor de $o \sim 0.01$, por encima del cual la dispersi\'on de los residuos se vuelve suficientemente grande como para considerar las predicciones menos fiables.
+El tercer experimento mostr\'o que los modelos entrenados con datos de estrellas individuales pueden transferirse a componentes de binarias eclipsantes, aunque no sin limitaciones. El par\'ametro de oblaticidad $o$ se introdujo para cuantificar el grado de interacci\'on entre las dos componentes, y los modelos se entrenaron \'unicamente con la muestra astrosismol\'ogica recopilada. Las diferencias entre las predicciones de masas y los valores de referencia para las binarias eclipsantes se analizaron entonces como funci\'on de $o$. Para la muestra seleccionada, 85 estrellas binarias, la oblaticidad no introdujo un sesgo signado de masa significativo, con $\beta_{\log o} = 0.002 \pm 0.005$. Sin embargo, s\'i caus\'o un aumento en los residuos absolutos, con $\beta_{\log o} = 0.030 \pm 0.012$, lo que indica una p\'erdida de precisi\'on m\'as que una p\'erdida sistem\'atica de exactitud. Se encontr\'o un punto de transici\'on pr\'actico alrededor de $o \sim 0.01$, por encima del cual la dispersi\'on de los residuos se vuelve suficientemente grande como para considerar las predicciones menos fiables.
 }
 
 

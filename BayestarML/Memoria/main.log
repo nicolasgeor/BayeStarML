@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.28)  19 JUN 2026 19:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.28)  19 JUN 2026 21:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1155,6 +1155,33 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
+
+Package natbib Warning: Citation `moya2022' on page 3 undefined on input line 44.
+
+
+Package natbib Warning: Citation `Serenelli2021' on page 3 undefined on input line 44.
+
+
+Package natbib Warning: Citation `moya2022' on page 3 undefined on input line 46.
+
+
+Package natbib Warning: Citation `yao2022hierarchicalstacking' on page 3 undefined on input line 48.
+
+
+Package natbib Warning: Citation `Serenelli2021' on page 3 undefined on input line 50.
+
+
+Package natbib Warning: Citation `maxted2023benchmark' on page 3 undefined on input line 52.
+
+
+Package natbib Warning: Citation `tsantaki2018' on page 3 undefined on input line 54.
+
+
+Package natbib Warning: Citation `Serenelli2021' on page 3 undefined on input line 54.
+
+
+Package natbib Warning: Citation `moya2018' on page 3 undefined on input line 54.
+
 [3]
 
 Package scrartcl Warning: Usage of \@startsection detected.
@@ -1162,7 +1189,7 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                62.
+(scrartcl)                58.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
@@ -1173,16 +1200,34 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                66.
+(scrartcl)                60.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
+
+Package natbib Warning: Citation `mcelreath2020rethinking' on page 4 undefined on input line 62.
+
+
+Package natbib Warning: Citation `chipman2010bart' on page 4 undefined on input line 64.
+
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 4 undefined on input line 64.
+
+
+Package natbib Warning: Citation `jospin2022bnn' on page 4 undefined on input line 64.
+
+
+Package natbib Warning: Citation `hastings1970' on page 4 undefined on input line 66.
+
+
+Package natbib Warning: Citation `bardenet2017mcmc' on page 4 undefined on input line 66.
+
 [4]
-<stacking_arquitecture.png, id=169, 540.21825pt x 218.61674pt>
+<stacking_arquitecture.png, id=125, 540.21825pt x 218.61674pt>
 File: stacking_arquitecture.png Graphic file (type png)
 <use stacking_arquitecture.png>
-Package pdftex.def Info: stacking_arquitecture.png  used on input line 79.
+Package pdftex.def Info: stacking_arquitecture.png  used on input line 73.
 (pdftex.def)             Requested size: 307.00235pt x 124.24255pt.
 
 
@@ -1191,10 +1236,22 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                101.
+(scrartcl)                95.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
+
+
+Package natbib Warning: Citation `hill2020' on page 5 undefined on input line 96.
+
+
+Package natbib Warning: Citation `chipman2010bart' on page 5 undefined on input line 100.
+
+
+Package natbib Warning: Citation `chipman2010bart' on page 5 undefined on input line 100.
+
+
+Package natbib Warning: Citation `chipman2010bart' on page 5 undefined on input line 104.
 
 [5 <./stacking_arquitecture.png>]
 
@@ -1203,57 +1260,109 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                120.
+(scrartcl)                110.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
+
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 6 undefined on input line 123.
+
+<ell0comma3.png, id=134, 528.7755pt x 437.2335pt>
+File: ell0comma3.png Graphic file (type png)
+<use ell0comma3.png>
+Package pdftex.def Info: ell0comma3.png  used on input line 130.
+(pdftex.def)             Requested size: 146.41673pt x 121.07019pt.
+<ell=1.png, id=135, 539.01375pt x 449.88075pt>
+File: ell=1.png Graphic file (type png)
+<use ell=1.png>
+Package pdftex.def Info: ell=1.png  used on input line 137.
+(pdftex.def)             Requested size: 146.41673pt x 122.20393pt.
+<ell3.png, id=136, 546.24075pt x 440.24475pt>
+File: ell3.png Graphic file (type png)
+<use ell3.png>
+Package pdftex.def Info: ell3.png  used on input line 144.
+(pdftex.def)             Requested size: 146.41673pt x 118.0011pt.
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 6 undefined on input line 149.
+
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 6 undefined on input line 149.
 
 [6]
 
+Package natbib Warning: Citation `rasmussen2006gpml' on page 7 undefined on input line 155.
+
+
+Package natbib Warning: Citation `le2005heteroscedasticgp' on page 7 undefined on input line 157.
+
+
+Package natbib Warning: Citation `quinonero2005sparsegp' on page 7 undefined on input line 157.
+
+File: ell0comma3.png Graphic file (type png)
+<use ell0comma3.png>
+Package pdftex.def Info: ell0comma3.png  used on input line 178.
+(pdftex.def)             Requested size: 146.41673pt x 121.07019pt.
+File: ell=1.png Graphic file (type png)
+<use ell=1.png>
+Package pdftex.def Info: ell=1.png  used on input line 185.
+(pdftex.def)             Requested size: 146.41673pt x 122.20393pt.
+File: ell3.png Graphic file (type png)
+<use ell3.png>
+Package pdftex.def Info: ell3.png  used on input line 192.
+(pdftex.def)             Requested size: 146.41673pt x 118.0011pt.
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 7 undefined on input line 197.
+
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 7 undefined on input line 197.
+
+[7 <./ell0comma3.png> <./ell=1.png> <./ell3.png>]
+
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                150.
+(scrartcl)                222.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
-[7]
-<understandBNN_panel_a_point_estimate.png, id=224, 265.99374pt x 254.9525pt>
+
+Package natbib Warning: Citation `jospin2022bnn' on page 8 undefined on input line 236.
+
+
+Package natbib Warning: Citation `blundell2015weight' on page 8 undefined on input line 238.
+
+
+Package natbib Warning: Citation `jospin2022bnn' on page 8 undefined on input line 238.
+
+<understandBNN_panel_a_point_estimate.png, id=158, 265.99374pt x 254.9525pt>
 File: understandBNN_panel_a_point_estimate.png Graphic file (type png)
 <use understandBNN_panel_a_point_estimate.png>
-Package pdftex.def Info: understandBNN_panel_a_point_estimate.png  used on input line 173.
+Package pdftex.def Info: understandBNN_panel_a_point_estimate.png  used on input line 245.
 (pdftex.def)             Requested size: 170.03395pt x 162.97841pt.
-<understandBNN_panel_b_weight_distributions.png, id=225, 265.99374pt x 254.9525pt>
+<understandBNN_panel_b_weight_distributions.png, id=159, 265.99374pt x 254.9525pt>
 File: understandBNN_panel_b_weight_distributions.png Graphic file (type png)
 <use understandBNN_panel_b_weight_distributions.png>
-Package pdftex.def Info: understandBNN_panel_b_weight_distributions.png  used on input line 178.
+Package pdftex.def Info: understandBNN_panel_b_weight_distributions.png  used on input line 250.
 (pdftex.def)             Requested size: 170.03395pt x 162.97841pt.
 
+Package natbib Warning: Citation `jospin2022bnn' on page 8 undefined on input line 255.
 
-Package scrartcl Warning: Usage of \@startsection detected.
-(scrartcl)                Note, the sectioning of scrartcl does neither use
-(scrartcl)                nor support the usage of \@startsection command.
-(scrartcl)                This means, that none of the KOMA-Script features
-(scrartcl)                for headings is available for the heading on line
-(scrartcl)                225.
-(scrartcl)                If you need additional sectioning commands, you
-(scrartcl)                should define them using \DeclareNewSectionCommand
-(scrartcl)                instead.
 
-[8 <./understandBNN_panel_a_point_estimate.png (PNG copy)> <./understandBNN_panel_b_weight_distributions.png (PNG copy)>]
+Package natbib Warning: Citation `jospin2022bnn' on page 8 undefined on input line 255.
 
-Package scrartcl Warning: Usage of \@startsection detected.
-(scrartcl)                Note, the sectioning of scrartcl does neither use
-(scrartcl)                nor support the usage of \@startsection command.
-(scrartcl)                This means, that none of the KOMA-Script features
-(scrartcl)                for headings is available for the heading on line
-(scrartcl)                256.
-(scrartcl)                If you need additional sectioning commands, you
-(scrartcl)                should define them using \DeclareNewSectionCommand
-(scrartcl)                instead.
+[8]
+
+Package natbib Warning: Citation `maas2013rectifier' on page 9 undefined on input line 259.
+
+
+Package natbib Warning: Citation `jospin2022bnn' on page 9 undefined on input line 259.
+
+
+Package natbib Warning: Citation `tamamesrodero2025bnn' on page 9 undefined on input line 259.
 
 
 Package scrartcl Warning: Usage of \@startsection detected.
@@ -1261,41 +1370,42 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                277.
+(scrartcl)                297.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
 
+Package natbib Warning: Citation `wolpert1992stacked' on page 9 undefined on input line 298.
+
+
+Package natbib Warning: Citation `yao2022hierarchicalstacking' on page 9 undefined on input line 298.
+
+
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                282.
+(scrartcl)                328.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
 
-Package scrartcl Warning: Usage of \@startsection detected.
-(scrartcl)                Note, the sectioning of scrartcl does neither use
-(scrartcl)                nor support the usage of \@startsection command.
-(scrartcl)                This means, that none of the KOMA-Script features
-(scrartcl)                for headings is available for the heading on line
-(scrartcl)                293.
-(scrartcl)                If you need additional sectioning commands, you
-(scrartcl)                should define them using \DeclareNewSectionCommand
-(scrartcl)                instead.
+Package natbib Warning: Citation `rasmussen2006gpml' on page 9 undefined on input line 331.
 
-[9]
+[9 <./understandBNN_panel_a_point_estimate.png (PNG copy)> <./understandBNN_panel_b_weight_distributions.png (PNG copy)>]
+
+Package natbib Warning: Citation `rasmussen2006gpml' on page 10 undefined on input line 333.
+
 
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                303.
+(scrartcl)                347.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
@@ -1306,10 +1416,33 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                320.
+(scrartcl)                352.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
+
+
+Package natbib Warning: Citation `tsantaki2018' on page 10 undefined on input line 358.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                363.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `Southworth2015' on page 10 undefined on input line 365.
+
+
+Package natbib Warning: Citation `Eker2018' on page 10 undefined on input line 365.
+
+
+Package natbib Warning: Citation `Graczyk2022' on page 10 undefined on input line 369.
 
 [10]
 
@@ -1318,117 +1451,78 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                326.
+(scrartcl)                373.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
-[11]
+
+Package natbib Warning: Citation `Bellinger2019' on page 11 undefined on input line 377.
+
+
+Package natbib Warning: Citation `Serenelli2021' on page 11 undefined on input line 377.
+
+
+Package natbib Warning: Citation `chaplin2013' on page 11 undefined on input line 384.
+
 
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                388.
+(scrartcl)                390.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--400
-[]|\T1/cmr/m/n/8 Initial
- []
+Package natbib Warning: Citation `ligi2016' on page 11 undefined on input line 391.
 
 
-Underfull \hbox (badness 3158) in paragraph at lines 402--402
-[]|\T1/cmr/m/n/8 Accurate stel-lar para-met-
- []
+Package natbib Warning: Citation `Soubiran2024' on page 11 undefined on input line 393.
 
 
-Underfull \hbox (badness 1552) in paragraph at lines 402--402
-\T1/cmr/m/n/8 com-pon-ents over a broad
- []
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                396.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
-[]|[]\T1/cmr/m/n/8 Heªminiak et al.[]
- []
+Package natbib Warning: Citation `li2021dataquality' on page 11 undefined on input line 399.
+
+[11]
+
+Package natbib Warning: Citation `moya2018' on page 12 undefined on input line 401.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
-[]|\T1/cmr/m/n/8 Detached ec-lipsing
- []
+Package natbib Warning: Citation `moya2018' on page 12 undefined on input line 408.
 
 
-Underfull \hbox (badness 1009) in paragraph at lines 404--404
-\T1/cmr/m/n/8 ad-di-tional at-mo-spheric in-
- []
+Package natbib Warning: Citation `Xiong2023' on page 12 undefined on input line 416.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--406
-[]|\T1/cmr/m/n/8 Surface-brightness--colour
- []
+Package natbib Warning: Citation `Yildiz2019' on page 12 undefined on input line 419.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 408--408
-[]|\T1/cmr/m/n/8 Pre-existing benchmark-
- []
+Package natbib Warning: Citation `Eker2018' on page 12 undefined on input line 424.
 
 
-Underfull \hbox (badness 3168) in paragraph at lines 410--410
-[]|\T1/cmr/m/n/8 Asteroseismic masses and
- []
+Package natbib Warning: Citation `Soubiran2024' on page 12 undefined on input line 426.
 
 
-Underfull \hbox (badness 1430) in paragraph at lines 410--410
-\T1/cmr/m/n/8 radii for mostly solar-like
- []
+Package natbib Warning: Citation `Helminiak2019' on page 12 undefined on input line 427.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--412
-[]|\T1/cmr/m/n/8 Mixed bench-mark
- []
+Package natbib Warning: Citation `ligi2016' on page 12 undefined on input line 429.
 
 
-Underfull \hbox (badness 2582) in paragraph at lines 412--412
-[]|\T1/cmr/m/n/8 Stellar mass-determination
- []
-
-
-Underfull \hbox (badness 4479) in paragraph at lines 412--412
-\T1/cmr/m/n/8 gram, in-clud-ing ec-lipsing
- []
-
-
-Underfull \hbox (badness 1178) in paragraph at lines 412--412
-\T1/cmr/m/n/8 bin-ar-ies and as-ter-o-seis-mo-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 414--414
-[]|\T1/cmr/m/n/8 Interferometry and
- []
-
-
-Underfull \hbox (badness 2221) in paragraph at lines 414--414
-\T1/cmr/m/n/8 benchmark-star cal-ib-
- []
-
-
-Underfull \hbox (badness 4940) in paragraph at lines 414--415
-[]|\T1/cmr/m/n/8 Luminosities were provided as
- []
-
-
-Underfull \hbox (badness 1033) in paragraph at lines 416--417
-[]|\T1/cmr/m/n/8 Treated with ad-di-tional cau-tion
- []
-
-
-Underfull \hbox (badness 1137) in paragraph at lines 418--418
-\T1/cmr/m/n/8 Kepler main-sequence and
- []
+Package natbib Warning: Citation `maxted2023benchmark' on page 12 undefined on input line 449.
 
 [12]
 
@@ -1437,25 +1531,202 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                431.
+(scrartcl)                458.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 470--470
+[]|\T1/cmr/m/n/8 Initial
+ []
+
+
+Package natbib Warning: Citation `Eker2018' on page 13 undefined on input line 472.
+
+
+Underfull \hbox (badness 3158) in paragraph at lines 472--472
+[]|\T1/cmr/m/n/8 Accurate stel-lar para-met-
+ []
+
+
+Underfull \hbox (badness 1552) in paragraph at lines 472--472
+\T1/cmr/m/n/8 com-pon-ents over a broad
+ []
+
+
+Package natbib Warning: Citation `Helminiak2019' on page 13 undefined on input line 474.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 474--474
+[]|\T1/cmr/m/n/8 Detached ec-lipsing
+ []
+
+
+Underfull \hbox (badness 1009) in paragraph at lines 474--474
+\T1/cmr/m/n/8 ad-di-tional at-mo-spheric in-
+ []
+
+
+Package natbib Warning: Citation `Graczyk2021' on page 13 undefined on input line 476.
+
+
+Package natbib Warning: Citation `Graczyk2022' on page 13 undefined on input line 476.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 476--476
+[]|\T1/cmr/m/n/8 Surface-brightness--colour
+ []
+
+
+Package natbib Warning: Citation `Graczyk2022' on page 13 undefined on input line 476.
+
+
+Package natbib Warning: Citation `Nsamba2025' on page 13 undefined on input line 478.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 478--478
+[]|\T1/cmr/m/n/8 Pre-existing benchmark-
+ []
+
+
+Package natbib Warning: Citation `Bellinger2019' on page 13 undefined on input line 480.
+
+
+Underfull \hbox (badness 3168) in paragraph at lines 480--480
+[]|\T1/cmr/m/n/8 Asteroseismic masses and
+ []
+
+
+Underfull \hbox (badness 1430) in paragraph at lines 480--480
+\T1/cmr/m/n/8 radii for mostly solar-like
+ []
+
+
+Package natbib Warning: Citation `Serenelli2021' on page 13 undefined on input line 482.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 482--482
+[]|\T1/cmr/m/n/8 Mixed bench-mark
+ []
+
+
+Underfull \hbox (badness 2582) in paragraph at lines 482--482
+[]|\T1/cmr/m/n/8 Stellar mass-determination
+ []
+
+
+Underfull \hbox (badness 4479) in paragraph at lines 482--482
+\T1/cmr/m/n/8 gram, in-clud-ing ec-lipsing
+ []
+
+
+Underfull \hbox (badness 1178) in paragraph at lines 482--482
+\T1/cmr/m/n/8 bin-ar-ies and as-ter-o-seis-mo-
+ []
+
+
+Package natbib Warning: Citation `Soubiran2024' on page 13 undefined on input line 484.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 484--484
+[]|\T1/cmr/m/n/8 Interferometry and
+ []
+
+
+Underfull \hbox (badness 2221) in paragraph at lines 484--484
+\T1/cmr/m/n/8 benchmark-star cal-ib-
+ []
+
+
+Underfull \hbox (badness 4940) in paragraph at lines 484--485
+[]|\T1/cmr/m/n/8 Luminosities were provided as
+ []
+
+
+Package natbib Warning: Citation `Xiong2023' on page 13 undefined on input line 486.
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 486--487
+[]|\T1/cmr/m/n/8 Treated with ad-di-tional cau-tion
+ []
+
+
+Package natbib Warning: Citation `Sayeed2025' on page 13 undefined on input line 488.
+
+
+Underfull \hbox (badness 1137) in paragraph at lines 488--488
+\T1/cmr/m/n/8 Kepler main-sequence and
+ []
+
+
+Package natbib Warning: Citation `Yildiz2019' on page 13 undefined on input line 490.
 
 [13]
-<hr_diagram_parsec_sample_clean.png, id=391, 834.9594pt x 254.3904pt>
+
+Package natbib Warning: Citation `Yildiz2019' on page 14 undefined on input line 496.
+
+
+Package natbib Warning: Citation `asplund2009' on page 14 undefined on input line 496.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                501.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `Eker2018' on page 14 undefined on input line 502.
+
+
+Package natbib Warning: Citation `Graczyk2022' on page 14 undefined on input line 502.
+
+
+Package natbib Warning: Citation `Soubiran2024' on page 14 undefined on input line 502.
+
+
+Package natbib Warning: Citation `Serenelli2021' on page 14 undefined on input line 502.
+
+
+Package natbib Warning: Citation `bilir2008' on page 14 undefined on input line 504.
+
+
+Package natbib Warning: Citation `moya2018' on page 14 undefined on input line 504.
+
+[14]
+
+Package natbib Warning: Citation `mcelreath2020rethinking' on page 15 undefined on input line 506.
+
+
+Package natbib Warning: Citation `moya2018' on page 15 undefined on input line 517.
+
+
+Package natbib Warning: Citation `pecaut2013' on page 15 undefined on input line 521.
+
+<hr_diagram_parsec_sample_clean.png, id=219, 834.9594pt x 254.3904pt>
 File: hr_diagram_parsec_sample_clean.png Graphic file (type png)
 <use hr_diagram_parsec_sample_clean.png>
-Package pdftex.def Info: hr_diagram_parsec_sample_clean.png  used on input line 455.
+Package pdftex.def Info: hr_diagram_parsec_sample_clean.png  used on input line 525.
 (pdftex.def)             Requested size: 467.5952pt x 142.46541pt.
- [14]
+
+Package natbib Warning: Citation `bressan2012' on page 15 undefined on input line 526.
+
+
+Package natbib Warning: Citation `bressan2012' on page 15 undefined on input line 526.
+
+[15]
 
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                464.
+(scrartcl)                534.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
@@ -1466,211 +1737,292 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                471.
+(scrartcl)                541.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
-[15 <./hr_diagram_parsec_sample_clean.png>]
+
+Package natbib Warning: Citation `laughlin1997' on page 16 undefined on input line 542.
+
+
+Package natbib Warning: Citation `chabrier2000' on page 16 undefined on input line 542.
+
+
+Package natbib Warning: Citation `maxted2023benchmark' on page 16 undefined on input line 544.
+
+
+Package natbib Warning: Citation `Southworth2015' on page 16 undefined on input line 544.
+
+[16 <./hr_diagram_parsec_sample_clean.png>]
+
+Package natbib Warning: Citation `moya2018' on page 17 undefined on input line 546.
+
 
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                478.
+(scrartcl)                548.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
-<HBNN_mass_3param_L_1000_seed_225_full_prediction.png, id=436, 569.9694pt x 425.1885pt>
+<HBNN_mass_3param_L_1000_seed_225_full_prediction.png, id=243, 569.9694pt x 425.1885pt>
 File: HBNN_mass_3param_L_1000_seed_225_full_prediction.png Graphic file (type png)
 <use HBNN_mass_3param_L_1000_seed_225_full_prediction.png>
-Package pdftex.def Info: HBNN_mass_3param_L_1000_seed_225_full_prediction.png  used on input line 491.
+Package pdftex.def Info: HBNN_mass_3param_L_1000_seed_225_full_prediction.png  used on input line 561.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
-<HBNN_mass_3param_L_1000_seed_225_full_residual.png, id=437, 569.9694pt x 425.1885pt>
+<HBNN_mass_3param_L_1000_seed_225_full_residual.png, id=244, 569.9694pt x 425.1885pt>
 File: HBNN_mass_3param_L_1000_seed_225_full_residual.png Graphic file (type png)
 <use HBNN_mass_3param_L_1000_seed_225_full_residual.png>
-Package pdftex.def Info: HBNN_mass_3param_L_1000_seed_225_full_residual.png  used on input line 498.
+Package pdftex.def Info: HBNN_mass_3param_L_1000_seed_225_full_residual.png  used on input line 568.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
-<GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png, id=438, 566.115pt x 425.1885pt>
+<GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png, id=245, 566.115pt x 425.1885pt>
 File: GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png Graphic file (type png)
 <use GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png>
-Package pdftex.def Info: GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png  used on input line 505.
+Package pdftex.def Info: GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png  used on input line 575.
 (pdftex.def)             Requested size: 113.35837pt x 85.13998pt.
-<GP_mass_3param_L_1000_seed_225_filtered_95_residual.png, id=439, 565.1514pt x 425.1885pt>
+<GP_mass_3param_L_1000_seed_225_filtered_95_residual.png, id=246, 565.1514pt x 425.1885pt>
 File: GP_mass_3param_L_1000_seed_225_filtered_95_residual.png Graphic file (type png)
 <use GP_mass_3param_L_1000_seed_225_filtered_95_residual.png>
-Package pdftex.def Info: GP_mass_3param_L_1000_seed_225_filtered_95_residual.png  used on input line 512.
+Package pdftex.def Info: GP_mass_3param_L_1000_seed_225_filtered_95_residual.png  used on input line 582.
 (pdftex.def)             Requested size: 113.35837pt x 85.28273pt.
-<BART_mass_3param_L_prediction_seed_225_full_prediction.png, id=440, 569.9694pt x 425.1885pt>
+<BART_mass_3param_L_prediction_seed_225_full_prediction.png, id=247, 569.9694pt x 425.1885pt>
 File: BART_mass_3param_L_prediction_seed_225_full_prediction.png Graphic file (type png)
 <use BART_mass_3param_L_prediction_seed_225_full_prediction.png>
-Package pdftex.def Info: BART_mass_3param_L_prediction_seed_225_full_prediction.png  used on input line 522.
+Package pdftex.def Info: BART_mass_3param_L_prediction_seed_225_full_prediction.png  used on input line 592.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
-<BART_mass_3param_L_prediction_seed_225_full_residual.png, id=441, 569.9694pt x 425.1885pt>
+<BART_mass_3param_L_prediction_seed_225_full_residual.png, id=248, 569.9694pt x 425.1885pt>
 File: BART_mass_3param_L_prediction_seed_225_full_residual.png Graphic file (type png)
 <use BART_mass_3param_L_prediction_seed_225_full_residual.png>
-Package pdftex.def Info: BART_mass_3param_L_prediction_seed_225_full_residual.png  used on input line 529.
+Package pdftex.def Info: BART_mass_3param_L_prediction_seed_225_full_residual.png  used on input line 599.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
-<BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png, id=442, 569.9694pt x 425.1885pt>
+<BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png, id=249, 569.9694pt x 425.1885pt>
 File: BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png Graphic file (type png)
 <use BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png>
-Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png  used on input line 536.
+Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png  used on input line 606.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
-<BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png, id=443, 569.9694pt x 425.1885pt>
+<BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png, id=250, 569.9694pt x 425.1885pt>
 File: BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png Graphic file (type png)
 <use BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png>
-Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png  used on input line 543.
+Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png  used on input line 613.
 (pdftex.def)             Requested size: 113.35837pt x 84.56258pt.
-[16] [17 <./HBNN_mass_3param_L_1000_seed_225_full_prediction.png> <./HBNN_mass_3param_L_1000_seed_225_full_residual.png> <./GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png> <./GP_mass_3param_L_1000_seed_225_filtered_95_residual.png> <./BART_mass_3param_L_prediction_seed_225_full_prediction.png> <./BART_mass_3param_L_prediction_seed_225_full_residual.png> <./BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png> <./BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png>] [18]
+[17]
 
-Package scrartcl Warning: Usage of \@startsection detected.
-(scrartcl)                Note, the sectioning of scrartcl does neither use
-(scrartcl)                nor support the usage of \@startsection command.
-(scrartcl)                This means, that none of the KOMA-Script features
-(scrartcl)                for headings is available for the heading on line
-(scrartcl)                612.
-(scrartcl)                If you need additional sectioning commands, you
-(scrartcl)                should define them using \DeclareNewSectionCommand
-(scrartcl)                instead.
+Package natbib Warning: Citation `izmailov2021' on page 18 undefined on input line 623.
+
+[18 <./HBNN_mass_3param_L_1000_seed_225_full_prediction.png> <./HBNN_mass_3param_L_1000_seed_225_full_residual.png> <./GP_mass_3param_L_1000_seed_225_filtered_95_prediction.png> <./GP_mass_3param_L_1000_seed_225_filtered_95_residual.png> <./BART_mass_3param_L_prediction_seed_225_full_prediction.png> <./BART_mass_3param_L_prediction_seed_225_full_residual.png> <./BHS_mass_3param_L_prediction_seed_225_filtered_95_prediction.png> <./BHS_mass_3param_L_prediction_seed_225_filtered_95_residual.png>]
+
+Package natbib Warning: Citation `cho2026' on page 19 undefined on input line 632.
+
+
+Package natbib Warning: Citation `le2005heteroscedasticgp' on page 19 undefined on input line 634.
+
+
+Package natbib Warning: Citation `zhang2019rerf' on page 19 undefined on input line 638.
 
 [19]
 
+Package natbib Warning: Citation `yao2022hierarchicalstacking' on page 20 undefined on input line 646.
+
+
+Package natbib Warning: Citation `moya2022' on page 20 undefined on input line 676.
+
+
+Package natbib Warning: Citation `moya2022' on page 20 undefined on input line 678.
+
+
+Package natbib Warning: Citation `moya2022' on page 20 undefined on input line 678.
+
+
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                621.
+(scrartcl)                682.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
 [20]
-<HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png, id=533, 504.2037pt x 382.3083pt>
-File: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png Graphic file (type png)
-<use HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png>
-Package pdftex.def Info: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png  used on input line 648.
-(pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
-<HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png, id=534, 504.2037pt x 382.3083pt>
-File: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png Graphic file (type png)
-<use HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png>
-Package pdftex.def Info: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png  used on input line 655.
-(pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
-<GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png, id=535, 504.2037pt x 382.3083pt>
-File: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png Graphic file (type png)
-<use GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png>
-Package pdftex.def Info: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png  used on input line 662.
-(pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
-<GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png, id=536, 504.2037pt x 382.3083pt>
-File: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png Graphic file (type png)
-<use GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png>
-Package pdftex.def Info: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png  used on input line 669.
-(pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
-<BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png, id=537, 528.0528pt x 386.6445pt>
-File: BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png Graphic file (type png)
-<use BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png>
-Package pdftex.def Info: BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png  used on input line 679.
-(pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
-<BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png, id=538, 528.0528pt x 386.6445pt>
-File: BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png Graphic file (type png)
-<use BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png>
-Package pdftex.def Info: BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png  used on input line 686.
-(pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
-<BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png, id=539, 528.0528pt x 386.6445pt>
-File: BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png Graphic file (type png)
-<use BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png>
-Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png  used on input line 693.
-(pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
-<BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png, id=540, 528.0528pt x 386.6445pt>
-File: BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png Graphic file (type png)
-<use BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png>
-Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png  used on input line 700.
-(pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
- [21 <./HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png> <./HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png> <./GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png> <./GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png> <./BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png> <./BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png> <./BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png> <./BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png>]
-<mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png, id=562, 714.0276pt x 425.6703pt>
-File: mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png Graphic file (type png)
-<use mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png>
-Package pdftex.def Info: mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png  used on input line 718.
-(pdftex.def)             Requested size: 377.85405pt x 225.26642pt.
- [22]
+
+Package natbib Warning: Citation `arielAMRsubwg' on page 21 undefined on input line 686.
+
+
+Package natbib Warning: Citation `moya2018' on page 21 undefined on input line 688.
+
+
+Package natbib Warning: Citation `bressan2012' on page 21 undefined on input line 690.
+
+
+Package natbib Warning: Citation `moya2018' on page 21 undefined on input line 690.
+
 
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                740.
+(scrartcl)                691.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
+
+
+Package natbib Warning: Citation `moya2018' on page 21 undefined on input line 692.
+
+
+Package natbib Warning: Citation `moya2022' on page 21 undefined on input line 692.
+
+[21]
+<HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png, id=307, 504.2037pt x 382.3083pt>
+File: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png Graphic file (type png)
+<use HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png>
+Package pdftex.def Info: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png  used on input line 718.
+(pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
+<HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png, id=308, 504.2037pt x 382.3083pt>
+File: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png Graphic file (type png)
+<use HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png>
+Package pdftex.def Info: HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png  used on input line 725.
+(pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
+<GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png, id=309, 504.2037pt x 382.3083pt>
+File: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png Graphic file (type png)
+<use GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png>
+Package pdftex.def Info: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png  used on input line 732.
+(pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
+<GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png, id=310, 504.2037pt x 382.3083pt>
+File: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png Graphic file (type png)
+<use GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png>
+Package pdftex.def Info: GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png  used on input line 739.
+(pdftex.def)             Requested size: 113.35837pt x 85.95148pt.
+<BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png, id=311, 528.0528pt x 386.6445pt>
+File: BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png Graphic file (type png)
+<use BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png>
+Package pdftex.def Info: BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png  used on input line 749.
+(pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
+<BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png, id=312, 528.0528pt x 386.6445pt>
+File: BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png Graphic file (type png)
+<use BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png>
+Package pdftex.def Info: BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png  used on input line 756.
+(pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
+<BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png, id=313, 528.0528pt x 386.6445pt>
+File: BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png Graphic file (type png)
+<use BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png>
+Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png  used on input line 763.
+(pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
+<BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png, id=314, 528.0528pt x 386.6445pt>
+File: BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png Graphic file (type png)
+<use BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png>
+Package pdftex.def Info: BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png  used on input line 770.
+(pdftex.def)             Requested size: 113.35837pt x 82.99715pt.
+ [22 <./HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_prediction_no_title_smaller_points_fontplus2.png> <./HBNN_mass_3param_L_1000_draws_4_chains_15_nodes_sig_015_seed_176_full_residual_no_title_smaller_points_fontplus2.png> <./GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_prediction_no_title_smaller_points_fontplus2.png> <./GP_mass_3param_L_1000_draws_4_chains_80_40_seed_176_filtered_90_residual_no_title_smaller_points_fontplus2.png> <./BART_mass_3param_L_prediction_seed_176_full_prediction_fontminus2_vertical_legend.png> <./BART_mass_3param_L_prediction_seed_176_full_residual_fontminus2_vertical_legend.png> <./BHS_mass_3param_L_prediction_seed_176_filtered_90_prediction_fontminus2_vertical_legend.png> <./BHS_mass_3param_L_prediction_seed_176_filtered_90_residual_fontminus2_clear_vertical_legend.png>]
+
+Package natbib Warning: Citation `bressan2012' on page 23 undefined on input line 782.
+
+
+Package natbib Warning: Citation `moya2018' on page 23 undefined on input line 782.
+
+
+Package natbib Warning: Citation `moya2018' on page 23 undefined on input line 784.
+
+<mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png, id=331, 714.0276pt x 425.6703pt>
+File: mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png Graphic file (type png)
+<use mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png>
+Package pdftex.def Info: mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png  used on input line 788.
+(pdftex.def)             Requested size: 377.85405pt x 225.26642pt.
+
+Package natbib Warning: Citation `moya2018' on page 23 undefined on input line 789.
+
+
+Package natbib Warning: Citation `moya2018' on page 23 undefined on input line 789.
 
 [23 <./mass_predictions_seed_819_without_bhs_2022_fractional_residual_distributions.png>]
 
+Package natbib Warning: Citation `bressan2012' on page 24 undefined on input line 797.
+
+
+Package natbib Warning: Citation `moya2018' on page 24 undefined on input line 797.
+
+
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                753.
+(scrartcl)                810.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
+
+
+Package natbib Warning: Citation `chandrasekhar1933double' on page 24 undefined on input line 813.
+
+
+Package natbib Warning: Citation `maxted2023benchmark' on page 24 undefined on input line 821.
+
+
+Package scrartcl Warning: Usage of \@startsection detected.
+(scrartcl)                Note, the sectioning of scrartcl does neither use
+(scrartcl)                nor support the usage of \@startsection command.
+(scrartcl)                This means, that none of the KOMA-Script features
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                823.
+(scrartcl)                If you need additional sectioning commands, you
+(scrartcl)                should define them using \DeclareNewSectionCommand
+(scrartcl)                instead.
+
+
+Package natbib Warning: Citation `moya2022' on page 24 undefined on input line 824.
 
 [24]
 
+Package natbib Warning: Citation `moya2022' on page 25 undefined on input line 841.
+
+
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                777.
+(scrartcl)                847.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
-<10_bins_02_fractional_residual_vs_log10_oblateness.png, id=604, 520.344pt x 361.35pt>
+[25]
+<10_bins_02_fractional_residual_vs_log10_oblateness.png, id=364, 520.344pt x 361.35pt>
 File: 10_bins_02_fractional_residual_vs_log10_oblateness.png Graphic file (type png)
 <use 10_bins_02_fractional_residual_vs_log10_oblateness.png>
-Package pdftex.def Info: 10_bins_02_fractional_residual_vs_log10_oblateness.png  used on input line 789.
+Package pdftex.def Info: 10_bins_02_fractional_residual_vs_log10_oblateness.png  used on input line 859.
 (pdftex.def)             Requested size: 231.43732pt x 160.72029pt.
-<10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png, id=605, 520.344pt x 361.35pt>
+<10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png, id=365, 520.344pt x 361.35pt>
 File: 10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png Graphic file (type png)
 <use 10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png>
-Package pdftex.def Info: 10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png  used on input line 796.
+Package pdftex.def Info: 10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png  used on input line 866.
 (pdftex.def)             Requested size: 231.43732pt x 160.72029pt.
-[25] [26 <./10_bins_02_fractional_residual_vs_log10_oblateness.png> <./10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png>]
-<04_predicted_vs_true_EB_masses.png, id=628, 733.0587pt x 552.6246pt>
+ [26 <./10_bins_02_fractional_residual_vs_log10_oblateness.png> <./10_bins_02c_abs_fractional_residual_vs_log10_oblateness.png>]
+<04_predicted_vs_true_EB_masses.png, id=382, 733.0587pt x 552.6246pt>
 File: 04_predicted_vs_true_EB_masses.png Graphic file (type png)
 <use 04_predicted_vs_true_EB_masses.png>
-Package pdftex.def Info: 04_predicted_vs_true_EB_masses.png  used on input line 818.
+Package pdftex.def Info: 04_predicted_vs_true_EB_masses.png  used on input line 888.
 (pdftex.def)             Requested size: 146.41673pt x 110.37117pt.
-<03_fractional_residual_vs_true_EB_mass.png, id=629, 732.0951pt x 552.6246pt>
+<03_fractional_residual_vs_true_EB_mass.png, id=383, 732.0951pt x 552.6246pt>
 File: 03_fractional_residual_vs_true_EB_mass.png Graphic file (type png)
 <use 03_fractional_residual_vs_true_EB_mass.png>
-Package pdftex.def Info: 03_fractional_residual_vs_true_EB_mass.png  used on input line 825.
+Package pdftex.def Info: 03_fractional_residual_vs_true_EB_mass.png  used on input line 895.
 (pdftex.def)             Requested size: 146.41673pt x 110.52295pt.
-<05_fractional_residual_vs_log10_oblateness_mass_colored.png, id=630, 785.334pt x 516.4896pt>
+<05_fractional_residual_vs_log10_oblateness_mass_colored.png, id=384, 785.334pt x 516.4896pt>
 File: 05_fractional_residual_vs_log10_oblateness_mass_colored.png Graphic file (type png)
 <use 05_fractional_residual_vs_log10_oblateness_mass_colored.png>
-Package pdftex.def Info: 05_fractional_residual_vs_log10_oblateness_mass_colored.png  used on input line 832.
+Package pdftex.def Info: 05_fractional_residual_vs_log10_oblateness_mass_colored.png  used on input line 902.
 (pdftex.def)             Requested size: 165.3134pt x 108.7182pt.
 
-Underfull \hbox (badness 3780) in paragraph at lines 833--833
+Underfull \hbox (badness 3780) in paragraph at lines 903--903
 [][][]|\T1/cmr/m/n/10.95 Frac-tional re-sid-uals, colour-
  []
-
-
-Package scrartcl Warning: Usage of \@startsection detected.
-(scrartcl)                Note, the sectioning of scrartcl does neither use
-(scrartcl)                nor support the usage of \@startsection command.
-(scrartcl)                This means, that none of the KOMA-Script features
-(scrartcl)                for headings is available for the heading on line
-(scrartcl)                850.
-(scrartcl)                If you need additional sectioning commands, you
-(scrartcl)                should define them using \DeclareNewSectionCommand
-(scrartcl)                instead.
 
 [27 <./04_predicted_vs_true_EB_masses.png> <./03_fractional_residual_vs_true_EB_mass.png> <./05_fractional_residual_vs_log10_oblateness_mass_colored.png>]
 
@@ -1679,33 +2031,48 @@ Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
 (scrartcl)                for headings is available for the heading on line
-(scrartcl)                860.
+(scrartcl)                920.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
-[28] [29] (main.bbl
+
+Package natbib Warning: Citation `moya2018' on page 28 undefined on input line 922.
+
+
+Package natbib Warning: Citation `bressan2012' on page 28 undefined on input line 926.
+
+
+Package natbib Warning: Citation `moya2018' on page 28 undefined on input line 926.
+
+[28]
 
 Package scrartcl Warning: Usage of \@startsection detected.
 (scrartcl)                Note, the sectioning of scrartcl does neither use
 (scrartcl)                nor support the usage of \@startsection command.
 (scrartcl)                This means, that none of the KOMA-Script features
-(scrartcl)                for headings is available for the heading on line 1.
+(scrartcl)                for headings is available for the heading on line
+(scrartcl)                930.
 (scrartcl)                If you need additional sectioning commands, you
 (scrartcl)                should define them using \DeclareNewSectionCommand
 (scrartcl)                instead.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10--13
-[]\T1/cmr/m/n/12 Ariel Stel-lar Char-ac-ter-isa-tion Work-ing Group. n.d., Age Mass Ra-dius sub-
- []
+Package natbib Warning: Citation `moya2018' on page 29 undefined on input line 933.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10--13
-\T1/cmr/m/n/12 WG, []$\T1/cmtt/m/n/12 https : / / sites . google . com / inaf . it / arielstellarcatalogue / the-[]team /
- []
+Package natbib Warning: Citation `bressan2012' on page 29 undefined on input line 937.
 
-[30] [31]) [32] (main.aux)
+
+Package natbib Warning: Citation `moya2018' on page 29 undefined on input line 937.
+
+[29]
+No file main.bbl.
+[30]
+
+Package natbib Warning: There were undefined citations.
+
+(main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
@@ -1716,20 +2083,41 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 40547 strings out of 467871
- 890140 string characters out of 5414020
- 1518396 words of memory out of 5000000
- 68665 multiletter control sequences out of 15000+600000
- 656107 words of font info for 102 fonts, out of 8000000 for 9000
+ 40391 strings out of 467871
+ 886845 string characters out of 5414020
+ 1517396 words of memory out of 5000000
+ 68550 multiletter control sequences out of 15000+600000
+ 657346 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 113i,13n,110p,11313b,1307s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 113i,13n,110p,11313b,1076s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-pdfTeX warning (dest): name{subsection.3.5} has been referenced but does not exist, replaced by a fixed one
+pdfTeX warning (dest): name{figure.caption.19} has been referenced but does not exist, replaced by a fixed one
 
- <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1440.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (32 pages, 5152732 bytes).
+
+pdfTeX warning (dest): name{table.caption.15} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.caption.13} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{table.caption.12} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{table.caption.10} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.caption.9} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.caption.7} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{table.caption.5} has been referenced but does not exist, replaced by a fixed one
+
+ <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx0800.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1440.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\ngeorgakopulos\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/ngeorgakopulos/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on main.pdf (30 pages, 5219957 bytes).
 PDF statistics:
- 1475 PDF objects out of 1728 (max. 8388607)
- 125 named destinations out of 1000 (max. 500000)
- 460 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1084 PDF objects out of 1200 (max. 8388607)
+ 86 named destinations out of 1000 (max. 500000)
+ 475 words of extra memory for PDF output out of 10000 (max. 10000000)
 
