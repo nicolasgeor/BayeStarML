@@ -322,13 +322,6 @@ Interferometry combines the light collected by separated telescopes, effectively
 
 If the bolometric flux is also known, the effective temperature follows from the Stefan--Boltzmann relation. This makes interferometry one of the most empirical routes to stellar radii and temperatures, and it is used in benchmark-star calibrations \citep{Soubiran2024}. The method is not fully assumption-free, because bolometric flux estimates require extinction corrections and model-dependent treatment of unobserved spectral regions. It is also limited to stars with sufficiently large angular diameters, so its contribution to the total sample is small.
 
-\subsection{Limits of Model Independence}
-MIGHT REMOVE THIS SECTION. NOT BECAUSE OF SPACE; BUT AVOIDING UNNCESSARY REPETITION
-
-The methods described above are used because they reduce the dependence on stellar-atmosphere models, but they do not remove modelling assumptions completely. Eclipsing binaries still require external calibrations for absolute temperatures and luminosities, asteroseismic masses and radii depend on scaling relations and an external $T_{\mathrm{eff}}$ estimate, and interferometric temperatures require bolometric fluxes and extinction corrections.
-
-For this reason, the catalogues used in this work should not be interpreted as perfectly model-independent ground truth. They are instead high-quality reference labels, selected because their central constraints are closer to geometry or dynamics than to atmospheric modelling: eclipsing binaries provide strong masses and radii, asteroseismology constrains stellar density and surface gravity, and interferometry gives empirical radii and temperatures for suitable nearby stars. This compromise is important for the machine-learning models trained later, since their predictions cannot be more physically reliable than the labels from which they learn.
-
 
 \section{Data} \label{sec:data}
 % This paper talks about prioritising Data instead of models. Not prioritising good data over a large quantity of data. It explicitly says it wants high quality and quantity of data. Might use it in the future, tho. https://www.semanticscholar.org/paper/Data-centric-Artificial-Intelligence%3A-A-Survey-Zha-Bhat/12c6be503e4e5b7c9cb1810152d4364f26628a8d Zha et al., 2023
