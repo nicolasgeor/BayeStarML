@@ -1,3 +1,5 @@
+# This is the old file called analyse_eb_oblateness_residuals.py
+
 #!/usr/bin/env python3
 """
 Analyse EB mass-prediction residuals versus oblateness and Roche-lobe filling factor.

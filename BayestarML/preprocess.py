@@ -70,7 +70,8 @@ def return_norm(df):
                    X_error[['eTeff', 'elogg', 'eMeta', 'eL']]],
                   axis=1)
     
-    Y = pd.concat([df['M'], X_error['eM']], axis=1)
+    # Y = pd.concat([df['M'], X_error['eM']], axis=1)
+    Y = pd.concat([df['R'], X_error['eR']], axis=1)
     
     # do split
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y,
@@ -82,7 +83,8 @@ def return_norm(df):
     logg = X_train['logg']
     met = X_train['Meta']
     lum = X_train['L']
-    mass = Y_train["M"]    
+    # mass = Y_train["M"]    
+    rad = Y_train['R']
 
 
     # Compute means and standard deviations for standardization
@@ -90,15 +92,18 @@ def return_norm(df):
     mlogg = np.mean(logg)
     mmet = np.mean(met)
     mlum = np.mean(lum)
-    mtmass = np.mean(mass)
+    # mtmass = np.mean(mass)
+    mtrad = np.mean(rad)
 
     steff = np.std(teff)
     slogg = np.std(logg)
     smet = np.std(met)
     slum = np.std(lum)
-    smass = np.std(mass)
-    
-    return mteff, mlogg, mmet, mlum, mtmass, steff, slogg, smet, slum, smass     
+    # smass = np.std(mass)
+    srad = np.std(rad)
+
+    # return mteff, mlogg, mmet, mlum, mtmass, steff, slogg, smet, slum, smass     
+    return mteff, mlogg, mmet, mlum, mtrad, steff, slogg, smet, slum, srad     
 
 def return_train_test(df, normalised=True):
     """
@@ -148,15 +153,17 @@ def return_train_test(df, normalised=True):
     met = X_train['Meta']
     lum = X_train['L']
     #print(lum)
-    mass = Y_train["M"]
-    # rad = Y_train['R']
+    # mass = Y_train["M"]
+    rad = Y_train['R']
 
     # Compute means and standard deviations for standardization
     mteff = np.mean(teff)
     mlogg = np.mean(logg)
     mmet = np.mean(met)
     mlum = np.mean(lum)
-    mtmass = np.mean(mass)
+    # mtmass = np.mean(mass)
+    mtrad = np.mean(rad)
+
     
     #print(mteff, mlogg, mmet, mlum, mtmass, mrad)
 
@@ -164,8 +171,9 @@ def return_train_test(df, normalised=True):
     slogg = np.std(logg)
     smet = np.std(met)
     slum = np.std(lum)
-    smass = np.std(mass)
-    
+    # smass = np.std(mass)
+    srad = np.std(rad)
+
     #print(steff, slogg, smet, slum, smass, srad)
 
     # Standardize inputs 
@@ -173,15 +181,17 @@ def return_train_test(df, normalised=True):
     logg = (logg - mlogg) / slogg
     met = (met - mmet) / smet
     lum = (lum - mlum) / slum
-    mass = (mass - mtmass) / smass
-
+    # mass = (mass - mtmass) / smass
+    rad = (rad - mtrad) / srad
 
     # Uncertainties for the inputs
     eteff = X_train['eTeff'] / steff
     elogg = X_train['elogg'] / slogg
     emet = abs(X_train['eMeta']) / smet
     elum = X_train['eL'] / slum  
-    emass = Y_train['eM'] / smass
+    # emass = Y_train['eM'] / smass
+    erad = Y_train['eR'] / srad
+
 
     x_train = pd.concat([teff, logg, met, lum], axis=1)
     x_train_er = pd.concat([eteff, elogg, emet, elum], axis=1)
@@ -190,7 +200,8 @@ def return_train_test(df, normalised=True):
     logg_test = (X_test['logg'] - mlogg) / slogg
     met_test = (X_test['Meta'] - mmet) / smet
     lum_test = (X_test['L'] - mlum) / slum
-    mass_test = (Y_test['M']- mtmass) / smass
+    # mass_test = (Y_test['M']- mtmass) / smass
+    rad_test = (Y_test['R']- mtrad) / srad
 
     x_test = pd.concat([teff_test, logg_test, met_test, lum_test], axis=1)
 
@@ -198,13 +209,14 @@ def return_train_test(df, normalised=True):
     elogg_test = X_test['elogg'] / slogg
     emet_test = abs(X_test['eMeta']) / smet
     elum_test = X_test['eL'] / slum 
-    emass_test = Y_test['eM'] / smass
+    # emass_test = Y_test['eM'] / smass
+    erad_test = Y_test['eR'] / srad
 
     x_test_error = pd.concat([eteff_test, elogg_test, emet_test, elum_test], axis=1)
-
     
     if normalised == True:
-        return x_train, x_train_er, x_test, x_test_error, mass, emass, mass_test, emass_test
+        # return x_train, x_train_er, x_test, x_test_error, mass, emass, mass_test, emass_test
+        return x_train, x_train_er, x_test, x_test_error, rad, erad, rad_test, erad_test
     
     if normalised == False:
         return X_train, X_test, Y_train, Y_test
@@ -226,7 +238,8 @@ def prepare_pred4(filename):
     X = pd.read_csv(filename)
     df = get_dataset('Datasets/database_D_old_format.txt', 'MS')
     df = df[df['mode'] == 'A']
-    mteff, mlogg, mmet, mlum, mtmass, steff, slogg, smet, slum, smass = return_norm(df)
+    # mteff, mlogg, mmet, mlum, mtmass, steff, slogg, smet, slum, smass = return_norm(df)
+    mteff, mlogg, mmet, mlum, mtrad, steff, slogg, smet, slum, srad = return_norm(df)
 
     # Helper function to normalize and handle missing values
     def normalize(value, mean, std):
@@ -282,7 +295,8 @@ def prepare_pred3(filename):
     
     X = pd.read_csv(filename)
     df = get_dataset('Datasets/database_A_old_format_with_xiong_log_L.txt', 'MS')
-    mteff, mlogg, mmet, mlum, mtmass, steff, slogg, smet, slum, smass = return_norm(df)
+    # mteff, mlogg, mmet, mlum, mtmass, steff, slogg, smet, slum, smass = return_norm(df)
+    mteff, mlogg, mmet, mlum, mtrad, steff, slogg, smet, slum, srad = return_norm(df)
 
     # Helper function to normalize and handle missing values
     def normalize(value, mean, std):

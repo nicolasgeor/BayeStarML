@@ -25,7 +25,8 @@ REAL_PREDICTION = True
 PREDICTION_DATABASE = "Datasets/database_D_old_format.txt"
 
 # Prediction results will be saved here.
-PREDICTION_OUTPUT = "Dataset_D_predictions/EB_oblateness_fill_factor_mass_predictions_4_features_3000_draws_seed_82.csv"
+# PREDICTION_OUTPUT = "Dataset_D_predictions/EB_oblateness_fill_factor_mass_predictions_4_features_3000_draws_seed_82.csv"
+PREDICTION_OUTPUT = "Dataset_D_predictions/EB_oblateness_fill_factor_radius_predictions_4_features_3000_draws_seed_82.csv"
 
 # Optional filters for the prediction database.
 # Leave as None to predict every row that has Teff, logg, Meta, L, and their errors.
@@ -40,7 +41,7 @@ REQUIRED_PREDICTION_COLUMNS = [
 
 def prepare_database_d_predictions(filename):
     """
-    Prepare a Dataset-D-format database for 4-feature mass prediction.
+    Prepare a Dataset-D-format database for 4-feature mass/radius prediction.
 
     Uses Teff, logg, Meta, and L, with mean asymmetric uncertainties.
     Rows without the required prediction inputs are skipped.
@@ -72,7 +73,8 @@ def prepare_database_d_predictions(filename):
 
     df_train = get_dataset("Datasets/database_D_old_format.txt", "MS")
     df_train = df_train[df_train["mode"] == "A"]
-    mteff, mlogg, mmet, mlum, _mtmass, steff, slogg, smet, slum, _smass = return_norm(df_train)
+    # mteff, mlogg, mmet, mlum, _mtmass, steff, slogg, smet, slum, _smass = return_norm(df_train)
+    mteff, mlogg, mmet, mlum, _mtrad, steff, slogg, smet, slum, _srad = return_norm(df_train)
 
     x_pred = pd.DataFrame({
         "Teff": (prediction_rows["Teff"] - mteff) / steff,
@@ -93,12 +95,18 @@ def prepare_database_d_predictions(filename):
 
 def build_prediction_table(prediction_rows, bhs_pred):
     prediction_summary = pd.DataFrame({
-        "mass_pred": bhs_pred.mean(0),
-        "mass_sigma": bhs_pred.std(0),
-        "mass_p16": np.percentile(bhs_pred, 16, axis=0),
-        "mass_p84": np.percentile(bhs_pred, 84, axis=0),
-        "mass_p02_5": np.percentile(bhs_pred, 2.5, axis=0),
-        "mass_p97_5": np.percentile(bhs_pred, 97.5, axis=0),
+        # "mass_pred": bhs_pred.mean(0),
+        # "mass_sigma": bhs_pred.std(0),
+        # "mass_p16": np.percentile(bhs_pred, 16, axis=0),
+        # "mass_p84": np.percentile(bhs_pred, 84, axis=0),
+        # "mass_p02_5": np.percentile(bhs_pred, 2.5, axis=0),
+        # "mass_p97_5": np.percentile(bhs_pred, 97.5, axis=0),
+        "rad_pred": bhs_pred.mean(0),
+        "rad_sigma": bhs_pred.std(0),
+        "rad_p16": np.percentile(bhs_pred, 16, axis=0),
+        "rad_p84": np.percentile(bhs_pred, 84, axis=0),
+        "rad_p02_5": np.percentile(bhs_pred, 2.5, axis=0),
+        "rad_p97_5": np.percentile(bhs_pred, 97.5, axis=0),
     }, index=prediction_rows.index)
 
     return pd.concat(
@@ -111,26 +119,28 @@ def build_prediction_table(prediction_rows, bhs_pred):
 def main():
     if not REAL_PREDICTION:
         print("Evaluating Dataset D A-label 4-parameter BHS on 20% holdout test set...")
-        _base_preds, _bhs_pred_test, _bhs_w_test = predict4(None, None, "mass", test=True)
+        # _base_preds, _bhs_pred_test, _bhs_w_test = predict4(None, None, "mass", test=True)
+        _base_preds, _bhs_pred_test, _bhs_w_test = predict4(None, None, "radius", test=True)
         print("\n--- Evaluation Complete ---")
         return
 
-    print(f"Preparing 4-feature mass predictions for {PREDICTION_DATABASE}...")
+    # print(f"Preparing 4-feature mass predictions for {PREDICTION_DATABASE}...")
+    print(f"Preparing 4-feature radius predictions for {PREDICTION_DATABASE}...")
     prediction_rows, X, X_er = prepare_database_d_predictions(PREDICTION_DATABASE)
 
-    print(f"Predicting masses for {len(prediction_rows)} star(s)...")
-    _base_preds, bhs_pred, _bhs_w = predict4(X, X_er, "mass", test=False)
+    # print(f"Predicting masses for {len(prediction_rows)} star(s)...")
+    # _base_preds, bhs_pred, _bhs_w = predict4(X, X_er, "mass", test=False)
+    print(f"Predicting radii for {len(prediction_rows)} star(s)...")
+    _base_preds, bhs_pred, _bhs_w = predict4(X, X_er, "radius", test=False)
 
     prediction_table = build_prediction_table(prediction_rows, bhs_pred)
     os.makedirs(os.path.dirname(PREDICTION_OUTPUT), exist_ok=True)
     prediction_table.to_csv(PREDICTION_OUTPUT, index=False)
 
     print(f"Saved predictions to {PREDICTION_OUTPUT}")
-    print(prediction_table[["original_row", "SIMBAD_ID", "mass_pred", "mass_sigma"]].head().to_string(index=False))
+    # print(prediction_table[["original_row", "SIMBAD_ID", "mass_pred", "mass_sigma"]].head().to_string(index=False))
+    print(prediction_table[["original_row", "SIMBAD_ID", "rad_pred", "rad_sigma"]].head().to_string(index=False))
     print("\n--- Prediction Complete ---")
-
-
-    
 
     
 if __name__ == '__main__':
