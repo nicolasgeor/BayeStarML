@@ -108,15 +108,15 @@ def predict4(X, X_er, target, test=False):
         bart4_pred, lpd_BART4 = sample_pred_BART(bart4_model,
                                       X,
                                       X_er, 'mass',
-                                      3000, 4,
-                                      trace_filename='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_3000_draws_4_chains_seed_82.nc',
-                                      predictions_filename='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_3000_draws_4_chains_predictions_seed_82.nc')
+                                      100, 4,
+                                      trace_filename='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_100_draws_4_chains_seed_28.nc',
+                                      predictions_filename='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_100_draws_4_chains_predictions_seed_28.nc')
 
 
         gp4_model, μ_gp4, lg_σ_gp4, Xu4, Xu_er4 = gp.sparse_fully_heteroscedastic_gp(x_train, x_train_er, mass_train, 100, 50)
 
         # Loads the trace from the trained GP model (the learned weights and hyperparamenters)    
-        gp4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/GP_mass_4param_L_3000_draws_4_chains_100_50_seed_82.nc')
+        gp4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/GP_mass_4param_L_100_draws_4_chains_100_50_seed_28.nc')
         gp4_pred, lpd_GP4 = posterior_predictive_GP(gp4_model, μ_gp4, lg_σ_gp4, 
                                             gp4_trace, X,
                                             X_er,
@@ -124,7 +124,7 @@ def predict4(X, X_er, target, test=False):
 
         
         # Loads the trace from the trained HBNN model (the learned weights and hyperparamenters)    
-        hbnn4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/HBNN_mass_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_82.nc')
+        hbnn4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/HBNN_mass_4param_L_100_draws_4_chains_15_nodes_sig_015_seed_28.nc')
         hbnn4_pred, lpd_HBNN4 = sample_post_pred_HBNN_para(hbnn4_trace,  
                                                       X,
                                                       X_er,
@@ -135,8 +135,8 @@ def predict4(X, X_er, target, test=False):
         (bhs_trace, bhs_pred, bhs_w) = run_stack(bart4_pred, hbnn4_pred, gp4_pred,
                                             x_train, X, lpd_BART4, lpd_HBNN4,
                                             lpd_GP4,
-                                            draws=3000, chains=4)
-        bhs_trace.to_netcdf('Dataset_D_training_with_Xiong/BHS_mass_4param_L_prediction_3000_draws_4_chains_seed_82.nc')
+                                            draws=100, chains=4)
+        bhs_trace.to_netcdf('Dataset_D_training_with_Xiong/BHS_mass_4param_L_prediction_100_draws_4_chains_seed_28.nc')
 
         if test == True:
             mard_BART = mard(unorm_mass, bart4_pred.mean(0))
@@ -164,9 +164,9 @@ def predict4(X, X_er, target, test=False):
             print('MRD BHS:', mrd_BHS)
             
             plot_mass_diagnostics(unorm_mass, bart4_pred, 'BART',
-                                  output_base='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_seed_82')
+                                  output_base='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_seed_28')
             plot_mass_diagnostics(unorm_mass, bhs_pred, 'BHS', filtered_percentiles=(95, 90),
-                                  output_base='Dataset_D_training_with_Xiong/BHS_mass_4param_L_prediction_seed_82')
+                                  output_base='Dataset_D_training_with_Xiong/BHS_mass_4param_L_prediction_seed_28')
             
         
         return [bart4_pred, gp4_pred, hbnn4_pred], bhs_pred, bhs_w
@@ -182,21 +182,21 @@ def predict4(X, X_er, target, test=False):
         bart4_pred, lpd_BART4 = sample_pred_BART(bart4_model,
                                       X,
                                       X_er, 'radius',
-                                      3000, 4,
-                                      trace_filename='Dataset_D_training_with_Xiong/BART_rad_4param_L_prediction_3000_draws_4_chains_seed_82.nc',
-                                      predictions_filename='Dataset_D_training_with_Xiong/BART_rad_4param_L_prediction_3000_draws_4_chains_predictions_seed_82.nc')
+                                      100, 4,
+                                      trace_filename='Dataset_D_training_with_Xiong/BART_rad_4param_L_prediction_100_draws_4_chains_seed_28.nc',
+                                      predictions_filename='Dataset_D_training_with_Xiong/BART_rad_4param_L_prediction_100_draws_4_chains_predictions_seed_28.nc')
 
-        gp4_model, μ_gp4, lg_σ_gp4, Xu4, Xu_er4 = gp.sparse_fully_heteroscedastic_gp(x_train, x_train_er, rad_train, 100, 50)
+        gp4_model, μ_gp4, lg_σ_gp4, Xu4, Xu_er4 = gp.sparse_fully_heteroscedastic_gp(x_train, x_train_er, rad_train, 80, 50)
 
         # Loads the trace from the trained GP model (the learned weights and hyperparamenters)    
-        gp4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/GP_rad_4param_L_3000_draws_4_chains_100_50_seed_82.nc')
+        gp4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/GP_rad_4param_L_100_draws_4_chains_80_50_seed_28.nc')
         gp4_pred, lpd_GP4 = posterior_predictive_GP(gp4_model, μ_gp4, lg_σ_gp4, 
                                             gp4_trace, X,
                                             X_er,
                                             Xu4, Xu_er4, 4, 'radius')
         
         # Loads the trace from the trained HBNN model (the learned weights and hyperparamenters)    
-        hbnn4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/HBNN_rad_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_82.nc')
+        hbnn4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/HBNN_rad_4param_L_100_draws_4_chains_15_nodes_sig_015_seed_28.nc')
         hbnn4_pred, lpd_HBNN4 = sample_post_pred_HBNN_para(hbnn4_trace,  
                                                       X,
                                                       X_er,
@@ -206,8 +206,8 @@ def predict4(X, X_er, target, test=False):
         (bhs_trace, bhs_pred, bhs_w) = run_stack(bart4_pred, hbnn4_pred, gp4_pred,
                                             x_train, X, lpd_BART4, lpd_HBNN4,
                                             lpd_GP4,
-                                            draws=3000, chains=4)
-        bhs_trace.to_netcdf('Dataset_D_training_with_Xiong/BHS_rad_4param_L_prediction_3000_draws_4_chains_seed_82.nc')
+                                            draws=100, chains=4)
+        bhs_trace.to_netcdf('Dataset_D_training_with_Xiong/BHS_rad_4param_L_prediction_100_draws_4_chains_seed_28.nc')
     
         if test == True:
             mard_BART = mard(unorm_rad, bart4_pred.mean(0))
@@ -235,9 +235,9 @@ def predict4(X, X_er, target, test=False):
             print('MRD BHS:', mrd_BHS)
             
             plot_mass_diagnostics(unorm_rad, bart4_pred, 'BART',
-                                  output_base='Dataset_D_training_with_Xiong/BART_rad_4param_L_prediction_seed_82')
+                                  output_base='Dataset_D_training_with_Xiong/BART_rad_4param_L_prediction_seed_28')
             plot_mass_diagnostics(unorm_rad, bhs_pred, 'BHS', filtered_percentiles=(95, 90),
-                                  output_base='Dataset_D_training_with_Xiong/BHS_rad_4param_L_prediction_seed_82')
+                                  output_base='Dataset_D_training_with_Xiong/BHS_rad_4param_L_prediction_seed_28')
             
         return [bart4_pred, gp4_pred, hbnn4_pred], bhs_pred, bhs_w
 
@@ -275,7 +275,7 @@ def predictNAN(X, X_er, target, test=False):
         
         unorm_rad = denormalise_val(rad_test, 'radius')
         
-        hbnn4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/HBNN_rad_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_82.nc')
+        hbnn4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/HBNN_rad_4param_L_100_draws_4_chains_15_nodes_sig_015_seed_28.nc')
         hbnn4_pred, lpd_HBNN4 = sample_post_pred_HBNN_para(hbnn4_trace,  
                                                       X,
                                                       X_er,
@@ -318,9 +318,9 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         bart3_pred, lpd_BART3 = sample_pred_BART(bart3_model,
                                       X,
                                       X_er, 'mass',
-                                      3000, 4,
-                                      trace_filename='Dataset_C_training_with_Xiong/BART_mass_3param_logL_prediction_3000_draws_4_chains.nc',
-                                      predictions_filename='Dataset_C_training_with_Xiong/BART_mass_3param_logL_prediction_3000_draws_4_chains_predictions.nc') # Made 2000 draws bc better MARD on test set
+                                      100, 4,
+                                      trace_filename='Dataset_C_training_with_Xiong/BART_mass_3param_logL_prediction_100_draws_4_chains.nc',
+                                      predictions_filename='Dataset_C_training_with_Xiong/BART_mass_3param_logL_prediction_100_draws_4_chains_predictions.nc') # Made 2000 draws bc better MARD on test set
 
         gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train3,
                                                                                       x_train3_er, 
@@ -330,13 +330,13 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         # CHANGE NAMES HERE
         # Change gp3_trace and hbnn3_trace according to which training we did
 
-        gp3_trace = az.from_netcdf('Dataset_C_training_with_Xiong/GP_mass_3param_L_3000_draws_4_chains_100_50_bis_bis.nc')
+        gp3_trace = az.from_netcdf('Dataset_C_training_with_Xiong/GP_mass_3param_L_100_draws_4_chains_100_50_bis_bis.nc')
         gp3_pred, lpd_GP3 = posterior_predictive_GP(gp3_model, μ_gp3, lg_σ_gp3, 
                                             gp3_trace, X,
                                             X_er,
                                             Xu3, Xu_er3, 3, 'mass')
         
-        hbnn3_trace = az.from_netcdf('Dataset_C_training_with_Xiong/HBNN_mass_3param_L_3000_draws_4_chains_15_nodes_sig_015_bis_bis.nc')
+        hbnn3_trace = az.from_netcdf('Dataset_C_training_with_Xiong/HBNN_mass_3param_L_100_draws_4_chains_15_nodes_sig_015_bis_bis.nc')
         hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(hbnn3_trace,  
                                                       X,
                                                       X_er,
@@ -345,8 +345,8 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         (bhs_trace, bhs_pred, bhs_w) = run_stack(bart3_pred, hbnn3_pred, gp3_pred,
                                             x_train3, X, lpd_BART3, lpd_HBNN3,
                                             lpd_GP3,
-                                            draws=3000, chains=4)
-        bhs_trace.to_netcdf('Dataset_C_training_with_Xiong/BHS_mass_3param_logL_prediction_3000_draws_4_chains.nc')
+                                            draws=100, chains=4)
+        bhs_trace.to_netcdf('Dataset_C_training_with_Xiong/BHS_mass_3param_logL_prediction_100_draws_4_chains.nc')
         
         if test == True:
             mard_BART = mard(unorm_mass, bart3_pred.mean(0))
@@ -391,9 +391,9 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         bart3_pred, lpd_BART3 = sample_pred_BART(bart3_model,
                                       X,
                                       X_er, 'radius',
-                                      3000, 4,
-                                      trace_filename='Dataset_C_training_with_Xiong/BART_radius_3param_logL_prediction_3000_draws_4_chains.nc',
-                                      predictions_filename='Dataset_C_training_with_Xiong/BART_radius_3param_logL_prediction_3000_draws_4_chains_predictions.nc') # Made 2000 draws bc better MARD on test set
+                                      100, 4,
+                                      trace_filename='Dataset_C_training_with_Xiong/BART_radius_3param_logL_prediction_100_draws_4_chains.nc',
+                                      predictions_filename='Dataset_C_training_with_Xiong/BART_radius_3param_logL_prediction_100_draws_4_chains_predictions.nc') # Made 2000 draws bc better MARD on test set
 
         gp3_model, μ_gp3, lg_σ_gp3, Xu3, Xu_er3 = gp.sparse_fully_heteroscedastic_gp(x_train3,
                                                                                       x_train3_er, 
@@ -403,13 +403,13 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         # CHANGE NAMES HERE
         # Change gp3_trace and hbnn3_trace according to which training we did
 
-        gp3_trace = az.from_netcdf('Dataset_C_training_with_Xiong/GP_radius_3param_L_3000_draws_4_chains_100_50_bis_bis.nc')
+        gp3_trace = az.from_netcdf('Dataset_C_training_with_Xiong/GP_radius_3param_L_100_draws_4_chains_100_50_bis_bis.nc')
         gp3_pred, lpd_GP3 = posterior_predictive_GP(gp3_model, μ_gp3, lg_σ_gp3, 
                                             gp3_trace, X,
                                             X_er,
                                             Xu3, Xu_er3, 3, 'radius')
         
-        hbnn3_trace = az.from_netcdf('Dataset_C_training_with_Xiong/HBNN_radius_3param_L_3000_draws_4_chains_15_nodes_sig_015_bis_bis.nc')
+        hbnn3_trace = az.from_netcdf('Dataset_C_training_with_Xiong/HBNN_radius_3param_L_100_draws_4_chains_15_nodes_sig_015_bis_bis.nc')
         hbnn3_pred, lpd_HBNN3 = sample_post_pred_HBNN_para(hbnn3_trace,  
                                                       X,
                                                       X_er,
@@ -418,8 +418,8 @@ def predict3(X, X_er, target, test=False): # Default: not test-mode
         (bhs_trace, bhs_pred, bhs_w) = run_stack(bart3_pred, hbnn3_pred, gp3_pred,
                                             x_train3, X, lpd_BART3, lpd_HBNN3,
                                             lpd_GP3,
-                                            draws=3000, chains=4)
-        bhs_trace.to_netcdf('Dataset_C_training_with_Xiong/BHS_radius_3param_logL_prediction_3000_draws_4_chains.nc')
+                                            draws=100, chains=4)
+        bhs_trace.to_netcdf('Dataset_C_training_with_Xiong/BHS_radius_3param_logL_prediction_100_draws_4_chains.nc')
         
         if test == True:
             mard_BART = mard(unorm_rad, bart3_pred.mean(0))

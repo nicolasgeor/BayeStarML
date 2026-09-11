@@ -54,18 +54,18 @@ def main():
     # PICK ONE OF THESE TWO COMBINATIONS (model + trace)
     # If training HBNN: uncomment the next 2 lines, and comment the GP model + trace below.
  
-    model = hbnn.HBNN_M4(x_train, rad_train, x_train_er, erad_train, 15)
+    # model = hbnn.HBNN_M4(x_train, rad_train, x_train_er, erad_train, 15)
 
     
-    trace = train(model, "Dataset_D_training_with_Xiong/HBNN_rad_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_392.nc", draw=3000, chains=4)
+    # trace = train(model, "Dataset_D_training_with_Xiong/HBNN_rad_4param_L_100_draws_4_chains_15_nodes_sig_015_seed_28.nc", draw=100, chains=4)
 
     
     # If training GP: uncomment the next 2 lines, and comment the HBNN model + trace above.
-    # model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
-    #                                                                     x_train_er,
-    #                                                                     rad_train, 100, 50)
+    model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(x_train,
+                                                                        x_train_er,
+                                                                        rad_train, 80, 50)
     
-    # trace = train(model, "Dataset_D_training_with_Xiong/GP_rad_4param_L_3000_draws_4_chains_100_50_seed_392.nc", draw=3000, chains=4)
+    trace = train(model, "Dataset_D_training_with_Xiong/GP_rad_4param_L_100_draws_4_chains_80_50_seed_28.nc", draw=100, chains=4)
     
     r_hat_values = az.rhat(trace)
     all_rhats = []
@@ -79,14 +79,14 @@ def main():
     
     # PICK ONE OF THESE TWO PREDICTION BLOCKS.
 
-    # pred, lpd = posterior_predictive_GP(
-    #     model, μ_gp, log_var_gp, trace,
-    #     x_test, x_test_er, Xu, Xu_er, 4, 'radius'
-    # )
-
-    pred, lpd = sample_post_pred_HBNN_para(
-        trace, x_test, x_test_er, 15, 4, 'radius'
+    pred, lpd = posterior_predictive_GP(
+        model, μ_gp, log_var_gp, trace,
+        x_test, x_test_er, Xu, Xu_er, 4, 'radius'
     )
+
+    # pred, lpd = sample_post_pred_HBNN_para(
+    #     trace, x_test, x_test_er, 15, 4, 'radius'
+    # )
 
     # pred, lpd = sample_post_pred_HBNN_para(trace, x_test, x_test_er, 15, 4, 'radius')
 
@@ -122,7 +122,7 @@ def main():
         'abs_pull': np.abs(np.where(R_pred_sigma != 0, residual_R / R_pred_sigma, np.nan)),
     })
     # CHANGE THIS FILENAME
-    diagnostic_table.to_csv('Dataset_D_training_with_Xiong/radius_prediction_results_HBNN_3000_seed_392.tsv', sep='\t', index=False)
+    diagnostic_table.to_csv('Dataset_D_training_with_Xiong/radius_prediction_results_GP_100_seed_28.tsv', sep='\t', index=False)
     diagnostic_print_columns = ['original_row', 'ID', 'catalog', 'R_true', 'R_pred', 'R_pred_sigma',
                                 'residual_R', 'abs_residual_R', 'relative_error_pct',
                                 'abs_relative_error_pct', 'pull', 'abs_pull']
@@ -142,48 +142,48 @@ def main():
     R_pred_mean_plot = R_pred_mean[plot_mask]
     R_pred_sigma_plot = R_pred_sigma[plot_mask]
     # Change this plot base to match the active GP or HBNN training filename above.
-    # plot_output_base = 'Dataset_D_training_with_Xiong/GP_radius_4param_L_3000_draws_4_chains_100_50_seed_392'
-    plot_output_base = 'Dataset_D_training_with_Xiong/HBNN_radius_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_392'
+    plot_output_base = 'Dataset_D_training_with_Xiong/GP_radius_4param_L_100_draws_4_chains_80_50_seed_28'
+    # plot_output_base = 'Dataset_D_training_with_Xiong/HBNN_radius_4param_L_100_draws_4_chains_15_nodes_sig_015_seed_28'
 
     # CHANGE NAMES HERE FOR THE PLOTS. 4 TIMES (ONE ABOVE AND THREE BELOW)
 
     plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_rad, R_pred_mean, yerr=R_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.errorbar(unorm_rad, R_pred_mean, yerr=R_pred_sigma, fmt='o', color='black', ecolor='blue', markersize = 5, label='Predictions with Uncertainty', alpha=0.7)
     plt.plot([unorm_rad.min(), unorm_rad.max()], [unorm_rad.min(), unorm_rad.max()], 'r--')
-    plt.xlabel('True Radius')
-    plt.ylabel('Predicted Radius')
-    plt.title('HBNN Predictions with Uncertainty')
-    plt.legend()
+    plt.xlabel(r'True Radius ($R_\odot$)', fontsize=14)
+    plt.ylabel(r'Predicted Radius ($R_\odot$)', fontsize=14)
+    plt.title('GP Predictions with Uncertainty')
+    plt.legend(fontsize=12)
     plt.savefig(plot_output_base + '_full_prediction.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_rad, R_pred_mean - unorm_rad, yerr=R_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.errorbar(unorm_rad, R_pred_mean - unorm_rad, yerr=R_pred_sigma, fmt='o', color='black', ecolor='blue', markersize = 5, label='Predictions with Uncertainty', alpha=0.7)
     plt.hlines(0, unorm_rad.min(), unorm_rad.max(), 'r', linestyle='--')
-    plt.xlabel('True Radius')
-    plt.ylabel('Residual Radius')
-    plt.title('HBNN Predictions with Uncertainty')
-    plt.legend()
+    plt.xlabel(r'True Radius ($R_\odot$)', fontsize=14)
+    plt.ylabel(r'Residual Radius ($R_\odot$)', fontsize=14)
+    plt.title('GP Predictions with Uncertainty')
+    plt.legend(fontsize=12)
     plt.savefig(plot_output_base + '_full_residual.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_rad_plot, R_pred_mean_plot, yerr=R_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.errorbar(unorm_rad_plot, R_pred_mean_plot, yerr=R_pred_sigma_plot, fmt='o', color='black', ecolor='blue', markersize = 5, label='Predictions with Uncertainty', alpha=0.7)
     plt.plot([unorm_rad_plot.min(), unorm_rad_plot.max()], [unorm_rad_plot.min(), unorm_rad_plot.max()], 'r--')
-    plt.xlabel('True Radius')
-    plt.ylabel('Predicted Radius')
-    plt.title('HBNN Predictions with Uncertainty (R_pred_sigma < 95th percentile)')
-    plt.legend()
+    plt.xlabel(r'True Radius ($R_\odot$)', fontsize=14)
+    plt.ylabel(r'Predicted Radius ($R_\odot$)', fontsize=14)
+    plt.title('GP Predictions with Uncertainty (R_pred_sigma < 95th percentile)')
+    plt.legend(fontsize=12)
     plt.savefig(plot_output_base + '_filtered_prediction.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     plt.figure(figsize=(8, 6))
-    plt.errorbar(unorm_rad_plot, R_pred_mean_plot - unorm_rad_plot, yerr=R_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
+    plt.errorbar(unorm_rad_plot, R_pred_mean_plot - unorm_rad_plot, yerr=R_pred_sigma_plot, fmt='o', color='black', ecolor='blue', markersize = 5, label='Predictions with Uncertainty', alpha=0.7)
     plt.hlines(0, unorm_rad_plot.min(), unorm_rad_plot.max(), 'r', linestyle='--')
-    plt.xlabel('True Radius')
-    plt.ylabel('Residual Radius')
-    plt.title('HBNN Residual Radius (R_pred_sigma < 95th percentile)')
-    plt.legend()
+    plt.xlabel(r'True Radius ($R_\odot$)', fontsize=14)
+    plt.ylabel(r'Residual Radius ($R_\odot$)', fontsize=14)
+    plt.title('GP Residual Radius (R_pred_sigma < 95th percentile)')
+    plt.legend(fontsize=12)
     plt.savefig(plot_output_base + '_filtered_residual.png', dpi=300, bbox_inches='tight')
     plt.show()
 

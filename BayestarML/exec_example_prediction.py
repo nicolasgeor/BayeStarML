@@ -1,3 +1,7 @@
+##############################
+### I BELIVE THAT IN THIS FILE WE COMMENT/UNCOMMENT TO SWITCH BETWEEN MASS AND RADIUS TRAINING
+#################################33
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -26,7 +30,7 @@ PREDICTION_DATABASE = "Datasets/database_D_old_format.txt"
 
 # Prediction results will be saved here.
 # PREDICTION_OUTPUT = "Dataset_D_predictions/EB_oblateness_fill_factor_mass_predictions_4_features_3000_draws_seed_82.csv"
-PREDICTION_OUTPUT = "Dataset_D_predictions/EB_oblateness_fill_factor_radius_predictions_4_features_3000_draws_seed_82.csv"
+PREDICTION_OUTPUT = "Dataset_D_predictions/EB_oblateness_fill_factor_radius_predictions_4_features_100_draws_seed_28.csv"
 
 # Optional filters for the prediction database.
 # Leave as None to predict every row that has Teff, logg, Meta, L, and their errors.

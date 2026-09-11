@@ -34,8 +34,8 @@ except Exception:  # pragma: no cover
     stats = None
 
 
-INPUT_CSV = Path("Dataset_D_predictions/EB_oblateness_fill_factor_radius_predictions_4_features_3000_draws_seed_392.csv")
-OUTPUT_DIR = Path("Dataset_D_predictions/seed_392_radius_residuals")
+INPUT_CSV = Path("Dataset_D_predictions/EB_oblateness_fill_factor_radius_predictions_4_features_100_draws_seed_28.csv")
+OUTPUT_DIR = Path("Dataset_D_predictions/seed_28_radius_residuals")
 MIN_OBLATENESS = 0.0
 TOP_N = 30
 RAD_MIN = 0.500
@@ -143,9 +143,9 @@ def correlation_rows(df: pd.DataFrame, ycols: list[str], xcols: list[str]) -> pd
 
 def add_reference_line(ax, horizontal: bool = True, vertical: bool = False) -> None:
     if horizontal:
-        ax.axhline(0.0, linestyle="--", linewidth=1)
+        ax.axhline(0.0, linestyle="--", linewidth=1, color='red')
     if vertical:
-        ax.axvline(0.0, linestyle="--", linewidth=1)
+        ax.axvline(0.0, linestyle="--", linewidth=1, color='red')
 
 
 def scatter_with_fit(df: pd.DataFrame, x: str, y: str, xlabel: str, ylabel: str, title: str, path: Path, color_by: str | None = None) -> None:
@@ -158,18 +158,42 @@ def scatter_with_fit(df: pd.DataFrame, x: str, y: str, xlabel: str, ylabel: str,
         cbar = fig.colorbar(sc, ax=ax)
         cbar.set_label(color_by)
     else:
-        ax.scatter(sub[x], sub[y], s=28, alpha=0.8)
+        ax.scatter(sub[x], sub[y], s=28, alpha=0.8, color='black')
 
     add_reference_line(ax, horizontal=True)
 
     if len(sub) >= 3 and sub[x].nunique() > 1:
         slope, intercept = np.polyfit(sub[x].to_numpy(float), sub[y].to_numpy(float), deg=1)
         xx = np.linspace(sub[x].min(), sub[x].max(), 200)
-        ax.plot(xx, slope * xx + intercept, linewidth=1.5, label=f"linear fit: slope={slope:.3g}")
-        ax.legend(frameon=False)
+        ax.plot(xx, slope * xx + intercept, linewidth=1.5, color='red', label=f"linear fit: slope={slope:.3g}")
+        ax.legend(frameon=True, fontsize=12)
 
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
+    ax.set_title(title)
+    fig.tight_layout()
+    fig.savefig(path)
+    plt.close(fig)
+
+def scatter_with_errorbars_and_colormap(df: pd.DataFrame, x: str, y: str, yerr: str, color_by: str, xlabel: str, ylabel: str, cbar_label: str, title: str, path: Path) -> None:
+    sub_cols = [x, y, yerr, color_by]
+    sub = df[sub_cols].replace([np.inf, -np.inf], np.nan).dropna()
+
+    fig, ax = plt.subplots(figsize=(7.2, 5.0), dpi=160)
+
+    # Plot error bars behind the scatter dots
+    ax.errorbar(sub[x], sub[y], yerr=sub[yerr], fmt='none', ecolor='tab:blue', alpha=0.6, elinewidth=1.2, capsize=2, zorder=1)
+
+    # Plot the color-mapped scatter points
+    sc = ax.scatter(sub[x], sub[y], c=sub[color_by], cmap='viridis', s=28, edgecolors='0.3', linewidths=0.5, zorder=2)
+
+    cbar = fig.colorbar(sc, ax=ax)
+    cbar.set_label(cbar_label, fontsize=14)
+
+    add_reference_line(ax, horizontal=True)
+
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
     ax.set_title(title)
     fig.tight_layout()
     fig.savefig(path)
@@ -190,7 +214,7 @@ def binned_scatter(
     sub = df[[x, y]].replace([np.inf, -np.inf], np.nan).dropna().copy()
 
     fig, ax = plt.subplots(figsize=(7.2, 5.0), dpi=160)
-    ax.scatter(sub[x], sub[y], s=24, alpha=0.55, color="0.65", edgecolors="none", label="raw stars")
+    ax.scatter(sub[x], sub[y], s=24, alpha=0.55, color="black", edgecolors="none", label="Stars")
     add_reference_line(ax, horizontal=True)
 
     rows = []
@@ -227,7 +251,7 @@ def binned_scatter(
 
     binned = pd.DataFrame(rows)
     if not binned.empty:
-        label = f"bin {bin_stat} +/- 1 sigma"
+        label = f"Bin {bin_stat} +/- 1 sigma"
         ax.errorbar(
             binned["x_center"], binned["y_center"],
             yerr=binned["y_std"],
@@ -236,10 +260,10 @@ def binned_scatter(
             elinewidth=1.4, capsize=3,
             label=label,
         )
-        ax.legend(frameon=False)
+        ax.legend(frameon=True, fontsize=12)
 
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
     ax.set_title(title)
     fig.tight_layout()
     fig.savefig(path)
@@ -267,20 +291,20 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
     plots.mkdir(parents=True, exist_ok=True)
     plot_bin_tables = []
 
-    scatter_with_fit(
-        df, "log10_oblateness", "delta_R",
-        r"$\log_{10}(o)$", r"$\Delta R = R_{pred}-R_{true}$ [$R_\odot$]",
-        "Absolute radius residual vs oblateness",
-        plots / "01_deltaR_vs_log10_oblateness.png",
-        color_by="fill_factor",
-    )
+    # scatter_with_fit(
+    #     df, "log10_oblateness", "delta_R",
+    #     r"$\log_{10}(o)$", r"$\Delta R = R_{pred}-R_{true}$ [$R_\odot$]",
+    #     "Absolute radius residual vs oblateness",
+    #     plots / "01_deltaR_vs_log10_oblateness.png",
+    #     color_by="fill_factor",
+    # )
 
     plot_bin_tables.append(binned_scatter(
         df, "log10_oblateness", "frac_residual",
         r"$\log_{10}(o)$", r"$(R_{pred}-R_{true})/R_{true}$",
         "Fractional radius residual vs oblateness",
         plots / "02_fractional_residual_vs_log10_oblateness.png",
-        marker_color="black",
+        marker_color="blue",
         bin_stat="mean",
     ))
 
@@ -304,51 +328,65 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
         color_by="fill_factor",
     )
 
-    scatter_with_fit(
-        df, "log10_oblateness", "z_R",
-        r"$\log_{10}(o)$", r"$z_R$ using rad_sigma",
-        "Normalized radius residual vs oblateness",
-        plots / "03_zR_vs_log10_oblateness.png",
-        color_by="fill_factor",
+    scatter_with_errorbars_and_colormap(
+        df,
+        x="log10_oblateness",
+        y="frac_residual",
+        yerr="sigma_frac_residual",
+        color_by="R",
+        xlabel=r"$\log_{10}(o)$",
+        ylabel=r"$(R_{pred}-R_{true})/R_{true}$",
+        cbar_label=r"True EB radius ($R_\odot$)",
+        title="Fractional radius residual vs oblateness",
+        path=plots / "02d_fractional_residual_vs_log10_oblateness_colored_by_R.png"
     )
 
-    if "z_R_q68" in df.columns and df["z_R_q68"].notna().sum() >= 3:
-        scatter_with_fit(
-            df, "log10_oblateness", "z_R_q68",
-            r"$\log_{10}(o)$", r"$z_R$ using $(p84-p16)/2$",
-            "Normalized residual from 68% predictive interval vs oblateness",
-            plots / "03b_zR_q68_vs_log10_oblateness.png",
-            color_by="fill_factor",
-        )
+    # scatter_with_fit(
+    #     df, "log10_oblateness", "z_R",
+    #     r"$\log_{10}(o)$", r"$z_R$ using rad_sigma",
+    #     "Normalized radius residual vs oblateness",
+    #     plots / "03_zR_vs_log10_oblateness.png",
+    #     color_by="fill_factor",
+    # )
 
-    if "fill_factor" in df.columns and df["fill_factor"].notna().sum() >= 3:
-        scatter_with_fit(
-            df, "fill_factor", "frac_residual",
-            "Roche-lobe filling factor", r"$(R_{pred}-R_{true})/R_{true}$",
-            "Fractional radius residual vs filling factor",
-            plots / "04_fractional_residual_vs_fill_factor.png",
-            color_by="log10_oblateness",
-        )
+    # if "z_R_q68" in df.columns and df["z_R_q68"].notna().sum() >= 3:
+    #     scatter_with_fit(
+    #         df, "log10_oblateness", "z_R_q68",
+    #         r"$\log_{10}(o)$", r"$z_R$ using $(p84-p16)/2$",
+    #         "Normalized residual from 68% predictive interval vs oblateness",
+    #         plots / "03b_zR_q68_vs_log10_oblateness.png",
+    #         color_by="fill_factor",
+    #     )
 
-        scatter_with_fit(
-            df, "log10_fill_factor", "frac_residual",
-            r"$\log_{10}$(filling factor)", r"$(R_{pred}-R_{true})/R_{true}$",
-            "Fractional radius residual vs log filling factor",
-            plots / "05_fractional_residual_vs_log10_fill_factor.png",
-            color_by="log10_oblateness",
-        )
+    # if "fill_factor" in df.columns and df["fill_factor"].notna().sum() >= 3:
+    #     scatter_with_fit(
+    #         df, "fill_factor", "frac_residual",
+    #         "Roche-lobe filling factor", r"$(R_{pred}-R_{true})/R_{true}$",
+    #         "Fractional radius residual vs filling factor",
+    #         plots / "04_fractional_residual_vs_fill_factor.png",
+    #         color_by="log10_oblateness",
+    #     )
 
-    # Predicted vs true radius.
+    #     scatter_with_fit(
+    #         df, "log10_fill_factor", "frac_residual",
+    #         r"$\log_{10}$(filling factor)", r"$(R_{pred}-R_{true})/R_{true}$",
+    #         "Fractional radius residual vs log filling factor",
+    #         plots / "05_fractional_residual_vs_log10_fill_factor.png",
+    #         color_by="log10_oblateness",
+    #     )
+
+    # Predicted vs true radius (plot 07).
     sub = df[["R", "rad_pred", "rad_sigma"]].replace([np.inf, -np.inf], np.nan).dropna()
     fig, ax = plt.subplots(figsize=(6.0, 6.0), dpi=160)
-    ax.scatter(sub["R"], sub["rad_pred"], s=28, alpha=0.8)
+    ax.scatter(sub["R"], sub["rad_pred"], s=28, alpha=0.8, color='black', label='Predictions')
     lo = min(sub["R"].min(), sub["rad_pred"].min())
     hi = max(sub["R"].max(), sub["rad_pred"].max())
-    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1)
-    ax.set_xlabel(r"True EB radius [$R_\odot$]")
-    ax.set_ylabel(r"Predicted radius [$R_\odot$]")
+    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1, color='red', label='1:1 Line')
+    ax.set_xlabel(r"True EB radius [$R_\odot$]", fontsize=14)
+    ax.set_ylabel(r"Predicted radius [$R_\odot$]", fontsize=14)
     ax.set_title("Predicted vs true EB radii")
     ax.set_aspect("equal", adjustable="box")
+    ax.legend(fontsize=12, frameon=True)
     fig.tight_layout()
     fig.savefig(plots / "07_rad_pred_vs_rad_true.png")
     plt.close(fig)
@@ -362,6 +400,9 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
     )
 
     for i, xcol in enumerate(["Teff", "Meta", "logg", "L", "log10_L"], start=9):
+        if i == 12:
+            continue
+
         if xcol in df.columns and df[xcol].notna().sum() >= 3:
             xlabel = {
                 "Teff": r"$T_{eff}$ [K]",
@@ -382,9 +423,9 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
     sub = df[["frac_residual"]].replace([np.inf, -np.inf], np.nan).dropna()
     fig, ax = plt.subplots(figsize=(7.2, 4.5), dpi=160)
     ax.hist(sub["frac_residual"], bins=30, alpha=0.85)
-    ax.axvline(0.0, linestyle="--", linewidth=1)
-    ax.set_xlabel(r"$(R_{pred}-R_{true})/R_{true}$")
-    ax.set_ylabel("Number of EB components")
+    ax.axvline(0.0, linestyle="--", linewidth=1, color='red')
+    ax.set_xlabel(r"$(R_{pred}-R_{true})/R_{true}$", fontsize=14)
+    ax.set_ylabel("Number of EB components", fontsize=14)
     ax.set_title("Distribution of fractional radius residuals")
     fig.tight_layout()
     fig.savefig(plots / "13_hist_fractional_residuals.png")
@@ -401,7 +442,7 @@ def make_pretrim_plots(df: pd.DataFrame, outdir: Path) -> None:
         r"$\log_{10}(o)$", r"$(R_{pred}-R_{true})/R_{true}$",
         "Fractional radius residual vs oblateness before radius cut",
         plots / "02_fractional_residual_vs_log10_oblateness_before_rad_cut.png",
-        marker_color="black",
+        marker_color="blue",
         bin_stat="mean",
     ))
 
@@ -428,33 +469,47 @@ def make_pretrim_plots(df: pd.DataFrame, outdir: Path) -> None:
         color_by="fill_factor",
     )
 
-    if "fill_factor" in df.columns and df["fill_factor"].notna().sum() >= 3:
-        scatter_with_fit(
-            df, "fill_factor", "frac_residual",
-            "Roche-lobe filling factor", r"$(R_{pred}-R_{true})/R_{true}$",
-            "Fractional radius residual vs filling factor before radius cut",
-            plots / "04_fractional_residual_vs_fill_factor_before_rad_cut.png",
-            color_by="log10_oblateness",
-        )
+    scatter_with_errorbars_and_colormap(
+        df,
+        x="log10_oblateness",
+        y="frac_residual",
+        yerr="sigma_frac_residual",
+        color_by="R",
+        xlabel=r"$\log_{10}(o)$",
+        ylabel=r"$(R_{pred}-R_{true})/R_{true}$",
+        cbar_label=r"True EB radius ($R_\odot$)",
+        title="Fractional radius residual vs oblateness before radius cut",
+        path=plots / "02d_fractional_residual_vs_log10_oblateness_colored_by_R_before_rad_cut.png"
+    )
 
-        scatter_with_fit(
-            df, "log10_fill_factor", "frac_residual",
-            r"$\log_{10}$(filling factor)", r"$(R_{pred}-R_{true})/R_{true}$",
-            "Fractional radius residual vs log filling factor before radius cut",
-            plots / "05_fractional_residual_vs_log10_fill_factor_before_rad_cut.png",
-            color_by="log10_oblateness",
-        )
+    # if "fill_factor" in df.columns and df["fill_factor"].notna().sum() >= 3:
+    #     scatter_with_fit(
+    #         df, "fill_factor", "frac_residual",
+    #         "Roche-lobe filling factor", r"$(R_{pred}-R_{true})/R_{true}$",
+    #         "Fractional radius residual vs filling factor before radius cut",
+    #         plots / "04_fractional_residual_vs_fill_factor_before_rad_cut.png",
+    #         color_by="log10_oblateness",
+    #     )
+
+    #     scatter_with_fit(
+    #         df, "log10_fill_factor", "frac_residual",
+    #         r"$\log_{10}$(filling factor)", r"$(R_{pred}-R_{true})/R_{true}$",
+    #         "Fractional radius residual vs log filling factor before radius cut",
+    #         plots / "05_fractional_residual_vs_log10_fill_factor_before_rad_cut.png",
+    #         color_by="log10_oblateness",
+    #     )
 
     sub = df[["R", "rad_pred", "rad_sigma"]].replace([np.inf, -np.inf], np.nan).dropna()
     fig, ax = plt.subplots(figsize=(6.0, 6.0), dpi=160)
-    ax.scatter(sub["R"], sub["rad_pred"], s=28, alpha=0.8)
+    ax.scatter(sub["R"], sub["rad_pred"], s=28, alpha=0.8, color='black', label='Predictions')
     lo = min(sub["R"].min(), sub["rad_pred"].min())
     hi = max(sub["R"].max(), sub["rad_pred"].max())
-    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1)
-    ax.set_xlabel(r"True EB radius [$R_\odot$]")
-    ax.set_ylabel(r"Predicted radius [$R_\odot$]")
+    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1, color='red')
+    ax.set_xlabel(r"True EB radius [$R_\odot$]", fontsize=14)
+    ax.set_ylabel(r"Predicted radius [$R_\odot$]", fontsize=14)
     ax.set_title("Predicted vs true EB radii before radius cut")
     ax.set_aspect("equal", adjustable="box")
+    ax.legend(fontsize=12, frameon=True)
     fig.tight_layout()
     fig.savefig(plots / "07_rad_pred_vs_rad_true_before_rad_cut.png")
     plt.close(fig)
@@ -468,6 +523,9 @@ def make_pretrim_plots(df: pd.DataFrame, outdir: Path) -> None:
     )
 
     for i, xcol in enumerate(["Teff", "Meta", "logg", "L", "log10_L"], start=9):
+        if i == 12:
+            continue
+
         if xcol in df.columns and df[xcol].notna().sum() >= 3:
             xlabel = {
                 "Teff": r"$T_{eff}$ [K]",

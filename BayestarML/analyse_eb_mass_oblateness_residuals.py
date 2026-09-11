@@ -145,9 +145,9 @@ def correlation_rows(df: pd.DataFrame, ycols: list[str], xcols: list[str]) -> pd
 
 def add_reference_line(ax, horizontal: bool = True, vertical: bool = False) -> None:
     if horizontal:
-        ax.axhline(0.0, linestyle="--", linewidth=1)
+        ax.axhline(0.0, linestyle="--", linewidth=1, color='red')
     if vertical:
-        ax.axvline(0.0, linestyle="--", linewidth=1)
+        ax.axvline(0.0, linestyle="--", linewidth=1, color='red')
 
 
 def scatter_with_fit(df: pd.DataFrame, x: str, y: str, xlabel: str, ylabel: str, title: str, path: Path, color_by: str | None = None) -> None:
@@ -160,23 +160,46 @@ def scatter_with_fit(df: pd.DataFrame, x: str, y: str, xlabel: str, ylabel: str,
         cbar = fig.colorbar(sc, ax=ax)
         cbar.set_label(color_by)
     else:
-        ax.scatter(sub[x], sub[y], s=28, alpha=0.8)
+        ax.scatter(sub[x], sub[y], s=28, alpha=0.8, color='black')
 
     add_reference_line(ax, horizontal=True)
 
     if len(sub) >= 3 and sub[x].nunique() > 1:
         slope, intercept = np.polyfit(sub[x].to_numpy(float), sub[y].to_numpy(float), deg=1)
         xx = np.linspace(sub[x].min(), sub[x].max(), 200)
-        ax.plot(xx, slope * xx + intercept, linewidth=1.5, label=f"linear fit: slope={slope:.3g}")
-        ax.legend(frameon=False)
+        ax.plot(xx, slope * xx + intercept, linewidth=1.5, color='red', label=f"linear fit: slope={slope:.3g}")
+        ax.legend(frameon=True, fontsize=12)
 
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
     ax.set_title(title)
     fig.tight_layout()
     fig.savefig(path)
     plt.close(fig)
 
+def scatter_with_errorbars_and_colormap(df: pd.DataFrame, x: str, y: str, yerr: str, color_by: str, xlabel: str, ylabel: str, cbar_label: str, title: str, path: Path) -> None:
+    sub_cols = [x, y, yerr, color_by]
+    sub = df[sub_cols].replace([np.inf, -np.inf], np.nan).dropna()
+
+    fig, ax = plt.subplots(figsize=(7.2, 5.0), dpi=160)
+
+    # Plot error bars behind the scatter dots
+    ax.errorbar(sub[x], sub[y], yerr=sub[yerr], fmt='none', ecolor='tab:blue', alpha=0.6, elinewidth=1.2, capsize=2, zorder=1)
+
+    # Plot the color-mapped scatter points
+    sc = ax.scatter(sub[x], sub[y], c=sub[color_by], cmap='viridis', s=28, edgecolors='0.3', linewidths=0.5, zorder=2)
+
+    cbar = fig.colorbar(sc, ax=ax)
+    cbar.set_label(cbar_label, fontsize=14)
+
+    add_reference_line(ax, horizontal=True)
+
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
+    ax.set_title(title)
+    fig.tight_layout()
+    fig.savefig(path)
+    plt.close(fig)
 
 def binned_scatter(
     df: pd.DataFrame,
@@ -192,7 +215,7 @@ def binned_scatter(
     sub = df[[x, y]].replace([np.inf, -np.inf], np.nan).dropna().copy()
 
     fig, ax = plt.subplots(figsize=(7.2, 5.0), dpi=160)
-    ax.scatter(sub[x], sub[y], s=24, alpha=0.55, color="0.65", edgecolors="none", label="raw stars")
+    ax.scatter(sub[x], sub[y], s=24, alpha=0.55, color="black", edgecolors="none", label="Stars")
     add_reference_line(ax, horizontal=True)
 
     rows = []
@@ -229,7 +252,7 @@ def binned_scatter(
 
     binned = pd.DataFrame(rows)
     if not binned.empty:
-        label = f"bin {bin_stat} +/- 1 sigma"
+        label = f"Bin {bin_stat} +/- 1 sigma"
         ax.errorbar(
             binned["x_center"], binned["y_center"],
             yerr=binned["y_std"],
@@ -238,10 +261,10 @@ def binned_scatter(
             elinewidth=1.4, capsize=3,
             label=label,
         )
-        ax.legend(frameon=False)
+        ax.legend(frameon=True, fontsize=12)
 
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
     ax.set_title(title)
     fig.tight_layout()
     fig.savefig(path)
@@ -269,20 +292,20 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
     plots.mkdir(parents=True, exist_ok=True)
     plot_bin_tables = []
 
-    scatter_with_fit(
-        df, "log10_oblateness", "delta_M",
-        r"$\log_{10}(o)$", r"$\Delta M = M_{pred}-M_{true}$ [$M_\odot$]",
-        "Absolute mass residual vs oblateness",
-        plots / "01_deltaM_vs_log10_oblateness.png",
-        color_by="fill_factor",
-    )
+    # scatter_with_fit(
+    #     df, "log10_oblateness", "delta_M",
+    #     r"$\log_{10}(o)$", r"$\Delta M = M_{pred}-M_{true}$ [$M_\odot$]",
+    #     "Absolute mass residual vs oblateness",
+    #     plots / "01_deltaM_vs_log10_oblateness.png",
+    #     color_by="fill_factor",
+    # )
 
     plot_bin_tables.append(binned_scatter(
         df, "log10_oblateness", "frac_residual",
         r"$\log_{10}(o)$", r"$(M_{pred}-M_{true})/M_{true}$",
         "Fractional mass residual vs oblateness",
         plots / "02_fractional_residual_vs_log10_oblateness.png",
-        marker_color="black",
+        marker_color="blue",
         bin_stat="mean",
     ))
 
@@ -306,51 +329,65 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
         color_by="fill_factor",
     )
 
-    scatter_with_fit(
-        df, "log10_oblateness", "z_M",
-        r"$\log_{10}(o)$", r"$z_M$ using mass_sigma",
-        "Normalized mass residual vs oblateness",
-        plots / "03_zM_vs_log10_oblateness.png",
-        color_by="fill_factor",
+    scatter_with_errorbars_and_colormap(
+        df,
+        x="log10_oblateness",
+        y="frac_residual",
+        yerr="sigma_frac_residual",
+        color_by="M",
+        xlabel=r"$\log_{10}(o)$",
+        ylabel=r"$(M_{pred}-M_{true})/M_{true}$",
+        cbar_label=r"True EB mass ($M_\odot$)",
+        title="Fractional mass residual vs oblateness",
+        path=plots / "02d_fractional_residual_vs_log10_oblateness_colored_by_M.png"
     )
 
-    if "z_M_q68" in df.columns and df["z_M_q68"].notna().sum() >= 3:
-        scatter_with_fit(
-            df, "log10_oblateness", "z_M_q68",
-            r"$\log_{10}(o)$", r"$z_M$ using $(p84-p16)/2$",
-            "Normalized residual from 68% predictive interval vs oblateness",
-            plots / "03b_zM_q68_vs_log10_oblateness.png",
-            color_by="fill_factor",
-        )
+    # scatter_with_fit(
+    #     df, "log10_oblateness", "z_M",
+    #     r"$\log_{10}(o)$", r"$z_M$ using mass_sigma",
+    #     "Normalized mass residual vs oblateness",
+    #     plots / "03_zM_vs_log10_oblateness.png",
+    #     color_by="fill_factor",
+    # )
 
-    if "fill_factor" in df.columns and df["fill_factor"].notna().sum() >= 3:
-        scatter_with_fit(
-            df, "fill_factor", "frac_residual",
-            "Roche-lobe filling factor", r"$(M_{pred}-M_{true})/M_{true}$",
-            "Fractional mass residual vs filling factor",
-            plots / "04_fractional_residual_vs_fill_factor.png",
-            color_by="log10_oblateness",
-        )
+    # if "z_M_q68" in df.columns and df["z_M_q68"].notna().sum() >= 3:
+    #     scatter_with_fit(
+    #         df, "log10_oblateness", "z_M_q68",
+    #         r"$\log_{10}(o)$", r"$z_M$ using $(p84-p16)/2$",
+    #         "Normalized residual from 68% predictive interval vs oblateness",
+    #         plots / "03b_zM_q68_vs_log10_oblateness.png",
+    #         color_by="fill_factor",
+    #     )
 
-        scatter_with_fit(
-            df, "log10_fill_factor", "frac_residual",
-            r"$\log_{10}$(filling factor)", r"$(M_{pred}-M_{true})/M_{true}$",
-            "Fractional mass residual vs log filling factor",
-            plots / "05_fractional_residual_vs_log10_fill_factor.png",
-            color_by="log10_oblateness",
-        )
+    # if "fill_factor" in df.columns and df["fill_factor"].notna().sum() >= 3:
+    #     scatter_with_fit(
+    #         df, "fill_factor", "frac_residual",
+    #         "Roche-lobe filling factor", r"$(M_{pred}-M_{true})/M_{true}$",
+    #         "Fractional mass residual vs filling factor",
+    #         plots / "04_fractional_residual_vs_fill_factor.png",
+    #         color_by="log10_oblateness",
+    #     )
+
+    #     scatter_with_fit(
+    #         df, "log10_fill_factor", "frac_residual",
+    #         r"$\log_{10}$(filling factor)", r"$(M_{pred}-M_{true})/M_{true}$",
+    #         "Fractional mass residual vs log filling factor",
+    #         plots / "05_fractional_residual_vs_log10_fill_factor.png",
+    #         color_by="log10_oblateness",
+    #     )
 
     # Predicted vs true mass.
     sub = df[["M", "mass_pred", "mass_sigma"]].replace([np.inf, -np.inf], np.nan).dropna()
     fig, ax = plt.subplots(figsize=(6.0, 6.0), dpi=160)
-    ax.scatter(sub["M"], sub["mass_pred"], s=28, alpha=0.8)
+    ax.scatter(sub["M"], sub["mass_pred"], s=28, alpha=0.8, color='black', label='Predictions')
     lo = min(sub["M"].min(), sub["mass_pred"].min())
     hi = max(sub["M"].max(), sub["mass_pred"].max())
-    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1)
-    ax.set_xlabel(r"True EB mass [$M_\odot$]")
-    ax.set_ylabel(r"Predicted mass [$M_\odot$]")
+    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1, color='red', label='1:1 Line')
+    ax.set_xlabel(r"True EB mass [$M_\odot$]", fontsize=14)
+    ax.set_ylabel(r"Predicted mass [$M_\odot$]", fontsize=14)
     ax.set_title("Predicted vs true EB masses")
     ax.set_aspect("equal", adjustable="box")
+    ax.legend(fontsize=12, frameon=True)
     fig.tight_layout()
     fig.savefig(plots / "07_mass_pred_vs_mass_true.png")
     plt.close(fig)
@@ -364,6 +401,9 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
     )
 
     for i, xcol in enumerate(["Teff", "Meta", "logg", "L", "log10_L"], start=9):
+        if i == 12:
+            continue
+
         if xcol in df.columns and df[xcol].notna().sum() >= 3:
             xlabel = {
                 "Teff": r"$T_{eff}$ [K]",
@@ -384,9 +424,9 @@ def make_plots(df: pd.DataFrame, outdir: Path) -> None:
     sub = df[["frac_residual"]].replace([np.inf, -np.inf], np.nan).dropna()
     fig, ax = plt.subplots(figsize=(7.2, 4.5), dpi=160)
     ax.hist(sub["frac_residual"], bins=30, alpha=0.85)
-    ax.axvline(0.0, linestyle="--", linewidth=1)
-    ax.set_xlabel(r"$(M_{pred}-M_{true})/M_{true}$")
-    ax.set_ylabel("Number of EB components")
+    ax.axvline(0.0, linestyle="--", linewidth=1, color = 'red')
+    ax.set_xlabel(r"$(M_{pred}-M_{true})/M_{true}$", fontsize = 14)
+    ax.set_ylabel("Number of EB components", fontsize=14)
     ax.set_title("Distribution of fractional mass residuals")
     fig.tight_layout()
     fig.savefig(plots / "13_hist_fractional_residuals.png")
@@ -430,33 +470,47 @@ def make_pretrim_plots(df: pd.DataFrame, outdir: Path) -> None:
         color_by="fill_factor",
     )
 
-    if "fill_factor" in df.columns and df["fill_factor"].notna().sum() >= 3:
-        scatter_with_fit(
-            df, "fill_factor", "frac_residual",
-            "Roche-lobe filling factor", r"$(M_{pred}-M_{true})/M_{true}$",
-            "Fractional mass residual vs filling factor before mass cut",
-            plots / "04_fractional_residual_vs_fill_factor_before_mass_cut.png",
-            color_by="log10_oblateness",
-        )
+    scatter_with_errorbars_and_colormap(
+        df,
+        x="log10_oblateness",
+        y="frac_residual",
+        yerr="sigma_frac_residual",
+        color_by="M",
+        xlabel=r"$\log_{10}(o)$",
+        ylabel=r"$(M_{pred}-M_{true})/M_{true}$",
+        cbar_label=r"True EB mass ($M_\odot$)",
+        title="Fractional mass residual vs oblateness before mass cut",
+        path=plots / "02d_fractional_residual_vs_log10_oblateness_colored_by_M_before_mass_cut.png"
+    )
 
-        scatter_with_fit(
-            df, "log10_fill_factor", "frac_residual",
-            r"$\log_{10}$(filling factor)", r"$(M_{pred}-M_{true})/M_{true}$",
-            "Fractional mass residual vs log filling factor before mass cut",
-            plots / "05_fractional_residual_vs_log10_fill_factor_before_mass_cut.png",
-            color_by="log10_oblateness",
-        )
+    # if "fill_factor" in df.columns and df["fill_factor"].notna().sum() >= 3:
+    #     scatter_with_fit(
+    #         df, "fill_factor", "frac_residual",
+    #         "Roche-lobe filling factor", r"$(M_{pred}-M_{true})/M_{true}$",
+    #         "Fractional mass residual vs filling factor before mass cut",
+    #         plots / "04_fractional_residual_vs_fill_factor_before_mass_cut.png",
+    #         color_by="log10_oblateness",
+    #     )
+
+    #     scatter_with_fit(
+    #         df, "log10_fill_factor", "frac_residual",
+    #         r"$\log_{10}$(filling factor)", r"$(M_{pred}-M_{true})/M_{true}$",
+    #         "Fractional mass residual vs log filling factor before mass cut",
+    #         plots / "05_fractional_residual_vs_log10_fill_factor_before_mass_cut.png",
+    #         color_by="log10_oblateness",
+    #     )
 
     sub = df[["M", "mass_pred", "mass_sigma"]].replace([np.inf, -np.inf], np.nan).dropna()
     fig, ax = plt.subplots(figsize=(6.0, 6.0), dpi=160)
-    ax.scatter(sub["M"], sub["mass_pred"], s=28, alpha=0.8)
+    ax.scatter(sub["M"], sub["mass_pred"], s=28, alpha=0.8, color='black', label='Predictions')
     lo = min(sub["M"].min(), sub["mass_pred"].min())
     hi = max(sub["M"].max(), sub["mass_pred"].max())
-    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1)
-    ax.set_xlabel(r"True EB mass [$M_\odot$]")
-    ax.set_ylabel(r"Predicted mass [$M_\odot$]")
+    ax.plot([lo, hi], [lo, hi], linestyle="--", linewidth=1, color='red', label='1:1 Line')
+    ax.set_xlabel(r"True EB mass [$M_\odot$]", fontsize=14)
+    ax.set_ylabel(r"Predicted mass [$M_\odot$]", fontsize=14)
     ax.set_title("Predicted vs true EB masses before mass cut")
     ax.set_aspect("equal", adjustable="box")
+    ax.legend(fontsize=12, frameon=True)
     fig.tight_layout()
     fig.savefig(plots / "07_mass_pred_vs_mass_true_before_mass_cut.png")
     plt.close(fig)
@@ -470,6 +524,9 @@ def make_pretrim_plots(df: pd.DataFrame, outdir: Path) -> None:
     )
 
     for i, xcol in enumerate(["Teff", "Meta", "logg", "L", "log10_L"], start=9):
+        if i == 12: 
+            continue
+
         if xcol in df.columns and df[xcol].notna().sum() >= 3:
             xlabel = {
                 "Teff": r"$T_{eff}$ [K]",
