@@ -18,7 +18,7 @@ from functools import partial
 import os
 from numpy.linalg import solve
 
-RANDOM_SEED = 5732 
+RANDOM_SEED = 5902 
 
 def sample_latent_given_obs(x_obs, sigma_obs_diag, chol_s, n_param):
     """
@@ -422,7 +422,7 @@ def posterior_predictive_GP(
     n_param, target,
     var_cols_x=(0,1),        # columns of X used in variance GP
     var_cols_xerr=(0,1),     # columns of X_err used in variance GP
-    random_seed=42,
+    random_seed=98,
 ):
     """
     Posterior predictive for sparse fully heteroscedastic GP

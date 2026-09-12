@@ -34,8 +34,8 @@ except Exception:  # pragma: no cover
     stats = None
 
 
-INPUT_CSV = Path("Dataset_D_predictions/EB_oblateness_fill_factor_radius_predictions_4_features_100_draws_seed_28.csv")
-OUTPUT_DIR = Path("Dataset_D_predictions/seed_28_radius_residuals")
+INPUT_CSV = Path("Dataset_D_predictions/EB_oblateness_fill_factor_radius_predictions_4_features_3000_draws_seed_2805.csv")
+OUTPUT_DIR = Path("Dataset_D_predictions/seed_2805_radius_residuals")
 MIN_OBLATENESS = 0.0
 TOP_N = 30
 RAD_MIN = 0.500
