@@ -22,8 +22,12 @@ import time
 from dataclasses import asdict, dataclass
 
 import matplotlib.pyplot as plt
+import numpy as np
 import xarray as xr
 
+from constants import MU, SIGMA
+from preprocess import return_train_test, TARGET_COLUMNS
+from utils import get_dataset
 import analyse_eb_mass_oblateness_residuals
 import analyse_eb_radius_oblateness_residuals
 import exec_example_prediction
@@ -34,8 +38,8 @@ import exec_example_train
 #######################################################################################
 TARGET_VAR = "radius"   # "radius" or "mass"
 
-SEED = 233              # MCMC seed for GP, HBNN and BART; it is the "seed_N" in every file name
-SPLIT_SEED = 233       # train/test split seed (seed 239 used 4159; seeds 2805 and 2695 used 5732).
+SEED = 2334              # MCMC seed for GP, HBNN and BART; it is the "seed_N" in every file name
+SPLIT_SEED = 2334       # train/test split seed (seed 239 used 4159; seeds 2805 and 2695 used 5732).
                         # Not part of the file names, so it is stored in the GP/HBNN traces and
                         # checked before they are reused
 DRAWS = 20            # draws per chain (and as many tuning steps) for GP, HBNN and BART
@@ -180,6 +184,22 @@ def preflight(cfg, steps):
             check_trace_split(path, cfg.split_seed)
 
 
+def set_target_normalisation(cfg):
+    """
+    Set the target's mean/std (constants.MU / SIGMA, used to turn predictions back into solar
+    units) to those of this run's training split, so they always match SPLIT_SEED.
+    Same calculation as in preprocess.return_train_test.
+    """
+    df = get_dataset(cfg.database, "MS")
+    df = df[df["mode"] == "A"]
+    _, _, Y_train, _ = return_train_test(df, normalised=False, random_state=cfg.split_seed)
+    y = Y_train[TARGET_COLUMNS[cfg.target][0]]
+    MU[cfg.target] = np.mean(y)
+    SIGMA[cfg.target] = np.std(y)
+    print(f"Target normalisation from the training split (SPLIT_SEED = {cfg.split_seed}): "
+          f"{cfg.target} mean = {MU[cfg.target]}, std = {SIGMA[cfg.target]}")
+
+
 def run_analysis(cfg):
     analysis = (analyse_eb_radius_oblateness_residuals if cfg.target == "radius"
                 else analyse_eb_mass_oblateness_residuals)
@@ -210,6 +230,7 @@ def main(only=None):
     print("Steps:", ", ".join(steps))
 
     preflight(cfg, steps)
+    set_target_normalisation(cfg)
 
     actions = {
         "train_gp": lambda: exec_example_train.train_and_evaluate(cfg, "GP"),
