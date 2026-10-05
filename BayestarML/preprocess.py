@@ -14,7 +14,7 @@ from constants import MU, SIGMA
 from utils import get_dataset
 from sklearn.model_selection import train_test_split
 
-RANDOM_SEED = 5732 
+RANDOM_SEED = 4159 
 
 
 def normalise_val(x: float | None, key: str) -> float:
