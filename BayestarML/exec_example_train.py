@@ -50,6 +50,13 @@ def train_and_evaluate(cfg, model_name):
     print('Test stars:', len(x_test))
     print(f'Active Model: {model_name}')
     print(f'Target Variable: {cfg.target}')
+    print(f'Seed: {cfg.seed}')
+    print(f'Train/test split seed: {cfg.split_seed}')
+    if model_name == "HBNN":
+        print(f'Nodes per hidden layer: {cfg.hbnn_nodes}')
+    elif model_name == "GP":
+        print(f'Inducing points (mean GP / variance GP): {cfg.gp_n_inducing_mean} / {cfg.gp_n_inducing_var}')
+    print(f'Draws: {cfg.draws}, chains: {cfg.chains}')
 
     model_string = cfg.model_string(model_name)
     trace_path = cfg.trace_path(model_name)

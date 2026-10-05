@@ -14,6 +14,7 @@ Created on Tue Jul 15 15:52:30 2025
 
 from preprocess import return_train_test, prepare_pred4, denormalise_val, prepare_pred3
 from utils import get_dataset, mard, mrd
+from sklearn.metrics import mean_absolute_error
 from models import bart, gp
 from pred_sampling import sample_pred_BART, posterior_predictive_GP, sample_post_pred_HBNN_para
 from bhs import run_stack
@@ -82,6 +83,15 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
             plt.savefig(output_base + f'_filtered_{percentile}_residual.png', dpi=300, bbox_inches='tight')
         plt.show() if show else plt.close()
 
+def print_model_metrics(y_true, preds):
+    """Print MARD, MRD and MAE of each model's mean prediction. preds: {name: draws (S, N)}."""
+    y_true = np.asarray(y_true, dtype=float)
+    for name, pred in preds.items():
+        pred_mean = pred.mean(0)
+        print(f'MARD {name}:', mard(y_true, pred_mean))
+        print(f'MRD {name}:', mrd(y_true, pred_mean))
+        print(f'MAE {name}:', mean_absolute_error(y_true, pred_mean))
+
 def predict4(X, X_er, cfg, test=False):
     """
     Train BART, load the trained GP and HBNN traces, and stack the three models with BHS
@@ -143,9 +153,7 @@ def predict4(X, X_er, cfg, test=False):
     if test == True:
         unorm_y = denormalise_val(y_test, cfg.target)
 
-        for name, pred in [('BART', bart4_pred), ('GP', gp4_pred), ('HBNN', hbnn4_pred), ('BHS', bhs_pred)]:
-            print(f'MARD {name}:', mard(unorm_y, pred.mean(0)))
-            print(f'MRD {name}:', mrd(unorm_y, pred.mean(0)))
+        print_model_metrics(unorm_y, {'BART': bart4_pred, 'GP': gp4_pred, 'HBNN': hbnn4_pred, 'BHS': bhs_pred})
         
         plot_mass_diagnostics(unorm_y, bart4_pred, 'BART',
                               output_base=cfg.holdout_plot_base('BART'), show=cfg.show_plots)

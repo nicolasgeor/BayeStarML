@@ -14,8 +14,8 @@ import os
 import numpy as np
 import pandas as pd
 
-from preprocess import return_norm
-from predict import predict4
+from preprocess import return_norm, TARGET_COLUMNS
+from predict import predict4, print_model_metrics
 from utils import get_dataset
 
 
@@ -111,7 +111,7 @@ def run_eb_predictions(cfg):
     prediction_rows, X, X_er = prepare_database_d_predictions(cfg)
 
     print(f"Predicting {cfg.target} for {len(prediction_rows)} star(s)...")
-    _base_preds, bhs_pred, _bhs_w = predict4(X, X_er, cfg, test=False)
+    base_preds, bhs_pred, _bhs_w = predict4(X, X_er, cfg, test=False)
 
     prediction_table = build_prediction_table(prediction_rows, bhs_pred, cfg.target)
     os.makedirs(os.path.dirname(cfg.eb_predictions_path), exist_ok=True)
@@ -120,6 +120,15 @@ def run_eb_predictions(cfg):
     prefix = "rad" if cfg.target == "radius" else "mass"
     print(f"Saved predictions to {cfg.eb_predictions_path}")
     print(prediction_table[["original_row", "SIMBAD_ID", f"{prefix}_pred", f"{prefix}_sigma"]].head().to_string(index=False))
+
+    # Results of all 4 models against the catalogue values of the predicted stars
+    true_col = TARGET_COLUMNS[cfg.target][0]
+    y_true = pd.to_numeric(prediction_rows[true_col], errors="coerce").to_numpy()
+    has_true = np.isfinite(y_true)
+    print(f"\nResults of the 4 models for the {has_true.sum()} predicted star(s) with a catalogue {cfg.target} ({true_col}):")
+    bart_pred, gp_pred, hbnn_pred = base_preds
+    print_model_metrics(y_true[has_true], {name: pred[:, has_true] for name, pred in
+                                           [("BART", bart_pred), ("GP", gp_pred), ("HBNN", hbnn_pred), ("BHS", bhs_pred)]})
     print("\n--- Prediction Complete ---")
 
 
