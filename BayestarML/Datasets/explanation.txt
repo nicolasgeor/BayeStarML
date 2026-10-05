@@ -10,6 +10,16 @@ database_D_old_format.txt: same as database A, but with computed oblateness and 
 
 database_D_old_format_extended.txt: same as database_D_old_format.txt but with basically all original stars, not deleting special ones. 
 
+database_D_v1.txt same as database_D_old_format.txt but deleting LV Her A and B and LL Aqr A and B due to Maxted's petition
+
+database_D_v2.txt same as database_D_v1.txt but deleting outlier KIC9540226
+
+
+
+
+
+
+
 | SIMBAD_ID      | Changed existing values from database_A_old_format to database_D_old_format                                                                                                                            |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `KIC9641031_A` | `Meta: NA → -0.437`; `eMeta1: NA → 0.012`; `eMeta2: NA → 0.012`                                                                                         |

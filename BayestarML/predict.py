@@ -1,6 +1,6 @@
 #######################################################################################
-# NOW, THIS IS BUILT FOR TRAINING ON RADIUS. FOR MASS, VARIABLE NAMES NEED TO BE CHANGED
-# BY COMMENTING/UNCOMMENTING
+# predict4 (4 features, Dataset D) handles both mass and radius; its settings and file
+# names come from run_pipeline.py. predictNAN and predict3 are older radius-only code.
 #######################################################################################
 
 
@@ -26,7 +26,7 @@ import os
 # from sklearn.metrics import mean_absolute_error
 # from utils import find_pointwise_loo
 
-def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95,), output_base=None):
+def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95,), output_base=None, show=True):
     M_pred_sigma = pred.std(0)
     M_pred_mean = pred.mean(0)
     if output_base is not None:
@@ -41,7 +41,7 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
     plt.legend()
     if output_base is not None:
         plt.savefig(output_base + '_full_prediction.png', dpi=300, bbox_inches='tight')
-    plt.show()
+    plt.show() if show else plt.close()
 
     plt.figure(figsize=(8, 6))
     plt.errorbar(unorm_mass, M_pred_mean - unorm_mass, yerr=M_pred_sigma, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
@@ -51,7 +51,7 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
     plt.legend()
     if output_base is not None:
         plt.savefig(output_base + '_full_residual.png', dpi=300, bbox_inches='tight')
-    plt.show()
+    plt.show() if show else plt.close()
 
     for percentile in filtered_percentiles:
         sigma_cut = np.percentile(M_pred_sigma, percentile)
@@ -69,7 +69,7 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
         plt.legend()
         if output_base is not None:
             plt.savefig(output_base + f'_filtered_{percentile}_prediction.png', dpi=300, bbox_inches='tight')
-        plt.show()
+        plt.show() if show else plt.close()
 
         plt.figure(figsize=(8, 6))
         plt.errorbar(unorm_mass_plot, M_pred_mean_plot - unorm_mass_plot, yerr=M_pred_sigma_plot, fmt='o', label='Predictions with Uncertainty', alpha=0.7)
@@ -80,166 +80,79 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
         plt.legend()
         if output_base is not None:
             plt.savefig(output_base + f'_filtered_{percentile}_residual.png', dpi=300, bbox_inches='tight')
-        plt.show()
+        plt.show() if show else plt.close()
 
-def predict4(X, X_er, target, test=False):
-    
-    df_train = get_dataset('Datasets/database_D_old_format.txt', 'MS')
+def predict4(X, X_er, cfg, test=False):
+    """
+    Train BART, load the trained GP and HBNN traces, and stack the three models with BHS
+    for the 4-feature (Teff, logg, Meta, L) Dataset D models.
+
+    Seeds, model settings and every file name come from `cfg` (a run_pipeline.RunConfig).
+    With test=True, X and X_er are ignored and the built-in holdout set is predicted instead;
+    its BART/BHS files are then named "holdout" rather than "prediction".
+    """
+    stage = 'holdout' if test else 'prediction'
+
+    df_train = get_dataset(cfg.database, 'MS')
     df_train = df_train[df_train['mode'] == 'A']
     
-    # (x_train, x_train_er, x_test, x_test_err, mass_train, emass_train,
-    # mass_test, emass_test
-    # ) = return_train_test(df_train)
-    (x_train, x_train_er, x_test, x_test_err, rad_train, erad_train,
-    rad_test, erad_test
-    ) = return_train_test(df_train)
+    (x_train, x_train_er, x_test, x_test_err, y_train, ey_train,
+    y_test, ey_test
+    ) = return_train_test(df_train, target=cfg.target, random_state=cfg.split_seed)
     
     if test == True:
         X = x_test
         X_er = x_test_err
 
-    if target == 'mass':
-        
-        unorm_mass = denormalise_val(mass_test, 'mass')
-        
-        
-        bart4_model = bart.BART_M(x_train, x_train_er, mass_train, emass_train)
-        # Change BART draws/chains and BART output filenames here.
-        bart4_pred, lpd_BART4 = sample_pred_BART(bart4_model,
-                                      X,
-                                      X_er, 'mass',
-                                      100, 4,
-                                      trace_filename='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_100_draws_4_chains_seed_28.nc',
-                                      predictions_filename='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_100_draws_4_chains_predictions_seed_28.nc')
+    # BART is trained here, each time predictions are made. For mass it infers its noise; for radius the noise is fixed.
+    bart_builder = bart.BART_M if cfg.target == 'mass' else bart.BART_R
+    bart4_model = bart_builder(x_train, x_train_er, y_train, ey_train)
+    bart4_pred, lpd_BART4 = sample_pred_BART(bart4_model,
+                                  X,
+                                  X_er, cfg.target,
+                                  cfg.draws, cfg.chains,
+                                  trace_filename=cfg.bart_trace_path(stage),
+                                  predictions_filename=cfg.bart_predictions_path(stage),
+                                  random_seed=cfg.seed)
 
+    gp4_model, μ_gp4, lg_σ_gp4, Xu4, Xu_er4 = gp.sparse_fully_heteroscedastic_gp(x_train, x_train_er, y_train,
+                                                                                  cfg.gp_n_inducing_mean,
+                                                                                  cfg.gp_n_inducing_var)
 
-        gp4_model, μ_gp4, lg_σ_gp4, Xu4, Xu_er4 = gp.sparse_fully_heteroscedastic_gp(x_train, x_train_er, mass_train, 100, 50)
-
-        # Loads the trace from the trained GP model (the learned weights and hyperparamenters)    
-        gp4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/GP_mass_4param_L_100_draws_4_chains_100_50_seed_28.nc')
-        gp4_pred, lpd_GP4 = posterior_predictive_GP(gp4_model, μ_gp4, lg_σ_gp4, 
-                                            gp4_trace, X,
-                                            X_er,
-                                            Xu4, Xu_er4, 4, 'mass')
-
-        
-        # Loads the trace from the trained HBNN model (the learned weights and hyperparamenters)    
-        hbnn4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/HBNN_mass_4param_L_100_draws_4_chains_15_nodes_sig_015_seed_28.nc')
-        hbnn4_pred, lpd_HBNN4 = sample_post_pred_HBNN_para(hbnn4_trace,  
-                                                      X,
-                                                      X_er,
-                                                      15, 4, 'mass')
-
-
-        # Change BHS stacking draws/chains here.
-        (bhs_trace, bhs_pred, bhs_w) = run_stack(bart4_pred, hbnn4_pred, gp4_pred,
-                                            x_train, X, lpd_BART4, lpd_HBNN4,
-                                            lpd_GP4,
-                                            draws=100, chains=4)
-        bhs_trace.to_netcdf('Dataset_D_training_with_Xiong/BHS_mass_4param_L_prediction_100_draws_4_chains_seed_28.nc')
-
-        if test == True:
-            mard_BART = mard(unorm_mass, bart4_pred.mean(0))
-            mrd_BART = mrd(unorm_mass, bart4_pred.mean(0))
-            
-            print('MARD BART:', mard_BART)
-            print('MRD BART:', mrd_BART)
-            
-            mard_GP = mard(unorm_mass, gp4_pred.mean(0))
-            mrd_GP = mrd(unorm_mass, gp4_pred.mean(0))
-            
-            print('MARD GP:', mard_GP)
-            print('MRD GP:', mrd_GP)
-            
-            mard_HBNN = mard(unorm_mass, hbnn4_pred.mean(0))
-            mrd_HBNN = mrd(unorm_mass, hbnn4_pred.mean(0))
-            
-            print('MARD HBNN:', mard_HBNN)
-            print('MRD HBNN:', mrd_HBNN)
-            
-            mard_BHS = mard(unorm_mass, bhs_pred.mean(0))
-            mrd_BHS = mrd(unorm_mass, bhs_pred.mean(0))
-            
-            print('MARD BHS:', mard_BHS)
-            print('MRD BHS:', mrd_BHS)
-            
-            plot_mass_diagnostics(unorm_mass, bart4_pred, 'BART',
-                                  output_base='Dataset_D_training_with_Xiong/BART_mass_4param_L_prediction_seed_28')
-            plot_mass_diagnostics(unorm_mass, bhs_pred, 'BHS', filtered_percentiles=(95, 90),
-                                  output_base='Dataset_D_training_with_Xiong/BHS_mass_4param_L_prediction_seed_28')
-            
-        
-        return [bart4_pred, gp4_pred, hbnn4_pred], bhs_pred, bhs_w
+    # Loads the trace from the trained GP model (the learned weights and hyperparamenters)    
+    gp4_trace = az.from_netcdf(cfg.trace_path('GP'))
+    gp4_pred, lpd_GP4 = posterior_predictive_GP(gp4_model, μ_gp4, lg_σ_gp4, 
+                                        gp4_trace, X,
+                                        X_er,
+                                        Xu4, Xu_er4, 4, cfg.target)
     
-    
-    if target == 'radius':
-        
-        unorm_rad = denormalise_val(rad_test, 'radius')
-        
-        
-        bart4_model = bart.BART_R(x_train, x_train_er, rad_train, erad_train)
-        # Change BART draws/chains and BART output filenames here.
-        bart4_pred, lpd_BART4 = sample_pred_BART(bart4_model,
-                                      X,
-                                      X_er, 'radius',
-                                      3000, 4,
-                                      trace_filename='Dataset_D_training_with_Xiong/BART_rad_4param_L_prediction_3000_draws_4_chains_seed_239.nc',
-                                      predictions_filename='Dataset_D_training_with_Xiong/BART_rad_4param_L_prediction_3000_draws_4_chains_predictions_seed_239.nc')
+    # Loads the trace from the trained HBNN model (the learned weights and hyperparamenters)    
+    hbnn4_trace = az.from_netcdf(cfg.trace_path('HBNN'))
+    hbnn4_pred, lpd_HBNN4 = sample_post_pred_HBNN_para(hbnn4_trace,  
+                                                  X,
+                                                  X_er,
+                                                  cfg.hbnn_nodes, 4, cfg.target,
+                                                  seed=cfg.seed)
 
-        gp4_model, μ_gp4, lg_σ_gp4, Xu4, Xu_er4 = gp.sparse_fully_heteroscedastic_gp(x_train, x_train_er, rad_train, 100, 50)
+    (bhs_trace, bhs_pred, bhs_w) = run_stack(bart4_pred, hbnn4_pred, gp4_pred,
+                                        x_train, X, lpd_BART4, lpd_HBNN4,
+                                        lpd_GP4,
+                                        draws=cfg.bhs_draws, chains=cfg.bhs_chains)
+    bhs_trace.to_netcdf(cfg.bhs_trace_path(stage))
 
-        # Loads the trace from the trained GP model (the learned weights and hyperparamenters)    
-        gp4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/GP_rad_4param_L_3000_draws_4_chains_100_50_seed_239.nc')
-        gp4_pred, lpd_GP4 = posterior_predictive_GP(gp4_model, μ_gp4, lg_σ_gp4, 
-                                            gp4_trace, X,
-                                            X_er,
-                                            Xu4, Xu_er4, 4, 'radius')
+    if test == True:
+        unorm_y = denormalise_val(y_test, cfg.target)
+
+        for name, pred in [('BART', bart4_pred), ('GP', gp4_pred), ('HBNN', hbnn4_pred), ('BHS', bhs_pred)]:
+            print(f'MARD {name}:', mard(unorm_y, pred.mean(0)))
+            print(f'MRD {name}:', mrd(unorm_y, pred.mean(0)))
         
-        # Loads the trace from the trained HBNN model (the learned weights and hyperparamenters)    
-        hbnn4_trace = az.from_netcdf('Dataset_D_training_with_Xiong/HBNN_rad_4param_L_3000_draws_4_chains_15_nodes_sig_015_seed_239.nc')
-        hbnn4_pred, lpd_HBNN4 = sample_post_pred_HBNN_para(hbnn4_trace,  
-                                                      X,
-                                                      X_er,
-                                                      15, 4, 'radius')
-
-        # Change BHS stacking draws/chains here.
-        (bhs_trace, bhs_pred, bhs_w) = run_stack(bart4_pred, hbnn4_pred, gp4_pred,
-                                            x_train, X, lpd_BART4, lpd_HBNN4,
-                                            lpd_GP4,
-                                            draws=100, chains=4)
-        bhs_trace.to_netcdf('Dataset_D_training_with_Xiong/BHS_rad_4param_L_prediction_3000_draws_4_chains_seed_239.nc')
-    
-        if test == True:
-            mard_BART = mard(unorm_rad, bart4_pred.mean(0))
-            mrd_BART = mrd(unorm_rad, bart4_pred.mean(0))
-            
-            print('MARD BART:', mard_BART)
-            print('MRD BART:', mrd_BART)
-            
-            mard_GP = mard(unorm_rad, gp4_pred.mean(0))
-            mrd_GP = mrd(unorm_rad, gp4_pred.mean(0))
-            
-            print('MARD GP:', mard_GP)
-            print('MRD GP:', mrd_GP)
-            
-            mard_HBNN = mard(unorm_rad, hbnn4_pred.mean(0))
-            mrd_HBNN = mrd(unorm_rad, hbnn4_pred.mean(0))
-            
-            print('MARD HBNN:', mard_HBNN)
-            print('MRD HBNN:', mrd_HBNN)
-            
-            mard_BHS = mard(unorm_rad, bhs_pred.mean(0))
-            mrd_BHS = mrd(unorm_rad, bhs_pred.mean(0))
-            
-            print('MARD BHS:', mard_BHS)
-            print('MRD BHS:', mrd_BHS)
-            
-            plot_mass_diagnostics(unorm_rad, bart4_pred, 'BART',
-                                  output_base='Dataset_D_training_with_Xiong/BART_rad_4param_L_prediction_seed_239')
-            plot_mass_diagnostics(unorm_rad, bhs_pred, 'BHS', filtered_percentiles=(95, 90),
-                                  output_base='Dataset_D_training_with_Xiong/BHS_rad_4param_L_prediction_seed_239')
-            
-        return [bart4_pred, gp4_pred, hbnn4_pred], bhs_pred, bhs_w
+        plot_mass_diagnostics(unorm_y, bart4_pred, 'BART',
+                              output_base=cfg.holdout_plot_base('BART'), show=cfg.show_plots)
+        plot_mass_diagnostics(unorm_y, bhs_pred, 'BHS', filtered_percentiles=(95, 90),
+                              output_base=cfg.holdout_plot_base('BHS'), show=cfg.show_plots)
+        
+    return [bart4_pred, gp4_pred, hbnn4_pred], bhs_pred, bhs_w
 
 def predictNAN(X, X_er, target, test=False):
     

@@ -14,7 +14,10 @@ from constants import MU, SIGMA
 from utils import get_dataset
 from sklearn.model_selection import train_test_split
 
-RANDOM_SEED = 4159 
+RANDOM_SEED = 4159 # Default train/test split seed; run_pipeline.py passes its own SPLIT_SEED
+
+# Column and error column for each prediction target
+TARGET_COLUMNS = {'radius': ('R', 'eR'), 'mass': ('M', 'eM')}
 
 
 def normalise_val(x: float | None, key: str) -> float:
@@ -32,7 +35,7 @@ def denormalise_err(y: np.ndarray, key: str) -> np.ndarray:
     return y * SIGMA[key]
 
 
-def return_norm(df):
+def return_norm(df, random_state=RANDOM_SEED):
     """
     Compute normalization statistics for stellar parameters and their errors.
 
@@ -49,6 +52,8 @@ def return_norm(df):
     df : pandas.DataFrame
         Input DataFrame containing stellar parameters (`Teff`, `logg`, `Meta`, `L`, `M`)
         and their asymmetric uncertainties (`eX1`, `eX2` for lower/upper errors).
+    random_state : int
+        Seed for the train/test split. Must match the one used for training.
 
     Returns
     -------
@@ -76,7 +81,7 @@ def return_norm(df):
     # do split
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y,
                                                         test_size=154,
-                                                        random_state=RANDOM_SEED)
+                                                        random_state=random_state)
 
     # Extract relevant columns for stellar mass prediction
     teff = X_train['Teff']
@@ -105,7 +110,7 @@ def return_norm(df):
     # return mteff, mlogg, mmet, mlum, mtmass, steff, slogg, smet, slum, smass     
     return mteff, mlogg, mmet, mlum, mtrad, steff, slogg, smet, slum, srad     
 
-def return_train_test(df, normalised=True):
+def return_train_test(df, normalised=True, target='radius', random_state=RANDOM_SEED):
     """
 
     Parameters
@@ -114,19 +119,25 @@ def return_train_test(df, normalised=True):
         DESCRIPTION. The default is df. All data.
     normalised : TYPE, bool
         DESCRIPTION. The default is True.
+    target : str, 'radius' or 'mass'
+        Which quantity is returned (normalised) as the target y. The default is 'radius'.
+    random_state : int
+        Seed for the train/test split. The default is RANDOM_SEED.
 
     Returns
     -------
     normalised or not normalised training and testing data. 
     Note that normalised and non normalised don't come in the same format
     For normalised: x_train, x_train_er, x_test, x_test_error,
-    mass, emass, mass_test, emass_test
+    y, ey, y_test, ey_test (y is the radius or the mass, depending on `target`)
     For non normalised: X_train, X_test, Y_train, Y_test / where errors and
     data are combined
     
     if you want both just call twice
 
     """
+    y_col, ey_col = TARGET_COLUMNS[target]
+
     df1 = df[['eTeff1', 'elogg1', 'eMeta1', 'eL1', 'eM1', 'eR1']].copy()
     df2 = df[['eTeff2', 'elogg2', 'eMeta2', 'eL2', 'eM2', 'eR2']].copy()
     df2.columns = ['eTeff1', 'elogg1', 'eMeta1', 'eL1', 'eM1', 'eR1']
@@ -145,52 +156,41 @@ def return_train_test(df, normalised=True):
     # do split
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y,
                                                         test_size=154,
-                                                        random_state=RANDOM_SEED)
+                                                        random_state=random_state)
 
-    # Extract relevant columns for stellar mass prediction
+    # Extract relevant columns for stellar mass or radius prediction
     teff = X_train['Teff']
     logg = X_train['logg']
     met = X_train['Meta']
     lum = X_train['L']
-    #print(lum)
-    # mass = Y_train["M"]
-    rad = Y_train['R']
+    y = Y_train[y_col]
 
-    # Compute means and standard deviations for standardization
+    # Compute means and standard deviations for standardization (training split only)
     mteff = np.mean(teff)
     mlogg = np.mean(logg)
     mmet = np.mean(met)
     mlum = np.mean(lum)
-    # mtmass = np.mean(mass)
-    mtrad = np.mean(rad)
-
-    
-    #print(mteff, mlogg, mmet, mlum, mtmass, mrad)
+    my = np.mean(y)
 
     steff = np.std(teff)
     slogg = np.std(logg)
     smet = np.std(met)
     slum = np.std(lum)
-    # smass = np.std(mass)
-    srad = np.std(rad)
-
-    #print(steff, slogg, smet, slum, smass, srad)
+    sy = np.std(y)
 
     # Standardize inputs 
     teff = (teff - mteff) / steff
     logg = (logg - mlogg) / slogg
     met = (met - mmet) / smet
     lum = (lum - mlum) / slum
-    # mass = (mass - mtmass) / smass
-    rad = (rad - mtrad) / srad
+    y = (y - my) / sy
 
     # Uncertainties for the inputs
     eteff = X_train['eTeff'] / steff
     elogg = X_train['elogg'] / slogg
     emet = abs(X_train['eMeta']) / smet
     elum = X_train['eL'] / slum  
-    # emass = Y_train['eM'] / smass
-    erad = Y_train['eR'] / srad
+    ey = Y_train[ey_col] / sy
 
 
     x_train = pd.concat([teff, logg, met, lum], axis=1)
@@ -200,8 +200,7 @@ def return_train_test(df, normalised=True):
     logg_test = (X_test['logg'] - mlogg) / slogg
     met_test = (X_test['Meta'] - mmet) / smet
     lum_test = (X_test['L'] - mlum) / slum
-    # mass_test = (Y_test['M']- mtmass) / smass
-    rad_test = (Y_test['R']- mtrad) / srad
+    y_test = (Y_test[y_col] - my) / sy
 
     x_test = pd.concat([teff_test, logg_test, met_test, lum_test], axis=1)
 
@@ -209,14 +208,12 @@ def return_train_test(df, normalised=True):
     elogg_test = X_test['elogg'] / slogg
     emet_test = abs(X_test['eMeta']) / smet
     elum_test = X_test['eL'] / slum 
-    # emass_test = Y_test['eM'] / smass
-    erad_test = Y_test['eR'] / srad
+    ey_test = Y_test[ey_col] / sy
 
     x_test_error = pd.concat([eteff_test, elogg_test, emet_test, elum_test], axis=1)
     
     if normalised == True:
-        # return x_train, x_train_er, x_test, x_test_error, mass, emass, mass_test, emass_test
-        return x_train, x_train_er, x_test, x_test_error, rad, erad, rad_test, erad_test
+        return x_train, x_train_er, x_test, x_test_error, y, ey, y_test, ey_test
     
     if normalised == False:
         return X_train, X_test, Y_train, Y_test

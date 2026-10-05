@@ -68,7 +68,8 @@ def find_pointwise_loo(trace):
     return az.loo(trace, pointwise=True, scale="log").loo_i.values
 
 
-def train(model, filename, draw=1000, chains=2, target_accept=0.95):
+def train(model, filename, draw=1000, chains=2, target_accept=0.95,
+          random_seed=239, attrs=None):
     """
     Sample from a PyMC model and save the posterior trace.
 
@@ -87,6 +88,11 @@ def train(model, filename, draw=1000, chains=2, target_accept=0.95):
         Number of MCMC chains. Default is 2.
     target_accept : float, optional
         Target acceptance rate for the sampler. Default is 0.95.
+    random_seed : int, optional
+        Seed for the MCMC sampler. Default is 239.
+    attrs : dict, optional
+        Extra metadata stored in the trace's posterior attributes
+        (e.g. the train/test split seed), so later steps can check it.
 
     Returns
     -------
@@ -95,8 +101,10 @@ def train(model, filename, draw=1000, chains=2, target_accept=0.95):
     """
     print('target_accept=', target_accept)
     trace = pm.sample(draws=draw, tune=draw, chains=chains, model=model,
-                      target_accept=target_accept, random_seed=239)
+                      target_accept=target_accept, random_seed=random_seed)
     trace.extend(pm.compute_log_likelihood(trace, model=model, var_names='y'))
+    if attrs:
+        trace.posterior.attrs.update(attrs)
     trace.to_netcdf(filename)
 
     return trace

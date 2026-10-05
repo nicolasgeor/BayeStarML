@@ -98,7 +98,7 @@ def _predict_one_chain(chain_idx,
                        w_in_1_draws, b_1_draws,
                        w_1_2_draws, b_2_draws,
                        w_out_draws, b_out_draws,
-                       n_param):
+                       n_param, seed=None):
     """
     Generate posterior predictive draws for one chain of the HBNN.
 
@@ -122,6 +122,9 @@ def _predict_one_chain(chain_idx,
         Draws of network weights and biases matching model shapes.
     n_param : int
         Input dimensionality.
+    seed : int, optional
+        Seeds NumPy's global RNG (used by `sample_latent_given_obs`) with
+        seed + chain_idx, so results do not depend on worker scheduling.
 
     Returns
     -------
@@ -130,6 +133,9 @@ def _predict_one_chain(chain_idx,
     Y_row : ndarray, shape (n_draws, N_test)
         Posterior predictive samples for the chain.
     """
+    if seed is not None:
+        np.random.seed(seed + chain_idx)
+
     start = chain_idx * n_draws
     stop  = start + n_draws
     draws = slice(start, stop)
@@ -161,7 +167,7 @@ def _predict_one_chain(chain_idx,
 
 
 def sample_post_pred_HBNN_para(trace, X, X_er, n_hidden, n_param, target,
-                          n_jobs=None):
+                          n_jobs=None, seed=None):
     """
     Parallel posterior predictive for HBNN with latent-input sampling.
 
@@ -186,6 +192,8 @@ def sample_post_pred_HBNN_para(trace, X, X_er, n_hidden, n_param, target,
         Denormalization context used by `denormalise_val/err`.
     n_jobs : int, optional
         Number of worker processes; defaults to available CPUs.
+    seed : int, optional
+        Seed for the latent-input sampling (None = not reproducible).
 
     Returns
     -------
@@ -230,7 +238,7 @@ def sample_post_pred_HBNN_para(trace, X, X_er, n_hidden, n_param, target,
         w_in_1_draws=w_in_1_draws, b_1_draws=b_1_draws,
         w_1_2_draws=w_1_2_draws, b_2_draws=b_2_draws,
         w_out_draws=w_out_draws, b_out_draws=b_out_draws,
-        n_param=n_param
+        n_param=n_param, seed=seed
     )
 
     print(f"starting parallel prediction on {n_jobs} worker(s)…")
@@ -649,7 +657,8 @@ def posterior_predictive_GP(
 
 #     return stats, lpd_GP
 
-def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2, trace_filename=None, predictions_filename=None):
+def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2, trace_filename=None, predictions_filename=None,
+                     random_seed=None):
     """
     Generate posterior predictive samples and LOO scores for a BART model.
 
@@ -672,6 +681,8 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2, trace_filenam
         Number of posterior draws per chain. Default is 1000.
     chains : int, optional
         Number of MCMC chains. Default is 2.
+    random_seed : int, optional
+        Seed for sampling and posterior predictive draws (None = not reproducible).
 
     Returns
     -------
@@ -682,7 +693,7 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2, trace_filenam
             Pointwise LOO log predictive densities for the BART model.
     """
     with model:
-        trace = pm.sample(draws=draws, tune=draws, chains=chains)
+        trace = pm.sample(draws=draws, tune=draws, chains=chains, random_seed=random_seed)
         trace.extend(pm.compute_log_likelihood(trace))
         if trace_filename is not None:
             os.makedirs(os.path.dirname(trace_filename), exist_ok=True)
@@ -700,7 +711,7 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2, trace_filenam
         pm.set_data({'X': X,
                      'X_er': X_er
             })
-        pred = pm.sample_posterior_predictive(trace, predictions=True)
+        pred = pm.sample_posterior_predictive(trace, predictions=True, random_seed=random_seed)
         if predictions_filename is not None:
             os.makedirs(os.path.dirname(predictions_filename), exist_ok=True)
             pred.to_netcdf(predictions_filename)

@@ -1,13 +1,12 @@
-##############################
-### I BELIVE THAT IN THIS FILE WE COMMENT/UNCOMMENT TO SWITCH BETWEEN MASS AND RADIUS TRAINING
-#################################33
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Wed Nov  5 18:53:33 2025
 
 @author: LamirelFamily
+
+Predict masses or radii for a Dataset-D-format database with the stacked (BHS) 4-feature
+model, or evaluate the stack on the holdout set. All settings live in run_pipeline.py.
 """
 
 import os
@@ -20,43 +19,27 @@ from predict import predict4
 from utils import get_dataset
 
 
-# False: original behavior, evaluate the built-in 20% holdout test set.
-# True: predict masses for PREDICTION_DATABASE and save a CSV.
-REAL_PREDICTION = True
-
-# Change this path to the database you want to predict.
-# It must have the same tab-separated old-format columns as database_D_old_format.txt.
-PREDICTION_DATABASE = "Datasets/database_D_old_format.txt"
-
-# Prediction results will be saved here.
-# PREDICTION_OUTPUT = "Dataset_D_predictions/EB_oblateness_fill_factor_mass_predictions_4_features_3000_draws_seed_239.csv"
-PREDICTION_OUTPUT = "Dataset_D_predictions/EB_oblateness_fill_factor_radius_predictions_4_features_3000_draws_seed_239.csv"
-
-# Optional filters for the prediction database.
-# Leave as None to predict every row that has Teff, logg, Meta, L, and their errors.
-PREDICTION_STAR_CLASS = None # e.g. "MS", "RGB", or None for all classes
-PREDICTION_MODE = "EB" # e.g. "A", "EB", or None for all modes
-
 # Extra columns required only for real prediction rows.
 REQUIRED_PREDICTION_COLUMNS = [
     "oblateness", "eoblateness1", "eoblateness2",
     "fill_factor", "efill_factor1", "efill_factor2",
 ]
 
-def prepare_database_d_predictions(filename):
+def prepare_database_d_predictions(cfg):
     """
     Prepare a Dataset-D-format database for 4-feature mass/radius prediction.
 
     Uses Teff, logg, Meta, and L, with mean asymmetric uncertainties.
     Rows without the required prediction inputs are skipped.
+    The database must have the same tab-separated old-format columns as database_D_old_format.txt.
     """
-    data = pd.read_table(filename, sep="\t", comment="%")
+    data = pd.read_table(cfg.prediction_database, sep="\t", comment="%")
 
-    if PREDICTION_STAR_CLASS is not None and "class" in data.columns:
-        data = data[data["class"] == PREDICTION_STAR_CLASS]
+    if cfg.prediction_star_class is not None and "class" in data.columns:
+        data = data[data["class"] == cfg.prediction_star_class]
 
-    if PREDICTION_MODE is not None and "mode" in data.columns:
-        data = data[data["mode"] == PREDICTION_MODE]
+    if cfg.prediction_mode is not None and "mode" in data.columns:
+        data = data[data["mode"] == cfg.prediction_mode]
 
     value_cols = ["Teff", "logg", "Meta", "L"]
     lower_error_cols = ["eTeff1", "elogg1", "eMeta1", "eL1"]
@@ -75,10 +58,10 @@ def prepare_database_d_predictions(filename):
     if prediction_rows.empty:
         raise ValueError("No rows have all required 4-feature prediction inputs.")
 
-    df_train = get_dataset("Datasets/database_D_old_format.txt", "MS")
+    # Features are normalised with the statistics of the training split the models were trained on
+    df_train = get_dataset(cfg.database, "MS")
     df_train = df_train[df_train["mode"] == "A"]
-    # mteff, mlogg, mmet, mlum, _mtmass, steff, slogg, smet, slum, _smass = return_norm(df_train)
-    mteff, mlogg, mmet, mlum, _mtrad, steff, slogg, smet, slum, _srad = return_norm(df_train)
+    mteff, mlogg, mmet, mlum, _mtrad, steff, slogg, smet, slum, _srad = return_norm(df_train, random_state=cfg.split_seed)
 
     x_pred = pd.DataFrame({
         "Teff": (prediction_rows["Teff"] - mteff) / steff,
@@ -97,20 +80,16 @@ def prepare_database_d_predictions(filename):
     return prediction_rows, x_pred, x_pred_er
 
 
-def build_prediction_table(prediction_rows, bhs_pred):
+def build_prediction_table(prediction_rows, bhs_pred, target):
+    # Column names expected by the oblateness analysis scripts: rad_* for radius, mass_* for mass
+    prefix = "rad" if target == "radius" else "mass"
     prediction_summary = pd.DataFrame({
-        # "mass_pred": bhs_pred.mean(0),
-        # "mass_sigma": bhs_pred.std(0),
-        # "mass_p16": np.percentile(bhs_pred, 16, axis=0),
-        # "mass_p84": np.percentile(bhs_pred, 84, axis=0),
-        # "mass_p02_5": np.percentile(bhs_pred, 2.5, axis=0),
-        # "mass_p97_5": np.percentile(bhs_pred, 97.5, axis=0),
-        "rad_pred": bhs_pred.mean(0),
-        "rad_sigma": bhs_pred.std(0),
-        "rad_p16": np.percentile(bhs_pred, 16, axis=0),
-        "rad_p84": np.percentile(bhs_pred, 84, axis=0),
-        "rad_p02_5": np.percentile(bhs_pred, 2.5, axis=0),
-        "rad_p97_5": np.percentile(bhs_pred, 97.5, axis=0),
+        f"{prefix}_pred": bhs_pred.mean(0),
+        f"{prefix}_sigma": bhs_pred.std(0),
+        f"{prefix}_p16": np.percentile(bhs_pred, 16, axis=0),
+        f"{prefix}_p84": np.percentile(bhs_pred, 84, axis=0),
+        f"{prefix}_p02_5": np.percentile(bhs_pred, 2.5, axis=0),
+        f"{prefix}_p97_5": np.percentile(bhs_pred, 97.5, axis=0),
     }, index=prediction_rows.index)
 
     return pd.concat(
@@ -119,33 +98,33 @@ def build_prediction_table(prediction_rows, bhs_pred):
     )
 
 
+def run_holdout_evaluation(cfg):
+    """Train BART and stack all three models on the built-in holdout set; prints MARD/MRD."""
+    print("Evaluating Dataset D A-label 4-parameter BHS on the holdout test set...")
+    predict4(None, None, cfg, test=True)
+    print("\n--- Evaluation Complete ---")
 
-def main():
-    if not REAL_PREDICTION:
-        print("Evaluating Dataset D A-label 4-parameter BHS on 20% holdout test set...")
-        # _base_preds, _bhs_pred_test, _bhs_w_test = predict4(None, None, "mass", test=True)
-        _base_preds, _bhs_pred_test, _bhs_w_test = predict4(None, None, "radius", test=True)
-        print("\n--- Evaluation Complete ---")
-        return
 
-    # print(f"Preparing 4-feature mass predictions for {PREDICTION_DATABASE}...")
-    print(f"Preparing 4-feature radius predictions for {PREDICTION_DATABASE}...")
-    prediction_rows, X, X_er = prepare_database_d_predictions(PREDICTION_DATABASE)
+def run_eb_predictions(cfg):
+    """Predict the stars of cfg.prediction_database and save them to cfg.eb_predictions_path."""
+    print(f"Preparing 4-feature {cfg.target} predictions for {cfg.prediction_database}...")
+    prediction_rows, X, X_er = prepare_database_d_predictions(cfg)
 
-    # print(f"Predicting masses for {len(prediction_rows)} star(s)...")
-    # _base_preds, bhs_pred, _bhs_w = predict4(X, X_er, "mass", test=False)
-    print(f"Predicting radii for {len(prediction_rows)} star(s)...")
-    _base_preds, bhs_pred, _bhs_w = predict4(X, X_er, "radius", test=False)
+    print(f"Predicting {cfg.target} for {len(prediction_rows)} star(s)...")
+    _base_preds, bhs_pred, _bhs_w = predict4(X, X_er, cfg, test=False)
 
-    prediction_table = build_prediction_table(prediction_rows, bhs_pred)
-    os.makedirs(os.path.dirname(PREDICTION_OUTPUT), exist_ok=True)
-    prediction_table.to_csv(PREDICTION_OUTPUT, index=False)
+    prediction_table = build_prediction_table(prediction_rows, bhs_pred, cfg.target)
+    os.makedirs(os.path.dirname(cfg.eb_predictions_path), exist_ok=True)
+    prediction_table.to_csv(cfg.eb_predictions_path, index=False)
 
-    print(f"Saved predictions to {PREDICTION_OUTPUT}")
-    # print(prediction_table[["original_row", "SIMBAD_ID", "mass_pred", "mass_sigma"]].head().to_string(index=False))
-    print(prediction_table[["original_row", "SIMBAD_ID", "rad_pred", "rad_sigma"]].head().to_string(index=False))
+    prefix = "rad" if cfg.target == "radius" else "mass"
+    print(f"Saved predictions to {cfg.eb_predictions_path}")
+    print(prediction_table[["original_row", "SIMBAD_ID", f"{prefix}_pred", f"{prefix}_sigma"]].head().to_string(index=False))
     print("\n--- Prediction Complete ---")
 
-    
+
 if __name__ == '__main__':
-    main()
+    # Settings live in run_pipeline.py. Running this file only does the prediction steps
+    # switched on there (RUN_HOLDOUT_EVAL / RUN_PREDICT).
+    import run_pipeline
+    run_pipeline.main(only=("holdout_eval", "predict"))

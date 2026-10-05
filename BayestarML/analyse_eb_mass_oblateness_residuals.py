@@ -650,9 +650,10 @@ def multivariable_regression_table(df: pd.DataFrame) -> pd.DataFrame:
     return pd.concat(tables, ignore_index=True)
 
 
-def main() -> None:
-    input_path = INPUT_CSV
-    outdir = OUTPUT_DIR
+def main(input_path: Path | None = None, output_dir: Path | None = None) -> None:
+    # run_pipeline.py passes both paths; running this file directly uses INPUT_CSV and OUTPUT_DIR.
+    input_path = Path(input_path) if input_path is not None else INPUT_CSV
+    outdir = Path(output_dir) if output_dir is not None else OUTPUT_DIR
     outdir.mkdir(parents=True, exist_ok=True)
 
     df = pd.read_csv(input_path)
