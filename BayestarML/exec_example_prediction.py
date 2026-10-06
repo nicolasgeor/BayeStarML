@@ -17,6 +17,8 @@ import pandas as pd
 from preprocess import return_norm, TARGET_COLUMNS
 from predict import predict4, print_model_metrics
 from utils import get_dataset
+import analyse_eb_mass_oblateness_residuals
+import analyse_eb_radius_oblateness_residuals
 
 
 # Extra columns required only for real prediction rows.
@@ -98,6 +100,29 @@ def build_prediction_table(prediction_rows, bhs_pred, target):
     )
 
 
+def analysis_selection(prediction_rows, y_true, target):
+    """
+    Stars kept by the oblateness analysis (the thesis sample): catalogue value inside the analysis
+    window, positive oblateness and, if ROBUST, inputs inside the robust feature ranges.
+    The cut values are read from the analysis script itself, so both always agree.
+    Returns the boolean mask and a short description of the cuts.
+    """
+    if target == "radius":
+        analysis = analyse_eb_radius_oblateness_residuals
+        lo, hi, true_col = analysis.RAD_MIN, analysis.RAD_MAX, "R"
+    else:
+        analysis = analyse_eb_mass_oblateness_residuals
+        lo, hi, true_col = analysis.MASS_MIN, analysis.MASS_MAX, "M"
+
+    keep = np.isfinite(y_true) & (y_true >= lo) & (y_true <= hi)
+    keep &= (prediction_rows["oblateness"] > analysis.MIN_OBLATENESS).to_numpy()
+    description = f"{lo:g} <= {true_col} <= {hi:g}"
+    if analysis.ROBUST:
+        keep &= analysis.robust_feature_mask(prediction_rows).to_numpy()
+        description += ", inputs within the robust feature ranges"
+    return keep, description
+
+
 def run_holdout_evaluation(cfg):
     """Train BART and stack all three models on the built-in holdout set; prints MARD/MRD."""
     print("Evaluating Dataset D A-label 4-parameter BHS on the holdout test set...")
@@ -125,10 +150,22 @@ def run_eb_predictions(cfg):
     true_col = TARGET_COLUMNS[cfg.target][0]
     y_true = pd.to_numeric(prediction_rows[true_col], errors="coerce").to_numpy()
     has_true = np.isfinite(y_true)
-    print(f"\nResults of the 4 models for the {has_true.sum()} predicted star(s) with a catalogue {cfg.target} ({true_col}):")
+    stars = f"{cfg.prediction_mode} stars" if cfg.prediction_mode else "predicted stars"
+    print(f"\nResults of the 4 models on ALL {has_true.sum()} {stars} with a catalogue {cfg.target} ({true_col}), with NO cuts")
+    print("(includes stars outside the training range). NOT comparable to the holdout MARD/MRD/MAE")
+    print("of the training and holdout steps, which are measured on asteroseismic test stars:")
     bart_pred, gp_pred, hbnn_pred = base_preds
-    print_model_metrics(y_true[has_true], {name: pred[:, has_true] for name, pred in
-                                           [("BART", bart_pred), ("GP", gp_pred), ("HBNN", hbnn_pred), ("BHS", bhs_pred)]})
+    model_preds = [("BART", bart_pred), ("GP", gp_pred), ("HBNN", hbnn_pred), ("BHS", bhs_pred)]
+    print_model_metrics(y_true[has_true], {name: pred[:, has_true] for name, pred in model_preds})
+
+    # Same metrics on the stars the oblateness analysis keeps (the sample used in the thesis)
+    selected, cuts = analysis_selection(prediction_rows, y_true, cfg.target)
+    print(f"\nResults of the 4 models on the {selected.sum()} {stars} kept by the oblateness analysis cuts")
+    print(f"({cuts}; same selection as the analysis step):")
+    if selected.any():
+        print_model_metrics(y_true[selected], {name: pred[:, selected] for name, pred in model_preds})
+    else:
+        print("No stars pass the analysis cuts.")
     print("\n--- Prediction Complete ---")
 
 
