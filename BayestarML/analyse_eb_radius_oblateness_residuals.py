@@ -222,6 +222,12 @@ def binned_scatter(
         edges = np.linspace(sub[x].min(), sub[x].max(), N_OBLATENESS_BINS + 1)
         edges = np.unique(edges)
         if len(edges) >= 3:
+            # The low end of the range is sparsely populated: merge the lowest bins into one,
+            # up to the first higher bin with at least MIN_BIN_COUNT stars. Other bins are unchanged.
+            counts = np.bincount(pd.cut(sub[x], bins=edges, include_lowest=True, labels=False),
+                                 minlength=len(edges) - 1)
+            first_full = next((i for i in range(1, len(counts)) if counts[i] >= MIN_BIN_COUNT), len(counts))
+            edges = np.delete(edges, range(1, first_full))
             sub["x_bin"] = pd.cut(sub[x], bins=edges, include_lowest=True)
             for interval, g in sub.groupby("x_bin", observed=True):
                 if len(g) < MIN_BIN_COUNT:
