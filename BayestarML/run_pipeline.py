@@ -36,10 +36,10 @@ import exec_example_train
 #######################################################################################
 # SETTINGS
 #######################################################################################
-TARGET_VAR = "mass"   # "radius" or "mass"
+TARGET_VAR = "radius"   # "radius" or "mass"
 
-SEED = 82              # MCMC seed for GP, HBNN and BART; it is the "seed_N" in every file name
-SPLIT_SEED = 5732       # train/test split seed (seed 239 used 4159; seeds 2805 and 2695 used 5732).
+SEED = 4492             # MCMC seed for GP, HBNN and BART; it is the "seed_N" in every file name
+SPLIT_SEED = 4492      # train/test split seed (seed 239 used 4159; seeds 2805 and 2695 used 5732).
                         # Not part of the file names, so it is stored in the GP/HBNN traces and
                         # checked before they are reused
 DRAWS = 3000            # draws per chain (and as many tuning steps) for GP, HBNN and BART
@@ -52,8 +52,8 @@ BHS_DRAWS = 3000         # per chain; the stacked predictions use BHS_DRAWS * BH
 BHS_CHAINS = 4
 
 # Steps to run. A step that is off is skipped, and later steps use the files it wrote before.
-RUN_TRAIN_GP = False
-RUN_TRAIN_HBNN = False
+RUN_TRAIN_GP = True
+RUN_TRAIN_HBNN = True
 RUN_HOLDOUT_EVAL = False
 RUN_PREDICT = True
 RUN_ANALYSIS = True
@@ -61,12 +61,12 @@ RUN_ANALYSIS = True
 SHOW_PLOTS = False      # True pops up plots and pauses the run until each window is closed
 
 # Data and output locations 
-DATABASE = "Datasets/database_D_old_format.txt"             # training stars: class MS, mode A
-PREDICTION_DATABASE = "Datasets/database_D_old_format.txt"  # stars to predict
+DATABASE = "Datasets/database_D_merged.txt"             # training stars: class MS, mode A
+PREDICTION_DATABASE = "Datasets/database_D_merged.txt"  # stars to predict
 PREDICTION_MODE = "EB"          # e.g. "A", "EB", or None for all modes
 PREDICTION_STAR_CLASS = None    # e.g. "MS", "RGB", or None for all classes
-TRAINING_DIR = "Dataset_D_v2_testing"
-PREDICTIONS_DIR = "Dataset_D_v2_testing"
+TRAINING_DIR = "Dataset_D_v4_training"
+PREDICTIONS_DIR = "Dataset_D_different_predictions"
 #######################################################################################
 
 STEP_ORDER = ("train_gp", "train_hbnn", "holdout_eval", "predict", "analysis")

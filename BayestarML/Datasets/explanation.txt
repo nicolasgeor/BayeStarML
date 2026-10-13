@@ -14,7 +14,15 @@ database_D_v1.txt same as database_D_old_format.txt but deleting LV Her A and B 
 
 database_D_v2.txt same as database_D_v1.txt but deleting outlier KIC9540226
 
+database_D_merged.txt: same as database_D_old_format.txt but updating with ca. 100 stars from Maxted email in 16/09/2026 and deleting outlier KIC9540226_A (see down for exact changes)
 
+database_D_merged_v0.txt: same as database_D_old_format.txt but updating with ca. 100 stars from Maxted email in 16/09/2026 (see down for exact changes)
+
+
+
+
+
+The file "database_D_original_vs_final.xlsx" explains the differences between database_D_old_format.txt and database_D_merged_v0.txt
 
 
 
