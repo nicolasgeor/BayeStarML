@@ -38,8 +38,8 @@ import exec_example_train
 #######################################################################################
 TARGET_VAR = "radius"   # "radius" or "mass"
 
-SEED = 4492             # MCMC seed for GP, HBNN and BART; it is the "seed_N" in every file name
-SPLIT_SEED = 4492      # train/test split seed (seed 239 used 4159; seeds 2805 and 2695 used 5732).
+SEED = 151             # MCMC seed for GP, HBNN and BART; it is the "seed_N" in every file name
+SPLIT_SEED = 151      # train/test split seed (seed 239 used 4159; seeds 2805 and 2695 used 5732).
                         # Not part of the file names, so it is stored in the GP/HBNN traces and
                         # checked before they are reused
 DRAWS = 3000            # draws per chain (and as many tuning steps) for GP, HBNN and BART
