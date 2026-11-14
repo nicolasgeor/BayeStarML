@@ -64,12 +64,19 @@ def train_and_evaluate(cfg, model_name):
     trace_attrs = {'split_seed': cfg.split_seed, 'database': cfg.database}
 
     if model_name == "HBNN":
-        model = hbnn.HBNN_M4(x_train, y_train, x_train_er, ey_train, cfg.hbnn_nodes)
+        if cfg.noise_model == 'fixed':
+            # The original radius model: Normal likelihood with the noise fixed at 0.15
+            model = hbnn.HBNN_R4(x_train, y_train, x_train_er, ey_train, cfg.hbnn_nodes)
+        else:
+            model = hbnn.HBNN_M4(x_train, y_train, x_train_er, ey_train, cfg.hbnn_nodes,
+                                 noise_floor=cfg.noise_floor)
+        # Stored like the split seed, so a trace is never reused with another NOISE_MODEL setting
+        trace_attrs['noise_model'] = cfg.noise_model
         trace = train(model, trace_path, draw=cfg.draws, chains=cfg.chains,
                       random_seed=cfg.seed, attrs=trace_attrs)
 
         pred, lpd = sample_post_pred_HBNN_para(trace, x_test, x_test_er, cfg.hbnn_nodes, 4, cfg.target,
-                                               seed=cfg.seed)
+                                               seed=cfg.seed, add_noise=cfg.noise_floor)
 
     elif model_name == "GP":
         model, μ_gp, log_var_gp, Xu, Xu_er = gp.sparse_fully_heteroscedastic_gp(

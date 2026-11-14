@@ -83,14 +83,22 @@ def plot_mass_diagnostics(unorm_mass, pred, model_name, filtered_percentiles=(95
             plt.savefig(output_base + f'_filtered_{percentile}_residual.png', dpi=300, bbox_inches='tight')
         plt.show() if show else plt.close()
 
-def print_model_metrics(y_true, preds):
-    """Print MARD, MRD and MAE of each model's mean prediction. preds: {name: draws (S, N)}."""
+def print_model_metrics(y_true, preds, coverage=False):
+    """
+    Print MARD, MRD and MAE of each model's mean prediction. preds: {name: draws (S, N)}.
+    With coverage=True, also the share of stars whose true value lies inside the central
+    68% and 95% intervals of the draws (same definition as in the oblateness analysis).
+    """
     y_true = np.asarray(y_true, dtype=float)
     for name, pred in preds.items():
         pred_mean = pred.mean(0)
         print(f'MARD {name}:', mard(y_true, pred_mean))
         print(f'MRD {name}:', mrd(y_true, pred_mean))
         print(f'MAE {name}:', mean_absolute_error(y_true, pred_mean))
+        if coverage:
+            p02_5, p16, p84, p97_5 = np.percentile(pred, [2.5, 16, 84, 97.5], axis=0)
+            print(f'68% interval coverage {name}:', np.mean((y_true >= p16) & (y_true <= p84)))
+            print(f'95% interval coverage {name}:', np.mean((y_true >= p02_5) & (y_true <= p97_5)))
 
 def predict4(X, X_er, cfg, test=False):
     """
@@ -114,8 +122,12 @@ def predict4(X, X_er, cfg, test=False):
         X = x_test
         X_er = x_test_err
 
-    # BART is trained here, each time predictions are made. For mass it infers its noise; for radius the noise is fixed.
-    bart_builder = bart.BART_M if cfg.target == 'mass' else bart.BART_R
+    # BART is trained here, each time predictions are made. With NOISE_MODEL = "floor" its noise is inferred, with the
+    # measurement error of the target as a floor. Otherwise: for mass it infers its noise; for radius the noise is fixed.
+    if cfg.noise_floor:
+        bart_builder = bart.BART_floor
+    else:
+        bart_builder = bart.BART_M if cfg.target == 'mass' else bart.BART_R
     bart4_model = bart_builder(x_train, x_train_er, y_train, ey_train)
     bart4_pred, lpd_BART4 = sample_pred_BART(bart4_model,
                                   X,
@@ -142,7 +154,7 @@ def predict4(X, X_er, cfg, test=False):
                                                   X,
                                                   X_er,
                                                   cfg.hbnn_nodes, 4, cfg.target,
-                                                  seed=cfg.seed)
+                                                  seed=cfg.seed, add_noise=cfg.noise_floor)
 
     (bhs_trace, bhs_pred, bhs_w) = run_stack(bart4_pred, hbnn4_pred, gp4_pred,
                                         x_train, X, lpd_BART4, lpd_HBNN4,
@@ -150,10 +162,17 @@ def predict4(X, X_er, cfg, test=False):
                                         draws=cfg.bhs_draws, chains=cfg.bhs_chains)
     bhs_trace.to_netcdf(cfg.bhs_trace_path(stage))
 
+    # What the stack is built on: each model's LOO score on the training stars decides its weight.
+    # A model with a much higher score than the others takes (almost) all of the weight.
+    print('\nSummed LOO log score on the training stars and mean BHS weight on the predicted stars:')
+    for k, (name, lpd) in enumerate((('BART', lpd_BART4), ('HBNN', lpd_HBNN4), ('GP', lpd_GP4))):
+        print(f'  {name}: LOO score = {np.sum(lpd):.1f}, mean weight = {bhs_w[:, :, k].mean():.3f}')
+
     if test == True:
         unorm_y = denormalise_val(y_test, cfg.target)
 
-        print_model_metrics(unorm_y, {'BART': bart4_pred, 'GP': gp4_pred, 'HBNN': hbnn4_pred, 'BHS': bhs_pred})
+        print_model_metrics(unorm_y, {'BART': bart4_pred, 'GP': gp4_pred, 'HBNN': hbnn4_pred, 'BHS': bhs_pred},
+                            coverage=True)
         
         plot_mass_diagnostics(unorm_y, bart4_pred, 'BART',
                               output_base=cfg.holdout_plot_base('BART'), show=cfg.show_plots)

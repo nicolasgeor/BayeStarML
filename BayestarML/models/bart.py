@@ -91,8 +91,54 @@ def BART_R(X, X_er, Y, Y_er, m=250):
         mu = pmb.BART('mu', X_normal, Y.values, m=m)
 
         sig = 0.3
-        
+
         y = pm.Normal("y", mu=mu, sigma=sig, shape=X_in.shape[0], observed=Y)
-        
+
+    return model_BART
+
+
+def BART_floor(X, X_er, Y, Y_er, m=250):
+    """
+    Build a BART model whose output noise cannot fall below the measurement error of Y.
+
+    Same as `BART_M`, but the noise of star i is sqrt(sig² + Y_er_i²): `sig` is inferred
+    and is the scatter beyond the measurement error of the target. Used for both mass and
+    radius when NOISE_MODEL = "floor" in run_pipeline.py.
+
+    Parameters
+    ----------
+    X : array-like
+        Input features.
+    X_er : array-like
+        Measurement errors for each input feature.
+    Y : array-like
+        Observed target values.
+    Y_er : array-like
+        Measurement errors for Y, in the same (normalised) units as Y.
+    m : int, optional
+        Number of trees in the BART ensemble. Default is 250.
+
+    Returns
+    -------
+    pm.Model
+        PyMC model defining the BART regression with a measurement-error noise floor.
+    """
+
+    with pm.Model() as model_BART:
+
+        X_in = pm.Data('X', X)
+        X_in_er = pm.Data('X_er', X_er)
+        # A data container, so that it can be set to zero for the stars to predict
+        # (see pred_sampling.sample_pred_BART): their draws then carry `sig` only.
+        Y_in_er = pm.Data('Y_er', Y_er)
+
+        X_normal = pm.Normal('X_dist', mu=X_in, sigma=X_in_er, shape=X_in.shape)
+
+        mu = pmb.BART('mu', X_normal, Y.values, m=m)
+
+        sig = pm.HalfCauchy('sig', beta=0.05)
+
+        y = pm.Normal("y", mu=mu, sigma=pm.math.sqrt(sig**2 + Y_in_er**2), shape=X_in.shape[0], observed=Y)
+
     return model_BART
 

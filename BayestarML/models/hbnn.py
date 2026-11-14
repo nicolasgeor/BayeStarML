@@ -130,13 +130,13 @@ def HBNN_M3(X_train, Y, X_error, Y_error, n_hidden):
 
     return neural_network
 
-def HBNN_M4(X_train, Y, X_error, Y_error, n_hidden):
+def HBNN_M4(X_train, Y, X_error, Y_error, n_hidden, noise_floor=False):
     """
     Construct a 4-input hierarchical Bayesian neural network with correlated latent inputs.
 
-    Similar to `HBNN_M3`, but extended to four input variables. Latent inputs are 
-    drawn from a multivariate normal with an LKJCholeskyCov prior, capturing correlations 
-    between features. The neural network uses two hidden layers with LeakyReLU activations 
+    Similar to `HBNN_M3`, but extended to four input variables. Latent inputs are
+    drawn from a multivariate normal with an LKJCholeskyCov prior, capturing correlations
+    between features. The neural network uses two hidden layers with LeakyReLU activations
     and a Student-t output likelihood for robustness to outliers.
 
     Parameters
@@ -148,9 +148,13 @@ def HBNN_M4(X_train, Y, X_error, Y_error, n_hidden):
     X_error : array-like
         Measurement uncertainties for each input feature.
     Y_error : array-like
-        Measurement uncertainty for the target variable (not directly used).
+        Measurement uncertainty for the target variable (only used if `noise_floor`).
     n_hidden : int
         Number of neurons in each hidden layer.
+    noise_floor : bool, optional
+        If True, the output noise of star i is sqrt(er² + Y_error_i²), so it cannot fall
+        below the measurement error of the target and `er` is the scatter beyond it.
+        If False (default), the output noise is `er` alone.
 
     Returns
     -------
@@ -230,13 +234,17 @@ def HBNN_M4(X_train, Y, X_error, Y_error, n_hidden):
         
         er = pm.HalfCauchy('er', beta=1)
 
+        # Without a floor, er can shrink towards zero when the target is almost fixed by the
+        # inputs (radius), and the chains then stop agreeing with each other.
+        sigma = pm.math.sqrt(er**2 + np.asarray(Y_error, dtype=float)**2) if noise_floor else er
+
         out = pm.StudentT(
             "y",
             nu=5,
             mu=act_out,
-            sigma=er,
+            sigma=sigma,
             observed=ann_output,
-            shape=X_train.shape[0], 
+            shape=X_train.shape[0],
         )
 
     return neural_network

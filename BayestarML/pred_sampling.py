@@ -98,13 +98,15 @@ def _predict_one_chain(chain_idx,
                        w_in_1_draws, b_1_draws,
                        w_1_2_draws, b_2_draws,
                        w_out_draws, b_out_draws,
-                       n_param, seed=None):
+                       n_param, seed=None, er_draws=None):
     """
     Generate posterior predictive draws for one chain of the HBNN.
 
     For each draw in the chain, samples latent inputs given observed
     features and their errors, then applies the neural network forward pass
-    to obtain predictions for all test points.
+    to obtain predictions for all test points. If `er_draws` is given, the
+    output noise of the model (Student-t, nu=5, scale er) is added to each
+    prediction.
 
     Parameters
     ----------
@@ -125,6 +127,8 @@ def _predict_one_chain(chain_idx,
     seed : int, optional
         Seeds NumPy's global RNG (used by `sample_latent_given_obs`) with
         seed + chain_idx, so results do not depend on worker scheduling.
+    er_draws : ndarray, shape (S,), optional
+        Draws of the output noise scale `er`. None (default) = no output noise.
 
     Returns
     -------
@@ -161,13 +165,17 @@ def _predict_one_chain(chain_idx,
                 x_lat, w1, b1, w2, b2, w_out, b_out
             )
 
+        if er_draws is not None:
+            # Same noise distribution as the likelihood of HBNN_M4
+            Y[s_local] += er_draws[s_idx] * np.random.standard_t(5, size=X.shape[0])
+
         s_local += 1
 
     return draws, Y
 
 
 def sample_post_pred_HBNN_para(trace, X, X_er, n_hidden, n_param, target,
-                          n_jobs=None, seed=None):
+                          n_jobs=None, seed=None, add_noise=False):
     """
     Parallel posterior predictive for HBNN with latent-input sampling.
 
@@ -194,6 +202,9 @@ def sample_post_pred_HBNN_para(trace, X, X_er, n_hidden, n_param, target,
         Number of worker processes; defaults to available CPUs.
     seed : int, optional
         Seed for the latent-input sampling (None = not reproducible).
+    add_noise : bool, optional
+        If True, the draws include the output noise `er` of the model, like the BART and
+        GP draws do. If False (default), they are the bare network output.
 
     Returns
     -------
@@ -223,6 +234,7 @@ def sample_post_pred_HBNN_para(trace, X, X_er, n_hidden, n_param, target,
     b_2_draws    = np.asarray(posterior["bias_2"]).reshape(S, n_hidden)
     w_out_draws  = np.asarray(posterior["w_2_out"]).reshape(S, n_hidden)
     b_out_draws  = np.asarray(posterior["bias_out"]).reshape(S)
+    er_draws     = np.asarray(posterior["er"]).reshape(S) if add_noise else None
 
     predictions = np.empty((S, N_test), dtype=float)
 
@@ -238,7 +250,7 @@ def sample_post_pred_HBNN_para(trace, X, X_er, n_hidden, n_param, target,
         w_in_1_draws=w_in_1_draws, b_1_draws=b_1_draws,
         w_1_2_draws=w_1_2_draws, b_2_draws=b_2_draws,
         w_out_draws=w_out_draws, b_out_draws=b_out_draws,
-        n_param=n_param, seed=seed
+        n_param=n_param, seed=seed, er_draws=er_draws
     )
 
     print(f"starting parallel prediction on {n_jobs} worker(s)…")
@@ -708,9 +720,14 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2, trace_filenam
     N_test = X.shape[0]
         
     with model:
-        pm.set_data({'X': X,
-                     'X_er': X_er
-            })
+        new_data = {'X': X,
+                    'X_er': X_er
+            }
+        if 'Y_er' in model.named_vars:
+            # BART_floor: the stars to predict have no measurement error of the target,
+            # so their draws carry only the inferred scatter `sig`
+            new_data['Y_er'] = np.zeros(N_test)
+        pm.set_data(new_data)
         pred = pm.sample_posterior_predictive(trace, predictions=True, random_seed=random_seed)
         if predictions_filename is not None:
             os.makedirs(os.path.dirname(predictions_filename), exist_ok=True)
