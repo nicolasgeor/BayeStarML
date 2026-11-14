@@ -1,0 +1,376 @@
+﻿Settings:
+  target = radius
+  seed = 665
+  split_seed = 665
+  draws = 1000
+  chains = 4
+  hbnn_nodes = 15
+  gp_n_inducing_mean = 80
+  gp_n_inducing_var = 40
+  bhs_draws = 1000
+  bhs_chains = 4
+  noise_floor = True
+  show_plots = False
+  database = Datasets/database_D_merged.txt
+  prediction_database = Datasets/database_D_merged.txt
+  prediction_mode = EB
+  prediction_star_class = None
+  training_dir = Dataset_D_v4_training
+  predictions_dir = Dataset_D_different_predictions
+Steps: train_hbnn, holdout_eval, predict, analysis
+Target normalisation from the training split (SPLIT_SEED = 665): radius mean = 1.7352443609022556, std = 0.402695564391989
+
+============================== train_hbnn ==============================
+A-label stars used after cleanup: 420
+Training stars: 266
+Test stars: 154
+Active Model: HBNN
+Target Variable: radius
+Seed: 665
+Train/test split seed: 665
+Nodes per hidden layer: 15
+Draws: 1000, chains: 4
+target_accept= 0.95
+python.exe : Initializing NUTS using jitter+adapt_diag...
+En línea: 1 Carácter: 723
++ ... = Get-Date; & "$e\python.exe" -W ignore run_pipeline.py *> $log; "exi ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Initializing NU...r+adapt_diag...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [Omega, X_latent, w_in_1, w_1_2, w_2_out, bias_1, bias_2, bias_out, er]
+                                                                               
+                             Step      Grad                                    
+  Progre…   Draw   Diverg…   size      evals     Speed     Elapsed   Remaini…  
+ ───────────────────────────────────────────────────────────────────────────── 
+  -------   2000   0         0.002     1023      2.74      0:12:09   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.002     1023      2.77      0:12:02   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.002     1023      2.66      0:12:32   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.002     1023      2.47      0:13:28   0:00:00   
+                                                 draws/s                       
+                                                                               
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 822 seconds.
+Chain 0 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+Chain 1 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+Chain 2 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+Chain 3 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See 
+https://arxiv.org/abs/1903.08008 for details
+The effective sample size per chain is smaller than 100 for some parameters.  A higher number is needed for reliable 
+rhat and ess computation. See https://arxiv.org/abs/1903.08008 for details
+Computing ... ---------------------------------------- 100% 0:00:00
+starting parallel prediction on 12 worker(s)…
+finished chain 2/4
+finished chain 1/4
+finished chain 3/4
+finished chain 4/4
+R-hats: [('X_latent', 1.0165399523808707), ('w_in_1', 1.0833425638866967), ('w_1_2', 1.0295232552243494), ('w_2_out', 1.0728882590961695), ('bias_1', 1.0354423529604955), ('bias_2', 1.0176462922168292), ('bias_out', 1.019939696914994), ('Omega', 1.0146950611711867), ('er', 1.0060390130308945), ('Omega_corr', 1.0083684564350783), ('Omega_stds', 1.0146950611711867), ('ann_input', 1.0165399523808707), ('act_1', 1.0434147514991896), ('act_2', 1.0663955533532046), ('act_out', 1.0120217879937212)]
+Computed from 4000 posterior samples and 266 observations log-likelihood matrix.
+
+         Estimate       SE
+elpd_loo   183.49    11.38
+p_loo       95.58        -
+
+There has been a warning during the calculation. Please check the results.
+------
+
+Pareto k diagnostic values:
+                         Count   Pct.
+(-Inf, 0.70]   (good)      244   91.7%
+   (0.70, 1]   (bad)        18    6.8%
+   (1, Inf)   (very bad)    4    1.5%
+
+MAE:  0.036744684205088037
+MARD 2.219336689146335
+MRD -0.8178059794852331
+
+Top 20 radius prediction errors by abs_relative_error_pct:
+original_row	ID	catalog	R_true	R_pred	R_pred_sigma	residual_R	abs_residual_R	relative_error_pct	abs_relative_error_pct	pull	abs_pull
+
+13156	KIC10130724	C14sdss	1.08	1.2392766191380118	0.0693306118386119	0.15927661913801172	0.15927661913801172	14.747835105371454	14.747835105371454	2.297349106175156	2.297349106175156
+
+13599	KIC8981766	C14sdss	1.82	2.0170637649434036	0.07550570112618453	0.1970637649434035	0.1970637649434035	10.827679392494698	10.827679392494698	2.6099190127917904	2.6099190127917904
+
+13486	KIC7019341	C14sdss	1.39	1.5150492229384929	0.04059426104130194	0.12504922293849297	0.12504922293849297	8.996346973992301	8.996346973992301	3.0804655567264487	3.0804655567264487
+
+13519	KIC7700968	serenelli17	1.148	1.2453860307545004	0.04589598115132697	0.09738603075450047	0.09738603075450047	8.483103724259623	8.483103724259623	2.12188580157818	2.12188580157818
+
+13470	KIC6593461	C14sdss	1.29	1.3975435954785846	0.044143871668437244	0.10754359547858461	0.10754359547858461	8.336712827797257	8.336712827797257	2.436206689941925	2.436206689941925
+
+13563	KIC8414062	serenelli17	1.726	1.5862682553837508	0.06065072634841854	-0.13973174461624915	0.13973174461624915	-8.095697834081642	8.095697834081642	-2.3038758647923867	2.3038758647923867
+
+13186	KIC10610027	serenelli17	1.48	1.5935283268599663	0.040562669528843395	0.11352832685996628	0.11352832685996628	7.670832895943668	7.670832895943668	2.7988376548845806	2.7988376548845806
+
+13581	KIC8677016	serenelli17	1.324	1.4159905486463835	0.03657533169755998	0.09199054864638345	0.09199054864638345	6.947926634923221	6.947926634923221	2.515098137921203	2.515098137921203
+
+13198	KIC10858780	C14sdss	1.43	1.5214443002109066	0.0445094242252821	0.09144430021090666	0.09144430021090666	6.394706308455012	6.394706308455012	2.054492993395425	2.054492993395425
+
+13506	KIC7465072	C14sdss	1.66	1.7627637426322629	0.06283643771375945	0.10276374263226296	0.10276374263226296	6.19058690555801	6.19058690555801	1.6354164298807876	1.6354164298807876
+
+13161	KIC10214328	serenelli17	1.765	1.872999670984604	0.05211519840282166	0.10799967098460406	0.10799967098460406	6.1189615288727515	6.1189615288727515	2.072325814627555	2.072325814627555
+
+13649	KIC9693187	serenelli17	1.423	1.5081748870766822	0.03073751379596444	0.08517488707668219	0.08517488707668219	5.985585880300927	5.985585880300927	2.7710402227738045	2.7710402227738045
+
+12349	KIC9955598	Yildiz19	0.8699999999999999	0.9219316645794282	0.032240313176432174	0.05193166457942833	0.05193166457942833	5.969156848210154	5.969156848210154	1.610767993947113	1.610767993947113
+
+13523	KIC7800289	serenelli17	2.858	2.6960977173149936	0.05729810501544222	-0.1619022826850065	0.1619022826850065	-5.664880429846273	5.664880429846273	-2.825613214282964	2.825613214282964
+
+13158	KIC10147635	serenelli17	2.688	2.5559829243061425	0.052013311305193995	-0.13201707569385768	0.13201707569385768	-4.911349542182205	4.911349542182205	-2.5381401872153946	2.5381401872153946
+
+13574	KIC8516041	C14sdss	1.3	1.3603726597347443	0.036945348122459205	0.06037265973474426	0.06037265973474426	4.644050748826482	4.644050748826482	1.6341072097800458	1.6341072097800458
+
+13660	KIC9787965	serenelli17	2.062	2.1570480924059625	0.06050167995870799	0.09504809240596268	0.09504809240596268	4.6095098160020695	4.6095098160020695	1.5709992263162345	1.5709992263162345
+
+13657	KIC9762786	C14sdss	1.96	2.048866644611636	0.05170018387489785	0.08886664461163596	0.08886664461163596	4.534012480185509	4.534012480185509	1.7188844981029874	1.7188844981029874
+
+12324	KIC6603624	Yildiz19	1.14	1.190537610001807	0.02339637988432586	0.05053761000180712	0.05053761000180712	4.433123684369046	4.433123684369046	2.1600610971299976	2.1600610971299976
+
+13334	KIC3761840	serenelli17	2.814	2.6909624855338947	0.06159263142464027	-0.12303751446610534	0.12303751446610534	-4.372335268873679	4.372335268873679	-1.9976012003423498	1.9976012003423498
+
+Top 10 radius prediction uncertainties by R_pred_sigma:
+original_row	ID	catalog	R_true	R_pred	R_pred_sigma	residual_R	abs_residual_R	relative_error_pct	abs_relative_error_pct	pull	abs_pull
+
+13599	KIC8981766	C14sdss	1.82	2.0170637649434036	0.07550570112618453	0.1970637649434035	0.1970637649434035	10.827679392494698	10.827679392494698	2.6099190127917904	2.6099190127917904
+
+13156	KIC10130724	C14sdss	1.08	1.2392766191380118	0.0693306118386119	0.15927661913801172	0.15927661913801172	14.747835105371454	14.747835105371454	2.297349106175156	2.297349106175156
+
+13262	KIC11817562	serenelli17	2.477	2.480599198168207	0.06872704630711018	0.003599198168207085	0.003599198168207085	0.1453047302465517	0.1453047302465517	0.05236945804602006	0.05236945804602006
+
+13374	KIC4756112	serenelli17	2.619	2.579815028322375	0.0662655143979557	-0.039184971677625136	0.039184971677625136	-1.4961806673396385	1.4961806673396385	-0.5913327925336983	0.5913327925336983
+
+13218	KIC11098033	C14sdss	2.26	2.1769914973205124	0.0641878195139589	-0.08300850267948734	0.08300850267948734	-3.672942596437493	3.672942596437493	-1.2932126890746851	1.2932126890746851
+
+13268	KIC11919192	C14sdss	2.29	2.2659276875853314	0.06379372054748021	-0.024072312414668673	0.024072312414668673	-1.0511926818632606	1.0511926818632606	-0.37734611193827766	0.37734611193827766
+
+13506	KIC7465072	C14sdss	1.66	1.7627637426322629	0.06283643771375945	0.10276374263226296	0.10276374263226296	6.19058690555801	6.19058690555801	1.6354164298807876	1.6354164298807876
+
+13283	KIC12253255	C14sdss	2.27	2.3322180716681546	0.06242257696352753	0.06221807166815463	0.06221807166815463	2.740884214456151	2.740884214456151	0.9967238568908747	0.9967238568908747
+
+13420	KIC5683538	serenelli17	2.302	2.2021126673005407	0.06237711901414297	-0.09988733269945937	0.09988733269945937	-4.339154330993022	4.339154330993022	-1.6013457222481144	1.6013457222481144
+
+13334	KIC3761840	serenelli17	2.814	2.6909624855338947	0.06159263142464027	-0.12303751446610534	0.12303751446610534	-4.372335268873679	4.372335268873679	-1.9976012003423498	1.9976012003423498
+
+Top 10 radius prediction pulls by abs_pull:
+original_row	ID	catalog	R_true	R_pred	R_pred_sigma	residual_R	abs_residual_R	relative_error_pct	abs_relative_error_pct	pull	abs_pull
+
+13486	KIC7019341	C14sdss	1.39	1.5150492229384929	0.04059426104130194	0.12504922293849297	0.12504922293849297	8.996346973992301	8.996346973992301	3.0804655567264487	3.0804655567264487
+
+13523	KIC7800289	serenelli17	2.858	2.6960977173149936	0.05729810501544222	-0.1619022826850065	0.1619022826850065	-5.664880429846273	5.664880429846273	-2.825613214282964	2.825613214282964
+
+13186	KIC10610027	serenelli17	1.48	1.5935283268599663	0.040562669528843395	0.11352832685996628	0.11352832685996628	7.670832895943668	7.670832895943668	2.7988376548845806	2.7988376548845806
+
+13649	KIC9693187	serenelli17	1.423	1.5081748870766822	0.03073751379596444	0.08517488707668219	0.08517488707668219	5.985585880300927	5.985585880300927	2.7710402227738045	2.7710402227738045
+
+13599	KIC8981766	C14sdss	1.82	2.0170637649434036	0.07550570112618453	0.1970637649434035	0.1970637649434035	10.827679392494698	10.827679392494698	2.6099190127917904	2.6099190127917904
+
+13158	KIC10147635	serenelli17	2.688	2.5559829243061425	0.052013311305193995	-0.13201707569385768	0.13201707569385768	-4.911349542182205	4.911349542182205	-2.5381401872153946	2.5381401872153946
+
+13581	KIC8677016	serenelli17	1.324	1.4159905486463835	0.03657533169755998	0.09199054864638345	0.09199054864638345	6.947926634923221	6.947926634923221	2.515098137921203	2.515098137921203
+
+13470	KIC6593461	C14sdss	1.29	1.3975435954785846	0.044143871668437244	0.10754359547858461	0.10754359547858461	8.336712827797257	8.336712827797257	2.436206689941925	2.436206689941925
+
+13507	KIC7510397	silva17	1.8574	1.7949330345249728	0.026347786226390668	-0.06246696547502717	0.06246696547502717	-3.363140167709011	3.363140167709011	-2.3708620124015782	2.3708620124015782
+
+13563	KIC8414062	serenelli17	1.726	1.5862682553837508	0.06065072634841854	-0.13973174461624915	0.13973174461624915	-8.095697834081642	8.095697834081642	-2.3038758647923867	2.3038758647923867
+--- train_hbnn finished in 15.1 min
+
+============================== holdout_eval ==============================
+Evaluating Dataset D A-label 4-parameter BHS on the holdout test set...
+Multiprocess sampling (4 chains in 4 jobs)
+CompoundStep
+>NUTS: [X_dist, sig]
+>PGBART: [mu]
+                                                                               
+                             Step      Grad                                    
+  Progre…   Draw   Diverg…   size      evals     Speed     Elapsed   Remaini…  
+ ───────────────────────────────────────────────────────────────────────────── 
+  -------   2000   2         0.290     15        8.32      0:04:00   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.326     15        8.38      0:03:58   0:00:00   
+                                                 draws/s                       
+  -------   2000   2         0.278     15        8.41      0:03:57   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.289     15        8.30      0:04:00   0:00:00   
+                                                 draws/s                       
+                                                                               
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 254 seconds.
+There were 4 divergences after tuning. Increase `target_accept` or reparameterize.
+The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See 
+https://arxiv.org/abs/1903.08008 for details
+The effective sample size per chain is smaller than 100 for some parameters.  A higher number is needed for reliable 
+rhat and ess computation. See https://arxiv.org/abs/1903.08008 for details
+Computing ... ---------------------------------------- 100% 0:00:00
+Sampling: [X_dist, mu, y]
+Sampling ... ---------------------------------------- 100% 0:00:00 / 0:04:53
+Sampling: [X_new_latent, X_var_new_latent, f_mu_pred, log_var_pred_latent, y_pred]
+Sampling ... ---------------------------------------- 100% 0:00:00 / 0:00:03
+starting parallel prediction on 12 worker(s)…
+finished chain 4/4
+finished chain 3/4
+finished chain 1/4
+finished chain 2/4
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [mu, sigma, beta_con]
+                                                                               
+                             Step      Grad                                    
+  Progre…   Draw   Diverg…   size      evals     Speed     Elapsed   Remaini…  
+ ───────────────────────────────────────────────────────────────────────────── 
+  -------   2000   0         0.346     15        360.44    0:00:06   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.316     15        360.44    0:00:06   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.277     15        360.44    0:00:05   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.330     15        260.59    0:00:07   0:00:00   
+                                                 draws/s                       
+                                                                               
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 21 seconds.
+
+Summed LOO log score on the training stars and mean BHS weight on the predicted stars:
+  BART: LOO score = 159.1, mean weight = 0.125
+  HBNN: LOO score = 183.5, mean weight = 0.117
+  GP: LOO score = 248.7, mean weight = 0.759
+MARD BART: 2.6178232610718446
+MRD BART: -0.9490426981779243
+MAE BART: 0.03963249949041313
+68% interval coverage BART: 0.8766233766233766
+95% interval coverage BART: 0.9935064935064936
+MARD GP: 1.9207136289803663
+MRD GP: -0.5329002705635482
+MAE GP: 0.030482276820096497
+68% interval coverage GP: 0.7597402597402597
+95% interval coverage GP: 0.935064935064935
+MARD HBNN: 2.219336689146335
+MRD HBNN: -0.8178059794852331
+MAE HBNN: 0.036744684205088037
+68% interval coverage HBNN: 0.6623376623376623
+95% interval coverage HBNN: 0.8896103896103896
+MARD BHS: 1.9304145788808098
+MRD BHS: -0.6322516056895042
+MAE BHS: 0.030570595182302315
+68% interval coverage BHS: 0.7012987012987013
+95% interval coverage BHS: 0.9090909090909091
+
+--- Evaluation Complete ---
+--- holdout_eval finished in 10.6 min
+
+============================== predict ==============================
+Preparing 4-feature radius predictions for Datasets/database_D_merged.txt...
+Predicting radius for 300 star(s)...
+Multiprocess sampling (4 chains in 4 jobs)
+CompoundStep
+>NUTS: [X_dist, sig]
+>PGBART: [mu]
+                                                                               
+                             Step      Grad                                    
+  Progre…   Draw   Diverg…   size      evals     Speed     Elapsed   Remaini…  
+ ───────────────────────────────────────────────────────────────────────────── 
+  -------   2000   0         0.202     15        6.82      0:04:53   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.300     15        6.88      0:04:50   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.291     15        6.88      0:04:51   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.222     15        6.75      0:04:56   0:00:00   
+                                                 draws/s                       
+                                                                               
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 310 seconds.
+The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See 
+https://arxiv.org/abs/1903.08008 for details
+The effective sample size per chain is smaller than 100 for some parameters.  A higher number is needed for reliable 
+rhat and ess computation. See https://arxiv.org/abs/1903.08008 for details
+Computing ... ---------------------------------------- 100% 0:00:00
+Sampling: [X_dist, mu, y]
+Sampling ... ---------------------------------------- 100% 0:00:00 / 0:04:14
+Sampling: [X_new_latent, X_var_new_latent, f_mu_pred, log_var_pred_latent, y_pred]
+Sampling ... ---------------------------------------- 100% 0:00:00 / 0:00:06
+starting parallel prediction on 12 worker(s)…
+finished chain 4/4
+finished chain 3/4
+finished chain 2/4
+finished chain 1/4
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [mu, sigma, beta_con]
+                                                                               
+                             Step      Grad                                    
+  Progre…   Draw   Diverg…   size      evals     Speed     Elapsed   Remaini…  
+ ───────────────────────────────────────────────────────────────────────────── 
+  -------   2000   0         0.293     15        327.17    0:00:06   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.410     15        387.63    0:00:05   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.281     15        288.12    0:00:06   0:00:00   
+                                                 draws/s                       
+  -------   2000   0         0.283     15        216.83    0:00:09   0:00:00   
+                                                 draws/s                       
+                                                                               
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 23 seconds.
+
+Summed LOO log score on the training stars and mean BHS weight on the predicted stars:
+  BART: LOO score = 152.1, mean weight = 0.101
+  HBNN: LOO score = 183.5, mean weight = 0.085
+  GP: LOO score = 248.7, mean weight = 0.814
+Saved predictions to Dataset_D_different_predictions/EB_oblateness_fill_factor_radius_predictions_4_features_1000_draws_floor_seed_665.csv
+ original_row       SIMBAD_ID  rad_pred  rad_sigma
+           22     NGTS-EB-8_A  1.065173   4.538789
+           23     NGTS-EB-8_B  1.077777   6.140715
+           26        HD4875_A  1.311472   0.019478
+           27        HD4875_B  1.132672   0.949661
+           32 TYC_8547-22-1_A  1.610682   0.020848
+
+Results of the 4 models on ALL 300 EB stars with a catalogue radius (R), with NO cuts
+(includes stars outside the training range). NOT comparable to the holdout MARD/MRD/MAE
+of the training and holdout steps, which are measured on asteroseismic test stars:
+MARD BART: 35.411241858245184
+MRD BART: -0.9223638349237078
+MAE BART: 3.662260004494645
+MARD GP: 44.34533849406693
+MRD GP: -5.8915038396610955
+MAE GP: 3.8520994579523236
+MARD HBNN: 29.753252899547398
+MRD HBNN: 0.8019166957561469
+MAE HBNN: 3.355821130760772
+MARD BHS: 42.33163162362785
+MRD BHS: -4.537562991428879
+MAE BHS: 3.8069071356893325
+
+Results of the 4 models on the 102 EB stars kept by the oblateness analysis cuts
+(0.5 <= R <= 2.5, inputs within the robust feature ranges; same selection as the analysis step):
+MARD BART: 5.5768368211147035
+MRD BART: 0.944564188072332
+MAE BART: 0.09251369103158526
+MARD GP: 5.985198605383581
+MRD GP: 1.8116712279317695
+MAE GP: 0.10056187051098311
+MARD HBNN: 5.143733622665759
+MRD HBNN: 0.6910948250596601
+MAE HBNN: 0.0843122742842094
+MARD BHS: 5.737079266198672
+MRD BHS: 1.6190917645254816
+MAE BHS: 0.0962484322143705
+
+--- Prediction Complete ---
+--- predict finished in 11.5 min
+
+============================== analysis ==============================
+Analysis complete.
+Output directory: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_665_radius_residuals_floor
+Residual table: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_665_radius_residuals_floor\EB_radius_residuals_with_oblateness.csv
+Regression table: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_665_radius_residuals_floor\EB_multivariable_regression_HC3.csv
+Plot-bin table: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_665_radius_residuals_floor\EB_plot_binned_residuals_vs_log10_oblateness.csv
+Pre-radius-cut plot-bin table: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_665_radius_residuals_floor\EB_plot_binned_residuals_vs_log10_oblateness_before_rad_cut.csv
+Plots directory: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_665_radius_residuals_floor\plots
+Pre-radius-cut plots directory: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_665_radius_residuals_floor\plots_before_rad_cut
+Usable rows before radius cut: 300 / 300
+Rows after 0.500-2.500 solar-radius cut: 211
+Rows left by ROBUST=True feature-range cut: 102 / 211
+Final usable rows: 102 / 300
+--- analysis finished in 0.1 min
+
+Pipeline finished in 37.2 min.
