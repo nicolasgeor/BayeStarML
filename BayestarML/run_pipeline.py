@@ -36,19 +36,19 @@ import exec_example_train
 #######################################################################################
 # SETTINGS
 #######################################################################################
-TARGET_VAR = "mass"   # "radius" or "mass"
+TARGET_VAR = "radius"   # "radius" or "mass"
 
-SEED = 648             # MCMC seed for GP, HBNN and BART; it is the "seed_N" in every file name
-SPLIT_SEED = 648      # train/test split seed (seed 239 used 4159; seeds 2805 and 2695 used 5732).
+SEED = 145             # MCMC seed for GP, HBNN and BART; it is the "seed_N" in every file name
+SPLIT_SEED = 145      # train/test split seed (seed 239 used 4159; seeds 2805 and 2695 used 5732).
                         # Not part of the file names, so it is stored in the GP/HBNN traces and
                         # checked before they are reused
-DRAWS = 1000            # draws per chain (and as many tuning steps) for GP, HBNN and BART
+DRAWS = 3000            # draws per chain (and as many tuning steps) for GP, HBNN and BART
 CHAINS = 4
 
 HBNN_NODES = 15
-GP_N_INDUCING_MEAN = 80
-GP_N_INDUCING_VAR = 40
-BHS_DRAWS = 1000         # per chain; the stacked predictions use BHS_DRAWS * BHS_CHAINS draws
+GP_N_INDUCING_MEAN = 100
+GP_N_INDUCING_VAR = 50
+BHS_DRAWS = 3000         # per chain; the stacked predictions use BHS_DRAWS * BHS_CHAINS draws
 BHS_CHAINS = 4
 
 NOISE_MODEL = "floor"   # How BART and the HBNN treat the noise of the target. The GP is the same in all three.
@@ -59,6 +59,7 @@ NOISE_MODEL = "floor"   # How BART and the HBNN treat the noise of the target. T
                         #   "free":  as in the runs up to October 2026: HBNN noise inferred with no lower limit
                         #            (for radius its chains do not converge); BART inferred for mass, 0.3 for radius.
                         # Files carry "floor" or "fixed" in their names; "free" keeps the names of the earlier runs.
+                        # Decided 2026-11-15: use "floor" for radius and "free" for mass.
 
 # Steps to run. A step that is off is skipped, and later steps use the files it wrote before.
 RUN_TRAIN_GP = False
