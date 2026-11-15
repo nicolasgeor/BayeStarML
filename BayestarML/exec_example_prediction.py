@@ -82,17 +82,20 @@ def prepare_database_d_predictions(cfg):
     return prediction_rows, x_pred, x_pred_er
 
 
-def build_prediction_table(prediction_rows, bhs_pred, target):
-    # Column names expected by the oblateness analysis scripts: rad_* for radius, mass_* for mass
+def build_prediction_table(prediction_rows, bhs_pred, target, model_preds=None):
+    # Column names expected by the oblateness analysis scripts: rad_* for radius, mass_* for mass.
+    # The columns without a model name are the stack (BHS). model_preds = {name: draws (S, N)} adds
+    # the same six columns for each single model, named e.g. rad_pred_GP, rad_p16_GP.
     prefix = "rad" if target == "radius" else "mass"
-    prediction_summary = pd.DataFrame({
-        f"{prefix}_pred": bhs_pred.mean(0),
-        f"{prefix}_sigma": bhs_pred.std(0),
-        f"{prefix}_p16": np.percentile(bhs_pred, 16, axis=0),
-        f"{prefix}_p84": np.percentile(bhs_pred, 84, axis=0),
-        f"{prefix}_p02_5": np.percentile(bhs_pred, 2.5, axis=0),
-        f"{prefix}_p97_5": np.percentile(bhs_pred, 97.5, axis=0),
-    }, index=prediction_rows.index)
+    columns = {}
+    for suffix, pred in [("", bhs_pred)] + [(f"_{name}", pred) for name, pred in (model_preds or {}).items()]:
+        columns[f"{prefix}_pred{suffix}"] = pred.mean(0)
+        columns[f"{prefix}_sigma{suffix}"] = pred.std(0)
+        columns[f"{prefix}_p16{suffix}"] = np.percentile(pred, 16, axis=0)
+        columns[f"{prefix}_p84{suffix}"] = np.percentile(pred, 84, axis=0)
+        columns[f"{prefix}_p02_5{suffix}"] = np.percentile(pred, 2.5, axis=0)
+        columns[f"{prefix}_p97_5{suffix}"] = np.percentile(pred, 97.5, axis=0)
+    prediction_summary = pd.DataFrame(columns, index=prediction_rows.index)
 
     return pd.concat(
         [prediction_rows.reset_index(names="original_row"), prediction_summary.reset_index(drop=True)],
@@ -137,8 +140,10 @@ def run_eb_predictions(cfg):
 
     print(f"Predicting {cfg.target} for {len(prediction_rows)} star(s)...")
     base_preds, bhs_pred, _bhs_w = predict4(X, X_er, cfg, test=False)
+    bart_pred, gp_pred, hbnn_pred = base_preds
 
-    prediction_table = build_prediction_table(prediction_rows, bhs_pred, cfg.target)
+    prediction_table = build_prediction_table(prediction_rows, bhs_pred, cfg.target,
+                                              model_preds={"BART": bart_pred, "HBNN": hbnn_pred, "GP": gp_pred})
     os.makedirs(os.path.dirname(cfg.eb_predictions_path), exist_ok=True)
     prediction_table.to_csv(cfg.eb_predictions_path, index=False)
 
@@ -154,7 +159,6 @@ def run_eb_predictions(cfg):
     print(f"\nResults of the 4 models on ALL {has_true.sum()} {stars} with a catalogue {cfg.target} ({true_col}), with NO cuts")
     print("(includes stars outside the training range). NOT comparable to the holdout MARD/MRD/MAE")
     print("of the training and holdout steps, which are measured on asteroseismic test stars:")
-    bart_pred, gp_pred, hbnn_pred = base_preds
     model_preds = [("BART", bart_pred), ("GP", gp_pred), ("HBNN", hbnn_pred), ("BHS", bhs_pred)]
     print_model_metrics(y_true[has_true], {name: pred[:, has_true] for name, pred in model_preds})
 

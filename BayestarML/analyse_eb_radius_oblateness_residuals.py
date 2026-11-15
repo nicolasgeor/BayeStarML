@@ -28,6 +28,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from eb_model_table import per_model_table
+
 try:
     from scipy import stats
 except Exception:  # pragma: no cover
@@ -766,6 +768,11 @@ def main(input_path: Path | None = None, output_dir: Path | None = None) -> None
     corr = correlation_rows(clean, ycols=ycols, xcols=xcols)
     corr.to_csv(outdir / "EB_residual_correlation_summary.csv", index=False)
 
+    # The same trend for each single model (empty if the predictions file has no per-model columns).
+    by_model = per_model_table(clean, true_col="R", prefix="rad")
+    if not by_model.empty:
+        by_model.to_csv(outdir / "EB_residual_correlation_by_model.csv", index=False)
+
     regression = multivariable_regression_table(clean)
     regression_path = outdir / "EB_multivariable_regression_HC3.csv"
     regression.to_csv(regression_path, index=False)
@@ -855,6 +862,10 @@ def main(input_path: Path | None = None, output_dir: Path | None = None) -> None
     key_corr = corr[(corr["x"].isin(["log10_oblateness", "fill_factor", "log10_fill_factor"])) & (corr["y"] == "frac_residual")]
     summary_lines.append(key_corr.to_string(index=False))
     summary_lines.append("")
+    if not by_model.empty:
+        summary_lines.append("Each model on its own (BHS is the stack; trend = Spearman rho with log10 oblateness):")
+        summary_lines.append(by_model.to_string(index=False, float_format=lambda v: f"{v:.4g}"))
+        summary_lines.append("")
     summary_lines.append("Multivariable regression:")
     summary_lines.append("  Responses: frac_residual and abs_frac_residual")
     summary_lines.append("  Predictors are standardized before fitting; standard errors are HC3 robust.")
@@ -868,6 +879,9 @@ def main(input_path: Path | None = None, output_dir: Path | None = None) -> None
     report_path.write_text("\n".join(summary_lines), encoding="utf-8")
 
     print("Analysis complete.")
+    if not by_model.empty:
+        print("Each model on its own (BHS is the stack; trend = Spearman rho with log10 oblateness):")
+        print(by_model.to_string(index=False, float_format=lambda v: f"{v:.4g}"))
     print(f"Output directory: {outdir.resolve()}")
     print(f"Residual table: {residual_path.resolve()}")
     print(f"Regression table: {regression_path.resolve()}")
