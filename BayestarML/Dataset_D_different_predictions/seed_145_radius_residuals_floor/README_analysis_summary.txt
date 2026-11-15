@@ -19,23 +19,30 @@ Residual definitions:
   sigma_delta_R = sqrt(rad_sigma^2 + sigma_R_true^2)
   z_R = delta_R / sigma_delta_R
 
-delta_R: n=102, mean=-0.0454507, median=-0.00627565, std=0.159189, min=-0.846375, max=0.289164
-frac_residual: n=102, mean=-0.0215984, median=-0.00441901, std=0.0822713, min=-0.357875, max=0.175357
-z_R: n=102, mean=-0.341889, median=-0.0631195, std=1.63169, min=-7.70578, max=4.1706
-z_R_q68: n=102, mean=-0.410784, median=-0.116609, std=1.79437, min=-7.9781, max=4.36304
+delta_R: n=102, mean=-0.0462547, median=-0.00489629, std=0.161047, min=-0.874503, max=0.285722
+frac_residual: n=102, mean=-0.0220115, median=-0.00324235, std=0.0829133, min=-0.369769, max=0.17327
+z_R: n=102, mean=-0.348376, median=-0.0573649, std=1.64795, min=-8.01075, max=4.14891
+z_R_q68: n=102, mean=-0.415959, median=-0.127116, std=1.80714, min=-8.14503, max=4.33923
 oblateness: n=102, mean=0.0107463, median=0.00277, std=0.0194447, min=4.9e-07, max=0.118
 fill_factor: n=102, mean=0.283757, median=0.2517, std=0.195833, min=0.0141, max=0.875
-sigma_pred_q68: n=102, mean=0.0519709, median=0.0333195, std=0.0532295, min=0.015204, max=0.284334
-rad_sigma: n=102, mean=0.560633, median=0.0362609, std=1.97556, min=0.0168528, max=14.6095
+sigma_pred_q68: n=102, mean=0.0513332, median=0.0327771, std=0.0528979, min=0.0144007, max=0.286201
+rad_sigma: n=102, mean=0.521562, median=0.0362175, std=1.74626, min=0.0161558, max=12.1844
 
-68% interval coverage: 0.343
-95% interval coverage: 0.696
+68% interval coverage: 0.353
+95% interval coverage: 0.716
 
 Most relevant correlations:
                 x             y   n  pearson_r  pearson_p  spearman_rho  spearman_p  linear_slope  linear_intercept
- log10_oblateness frac_residual 102  -0.258389   0.008738     -0.321803    0.000973     -0.018795         -0.073928
-      fill_factor frac_residual 102  -0.171668   0.084486     -0.323569    0.000909     -0.072119         -0.001134
-log10_fill_factor frac_residual 102  -0.259720   0.008386     -0.323569    0.000909     -0.056704         -0.059881
+ log10_oblateness frac_residual 102  -0.258156   0.008801     -0.325738    0.000835     -0.018924         -0.074702
+      fill_factor frac_residual 102  -0.173304   0.081523     -0.327504    0.000779     -0.073375         -0.001191
+log10_fill_factor frac_residual 102  -0.259440   0.008459     -0.327504    0.000779     -0.057085         -0.060551
+
+Each model on its own (BHS is the stack; trend = Spearman rho with log10 oblateness):
+model   n  MARD_percent  median_abs_frac_residual_percent  mean_frac_residual_percent  coverage_68  coverage_95  median_half_width_68  spearman_rho_frac_residual  spearman_p_frac_residual  spearman_rho_abs_frac_residual  spearman_p_abs_frac_residual
+  BHS 102         5.704                              3.96                      -2.201       0.3529       0.7157               0.03278                     -0.3257                 0.0008352                          0.3339                     0.0006041
+ BART 102         5.354                             4.039                      -2.137       0.6863        0.902               0.07482                     -0.3818                 7.494e-05                          0.3587                      0.000214
+ HBNN 102         5.084                             3.623                     -0.8645       0.4706       0.7549               0.04265                     -0.2682                  0.006429                          0.2504                       0.01112
+   GP 102         5.995                             4.073                      -2.356       0.3824       0.7647               0.03634                     -0.3244                  0.000879                          0.3349                     0.0005808
 
 Multivariable regression:
   Responses: frac_residual and abs_frac_residual
