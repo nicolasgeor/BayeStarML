@@ -11,6 +11,7 @@ import pytensor.tensor as tt
 import pymc as pm
 import arviz as az
 from utils import find_pointwise_loo
+from models import bart
 from tqdm.auto import tqdm
 from preprocess import denormalise_err, denormalise_val
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -695,6 +696,8 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2, trace_filenam
         Number of MCMC chains. Default is 2.
     random_seed : int, optional
         Seed for sampling and posterior predictive draws (None = not reproducible).
+        With a seed, the trees are sampled with models.bart.SeededPGBART, so that two runs
+        with the same seed give the same BART.
 
     Returns
     -------
@@ -705,7 +708,14 @@ def sample_pred_BART(model, X, X_er, target, draws=1000, chains=2, trace_filenam
             Pointwise LOO log predictive densities for the BART model.
     """
     with model:
-        trace = pm.sample(draws=draws, tune=draws, chains=chains, random_seed=random_seed)
+        if random_seed is None:
+            trace = pm.sample(draws=draws, tune=draws, chains=chains)
+        else:
+            # pymc_bart does not use random_seed for the trees; SeededPGBART does (see models/bart.py)
+            bart.seed_bart_inputs(model, random_seed)
+            step = bart.SeededPGBART([model['mu']])
+            trace = pm.sample(draws=draws, tune=draws, chains=chains, step=step, random_seed=random_seed)
+            bart.order_bart_trees(model)
         trace.extend(pm.compute_log_likelihood(trace))
         if trace_filename is not None:
             os.makedirs(os.path.dirname(trace_filename), exist_ok=True)
