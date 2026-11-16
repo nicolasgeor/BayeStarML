@@ -1,0 +1,605 @@
+Settings:
+  target = radius
+  seed = 146
+  split_seed = 146
+  draws = 3000
+  chains = 4
+  hbnn_nodes = 15
+  gp_n_inducing_mean = 100
+  gp_n_inducing_var = 50
+  bhs_draws = 3000
+  bhs_chains = 4
+  noise_model = floor
+  show_plots = False
+  database = Datasets/database_D_merged.txt
+  prediction_database = Datasets/database_D_merged.txt
+  prediction_mode = EB
+  prediction_star_class = None
+  training_dir = Dataset_D_v4_training
+  predictions_dir = Dataset_D_different_predictions
+Steps: train_hbnn, holdout_eval, predict, analysis
+Target normalisation from the training split (SPLIT_SEED = 146): radius mean = 1.7302090225563909, std = 0.4108338631082986
+
+============================== train_hbnn ==============================
+A-label stars used after cleanup: 420
+Training stars: 266
+Test stars: 154
+Active Model: HBNN
+Target Variable: radius
+Seed: 146
+Train/test split seed: 146
+Nodes per hidden layer: 15
+Draws: 3000, chains: 4
+target_accept= 0.95
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [Omega, X_latent, w_in_1, w_1_2, w_2_out, bias_1, bias_2, bias_out, er]
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+                                                                               
+                             Step      Grad                                    
+  Progre…   Draw   Diverg…   size      evals     Speed     Elapsed   Remaini…  
+ ───────────────────────────────────────────────────────────────────────────── 
+  -------   6000   0         0.002     1023      2.74      0:36:28   0:00:00   
+                                                 draws/s                       
+  -------   6000   0         0.002     1023      2.73      0:36:38   0:00:00   
+                                                 draws/s                       
+  -------   6000   0         0.002     1023      2.73      0:36:36   0:00:00   
+                                                 draws/s                       
+  -------   6000   0         0.002     1023      2.70      0:36:58   0:00:00   
+                                                 draws/s                       
+                                                                               
+Sampling 4 chains for 3_000 tune and 3_000 draw iterations (12_000 + 12_000 draws total) took 2235 seconds.
+Chain 0 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+Chain 1 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+Chain 2 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+Chain 3 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See https://arxiv.org/abs/1903.08008 for details
+The effective sample size per chain is smaller than 100 for some parameters.  A higher number is needed for reliable rhat and ess computation. See https://arxiv.org/abs/1903.08008 for details
+Computing ... ---------------------------------------- 100% 0:00:00
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:1042: RuntimeWarning: overflow encountered in exp
+  weights = 1 / np.exp(len_scale - len_scale[:, None]).sum(axis=1)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:782: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
+  warnings.warn(
+starting parallel prediction on 12 worker(s)…
+finished chain 3/4
+finished chain 1/4
+finished chain 2/4
+finished chain 4/4
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\diagnostics.py:596: RuntimeWarning: invalid value encountered in scalar divide
+  (between_chain_variance / within_chain_variance + num_samples - 1) / (num_samples)
+R-hats: [('X_latent', 1.0071778457896121), ('w_in_1', 1.0356675944046703), ('w_1_2', 1.0158930925184748), ('w_2_out', 1.0358204486011735), ('bias_1', 1.0301631009600416), ('bias_2', 1.007840057086108), ('bias_out', 1.0075707135140235), ('Omega', 1.0064980012054108), ('er', 1.0032631749729946), ('Omega_corr', 1.0066710744780978), ('Omega_stds', 1.003184685749), ('ann_input', 1.0071778457896121), ('act_1', 1.0326871018844217), ('act_2', 1.0223300943892881), ('act_out', 1.0039487841731851)]
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:1042: RuntimeWarning: overflow encountered in exp
+  weights = 1 / np.exp(len_scale - len_scale[:, None]).sum(axis=1)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:782: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
+  warnings.warn(
+Computed from 12000 posterior samples and 266 observations log-likelihood matrix.
+
+         Estimate       SE
+elpd_loo   183.91    10.86
+p_loo       94.65        -
+
+There has been a warning during the calculation. Please check the results.
+------
+
+Pareto k diagnostic values:
+                         Count   Pct.
+(-Inf, 0.70]   (good)      251   94.4%
+   (0.70, 1]   (bad)        13    4.9%
+   (1, Inf)   (very bad)    2    0.8%
+
+MAE:  0.03220830790405892
+MARD 1.9028559325281094
+MRD -0.8608355649137546
+
+Top 20 radius prediction errors by abs_relative_error_pct:
+original_row	ID	catalog	R_true	R_pred	R_pred_sigma	residual_R	abs_residual_R	relative_error_pct	abs_relative_error_pct	pull	abs_pull
+13599	KIC8981766	C14sdss	1.82	2.022642222454554	0.07631947972004692	0.2026422224545541	0.2026422224545541	11.134188046953522	11.134188046953522	2.6551834891679147	2.6551834891679147
+13595	KIC8940939	serenelli17	1.458	1.6142084963748617	0.04055254762546829	0.15620849637486178	0.15620849637486178	10.71388864025115	10.71388864025115	3.852002044792813	3.852002044792813
+13486	KIC7019341	C14sdss	1.39	1.5040888567584638	0.040099166675754805	0.11408885675846392	0.11408885675846392	8.207831421472225	8.207831421472225	2.845167773210748	2.845167773210748
+13470	KIC6593461	C14sdss	1.29	1.3911459651727718	0.04329775514276986	0.10114596517277175	0.10114596517277175	7.840772494013313	7.840772494013313	2.3360556416667193	2.3360556416667193
+13544	KIC8174170	C14sdss	2.18	2.015604173126331	0.05697842617984469	-0.16439582687366938	0.16439582687366938	-7.541092975856394	7.541092975856394	-2.885229338465338	2.885229338465338
+13559	KIC8377423	C14sdss	1.99	2.1392713696255723	0.07106221568110442	0.1492713696255723	0.1492713696255723	7.501073850531272	7.501073850531272	2.1005729724982927	2.1005729724982927
+13136	EPIC206189649	lund16	2.0	2.1359562219515107	0.06908123982543757	0.1359562219515107	0.1359562219515107	6.797811097575535	6.797811097575535	1.9680628531720121	1.9680628531720121
+13272	KIC12011630	C14sdss	0.99	1.0544211224272422	0.030029927451147385	0.06442112242724218	0.06442112242724218	6.5071840835598165	6.5071840835598165	2.1452307046709427	2.1452307046709427
+13506	KIC7465072	C14sdss	1.66	1.7605285061486757	0.06267049852187125	0.10052850614867581	0.10052850614867581	6.055934105341917	6.055934105341917	1.6040802055147618	1.6040802055147618
+13649	KIC9693187	serenelli17	1.423	1.5070825812209874	0.029613867420826747	0.08408258122098733	0.08408258122098733	5.908825103372265	5.908825103372265	2.839297550236684	2.839297550236684
+13529	KIC7938112	C14sdss	1.84	1.9281529014548915	0.06199405985567052	0.08815290145489141	0.08815290145489141	4.790918557331055	4.790918557331055	1.4219572271943757	1.4219572271943757
+13119	EPIC204926239	lund16	2.45	2.3417224902628595	0.046937780412253764	-0.10827750973714068	0.10827750973714068	-4.41949019335268	4.41949019335268	-2.3068306337909688	2.3068306337909688
+13152	KIC10081026	serenelli17	2.341	2.4431418463007497	0.06910575603261522	0.10214184630074952	0.10214184630074952	4.363171563466446	4.363171563466446	1.4780512096929024	1.4780512096929024
+13352	KIC4346201	serenelli17	1.902	1.9763996074460841	0.04451419774855271	0.0743996074460842	0.0743996074460842	3.911651285283081	3.911651285283081	1.6713680400654454	1.6713680400654454
+13141	EPIC206371648	lund16	0.93	0.9661567567382594	0.0295097344223267	0.036156756738259355	0.036156756738259355	3.8878233051891775	3.8878233051891775	1.2252484627887263	1.2252484627887263
+13645	KIC9579208	serenelli17	1.781	1.8489475428608941	0.03535185905957947	0.06794754286089422	0.06794754286089422	3.815134354907031	3.815134354907031	1.922035917442993	1.922035917442993
+13664	KIC9821513	serenelli17	1.775	1.8410288836166258	0.04308959835275646	0.06602888361662584	0.06602888361662584	3.71993710516202	3.71993710516202	1.5323624758828123	1.5323624758828123
+13432	KIC5950854	serenelli17	1.233	1.2756636629561129	0.023191472702204303	0.04266366295611279	0.04266366295611279	3.4601510913311264	3.4601510913311264	1.839627155374988	1.839627155374988
+13284	KIC12258514	silva17	1.6055	1.5519308291967857	0.02147369367481305	-0.05356917080321422	0.05356917080321422	-3.3366036003247723	3.3366036003247723	-2.4946416585073403	2.4946416585073403
+13507	KIC7510397	silva17	1.8574	1.796093600771238	0.025415969806216358	-0.06130639922876191	0.06130639922876191	-3.3006567906084805	3.3006567906084805	-2.412121185860368	2.412121185860368
+
+Top 10 radius prediction uncertainties by R_pred_sigma:
+original_row	ID	catalog	R_true	R_pred	R_pred_sigma	residual_R	abs_residual_R	relative_error_pct	abs_relative_error_pct	pull	abs_pull
+12318	KIC4914923	Yildiz19	1.37	1.3400345942036287	0.11220765026308349	-0.029965405796371414	0.029965405796371414	-2.1872558975453584	2.1872558975453584	-0.26705314411374037	0.26705314411374037
+13599	KIC8981766	C14sdss	1.82	2.022642222454554	0.07631947972004692	0.2026422224545541	0.2026422224545541	11.134188046953522	11.134188046953522	2.6551834891679147	2.6551834891679147
+13559	KIC8377423	C14sdss	1.99	2.1392713696255723	0.07106221568110442	0.1492713696255723	0.1492713696255723	7.501073850531272	7.501073850531272	2.1005729724982927	2.1005729724982927
+13262	KIC11817562	serenelli17	2.477	2.491914347338473	0.0695021400652903	0.014914347338473188	0.014914347338473188	0.6021133362322644	0.6021133362322644	0.21458831806420137	0.21458831806420137
+13152	KIC10081026	serenelli17	2.341	2.4431418463007497	0.06910575603261522	0.10214184630074952	0.10214184630074952	4.363171563466446	4.363171563466446	1.4780512096929024	1.4780512096929024
+13136	EPIC206189649	lund16	2.0	2.1359562219515107	0.06908123982543757	0.1359562219515107	0.1359562219515107	6.797811097575535	6.797811097575535	1.9680628531720121	1.9680628531720121
+13280	KIC12069569	serenelli17	2.314	2.3760768827945573	0.0689060702361652	0.06207688279455725	0.06207688279455725	2.6826656350284033	2.6826656350284033	0.900891352268357	0.900891352268357
+13144	KIC10003270	serenelli17	2.362	2.404006231762843	0.06868626206493472	0.042006231762842905	0.042006231762842905	1.7784179408485565	1.7784179408485565	0.6115667165456026	0.6115667165456026
+13632	KIC9402223	C14sdss	2.6	2.5795308152175216	0.06633469774163435	-0.0204691847824785	0.0204691847824785	-0.7872763377876346	0.7872763377876346	-0.3085743280568415	0.3085743280568415
+13534	KIC8016496	serenelli17	2.081	2.041408351836095	0.06487953387434972	-0.039591648163904924	0.039591648163904924	-1.9025299454062914	1.9025299454062914	-0.610233239970264	0.610233239970264
+
+Top 10 radius prediction pulls by abs_pull:
+original_row	ID	catalog	R_true	R_pred	R_pred_sigma	residual_R	abs_residual_R	relative_error_pct	abs_relative_error_pct	pull	abs_pull
+13595	KIC8940939	serenelli17	1.458	1.6142084963748617	0.04055254762546829	0.15620849637486178	0.15620849637486178	10.71388864025115	10.71388864025115	3.852002044792813	3.852002044792813
+13544	KIC8174170	C14sdss	2.18	2.015604173126331	0.05697842617984469	-0.16439582687366938	0.16439582687366938	-7.541092975856394	7.541092975856394	-2.885229338465338	2.885229338465338
+13486	KIC7019341	C14sdss	1.39	1.5040888567584638	0.040099166675754805	0.11408885675846392	0.11408885675846392	8.207831421472225	8.207831421472225	2.845167773210748	2.845167773210748
+13649	KIC9693187	serenelli17	1.423	1.5070825812209874	0.029613867420826747	0.08408258122098733	0.08408258122098733	5.908825103372265	5.908825103372265	2.839297550236684	2.839297550236684
+13599	KIC8981766	C14sdss	1.82	2.022642222454554	0.07631947972004692	0.2026422224545541	0.2026422224545541	11.134188046953522	11.134188046953522	2.6551834891679147	2.6551834891679147
+13284	KIC12258514	silva17	1.6055	1.5519308291967857	0.02147369367481305	-0.05356917080321422	0.05356917080321422	-3.3366036003247723	3.3366036003247723	-2.4946416585073403	2.4946416585073403
+13507	KIC7510397	silva17	1.8574	1.796093600771238	0.025415969806216358	-0.06130639922876191	0.06130639922876191	-3.3006567906084805	3.3006567906084805	-2.412121185860368	2.412121185860368
+13470	KIC6593461	C14sdss	1.29	1.3911459651727718	0.04329775514276986	0.10114596517277175	0.10114596517277175	7.840772494013313	7.840772494013313	2.3360556416667193	2.3360556416667193
+13119	EPIC204926239	lund16	2.45	2.3417224902628595	0.046937780412253764	-0.10827750973714068	0.10827750973714068	-4.41949019335268	4.41949019335268	-2.3068306337909688	2.3068306337909688
+13572	KIC8494142	silva15	1.887	1.8278967407874067	0.025806212261305236	-0.059103259212593295	0.059103259212593295	-3.1321282041649865	3.1321282041649865	-2.290272536478158	2.290272536478158
+--- train_hbnn finished in 41.5 min
+
+============================== holdout_eval ==============================
+Evaluating Dataset D A-label 4-parameter BHS on the holdout test set...
+Multiprocess sampling (4 chains in 4 jobs)
+CompoundStep
+>NUTS: [X_dist, sig]
+>PGBART: [mu]
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+                                                                               
+                             Step      Grad                                    
+  Progre…   Draw   Diverg…   size      evals     Speed     Elapsed   Remaini…  
+ ───────────────────────────────────────────────────────────────────────────── 
+  -------   6000   21        0.282     15        7.27      0:13:45   0:00:00   
+                                                 draws/s                       
+  -------   6000   11        0.272     15        7.28      0:13:44   0:00:00   
+                                                 draws/s                       
+  -------   6000   0         0.270     15        7.20      0:13:53   0:00:00   
+                                                 draws/s                       
+  -------   6000   0         0.286     15        7.25      0:13:47   0:00:00   
+                                                 draws/s                       
+                                                                               
+Sampling 4 chains for 3_000 tune and 3_000 draw iterations (12_000 + 12_000 draws total) took 851 seconds.
+There were 32 divergences after tuning. Increase `target_accept` or reparameterize.
+The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See https://arxiv.org/abs/1903.08008 for details
+The effective sample size per chain is smaller than 100 for some parameters.  A higher number is needed for reliable rhat and ess computation. See https://arxiv.org/abs/1903.08008 for details
+Computing ... ---------------------------------------- 100% 0:00:00
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:782: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
+  warnings.warn(
+Sampling: [X_dist, mu, y]
+Sampling ... ---------------------------------------- 100% 0:00:00 / 0:32:04
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\sklearn\cluster\_kmeans.py:1425: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=2.
+  warnings.warn(
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\sklearn\cluster\_kmeans.py:1425: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=2.
+  warnings.warn(
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:782: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
+  warnings.warn(
+Sampling: [X_new_latent, X_var_new_latent, f_mu_pred, log_var_pred_latent, y_pred]
+Sampling ... ---------------------------------------- 100% 0:00:00 / 0:00:26
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:1042: RuntimeWarning: overflow encountered in exp
+  weights = 1 / np.exp(len_scale - len_scale[:, None]).sum(axis=1)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:782: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
+  warnings.warn(
+starting parallel prediction on 12 worker(s)…
+finished chain 3/4
+finished chain 1/4
+finished chain 4/4
+finished chain 2/4
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [mu, sigma, beta_con]
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+                                                                               
+                             Step      Grad                                    
+  Progre…   Draw   Diverg…   size      evals     Speed     Elapsed   Remaini…  
+ ───────────────────────────────────────────────────────────────────────────── 
+  -------   4000   0         0.368     15        383.71    0:00:10   0:00:00   
+                                                 draws/s                       
+  -------   4000   0         0.336     15        327.71    0:00:12   0:00:00   
+                                                 draws/s                       
+  -------   4000   0         0.340     15        288.55    0:00:13   0:00:00   
+                                                 draws/s                       
+  -------   4000   0         0.276     15        224.11    0:00:17   0:00:00   
+                                                 draws/s                       
+                                                                               
+Sampling 4 chains for 1_000 tune and 3_000 draw iterations (4_000 + 12_000 draws total) took 35 seconds.
+
+Summed LOO log score on the training stars and mean BHS weight on the predicted stars:
+  BART: LOO score = 131.8, mean weight = 0.087
+  HBNN: LOO score = 183.9, mean weight = 0.136
+  GP: LOO score = 243.2, mean weight = 0.777
+MARD BART: 2.7142325446028677
+MRD BART: -1.208392020816464
+MAE BART: 0.044754216317946
+68% interval coverage BART: 0.8961038961038961
+95% interval coverage BART: 1.0
+MARD GP: 1.703311613556955
+MRD GP: -0.412914410882739
+MAE GP: 0.028304134848247984
+68% interval coverage GP: 0.8051948051948052
+95% interval coverage GP: 0.935064935064935
+MARD HBNN: 1.9028559325281094
+MRD HBNN: -0.8608355649137546
+MAE HBNN: 0.03220830790405892
+68% interval coverage HBNN: 0.7532467532467533
+95% interval coverage HBNN: 0.9155844155844156
+MARD BHS: 1.7043483674837996
+MRD BHS: -0.5215870968627463
+MAE BHS: 0.028413594163262532
+68% interval coverage BHS: 0.7142857142857143
+95% interval coverage BHS: 0.922077922077922
+
+--- Evaluation Complete ---
+--- holdout_eval finished in 50.4 min
+
+============================== predict ==============================
+Preparing 4-feature radius predictions for Datasets/database_D_merged.txt...
+Predicting radius for 300 star(s)...
+Multiprocess sampling (4 chains in 4 jobs)
+CompoundStep
+>NUTS: [X_dist, sig]
+>PGBART: [mu]
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+                                                                               
+                             Step      Grad                                    
+  Progre…   Draw   Diverg…   size      evals     Speed     Elapsed   Remaini…  
+ ───────────────────────────────────────────────────────────────────────────── 
+  -------   6000   5         0.237     15        6.20      0:16:08   0:00:00   
+                                                 draws/s                       
+  -------   6000   0         0.307     15        6.12      0:16:20   0:00:00   
+                                                 draws/s                       
+  -------   6000   1         0.301     15        6.24      0:16:01   0:00:00   
+                                                 draws/s                       
+  -------   6000   1         0.360     15        6.10      0:16:22   0:00:00   
+                                                 draws/s                       
+                                                                               
+Sampling 4 chains for 3_000 tune and 3_000 draw iterations (12_000 + 12_000 draws total) took 1001 seconds.
+There were 7 divergences after tuning. Increase `target_accept` or reparameterize.
+The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See https://arxiv.org/abs/1903.08008 for details
+The effective sample size per chain is smaller than 100 for some parameters.  A higher number is needed for reliable rhat and ess computation. See https://arxiv.org/abs/1903.08008 for details
+Computing ... ---------------------------------------- 100% 0:00:00
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:782: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
+  warnings.warn(
+Sampling: [X_dist, mu, y]
+Sampling ... ---------------------------------------- 100% 0:00:00 / 0:31:51
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\sklearn\cluster\_kmeans.py:1425: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=2.
+  warnings.warn(
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\sklearn\cluster\_kmeans.py:1425: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=2.
+  warnings.warn(
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:782: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
+  warnings.warn(
+Sampling: [X_new_latent, X_var_new_latent, f_mu_pred, log_var_pred_latent, y_pred]
+Sampling ... ---------------------------------------- 100% 0:00:00 / 0:00:19
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:1042: RuntimeWarning: overflow encountered in exp
+  weights = 1 / np.exp(len_scale - len_scale[:, None]).sum(axis=1)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\arviz\stats\stats.py:782: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
+  warnings.warn(
+starting parallel prediction on 12 worker(s)…
+finished chain 4/4
+finished chain 1/4
+finished chain 2/4
+finished chain 3/4
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [mu, sigma, beta_con]
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+C:\Users\ngeorgakopulos\AppData\Local\miniforge3\envs\stellar_ml311\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP ('libiomp') and LLVM OpenMP ('libomp') loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+                                                                               
+                             Step      Grad                                    
+  Progre…   Draw   Diverg…   size      evals     Speed     Elapsed   Remaini…  
+ ───────────────────────────────────────────────────────────────────────────── 
+  -------   4000   0         0.304     15        420.95    0:00:09   0:00:00   
+                                                 draws/s                       
+  -------   4000   0         0.337     15        363.55    0:00:11   0:00:00   
+                                                 draws/s                       
+  -------   4000   0         0.316     15        310.60    0:00:12   0:00:00   
+                                                 draws/s                       
+  -------   4000   0         0.330     15        247.28    0:00:16   0:00:00   
+                                                 draws/s                       
+                                                                               
+Sampling 4 chains for 1_000 tune and 3_000 draw iterations (4_000 + 12_000 draws total) took 35 seconds.
+
+Summed LOO log score on the training stars and mean BHS weight on the predicted stars:
+  BART: LOO score = 163.6, mean weight = 0.074
+  HBNN: LOO score = 183.9, mean weight = 0.068
+  GP: LOO score = 243.2, mean weight = 0.857
+Saved predictions to Dataset_D_different_predictions/EB_oblateness_fill_factor_radius_predictions_4_features_3000_draws_floor_seed_146.csv
+ original_row       SIMBAD_ID  rad_pred  rad_sigma
+           22     NGTS-EB-8_A  1.077515   2.006325
+           23     NGTS-EB-8_B  1.138408   2.458503
+           26        HD4875_A  1.306039   0.019838
+           27        HD4875_B  1.062840   3.129060
+           32 TYC_8547-22-1_A  1.595996   0.022882
+
+Results of the 4 models on ALL 300 EB stars with a catalogue radius (R), with NO cuts
+(includes stars outside the training range). NOT comparable to the holdout MARD/MRD/MAE
+of the training and holdout steps, which are measured on asteroseismic test stars:
+MARD BART: 33.95018908204988
+MRD BART: 0.6005474264111518
+MAE BART: 3.6565279908523887
+MARD GP: 41.900461432519656
+MRD GP: -3.3297264299735216
+MAE GP: 3.839525037565327
+MARD HBNN: 28.78141528262544
+MRD HBNN: 1.570863390540296
+MAE HBNN: 3.3390987687635034
+MARD BHS: 41.052599143580814
+MRD BHS: -3.3373641682563635
+MAE BHS: 3.791399909118089
+
+Results of the 4 models on the 102 EB stars kept by the oblateness analysis cuts
+(0.5 <= R <= 2.5, inputs within the robust feature ranges; same selection as the analysis step):
+MARD BART: 5.577716926123232
+MRD BART: 0.7522485246754889
+MAE BART: 0.09136741624748192
+MARD GP: 6.1280161731473335
+MRD GP: 1.9926352828507115
+MAE GP: 0.10331453877269134
+MARD HBNN: 5.11181885874361
+MRD HBNN: 0.6609664498192924
+MAE HBNN: 0.08387097957769071
+MARD BHS: 5.881235348859022
+MRD BHS: 1.789934342572234
+MAE BHS: 0.09875808689482511
+
+--- Prediction Complete ---
+--- predict finished in 53.9 min
+
+============================== analysis ==============================
+Analysis complete.
+Each model on its own (BHS is the stack; trend = Spearman rho with log10 oblateness):
+model   n  MARD_percent  median_abs_frac_residual_percent  mean_frac_residual_percent  coverage_68  coverage_95  median_half_width_68  spearman_rho_frac_residual  spearman_p_frac_residual  spearman_rho_abs_frac_residual  spearman_p_abs_frac_residual
+  BHS 102         5.881                             4.294                       -1.79       0.3431       0.6078               0.03133                     -0.3295                 0.0007213                          0.2627                      0.007631
+ BART 102         5.578                             4.415                     -0.7522       0.7157       0.9216               0.08064                     -0.3752                  0.000102                           0.127                        0.2034
+ HBNN 102         5.112                             3.717                      -0.661       0.4314       0.7353               0.04126                     -0.2834                  0.003895                          0.2211                       0.02552
+   GP 102         6.128                              4.45                      -1.993       0.3922       0.6569               0.03673                      -0.336                 0.0005551                          0.2636                      0.007434
+Output directory: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_146_radius_residuals_floor
+Residual table: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_146_radius_residuals_floor\EB_radius_residuals_with_oblateness.csv
+Regression table: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_146_radius_residuals_floor\EB_multivariable_regression_HC3.csv
+Plot-bin table: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_146_radius_residuals_floor\EB_plot_binned_residuals_vs_log10_oblateness.csv
+Pre-radius-cut plot-bin table: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_146_radius_residuals_floor\EB_plot_binned_residuals_vs_log10_oblateness_before_rad_cut.csv
+Plots directory: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_146_radius_residuals_floor\plots
+Pre-radius-cut plots directory: C:\Users\ngeorgakopulos\Desktop\Metalurgia\tests\code\BayeStarML\BayestarML\Dataset_D_different_predictions\seed_146_radius_residuals_floor\plots_before_rad_cut
+Usable rows before radius cut: 300 / 300
+Rows after 0.500-2.500 solar-radius cut: 211
+Rows left by ROBUST=True feature-range cut: 102 / 211
+Final usable rows: 102 / 300
+--- analysis finished in 0.1 min
+
+Pipeline finished in 146.0 min.
