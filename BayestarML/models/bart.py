@@ -14,6 +14,27 @@ import pymc as pm
 import pymc_bart as pmb
 from numba import njit
 
+#######################################################################################
+# How the input errors enter BART (checked 2026-11-15 on pymc_bart 0.11.0).
+#
+# The builders below give BART the inputs as X_dist ~ Normal(X, X_er). This is NOT an
+# errors-in-variables model with latent inputs, unlike the HBNN:
+#   - the tree sampler (PGBART) evaluates X_dist ONCE, when it is created, and trains every
+#     tree on that single draw: the measured inputs plus one random realisation of their
+#     errors (a noisy copy of the training inputs);
+#   - nothing in the model links X_dist to the data (the BART term adds zero to the
+#     log-probability), so the "latent" inputs are never inferred: their posterior is their prior;
+#   - the input errors are propagated only when predicting: each predictive draw evaluates the
+#     trees at a new draw of Normal(X_new, X_er_new).
+#
+# Decision (Nicolás, 2026-11-16): keep it as it is, and describe it this way in the paper
+# (trees trained on one error-perturbed copy of the inputs, input errors propagated in the
+# predictions), not as latent inputs.
+#
+# Since the same date the noisy copy and the trees are reproducible from the seed:
+# see SeededPGBART and seed_bart_inputs at the end of this file.
+#######################################################################################
+
 def BART_M(X, X_er, Y, Y_er, m=250):
     """
     Build a BART model for predicting Y with input uncertainty in X.
