@@ -1,0 +1,29 @@
+case,catalog,n,median_log_o,mean_signed_res_percent,mean_abs_res_percent
+radius seed 665 floor,OzdarcanFeb25,4,-4.85,1.19,1.58
+radius seed 665 floor,Benbakoura21,3,-3.96,5.23,5.23
+radius seed 665 floor,MWang25,9,-2.72,-2.25,4.46
+radius seed 665 floor,Xiong23,59,-2.48,-2.13,6.91
+radius seed 665 floor,Helminiak19,7,-1.96,-2.81,3.25
+radius seed 665 floor,Eker14+18,6,-1.72,-2.63,4.56
+radius seed 145 floor,OzdarcanFeb25,4,-4.85,0.83,0.97
+radius seed 145 floor,Benbakoura21,3,-3.96,5.23,5.23
+radius seed 145 floor,MWang25,9,-2.72,-2.21,4.62
+radius seed 145 floor,Xiong23,59,-2.48,-2.55,6.8
+radius seed 145 floor,Helminiak19,7,-1.96,-3.02,3.08
+radius seed 145 floor,Eker14+18,6,-1.72,-5.35,5.35
+radius seed 146 floor,OzdarcanFeb25,4,-4.85,1.16,1.42
+radius seed 146 floor,Benbakoura21,3,-3.96,5.62,5.62
+radius seed 146 floor,MWang25,9,-2.72,-1.89,4.66
+radius seed 146 floor,Xiong23,59,-2.48,-2.25,6.93
+radius seed 146 floor,Helminiak19,7,-1.96,-2.77,3.04
+radius seed 146 floor,Eker14+18,6,-1.72,-3.25,5.34
+mass seed 648,Benbakoura21,3,-3.96,12.08,12.08
+mass seed 648,MWang25,8,-2.64,-7.01,9.24
+mass seed 648,Xiong23,50,-2.53,0.71,7.89
+mass seed 648,Helminiak19,5,-2.17,-5.3,5.37
+mass seed 648,Eker14+18,5,-2.1,-6.95,8.95
+mass seed 38 (v3),Benbakoura21,3,-3.96,10.82,10.82
+mass seed 38 (v3),MWang25,8,-2.64,-6.96,9.22
+mass seed 38 (v3),Xiong23,50,-2.53,0.77,7.72
+mass seed 38 (v3),Helminiak19,5,-2.17,-5.42,5.43
+mass seed 38 (v3),Eker14+18,5,-2.1,-6.88,8.3

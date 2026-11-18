@@ -1,0 +1,152 @@
+case,check,group,n,rho,p,note
+radius seed 665 floor,size,"EBs, GP",102,-0.2911,0.002996,"holdout slope -2.28 %/Rsun, EB slope -10.17 %/Rsun"
+radius seed 665 floor,size,"EBs, HBNN",102,-0.2401,0.01507,"holdout slope -1.25 %/Rsun, EB slope -9.01 %/Rsun"
+radius seed 665 floor,signed,all EBs,102,-0.3038,0.001909,
+radius seed 665 floor,absolute,all EBs,102,0.2409,0.01471,
+radius seed 665 floor,signed,Xiong23,59,-0.1835,0.1643,
+radius seed 665 floor,absolute,Xiong23,59,0.2916,0.02503,
+radius seed 665 floor,signed,other catalogues,43,-0.5246,0.0003046,
+radius seed 665 floor,absolute,other catalogues,43,0.05693,0.7169,
+radius seed 665 floor,signed,"inside catalogues, incl. Xiong23",88,-0.1819,0.1665,permutation p
+radius seed 665 floor,absolute,"inside catalogues, incl. Xiong23",88,0.2883,0.0315,permutation p
+radius seed 665 floor,signed,"inside catalogues, excl. Xiong23",29,0.04889,0.848,permutation p
+radius seed 665 floor,absolute,"inside catalogues, excl. Xiong23",29,-0.2178,0.3615,permutation p
+radius seed 665 floor,signed,"other catalogues, leave one catalogue out",43,-0.4711,,range -0.56 to -0.47; rho = weakest
+radius seed 665 floor,absolute residual,Xiong23,59,0.2916,0.02503,
+radius seed 665 floor,absolute residual at fixed R,Xiong23,59,0.2064,0.1201,
+radius seed 665 floor,"absolute residual at fixed R, Teff, logg",Xiong23,59,0.2388,0.07631,
+radius seed 665 floor,catalogue error on R (relative),Xiong23,59,0.342,0.008021,
+radius seed 665 floor,catalogue error on M (relative),Xiong23,59,0.2838,0.02941,
+radius seed 665 floor,catalogue error on Teff (relative),Xiong23,59,-0.2894,0.02619,
+radius seed 665 floor,catalogue error on logg,Xiong23,59,0.3175,0.01426,
+radius seed 665 floor,model sigma (relative),Xiong23,59,0.1489,0.2605,
+radius seed 665 floor,|z| = |residual| / combined sigma,Xiong23,59,0.03518,0.7914,
+radius seed 665 floor,absolute residual,other catalogues,43,0.05693,0.7169,
+radius seed 665 floor,absolute residual at fixed R,other catalogues,43,0.07651,0.6301,
+radius seed 665 floor,"absolute residual at fixed R, Teff, logg",other catalogues,43,-0.1096,0.5007,
+radius seed 665 floor,catalogue error on R (relative),other catalogues,43,0.2958,0.05409,
+radius seed 665 floor,catalogue error on M (relative),other catalogues,43,-0.01397,0.9292,
+radius seed 665 floor,catalogue error on Teff (relative),other catalogues,43,0.05361,0.7328,
+radius seed 665 floor,catalogue error on logg,other catalogues,43,0.3352,0.02801,
+radius seed 665 floor,model sigma (relative),other catalogues,43,0.02159,0.8907,
+radius seed 665 floor,|z| = |residual| / combined sigma,other catalogues,43,0.02537,0.8717,
+radius seed 145 floor,size,"EBs, GP",102,-0.3214,0.0009872,"holdout slope -0.55 %/Rsun, EB slope -10.79 %/Rsun"
+radius seed 145 floor,size,"EBs, HBNN",102,-0.2708,0.005908,"holdout slope +0.60 %/Rsun, EB slope -8.85 %/Rsun"
+radius seed 145 floor,signed,all EBs,102,-0.3257,0.0008352,
+radius seed 145 floor,absolute,all EBs,102,0.3339,0.0006041,
+radius seed 145 floor,signed,Xiong23,59,-0.138,0.2973,
+radius seed 145 floor,absolute,Xiong23,59,0.3641,0.004585,
+radius seed 145 floor,signed,other catalogues,43,-0.672,8.048e-07,
+radius seed 145 floor,absolute,other catalogues,43,0.2175,0.1613,
+radius seed 145 floor,signed,"inside catalogues, incl. Xiong23",88,-0.1362,0.3015,permutation p
+radius seed 145 floor,absolute,"inside catalogues, incl. Xiong23",88,0.3601,0.009,permutation p
+radius seed 145 floor,signed,"inside catalogues, excl. Xiong23",29,0.1378,0.5795,permutation p
+radius seed 145 floor,absolute,"inside catalogues, excl. Xiong23",29,-0.2444,0.306,permutation p
+radius seed 145 floor,signed,"other catalogues, leave one catalogue out",43,-0.5925,,range -0.73 to -0.59; rho = weakest
+radius seed 145 floor,absolute residual,Xiong23,59,0.3641,0.004585,
+radius seed 145 floor,absolute residual at fixed R,Xiong23,59,0.2774,0.03499,
+radius seed 145 floor,"absolute residual at fixed R, Teff, logg",Xiong23,59,0.3074,0.02118,
+radius seed 145 floor,catalogue error on R (relative),Xiong23,59,0.342,0.008021,
+radius seed 145 floor,catalogue error on M (relative),Xiong23,59,0.2838,0.02941,
+radius seed 145 floor,catalogue error on Teff (relative),Xiong23,59,-0.2894,0.02619,
+radius seed 145 floor,catalogue error on logg,Xiong23,59,0.3175,0.01426,
+radius seed 145 floor,model sigma (relative),Xiong23,59,0.295,0.02333,
+radius seed 145 floor,|z| = |residual| / combined sigma,Xiong23,59,0.03887,0.7701,
+radius seed 145 floor,absolute residual,other catalogues,43,0.2175,0.1613,
+radius seed 145 floor,absolute residual at fixed R,other catalogues,43,0.2388,0.1277,
+radius seed 145 floor,"absolute residual at fixed R, Teff, logg",other catalogues,43,0.03114,0.8487,
+radius seed 145 floor,catalogue error on R (relative),other catalogues,43,0.2958,0.05409,
+radius seed 145 floor,catalogue error on M (relative),other catalogues,43,-0.01397,0.9292,
+radius seed 145 floor,catalogue error on Teff (relative),other catalogues,43,0.05361,0.7328,
+radius seed 145 floor,catalogue error on logg,other catalogues,43,0.3352,0.02801,
+radius seed 145 floor,model sigma (relative),other catalogues,43,0.1903,0.2217,
+radius seed 145 floor,|z| = |residual| / combined sigma,other catalogues,43,0.09348,0.551,
+radius seed 146 floor,size,"EBs, GP",102,-0.3379,0.0005135,"holdout slope +0.10 %/Rsun, EB slope -11.13 %/Rsun"
+radius seed 146 floor,size,"EBs, HBNN",102,-0.2851,0.003682,"holdout slope +0.36 %/Rsun, EB slope -9.35 %/Rsun"
+radius seed 146 floor,signed,all EBs,102,-0.3295,0.0007213,
+radius seed 146 floor,absolute,all EBs,102,0.2627,0.007631,
+radius seed 146 floor,signed,Xiong23,59,-0.1733,0.1893,
+radius seed 146 floor,absolute,Xiong23,59,0.3107,0.01662,
+radius seed 146 floor,signed,other catalogues,43,-0.5877,3.414e-05,
+radius seed 146 floor,absolute,other catalogues,43,0.07989,0.6106,
+radius seed 146 floor,signed,"inside catalogues, incl. Xiong23",88,-0.1719,0.1935,permutation p
+radius seed 146 floor,absolute,"inside catalogues, incl. Xiong23",88,0.3078,0.0205,permutation p
+radius seed 146 floor,signed,"inside catalogues, excl. Xiong23",29,0.04,0.886,permutation p
+radius seed 146 floor,absolute,"inside catalogues, excl. Xiong23",29,-0.1378,0.5725,permutation p
+radius seed 146 floor,signed,"other catalogues, leave one catalogue out",43,-0.5415,,range -0.63 to -0.54; rho = weakest
+radius seed 146 floor,absolute residual,Xiong23,59,0.3107,0.01662,
+radius seed 146 floor,absolute residual at fixed R,Xiong23,59,0.2179,0.1004,
+radius seed 146 floor,"absolute residual at fixed R, Teff, logg",Xiong23,59,0.2475,0.06588,
+radius seed 146 floor,catalogue error on R (relative),Xiong23,59,0.342,0.008021,
+radius seed 146 floor,catalogue error on M (relative),Xiong23,59,0.2838,0.02941,
+radius seed 146 floor,catalogue error on Teff (relative),Xiong23,59,-0.2894,0.02619,
+radius seed 146 floor,catalogue error on logg,Xiong23,59,0.3175,0.01426,
+radius seed 146 floor,model sigma (relative),Xiong23,59,0.2228,0.08986,
+radius seed 146 floor,|z| = |residual| / combined sigma,Xiong23,59,0.05099,0.7013,
+radius seed 146 floor,absolute residual,other catalogues,43,0.07989,0.6106,
+radius seed 146 floor,absolute residual at fixed R,other catalogues,43,0.1119,0.4807,
+radius seed 146 floor,"absolute residual at fixed R, Teff, logg",other catalogues,43,-0.09648,0.5537,
+radius seed 146 floor,catalogue error on R (relative),other catalogues,43,0.2958,0.05409,
+radius seed 146 floor,catalogue error on M (relative),other catalogues,43,-0.01397,0.9292,
+radius seed 146 floor,catalogue error on Teff (relative),other catalogues,43,0.05361,0.7328,
+radius seed 146 floor,catalogue error on logg,other catalogues,43,0.3352,0.02801,
+radius seed 146 floor,model sigma (relative),other catalogues,43,0.1234,0.4306,
+radius seed 146 floor,|z| = |residual| / combined sigma,other catalogues,43,0.02159,0.8907,
+mass seed 648,signed,all EBs,87,-0.1421,0.1892,
+mass seed 648,absolute,all EBs,87,0.3017,0.004519,
+mass seed 648,signed,Xiong23,50,0.04783,0.7415,
+mass seed 648,absolute,Xiong23,50,0.4104,0.003072,
+mass seed 648,signed,other catalogues,37,-0.459,0.004271,
+mass seed 648,absolute,other catalogues,37,0.1871,0.2676,
+mass seed 648,signed,"inside catalogues, incl. Xiong23",71,0.04925,0.737,permutation p
+mass seed 648,absolute,"inside catalogues, incl. Xiong23",71,0.4074,0.002,permutation p
+mass seed 648,signed,"inside catalogues, excl. Xiong23",21,0.2812,0.3285,permutation p
+mass seed 648,absolute,"inside catalogues, excl. Xiong23",21,-0.07812,0.807,permutation p
+mass seed 648,signed,"other catalogues, leave one catalogue out",37,-0.4057,,range -0.50 to -0.41; rho = weakest
+mass seed 648,absolute residual,Xiong23,50,0.4104,0.003072,
+mass seed 648,absolute residual at fixed R,Xiong23,50,0.4108,0.00337,
+mass seed 648,"absolute residual at fixed R, Teff, logg",Xiong23,50,0.426,0.002834,
+mass seed 648,catalogue error on R (relative),Xiong23,50,0.3921,0.004856,
+mass seed 648,catalogue error on M (relative),Xiong23,50,0.2874,0.04302,
+mass seed 648,catalogue error on Teff (relative),Xiong23,50,-0.2981,0.03551,
+mass seed 648,catalogue error on logg,Xiong23,50,0.3318,0.01858,
+mass seed 648,model sigma (relative),Xiong23,50,0.307,0.03009,
+mass seed 648,|z| = |residual| / combined sigma,Xiong23,50,0.299,0.0349,
+mass seed 648,absolute residual,other catalogues,37,0.1871,0.2676,
+mass seed 648,absolute residual at fixed R,other catalogues,37,0.1914,0.2636,
+mass seed 648,"absolute residual at fixed R, Teff, logg",other catalogues,37,0.1193,0.5017,
+mass seed 648,catalogue error on R (relative),other catalogues,37,0.3241,0.05036,
+mass seed 648,catalogue error on M (relative),other catalogues,37,0.02584,0.8793,
+mass seed 648,catalogue error on Teff (relative),other catalogues,37,0.02086,0.9025,
+mass seed 648,catalogue error on logg,other catalogues,37,0.3625,0.02747,
+mass seed 648,model sigma (relative),other catalogues,37,0.1437,0.3963,
+mass seed 648,|z| = |residual| / combined sigma,other catalogues,37,0.183,0.2782,
+mass seed 38 (v3),signed,all EBs,88,-0.14,0.1934,
+mass seed 38 (v3),absolute,all EBs,88,0.3288,0.00176,
+mass seed 38 (v3),signed,Xiong23,50,0.06142,0.6718,
+mass seed 38 (v3),absolute,Xiong23,50,0.4345,0.001617,
+mass seed 38 (v3),signed,other catalogues,38,-0.482,0.002182,
+mass seed 38 (v3),absolute,other catalogues,38,0.2461,0.1364,
+mass seed 38 (v3),signed,"inside catalogues, incl. Xiong23",71,0.06276,0.666,permutation p
+mass seed 38 (v3),absolute,"inside catalogues, incl. Xiong23",71,0.4317,0.0015,permutation p
+mass seed 38 (v3),signed,"inside catalogues, excl. Xiong23",21,0.2812,0.3285,permutation p
+mass seed 38 (v3),absolute,"inside catalogues, excl. Xiong23",21,-0.01563,0.9725,permutation p
+mass seed 38 (v3),signed,"other catalogues, leave one catalogue out",38,-0.4402,,range -0.52 to -0.44; rho = weakest
+mass seed 38 (v3),absolute residual,Xiong23,50,0.4345,0.001617,
+mass seed 38 (v3),absolute residual at fixed R,Xiong23,50,0.4109,0.003356,
+mass seed 38 (v3),"absolute residual at fixed R, Teff, logg",Xiong23,50,0.4265,0.002798,
+mass seed 38 (v3),catalogue error on R (relative),Xiong23,50,0.3921,0.004856,
+mass seed 38 (v3),catalogue error on M (relative),Xiong23,50,0.2874,0.04302,
+mass seed 38 (v3),catalogue error on Teff (relative),Xiong23,50,-0.2981,0.03551,
+mass seed 38 (v3),catalogue error on logg,Xiong23,50,0.3318,0.01858,
+mass seed 38 (v3),model sigma (relative),Xiong23,50,0.09422,0.5152,
+mass seed 38 (v3),|z| = |residual| / combined sigma,Xiong23,50,0.3802,0.006462,
+mass seed 38 (v3),absolute residual,other catalogues,38,0.2461,0.1364,
+mass seed 38 (v3),absolute residual at fixed R,other catalogues,38,0.2422,0.1487,
+mass seed 38 (v3),"absolute residual at fixed R, Teff, logg",other catalogues,38,0.1866,0.2831,
+mass seed 38 (v3),catalogue error on R (relative),other catalogues,38,0.3137,0.05511,
+mass seed 38 (v3),catalogue error on M (relative),other catalogues,38,-0.001422,0.9932,
+mass seed 38 (v3),catalogue error on Teff (relative),other catalogues,38,-0.0009848,0.9953,
+mass seed 38 (v3),catalogue error on logg,other catalogues,38,0.365,0.02423,
+mass seed 38 (v3),model sigma (relative),other catalogues,38,-0.1006,0.548,
+mass seed 38 (v3),|z| = |residual| / combined sigma,other catalogues,38,0.2268,0.1708,

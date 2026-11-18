@@ -1,0 +1,204 @@
+EB residuals against oblateness, split by source catalogue.
+
+##### radius seed 665 floor (stacked prediction, 102 EB stars; seed_665_radius_residuals_floor)
+1. Size
+  GP   residual slope vs R: holdout -2.28 %/Rsun (n=142 in the EB R range), EBs -10.17 %/Rsun | EB residual vs log o: -0.32 (p=0.0011), after removing the holdout size relation -0.29 (p=0.003)
+  HBNN residual slope vs R: holdout -1.25 %/Rsun (n=142 in the EB R range), EBs -9.01 %/Rsun | EB residual vs log o: -0.26 (p=0.0087), after removing the holdout size relation -0.24 (p=0.015)
+2. Residual vs log10 oblateness: signed | absolute
+  all EBs                            n=102, median log o -2.56, mean |res| 5.7% | signed -0.30 (p=0.0019) | absolute +0.24 (p=0.015)
+  Xiong23                            n= 59, median log o -2.48, mean |res| 6.9% | signed -0.18 (p=0.16) | absolute +0.29 (p=0.025)
+  other catalogues                   n= 43, median log o -2.91, mean |res| 4.1% | signed -0.52 (p=0.0003) | absolute +0.06 (p=0.72)
+  inside catalogues, incl. Xiong23   n= 88 | signed -0.18 (perm p=0.17) | absolute +0.29 (perm p=0.032)
+  inside catalogues, excl. Xiong23   n= 29 | signed +0.05 (perm p=0.85) | absolute -0.22 (perm p=0.36)
+  signed, other catalogues leaving one catalogue out: rho -0.56 to -0.47
+  catalogues with >= 3 stars, by median log o:
+                    n  median_log_o  mean_signed_res_percent  mean_abs_res_percent
+    catalog                                                                       
+    OzdarcanFeb25   4         -4.85                     1.19                  1.58
+    Benbakoura21    3         -3.96                     5.23                  5.23
+    MWang25         9         -2.72                    -2.25                  4.46
+    Xiong23        59         -2.48                    -2.13                  6.91
+    Helminiak19     7         -1.96                    -2.81                  3.25
+    Eker14+18       6         -1.72                    -2.63                  4.56
+3. Absolute residual, catalogue errors and model sigma vs log10 oblateness
+  Xiong23 (n=59; absolute residual vs R +0.28 (p=0.033); 68% coverage 0.27; median catalogue error R 2.6%, M 0.7%; median model sigma 2.4%)
+    absolute residual                          +0.29 (p=0.025)
+    absolute residual at fixed R               +0.21 (p=0.12)
+    absolute residual at fixed R, Teff, logg   +0.24 (p=0.076)
+    catalogue error on R (relative)            +0.34 (p=0.008)
+    catalogue error on M (relative)            +0.28 (p=0.029)
+    catalogue error on Teff (relative)         -0.29 (p=0.026)
+    catalogue error on logg                    +0.32 (p=0.014)
+    model sigma (relative)                     +0.15 (p=0.26)
+    |z| = |residual| / combined sigma          +0.04 (p=0.79)
+  other catalogues (n=43; absolute residual vs R -0.11 (p=0.49); 68% coverage 0.37; median catalogue error R 1.4%, M 1.5%; median model sigma 2.1%)
+    absolute residual                          +0.06 (p=0.72)
+    absolute residual at fixed R               +0.08 (p=0.63)
+    absolute residual at fixed R, Teff, logg   -0.11 (p=0.5)
+    catalogue error on R (relative)            +0.30 (p=0.054)
+    catalogue error on M (relative)            -0.01 (p=0.93)
+    catalogue error on Teff (relative)         +0.05 (p=0.73)
+    catalogue error on logg                    +0.34 (p=0.028)
+    model sigma (relative)                     +0.02 (p=0.89)
+    |z| = |residual| / combined sigma          +0.03 (p=0.87)
+
+##### radius seed 145 floor (stacked prediction, 102 EB stars; seed_145_radius_residuals_floor)
+1. Size
+  GP   residual slope vs R: holdout -0.55 %/Rsun (n=145 in the EB R range), EBs -10.79 %/Rsun | EB residual vs log o: -0.32 (p=0.00088), after removing the holdout size relation -0.32 (p=0.00099)
+  HBNN residual slope vs R: holdout +0.60 %/Rsun (n=145 in the EB R range), EBs -8.85 %/Rsun | EB residual vs log o: -0.27 (p=0.0064), after removing the holdout size relation -0.27 (p=0.0059)
+2. Residual vs log10 oblateness: signed | absolute
+  all EBs                            n=102, median log o -2.56, mean |res| 5.7% | signed -0.33 (p=0.00084) | absolute +0.33 (p=0.0006)
+  Xiong23                            n= 59, median log o -2.48, mean |res| 6.8% | signed -0.14 (p=0.3) | absolute +0.36 (p=0.0046)
+  other catalogues                   n= 43, median log o -2.91, mean |res| 4.2% | signed -0.67 (p=8e-07) | absolute +0.22 (p=0.16)
+  inside catalogues, incl. Xiong23   n= 88 | signed -0.14 (perm p=0.3) | absolute +0.36 (perm p=0.009)
+  inside catalogues, excl. Xiong23   n= 29 | signed +0.14 (perm p=0.58) | absolute -0.24 (perm p=0.31)
+  signed, other catalogues leaving one catalogue out: rho -0.73 to -0.59
+  catalogues with >= 3 stars, by median log o:
+                    n  median_log_o  mean_signed_res_percent  mean_abs_res_percent
+    catalog                                                                       
+    OzdarcanFeb25   4         -4.85                     0.83                  0.97
+    Benbakoura21    3         -3.96                     5.23                  5.23
+    MWang25         9         -2.72                    -2.21                  4.62
+    Xiong23        59         -2.48                    -2.55                  6.80
+    Helminiak19     7         -1.96                    -3.02                  3.08
+    Eker14+18       6         -1.72                    -5.35                  5.35
+3. Absolute residual, catalogue errors and model sigma vs log10 oblateness
+  Xiong23 (n=59; absolute residual vs R +0.31 (p=0.017); 68% coverage 0.34; median catalogue error R 2.6%, M 0.7%; median model sigma 2.4%)
+    absolute residual                          +0.36 (p=0.0046)
+    absolute residual at fixed R               +0.28 (p=0.035)
+    absolute residual at fixed R, Teff, logg   +0.31 (p=0.021)
+    catalogue error on R (relative)            +0.34 (p=0.008)
+    catalogue error on M (relative)            +0.28 (p=0.029)
+    catalogue error on Teff (relative)         -0.29 (p=0.026)
+    catalogue error on logg                    +0.32 (p=0.014)
+    model sigma (relative)                     +0.29 (p=0.023)
+    |z| = |residual| / combined sigma          +0.04 (p=0.77)
+  other catalogues (n=43; absolute residual vs R -0.10 (p=0.52); 68% coverage 0.37; median catalogue error R 1.4%, M 1.5%; median model sigma 2.2%)
+    absolute residual                          +0.22 (p=0.16)
+    absolute residual at fixed R               +0.24 (p=0.13)
+    absolute residual at fixed R, Teff, logg   +0.03 (p=0.85)
+    catalogue error on R (relative)            +0.30 (p=0.054)
+    catalogue error on M (relative)            -0.01 (p=0.93)
+    catalogue error on Teff (relative)         +0.05 (p=0.73)
+    catalogue error on logg                    +0.34 (p=0.028)
+    model sigma (relative)                     +0.19 (p=0.22)
+    |z| = |residual| / combined sigma          +0.09 (p=0.55)
+
+##### radius seed 146 floor (stacked prediction, 102 EB stars; seed_146_radius_residuals_floor)
+1. Size
+  GP   residual slope vs R: holdout +0.10 %/Rsun (n=140 in the EB R range), EBs -11.13 %/Rsun | EB residual vs log o: -0.34 (p=0.00056), after removing the holdout size relation -0.34 (p=0.00051)
+  HBNN residual slope vs R: holdout +0.36 %/Rsun (n=140 in the EB R range), EBs -9.35 %/Rsun | EB residual vs log o: -0.28 (p=0.0039), after removing the holdout size relation -0.29 (p=0.0037)
+2. Residual vs log10 oblateness: signed | absolute
+  all EBs                            n=102, median log o -2.56, mean |res| 5.9% | signed -0.33 (p=0.00072) | absolute +0.26 (p=0.0076)
+  Xiong23                            n= 59, median log o -2.48, mean |res| 6.9% | signed -0.17 (p=0.19) | absolute +0.31 (p=0.017)
+  other catalogues                   n= 43, median log o -2.91, mean |res| 4.4% | signed -0.59 (p=3.4e-05) | absolute +0.08 (p=0.61)
+  inside catalogues, incl. Xiong23   n= 88 | signed -0.17 (perm p=0.19) | absolute +0.31 (perm p=0.021)
+  inside catalogues, excl. Xiong23   n= 29 | signed +0.04 (perm p=0.89) | absolute -0.14 (perm p=0.57)
+  signed, other catalogues leaving one catalogue out: rho -0.63 to -0.54
+  catalogues with >= 3 stars, by median log o:
+                    n  median_log_o  mean_signed_res_percent  mean_abs_res_percent
+    catalog                                                                       
+    OzdarcanFeb25   4         -4.85                     1.16                  1.42
+    Benbakoura21    3         -3.96                     5.62                  5.62
+    MWang25         9         -2.72                    -1.89                  4.66
+    Xiong23        59         -2.48                    -2.25                  6.93
+    Helminiak19     7         -1.96                    -2.77                  3.04
+    Eker14+18       6         -1.72                    -3.25                  5.34
+3. Absolute residual, catalogue errors and model sigma vs log10 oblateness
+  Xiong23 (n=59; absolute residual vs R +0.31 (p=0.019); 68% coverage 0.29; median catalogue error R 2.6%, M 0.7%; median model sigma 2.4%)
+    absolute residual                          +0.31 (p=0.017)
+    absolute residual at fixed R               +0.22 (p=0.1)
+    absolute residual at fixed R, Teff, logg   +0.25 (p=0.066)
+    catalogue error on R (relative)            +0.34 (p=0.008)
+    catalogue error on M (relative)            +0.28 (p=0.029)
+    catalogue error on Teff (relative)         -0.29 (p=0.026)
+    catalogue error on logg                    +0.32 (p=0.014)
+    model sigma (relative)                     +0.22 (p=0.09)
+    |z| = |residual| / combined sigma          +0.05 (p=0.7)
+  other catalogues (n=43; absolute residual vs R -0.17 (p=0.27); 68% coverage 0.42; median catalogue error R 1.4%, M 1.5%; median model sigma 2.2%)
+    absolute residual                          +0.08 (p=0.61)
+    absolute residual at fixed R               +0.11 (p=0.48)
+    absolute residual at fixed R, Teff, logg   -0.10 (p=0.55)
+    catalogue error on R (relative)            +0.30 (p=0.054)
+    catalogue error on M (relative)            -0.01 (p=0.93)
+    catalogue error on Teff (relative)         +0.05 (p=0.73)
+    catalogue error on logg                    +0.34 (p=0.028)
+    model sigma (relative)                     +0.12 (p=0.43)
+    |z| = |residual| / combined sigma          +0.02 (p=0.89)
+
+##### mass seed 648 (stacked prediction, 87 EB stars; v4_seed_648_mass_residuals)
+2. Residual vs log10 oblateness: signed | absolute
+  all EBs                            n= 87, median log o -2.61, mean |res| 7.2% | signed -0.14 (p=0.19) | absolute +0.30 (p=0.0045)
+  Xiong23                            n= 50, median log o -2.53, mean |res| 7.9% | signed +0.05 (p=0.74) | absolute +0.41 (p=0.0031)
+  other catalogues                   n= 37, median log o -2.91, mean |res| 6.3% | signed -0.46 (p=0.0043) | absolute +0.19 (p=0.27)
+  inside catalogues, incl. Xiong23   n= 71 | signed +0.05 (perm p=0.74) | absolute +0.41 (perm p=0.002)
+  inside catalogues, excl. Xiong23   n= 21 | signed +0.28 (perm p=0.33) | absolute -0.08 (perm p=0.81)
+  signed, other catalogues leaving one catalogue out: rho -0.50 to -0.41
+  catalogues with >= 3 stars, by median log o:
+                   n  median_log_o  mean_signed_res_percent  mean_abs_res_percent
+    catalog                                                                      
+    Benbakoura21   3         -3.96                    12.08                 12.08
+    MWang25        8         -2.64                    -7.01                  9.24
+    Xiong23       50         -2.53                     0.71                  7.89
+    Helminiak19    5         -2.17                    -5.30                  5.37
+    Eker14+18      5         -2.10                    -6.95                  8.95
+3. Absolute residual, catalogue errors and model sigma vs log10 oblateness
+  Xiong23 (n=50; absolute residual vs R +0.10 (p=0.48); 68% coverage 0.26; median catalogue error R 1.0%, M 0.6%; median model sigma 3.5%)
+    absolute residual                          +0.41 (p=0.0031)
+    absolute residual at fixed R               +0.41 (p=0.0034)
+    absolute residual at fixed R, Teff, logg   +0.43 (p=0.0028)
+    catalogue error on R (relative)            +0.39 (p=0.0049)
+    catalogue error on M (relative)            +0.29 (p=0.043)
+    catalogue error on Teff (relative)         -0.30 (p=0.036)
+    catalogue error on logg                    +0.33 (p=0.019)
+    model sigma (relative)                     +0.31 (p=0.03)
+    |z| = |residual| / combined sigma          +0.30 (p=0.035)
+  other catalogues (n=37; absolute residual vs R -0.06 (p=0.74); 68% coverage 0.43; median catalogue error R 1.7%, M 1.4%; median model sigma 3.3%)
+    absolute residual                          +0.19 (p=0.27)
+    absolute residual at fixed R               +0.19 (p=0.26)
+    absolute residual at fixed R, Teff, logg   +0.12 (p=0.5)
+    catalogue error on R (relative)            +0.32 (p=0.05)
+    catalogue error on M (relative)            +0.03 (p=0.88)
+    catalogue error on Teff (relative)         +0.02 (p=0.9)
+    catalogue error on logg                    +0.36 (p=0.027)
+    model sigma (relative)                     +0.14 (p=0.4)
+    |z| = |residual| / combined sigma          +0.18 (p=0.28)
+
+##### mass seed 38 (v3) (stacked prediction, 88 EB stars; v3_seed_38_mass_residuals)
+2. Residual vs log10 oblateness: signed | absolute
+  all EBs                            n= 88, median log o -2.64, mean |res| 6.9% | signed -0.14 (p=0.19) | absolute +0.33 (p=0.0018)
+  Xiong23                            n= 50, median log o -2.53, mean |res| 7.7% | signed +0.06 (p=0.67) | absolute +0.43 (p=0.0016)
+  other catalogues                   n= 38, median log o -3.08, mean |res| 5.9% | signed -0.48 (p=0.0022) | absolute +0.25 (p=0.14)
+  inside catalogues, incl. Xiong23   n= 71 | signed +0.06 (perm p=0.67) | absolute +0.43 (perm p=0.0015)
+  inside catalogues, excl. Xiong23   n= 21 | signed +0.28 (perm p=0.33) | absolute -0.02 (perm p=0.97)
+  signed, other catalogues leaving one catalogue out: rho -0.52 to -0.44
+  catalogues with >= 3 stars, by median log o:
+                   n  median_log_o  mean_signed_res_percent  mean_abs_res_percent
+    catalog                                                                      
+    Benbakoura21   3         -3.96                    10.82                 10.82
+    MWang25        8         -2.64                    -6.96                  9.22
+    Xiong23       50         -2.53                     0.77                  7.72
+    Helminiak19    5         -2.17                    -5.42                  5.43
+    Eker14+18      5         -2.10                    -6.88                  8.30
+3. Absolute residual, catalogue errors and model sigma vs log10 oblateness
+  Xiong23 (n=50; absolute residual vs R +0.16 (p=0.26); 68% coverage 0.32; median catalogue error R 1.0%, M 0.6%; median model sigma 3.4%)
+    absolute residual                          +0.43 (p=0.0016)
+    absolute residual at fixed R               +0.41 (p=0.0034)
+    absolute residual at fixed R, Teff, logg   +0.43 (p=0.0028)
+    catalogue error on R (relative)            +0.39 (p=0.0049)
+    catalogue error on M (relative)            +0.29 (p=0.043)
+    catalogue error on Teff (relative)         -0.30 (p=0.036)
+    catalogue error on logg                    +0.33 (p=0.019)
+    model sigma (relative)                     +0.09 (p=0.52)
+    |z| = |residual| / combined sigma          +0.38 (p=0.0065)
+  other catalogues (n=38; absolute residual vs R +0.05 (p=0.78); 68% coverage 0.47; median catalogue error R 1.6%, M 1.5%; median model sigma 3.4%)
+    absolute residual                          +0.25 (p=0.14)
+    absolute residual at fixed R               +0.24 (p=0.15)
+    absolute residual at fixed R, Teff, logg   +0.19 (p=0.28)
+    catalogue error on R (relative)            +0.31 (p=0.055)
+    catalogue error on M (relative)            -0.00 (p=0.99)
+    catalogue error on Teff (relative)         -0.00 (p=1)
+    catalogue error on logg                    +0.37 (p=0.024)
+    model sigma (relative)                     -0.10 (p=0.55)
+    |z| = |residual| / combined sigma          +0.23 (p=0.17)
+
